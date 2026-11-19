@@ -17,8 +17,11 @@ from pydantic import BaseModel
 from database import get_db, init_database
 from auth import verify_google_id_token, upsert_google_user, decode_jwt
 
-# Initialize database schema on startup
-init_database()
+# Initialize database schema on startup safely
+try:
+    init_database()
+except Exception as e:
+    print(f"Warning: Deferred database initialization on startup: {e}")
 
 app = FastAPI(title="Kanji Master Full Multi-Level API", version="2.0.0")
 
