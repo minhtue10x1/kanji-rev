@@ -1991,7 +1991,7 @@
         // Offline / Guest mode: strictly per-level localStorage database
         if (requestId !== this.levelSwitchRequestId || this.currentLevel !== targetLevel) return;
 
-        const localKey = `kanji_master_${targetLevel.toLowerCase()}_db`;
+        const localKey = this.getLocalDbKey(targetLevel);
         const localDbStr = localStorage.getItem(localKey);
         if (localDbStr) {
           try {
@@ -2237,6 +2237,14 @@
           const data = await res.json();
           localStorage.setItem('kanji_auth_token', data.token);
           this.currentUser = data.user;
+          this.userSettings = null;
+          this.db = null;
+          this.session = null;
+          this.currentQuiz = null;
+
+          const resumeContainer = document.getElementById('resume-container');
+          if (resumeContainer) resumeContainer.innerHTML = '';
+
           this.showToast(`Xin chào ${data.user.name || data.user.email}!`);
 
           // Ask to merge offline local progress if available
@@ -2292,16 +2300,27 @@
         }
       }
 
-      performLogout() {
+      async performLogout() {
         this.closeConfirmLogoutModal();
         this.closeUserAccountModal();
         localStorage.removeItem('kanji_auth_token');
         this.currentUser = null;
+        this.userSettings = null;
+        this.db = null;
+        this.session = null;
+        this.currentQuiz = null;
+
+        // Clear resume banner immediately
+        const resumeContainer = document.getElementById('resume-container');
+        if (resumeContainer) resumeContainer.innerHTML = '';
+
         this.renderAuthUI();
-        this.loadDatabase();
+        await this.loadDatabase();
         this.updateDashboard();
         if (this.currentView === 'browse') {
           this.renderBrowseGrid();
+        } else if (this.currentView === 'special') {
+          this.renderSpecialReadings();
         }
         this.showToast('Đã đăng xuất an toàn khỏi tài khoản.');
       }
@@ -2415,8 +2434,8 @@
               this.userSettings = meData.settings || {};
               this.renderAuthUI();
 
-              // Fetch user's isolated cloud progress
-              const progRes = await fetch('/api/progress', {
+              // Fetch user's isolated cloud progress for current level
+              const progRes = await fetch(`/api/progress?level=${this.currentLevel}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
               });
               if (progRes.ok) {
@@ -2425,8 +2444,8 @@
                 this.db.cards = progData.cards || {};
                 this.db.bookmarks = progData.bookmarks || [];
 
-                // Fetch active session if any
-                const sessRes = await fetch('/api/session/current', {
+                // Fetch active session for current level if any
+                const sessRes = await fetch(`/api/session/current?level=${this.currentLevel}`, {
                   headers: { 'Authorization': `Bearer ${token}` }
                 });
                 if (sessRes.ok) {
@@ -2494,7 +2513,10 @@
 
       getLocalDbKey(lvl = null) {
         const l = (lvl || this.currentLevel || 'N3').toLowerCase();
-        return `kanji_master_${l}_db`;
+        if (this.currentUser && this.currentUser.id) {
+          return `kanji_user_${this.currentUser.id}_${l}_db`;
+        }
+        return `kanji_guest_${l}_db`;
       }
 
       createDefaultDb() {
