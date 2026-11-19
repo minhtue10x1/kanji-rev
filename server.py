@@ -105,6 +105,7 @@ class ImportLocalRequest(BaseModel):
     level: Optional[str] = "N3"
     cards: Dict[str, Any]
     bookmarks: Optional[List[int]] = None
+    session: Optional[Dict[str, Any]] = None
 
 
 # -------------------------------------------------------------
@@ -491,6 +492,31 @@ def import_local_progress(req: ImportLocalRequest, user_id: str = Depends(get_cu
             cursor.execute("""
                 UPDATE user_kanji_progress SET is_bookmarked = 1 WHERE user_id = ? AND level = ? AND kanji_id = ?
             """, (user_id, lvl, b_kid))
+
+    if req.session and req.session.get("active"):
+        try:
+            sess = req.session
+            sess_id = f"sess_{user_id}_{lvl}"
+            q_json = json.dumps(sess.get("queue", []))
+            now_iso = datetime.now(timezone.utc).isoformat()
+            cur_idx = sess.get("currentIndex", sess.get("current_index", 0))
+            comp_cnt = sess.get("completed", sess.get("completed_count", 0))
+            cursor.execute("""
+                INSERT INTO study_sessions (
+                    id, user_id, level, mode, filter_type, chapter_num, queue_json, current_index, completed_count, is_active, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)
+                ON CONFLICT(id) DO UPDATE SET
+                    mode = excluded.mode,
+                    filter_type = excluded.filter_type,
+                    chapter_num = excluded.chapter_num,
+                    queue_json = excluded.queue_json,
+                    current_index = excluded.current_index,
+                    completed_count = excluded.completed_count,
+                    is_active = excluded.is_active,
+                    updated_at = excluded.updated_at
+            """, (sess_id, user_id, lvl, sess.get("mode", "flashcard"), sess.get("filter", sess.get("filter_type", "all")), sess.get("chapter", sess.get("chapter_num")), q_json, cur_idx, comp_cnt, now_iso))
+        except Exception as se:
+            print(f"Session sync warning: {se}")
 
     conn.commit()
     conn.close()

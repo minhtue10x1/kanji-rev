@@ -2318,6 +2318,13 @@
         const token = localStorage.getItem('kanji_auth_token');
         if (token && this.currentUser) {
           try {
+            // Read local mirror first for data safety
+            let localMirror = null;
+            try {
+              const localRaw = localStorage.getItem(this.getLocalDbKey(targetLevel));
+              if (localRaw) localMirror = JSON.parse(localRaw);
+            } catch (e) {}
+
             const progRes = await fetch(`/api/progress?level=${targetLevel}`, {
               headers: { 'Authorization': `Bearer ${token}` },
               signal: signal
@@ -2332,8 +2339,29 @@
             if (progRes.ok) {
               const progData = await progRes.json();
               if (requestId !== this.levelSwitchRequestId || this.currentLevel !== targetLevel) return;
-              this.db.cards = progData.cards || {};
-              this.db.bookmarks = progData.bookmarks || [];
+
+              const cloudLearned = progData.cards ? Object.values(progData.cards).filter(c => (c.repetitions > 0) || (c.status && c.status !== 'new')).length : 0;
+              const localLearned = (localMirror && localMirror.cards) ? Object.values(localMirror.cards).filter(c => (c.repetitions > 0) || (c.status && c.status !== 'new')).length : 0;
+
+              if (cloudLearned === 0 && localLearned > 0) {
+                // Cloud DB is empty (e.g. cold restart on Vercel), but local has user progress!
+                // Restore local progress and immediately push to cloud
+                this.db.cards = localMirror.cards;
+                this.db.bookmarks = localMirror.bookmarks || [];
+                if (localMirror.session && localMirror.session.active) this.db.session = localMirror.session;
+                this.syncBulkToCloud(targetLevel, this.db);
+              } else {
+                this.db.cards = progData.cards || {};
+                this.db.bookmarks = progData.bookmarks || [];
+                // Merge if local mirror has cards with more repetitions
+                if (localMirror && localMirror.cards) {
+                  for (const [kId, lCard] of Object.entries(localMirror.cards)) {
+                    if (!this.db.cards[kId] || (lCard.repetitions > (this.db.cards[kId].repetitions || 0))) {
+                      this.db.cards[kId] = lCard;
+                    }
+                  }
+                }
+              }
             }
 
             const sessRes = await fetch(`/api/session/current?level=${targetLevel}`, {
@@ -2361,6 +2389,9 @@
                   currentIndex: curIdx,
                   completed: compCnt
                 };
+              } else if (localMirror && localMirror.session && localMirror.session.active && (localMirror.session.currentIndex > 0 || localMirror.session.completed > 0)) {
+                this.db.session = localMirror.session;
+                this.syncSessionSaveToCloud().catch(() => {});
               } else {
                 this.db.session = {
                   active: false,
@@ -2632,8 +2663,6 @@
           localStorage.setItem('kanji_auth_token', data.token);
           this.currentUser = data.user;
           this.userSettings = null;
-          this.db = null;
-          this.session = null;
           this.currentQuiz = null;
 
           const resumeContainer = document.getElementById('resume-container');
@@ -2641,13 +2670,20 @@
 
           this.showToast(`Xin chào ${data.user.name || data.user.email}!`);
 
-          // Ask to merge offline local progress if available
-          const localDb = localStorage.getItem('kanji_master_n3_db');
-          if (localDb) {
-            try {
-              const parsed = JSON.parse(localDb);
-              if (parsed.cards && Object.values(parsed.cards).some(c => c.repetitions > 0)) {
-                if (confirm('Phát hiện bạn có dữ liệu học tập trên máy này. Bạn có muốn đồng bộ toàn bộ lên tài khoản cá nhân mới không?')) {
+          // Safeguard: Check if local storage (under user ID, guest mode, or legacy key)
+          // has existing progress for any level (N5..N1) and auto-sync it to the server
+          const allLevels = ['n1', 'n2', 'n3', 'n4', 'n5'];
+          for (const lvl of allLevels) {
+            const userKey = `kanji_user_${data.user.id}_${lvl}_db`;
+            const guestKey = `kanji_guest_${lvl}_db`;
+            const legacyKey = `kanji_master_${lvl}_db`;
+            const candidateStr = localStorage.getItem(userKey) || localStorage.getItem(guestKey) || localStorage.getItem(legacyKey);
+            if (candidateStr) {
+              try {
+                const parsed = JSON.parse(candidateStr);
+                const hasLearned = parsed.cards && Object.values(parsed.cards).some(c => (c.repetitions > 0) || (c.status && c.status !== 'new'));
+                if (hasLearned) {
+                  localStorage.setItem(userKey, candidateStr);
                   await fetch('/api/sync/import-local', {
                     method: 'POST',
                     headers: {
@@ -2655,13 +2691,15 @@
                       'Authorization': `Bearer ${data.token}`
                     },
                     body: JSON.stringify({
+                      level: lvl.toUpperCase(),
                       cards: parsed.cards,
-                      bookmarks: parsed.bookmarks || []
+                      bookmarks: parsed.bookmarks || [],
+                      session: parsed.session || null
                     })
-                  });
+                  }).catch(() => {});
                 }
-              }
-            } catch (err) {}
+              } catch (e) {}
+            }
           }
 
           await this.loadDatabase();
@@ -2812,6 +2850,28 @@
         } catch (e) {}
       }
 
+      async syncBulkToCloud(level = this.currentLevel, dbData = this.db) {
+        const token = localStorage.getItem('kanji_auth_token');
+        if (!token || !dbData || !dbData.cards) return;
+        try {
+          await fetch('/api/sync/import-local', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+              level: level,
+              cards: dbData.cards,
+              bookmarks: dbData.bookmarks || [],
+              session: dbData.session || null
+            })
+          });
+        } catch (e) {
+          console.warn('syncBulkToCloud background error:', e);
+        }
+      }
+
       // --- DATABASE LAYER ---
 
       async loadDatabase() {
@@ -2834,9 +2894,36 @@
               });
               if (progRes.ok) {
                 const progData = await progRes.json();
+
+                let localMirror = null;
+                try {
+                  const localRaw = localStorage.getItem(this.getLocalDbKey());
+                  if (localRaw) localMirror = JSON.parse(localRaw);
+                } catch (e) {}
+
                 this.db = this.createDefaultDb();
-                this.db.cards = progData.cards || {};
-                this.db.bookmarks = progData.bookmarks || [];
+
+                const cloudLearned = progData.cards ? Object.values(progData.cards).filter(c => (c.repetitions > 0) || (c.status && c.status !== 'new')).length : 0;
+                const localLearned = (localMirror && localMirror.cards) ? Object.values(localMirror.cards).filter(c => (c.repetitions > 0) || (c.status && c.status !== 'new')).length : 0;
+
+                if (cloudLearned === 0 && localLearned > 0) {
+                  // Cloud DB was wiped (e.g. cold restart on Vercel), but local has user progress!
+                  // Preserve user's local progress and push up to cloud!
+                  this.db.cards = localMirror.cards;
+                  this.db.bookmarks = localMirror.bookmarks || [];
+                  if (localMirror.session && localMirror.session.active) this.db.session = localMirror.session;
+                  this.syncBulkToCloud(this.currentLevel, this.db);
+                } else {
+                  this.db.cards = progData.cards || {};
+                  this.db.bookmarks = progData.bookmarks || [];
+                  if (localMirror && localMirror.cards) {
+                    for (const [kId, lCard] of Object.entries(localMirror.cards)) {
+                      if (!this.db.cards[kId] || (lCard.repetitions > (this.db.cards[kId].repetitions || 0))) {
+                        this.db.cards[kId] = lCard;
+                      }
+                    }
+                  }
+                }
 
                 // Fetch active session for current level if any
                 const sessRes = await fetch(`/api/session/current?level=${this.currentLevel}`, {
@@ -2858,6 +2945,9 @@
                       currentIndex: curIdx,
                       completed: compCnt
                     };
+                  } else if (localMirror && localMirror.session && localMirror.session.active && (localMirror.session.currentIndex > 0 || localMirror.session.completed > 0)) {
+                    this.db.session = localMirror.session;
+                    this.syncSessionSaveToCloud().catch(() => {});
                   }
                 }
                 this.saveLocal();
