@@ -1648,9 +1648,26 @@
         <button class="btn btn-primary" onclick="app.closeUserAccountModal(); app.exportDatabase();">
           💾 Xuất bản sao lưu dữ liệu cá nhân (db.json)
         </button>
-        <button class="btn" onclick="app.closeUserAccountModal(); app.logout();" style="color:var(--danger); border-color:var(--danger);">
+        <button class="btn" onclick="app.closeUserAccountModal(); app.confirmLogout();" style="color:var(--danger); border-color:var(--danger);">
           Đăng xuất khỏi tài khoản
         </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Confirm Logout Modal -->
+  <div class="modal-overlay" id="confirm-logout-modal" onclick="if(event.target === this) app.closeConfirmLogoutModal()">
+    <div class="modal-card" style="max-width: 380px; text-align: center;">
+      <button class="modal-close" onclick="app.closeConfirmLogoutModal()">✕</button>
+      <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">🚪</div>
+      <div style="font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem;">Xác nhận đăng xuất</div>
+      <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.25rem;">
+        Tiến trình học của bạn đã được tự động sao lưu an toàn trên đám mây. Bạn có muốn đăng xuất trên thiết bị này?
+      </div>
+      <div style="display: flex; gap: 0.75rem; justify-content: center;">
+        <button class="btn" onclick="app.closeConfirmLogoutModal()" style="flex: 1; justify-content: center; font-weight: 600;">Hủy</button>
+        <button class="btn" onclick="app.performLogout()" style="flex: 1; justify-content: center; background: #ef4444; border-color: #ef4444; color: #fff; font-weight: 600;">Đăng xuất</button>
       </div>
     </div>
   </div>
@@ -2095,10 +2112,16 @@
           const avatar = this.currentUser.avatar_url || 'https://www.gravatar.com/avatar/?d=mp';
           const name = this.currentUser.name || this.currentUser.email.split('@')[0];
           container.innerHTML = `
-            <div class="user-pill" onclick="app.showUserAccountModal()" style="display:inline-flex; align-items:center; gap:0.45rem; padding:0.25rem 0.65rem; background:var(--surface-elevated); border:1px solid var(--border); border-radius:999px; cursor:pointer; font-size:0.8rem;" title="Tài khoản Google đang kết nối cơ sở dữ liệu riêng biệt">
-              <img src="${avatar}" style="width:20px; height:20px; border-radius:50%; object-fit:cover;" onerror="this.src='https://www.gravatar.com/avatar/?d=mp'" />
-              <span style="font-weight:600; max-width:100px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${name}</span>
-              <span style="font-size:0.7rem; color:var(--success);" title="Đồng bộ đám mây trực tiếp">☁️</span>
+            <div style="display:inline-flex; align-items:center; gap:0.4rem;">
+              <div class="user-pill" onclick="app.showUserAccountModal()" style="display:inline-flex; align-items:center; gap:0.45rem; padding:0.25rem 0.65rem; background:var(--surface-elevated); border:1px solid var(--border); border-radius:999px; cursor:pointer; font-size:0.8rem;" title="Xem hồ sơ và dữ liệu đám mây">
+                <img src="${avatar}" style="width:20px; height:20px; border-radius:50%; object-fit:cover;" onerror="this.src='https://www.gravatar.com/avatar/?d=mp'" />
+                <span style="font-weight:600; max-width:90px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${name}</span>
+                <span style="font-size:0.7rem; color:var(--success);" title="Đồng bộ đám mây trực tiếp">☁️</span>
+              </div>
+              <button class="btn btn-sm" onclick="app.confirmLogout()" style="display:inline-flex; align-items:center; gap:0.3rem; padding:0.25rem 0.55rem; font-size:0.75rem; color:var(--text-muted); border:1px solid var(--border); border-radius:999px; background:var(--surface);" title="Đăng xuất">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                <span>Đăng xuất</span>
+              </button>
             </div>
           `;
         } else {
@@ -2248,15 +2271,39 @@
       }
 
       logout() {
-        if (confirm('Bạn có muốn đăng xuất khỏi tài khoản Google này?')) {
-          localStorage.removeItem('kanji_auth_token');
-          this.currentUser = null;
-          this.renderAuthUI();
-          this.loadDatabase();
-          this.updateDashboard();
-          this.renderBrowseGrid();
-          this.showToast('Đã đăng xuất.');
+        this.confirmLogout();
+      }
+
+      confirmLogout() {
+        const modal = document.getElementById('confirm-logout-modal');
+        if (modal) {
+          modal.classList.add('active');
+          this.syncModalScrollLock();
+        } else if (confirm('Bạn có muốn đăng xuất khỏi tài khoản Google này?')) {
+          this.performLogout();
         }
+      }
+
+      closeConfirmLogoutModal() {
+        const modal = document.getElementById('confirm-logout-modal');
+        if (modal) {
+          modal.classList.remove('active');
+          this.syncModalScrollLock();
+        }
+      }
+
+      performLogout() {
+        this.closeConfirmLogoutModal();
+        this.closeUserAccountModal();
+        localStorage.removeItem('kanji_auth_token');
+        this.currentUser = null;
+        this.renderAuthUI();
+        this.loadDatabase();
+        this.updateDashboard();
+        if (this.currentView === 'browse') {
+          this.renderBrowseGrid();
+        }
+        this.showToast('Đã đăng xuất an toàn khỏi tài khoản.');
       }
 
       showUserAccountModal() {
