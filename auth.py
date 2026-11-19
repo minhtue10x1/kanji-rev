@@ -89,10 +89,30 @@ def verify_google_id_token(id_token: str) -> Optional[Dict[str, Any]]:
             "picture": avatar
         }
 
+    # Try verifying as Google Access Token via Google userinfo endpoint
+    try:
+        req = urllib.request.Request(
+            "https://www.googleapis.com/oauth2/v3/userinfo",
+            headers={"Authorization": f"Bearer {id_token}", "User-Agent": "KanjiRevApp/1.0"}
+        )
+        with urllib.request.urlopen(req, timeout=8) as response:
+            if response.status == 200:
+                data = json.loads(response.read().decode('utf-8'))
+                if "email" in data:
+                    return {
+                        "sub": data.get("sub", data["email"]),
+                        "email": data["email"],
+                        "name": data.get("name", data["email"].split("@")[0]),
+                        "picture": data.get("picture", "")
+                    }
+    except Exception:
+        pass
+
+    # Try verifying as Google ID Token via Google tokeninfo endpoint
     try:
         url = f"https://oauth2.googleapis.com/tokeninfo?id_token={id_token}"
         req = urllib.request.Request(url, headers={"User-Agent": "KanjiRevApp/1.0"})
-        with urllib.request.urlopen(req, timeout=10) as response:
+        with urllib.request.urlopen(req, timeout=8) as response:
             if response.status == 200:
                 data = json.loads(response.read().decode('utf-8'))
                 # Validate mandatory claims

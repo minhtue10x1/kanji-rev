@@ -9,7 +9,7 @@ import json
 from datetime import datetime, timezone, timedelta
 from typing import Optional, List, Dict, Any
 
-from fastapi import FastAPI, HTTPException, Depends, Header, status
+from fastapi import FastAPI, HTTPException, Depends, Header, status, Request
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -33,6 +33,23 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.middleware("http")
+async def vercel_path_rewrite_middleware(request: Request, call_next):
+    """Normalize paths rewritten by Vercel serverless environment."""
+    path = request.scope.get("path", "")
+    matched_path = request.headers.get("x-matched-path") or request.headers.get("x-vercel-matched-path")
+    if matched_path and (matched_path.startswith("/api/") or matched_path.startswith("/config")):
+        request.scope["path"] = matched_path
+    elif path.startswith("/api/index.py/"):
+        request.scope["path"] = path.replace("/api/index.py/", "/api/")
+    elif path == "/api/index.py":
+        request.scope["path"] = "/api"
+    return await call_next(request)
+
+@app.get("/api")
+def api_health():
+    return {"status": "ok", "message": "Kanji Master API operational"}
 
 # -------------------------------------------------------------
 # Dependency: Extract Current Authenticated User
@@ -92,6 +109,7 @@ class ImportLocalRequest(BaseModel):
 # 1. Authentication & Public Config Endpoints
 # -------------------------------------------------------------
 @app.get("/api/config")
+@app.get("/config")
 def get_public_config():
     """Public environment configuration for frontend clients."""
     return {
@@ -100,6 +118,7 @@ def get_public_config():
     }
 
 @app.post("/api/auth/google")
+@app.post("/auth/google")
 def auth_google(req: GoogleAuthRequest):
     """Authenticate with Google ID Token from Google Identity Services."""
     profile = verify_google_id_token(req.id_token)
@@ -110,6 +129,7 @@ def auth_google(req: GoogleAuthRequest):
     return result
 
 @app.get("/api/auth/me")
+@app.get("/auth/me")
 def get_current_user(user_id: str = Depends(get_current_user_id)):
     """Fetch current user profile and preferences."""
     conn = get_db()
@@ -131,6 +151,7 @@ def get_current_user(user_id: str = Depends(get_current_user_id)):
     }
 
 @app.post("/api/auth/settings")
+@app.post("/auth/settings")
 def update_user_settings(req: SettingsUpdateRequest, user_id: str = Depends(get_current_user_id)):
     """Update user study preferences."""
     conn = get_db()
@@ -174,6 +195,7 @@ def update_user_settings(req: SettingsUpdateRequest, user_id: str = Depends(get_
 # 2. Kanji Progress & Spaced Repetition (SRS)
 # -------------------------------------------------------------
 @app.get("/api/progress")
+@app.get("/progress")
 def get_all_progress(level: str = "N3", user_id: str = Depends(get_current_user_id)):
     """Fetch all Kanji card records and bookmarks for this user in the specified level."""
     conn = get_db()
@@ -215,6 +237,7 @@ def get_all_progress(level: str = "N3", user_id: str = Depends(get_current_user_
     }
 
 @app.post("/api/progress/review")
+@app.post("/progress/review")
 def review_card(req: CardReviewRequest, user_id: str = Depends(get_current_user_id)):
     """
     Submits a card review result and calculates the next Spaced Repetition interval.
@@ -305,6 +328,7 @@ def review_card(req: CardReviewRequest, user_id: str = Depends(get_current_user_
     }
 
 @app.post("/api/progress/bookmark")
+@app.post("/progress/bookmark")
 def toggle_bookmark(req: BookmarkToggleRequest, user_id: str = Depends(get_current_user_id)):
     """Toggle star / bookmark for a specific kanji."""
     conn = get_db()
@@ -333,6 +357,7 @@ def toggle_bookmark(req: BookmarkToggleRequest, user_id: str = Depends(get_curre
 # 3. Study Session (Resume across devices)
 # -------------------------------------------------------------
 @app.get("/api/session/current")
+@app.get("/session/current")
 def get_current_session(level: Optional[str] = None, user_id: str = Depends(get_current_user_id)):
     """Retrieves any active/unfinished study session."""
     conn = get_db()
@@ -373,6 +398,7 @@ def get_current_session(level: Optional[str] = None, user_id: str = Depends(get_
     }
 
 @app.post("/api/session/save")
+@app.post("/session/save")
 def save_session(req: SessionSaveRequest, user_id: str = Depends(get_current_user_id)):
     """Saves or updates ongoing study session state."""
     conn = get_db()
@@ -397,6 +423,7 @@ def save_session(req: SessionSaveRequest, user_id: str = Depends(get_current_use
     return {"status": "saved", "session_id": session_id}
 
 @app.post("/api/session/complete")
+@app.post("/session/complete")
 def complete_session(level: Optional[str] = None, user_id: str = Depends(get_current_user_id)):
     """Marks active study session completed."""
     conn = get_db()
@@ -414,6 +441,7 @@ def complete_session(level: Optional[str] = None, user_id: str = Depends(get_cur
 # 4. Import / Merge Local Offline Data
 # -------------------------------------------------------------
 @app.post("/api/sync/import-local")
+@app.post("/sync/import-local")
 def import_local_progress(req: ImportLocalRequest, user_id: str = Depends(get_current_user_id)):
     """
     Seamlessly merges offline Guest / localStorage cards into the newly logged-in account.
@@ -467,6 +495,7 @@ def import_local_progress(req: ImportLocalRequest, user_id: str = Depends(get_cu
 # 5. Dashboard Summary Stats
 # -------------------------------------------------------------
 @app.get("/api/stats/dashboard")
+@app.get("/stats/dashboard")
 def get_dashboard_stats(level: str = "N3", user_id: str = Depends(get_current_user_id)):
     """Computes accurate dashboard aggregates for the user in the specified level."""
     conn = get_db()
