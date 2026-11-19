@@ -20,7 +20,7 @@ except Exception:
     HAS_PSYCOPG2 = False
 
 try:
-    import pg8000.native
+    import pg8000.dbapi
     HAS_PG8000 = True
 except Exception:
     HAS_PG8000 = False
@@ -127,16 +127,23 @@ def get_db():
                 print(f"psycopg2 connection warning, falling back to pg8000: {e}")
 
         if HAS_PG8000:
-            parsed = urllib.parse.urlparse(pg_url)
-            conn = pg8000.native.Connection(
-                user=parsed.username,
-                password=parsed.password,
-                host=parsed.hostname,
-                port=parsed.port or 5432,
-                database=parsed.path.lstrip('/'),
-                ssl_context=True
-            )
-            return PostgresConnectionWrapper(conn)
+            try:
+                import ssl
+                parsed = urllib.parse.urlparse(pg_url)
+                user = urllib.parse.unquote(parsed.username) if parsed.username else None
+                password = urllib.parse.unquote(parsed.password) if parsed.password else None
+                ssl_ctx = ssl.create_default_context()
+                conn = pg8000.dbapi.connect(
+                    user=user,
+                    password=password,
+                    host=parsed.hostname,
+                    port=parsed.port or 5432,
+                    database=parsed.path.lstrip('/'),
+                    ssl_context=ssl_ctx
+                )
+                return PostgresConnectionWrapper(conn)
+            except Exception as e:
+                print(f"pg8000 connection warning: {e}")
 
         print("Warning: PostgreSQL URL present but drivers failed to connect. Falling back to local/tmp SQLite.")
 
