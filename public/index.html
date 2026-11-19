@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>漢字マスター (N5 - N1) — Kanji Study App</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1175,14 +1175,349 @@
       color: var(--text-muted);
     }
 
-    /* Responsive */
-    @media (max-width: 640px) {
-      .stats-row { grid-template-columns: repeat(2, 1fr); }
-      .quiz-options { grid-template-columns: 1fr; }
-      .resume-card { flex-direction: column; align-items: flex-start; gap: 1rem; }
-      .header-inner { padding: 0.75rem 1rem; }
-      .study-controls { grid-template-columns: 1fr; }
+
+    /* Helper display classes */
+    .desktop-only { display: inline; }
+    .mobile-only { display: none; }
+
+    /* Mobile Bottom Navigation (Hidden on desktop) */
+    .mobile-bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: calc(3.6rem + env(safe-area-inset-bottom, 0px));
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
     }
+
+    .mobile-nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.2rem;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0.35rem 0;
+      transition: color 0.15s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .mobile-nav-item.active {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .mobile-nav-icon {
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    .mobile-nav-label {
+      font-size: 0.72rem;
+      letter-spacing: -0.01em;
+    }
+
+    /* ============================================================= */
+    /* COMPREHENSIVE RESPONSIVE STYLES (Tablets & Mobile <= 768px)   */
+    /* ============================================================= */
+    @media (max-width: 768px) {
+      .desktop-only { display: none !important; }
+      .mobile-only { display: inline !important; }
+
+      /* Show mobile bottom navigation */
+      .mobile-bottom-nav {
+        display: flex;
+      }
+
+      /* Adjust main padding so bottom bar never obscures content */
+      main {
+        padding: 0.85rem 0.75rem calc(4.6rem + env(safe-area-inset-bottom, 0px)) !important;
+      }
+
+      /* Header adjustments */
+      .header-inner {
+        padding: 0.6rem 0.75rem !important;
+        gap: 0.5rem !important;
+      }
+
+      /* Hide desktop top nav bar on mobile */
+      nav:not(.mobile-bottom-nav) {
+        display: none !important;
+      }
+
+      /* Brand title compact */
+      .brand {
+        gap: 0.45rem !important;
+      }
+      .brand-title {
+        font-size: 0.9rem !important;
+      }
+      .brand-mark {
+        width: 1.85rem !important;
+        height: 1.85rem !important;
+        font-size: 1.15rem !important;
+      }
+
+      /* Level combobox */
+      .level-combo-select {
+        font-size: 0.78rem !important;
+        padding: 0.3rem 1.6rem 0.3rem 0.5rem !important;
+        background-position: right 0.35rem center !important;
+        max-width: 125px !important;
+      }
+
+      /* Header actions (User pill + Logout / Login) */
+      .header-actions {
+        gap: 0.3rem !important;
+      }
+
+      .user-pill {
+        padding: 0.2rem 0.45rem !important;
+        font-size: 0.75rem !important;
+        max-width: 110px !important;
+      }
+      .user-pill span:first-of-type {
+        max-width: 55px !important;
+      }
+
+      /* Stats Row */
+      .stats-row {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.6rem !important;
+        margin-bottom: 1.25rem !important;
+      }
+      .stat-box {
+        padding: 0.75rem 0.85rem !important;
+      }
+      .stat-label {
+        font-size: 0.68rem !important;
+      }
+      .stat-value {
+        font-size: 1.35rem !important;
+      }
+
+      /* Launcher grid */
+      .study-launcher-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.75rem !important;
+        margin-bottom: 1.75rem !important;
+      }
+      .launch-card {
+        padding: 1rem !important;
+      }
+
+      /* Resume card banner */
+      .resume-card {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.75rem !important;
+        padding: 1rem !important;
+      }
+      .resume-actions {
+        width: 100% !important;
+        display: flex !important;
+      }
+      .resume-actions .btn-primary {
+        flex: 1 !important;
+        justify-content: center !important;
+      }
+
+      /* Info banner */
+      .info-banner {
+        padding: 0.85rem 1rem !important;
+        font-size: 0.8rem !important;
+        margin-bottom: 1.25rem !important;
+      }
+
+      /* Flashcard View & Controls */
+      .study-container {
+        padding: 0 !important;
+      }
+
+      .study-topbar {
+        font-size: 0.8rem !important;
+        margin-bottom: 0.65rem !important;
+      }
+
+      .flashcard-wrapper {
+        margin-bottom: 1rem !important;
+      }
+
+      .flashcard {
+        min-height: min(440px, 58vh) !important;
+      }
+
+      .card-face {
+        padding: 1.25rem 1rem !important;
+        border-radius: 12px !important;
+      }
+
+      .kanji-display {
+        font-size: 4.8rem !important;
+        margin-bottom: 0.75rem !important;
+      }
+
+      .flip-hint {
+        font-size: 0.75rem !important;
+        bottom: 0.85rem !important;
+      }
+
+      .kanji-header-back {
+        margin-bottom: 0.75rem !important;
+      }
+      .kanji-back-char {
+        font-size: 2.2rem !important;
+      }
+      .kanji-back-meaning {
+        font-size: 1.05rem !important;
+      }
+
+      .card-srs-status-box {
+        font-size: 0.72rem !important;
+        padding: 0.4rem 0.6rem !important;
+        gap: 0.5rem !important;
+        flex-wrap: wrap !important;
+      }
+
+      .readings-block {
+        gap: 0.5rem !important;
+        margin-bottom: 0.75rem !important;
+      }
+      .reading-item {
+        padding: 0.5rem 0.6rem !important;
+      }
+      .reading-item .label {
+        font-size: 0.68rem !important;
+      }
+      .reading-item .value {
+        font-size: 0.95rem !important;
+      }
+
+      .radicals-block {
+        padding: 0.55rem 0.75rem !important;
+        margin-bottom: 0.75rem !important;
+      }
+
+      /* Study Controls - Thumb-friendly buttons side by side */
+      .study-controls {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0.65rem !important;
+      }
+
+      .btn-study-action {
+        padding: 0.85rem 0.5rem !important;
+        min-height: 56px !important;
+        border-radius: 10px !important;
+      }
+      .action-main-text {
+        font-size: 0.9rem !important;
+      }
+      .action-sub-text {
+        display: none !important;
+      }
+
+      /* Hide keyboard shortcuts on touchscreens */
+      .keyboard-shortcuts-bar {
+        display: none !important;
+      }
+
+      /* Quiz view */
+      .quiz-question-box {
+        padding: 1.5rem 1rem !important;
+        margin-bottom: 1rem !important;
+      }
+      .quiz-prompt {
+        font-size: 3.8rem !important;
+      }
+      .quiz-options {
+        grid-template-columns: 1fr !important;
+        gap: 0.6rem !important;
+      }
+      .quiz-option-btn {
+        padding: 0.85rem 1rem !important;
+        font-size: 0.95rem !important;
+        min-height: 50px !important;
+      }
+
+      /* Browse Kanji Grid */
+      .filter-bar {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.6rem !important;
+      }
+      .search-input {
+        width: 100% !important;
+        font-size: 16px !important; /* Prevents auto-zoom in iOS Safari */
+        box-sizing: border-box !important;
+      }
+      .select-dropdown {
+        width: 100% !important;
+        font-size: 16px !important; /* Prevents auto-zoom in iOS Safari */
+        box-sizing: border-box !important;
+      }
+      .kanji-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 0.5rem !important;
+      }
+      .grid-card {
+        padding: 0.75rem 0.4rem !important;
+        min-height: 95px !important;
+      }
+      .grid-kanji {
+        font-size: 1.85rem !important;
+      }
+
+      /* Modals */
+      .modal-card {
+        max-width: 95% !important;
+        width: 95% !important;
+        max-height: 90vh !important;
+        padding: 1.25rem 1rem !important;
+        border-radius: 14px !important;
+      }
+      .modal-close {
+        top: 0.75rem !important;
+        right: 0.75rem !important;
+        padding: 0.4rem !important;
+        font-size: 1.4rem !important;
+      }
+
+      /* Special table wrapper */
+      .special-table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .special-table th, .special-table td {
+        padding: 0.6rem 0.75rem !important;
+        font-size: 0.85rem !important;
+        white-space: nowrap;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .kanji-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+      .kanji-display {
+        font-size: 4rem !important;
+      }
+      .brand-title {
+        display: none !important;
+      }
+    }
+
   </style>
   <!-- Google Identity Services (GIS) for Google OAuth2 -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -1346,7 +1681,7 @@
                 <div class="card-badge" id="card-chapter-tag">1章 生活</div>
                 <div class="kanji-display" id="card-kanji-char">起</div>
                 <div class="card-badge" id="card-stroke-tag">10 nét · Trang 8</div>
-                <div class="flip-hint">Nhấp chuột hoặc phím <span class="kbd">Space</span> để xem Hán Việt, nghĩa & bộ thủ</div>
+                <div class="flip-hint"><span class="desktop-only">Nhấp chuột hoặc phím <span class="kbd">Space</span></span><span class="mobile-only">Chạm vào thẻ</span> để xem Hán Việt, nghĩa & bộ thủ</div>
               </div>
 
               <!-- Back Face -->
@@ -1484,7 +1819,7 @@
           Đây là các từ ghép chữ Hán có cách đọc biến âm đặc biệt (熟字訓 - jukujikun) xuất hiện trực tiếp trong đề thi JLPT N3.
         </p>
 
-        <table class="special-table">
+        <div class="special-table-wrapper"><table class="special-table">
           <thead>
             <tr>
               <th>Từ vựng</th>
@@ -1496,11 +1831,28 @@
           <tbody id="special-readings-tbody">
             <!-- Injected via JS -->
           </tbody>
-        </table>
+        </table></div>
       </div>
     </section>
 
   </main>
+
+  <!-- Mobile Bottom Navigation Bar (Visible only on mobile devices) -->
+  <nav class="mobile-bottom-nav" id="mobile-nav">
+    <button class="mobile-nav-item active" data-view="home" onclick="app.navigate('home')">
+      <span class="mobile-nav-icon">🏠</span>
+      <span class="mobile-nav-label">Trang chủ</span>
+    </button>
+    <button class="mobile-nav-item" data-view="browse" onclick="app.navigate('browse')" id="mobile-nav-browse-btn">
+      <span class="mobile-nav-icon">📖</span>
+      <span class="mobile-nav-label">Chữ Hán</span>
+    </button>
+    <button class="mobile-nav-item" data-view="special" onclick="app.navigate('special')">
+      <span class="mobile-nav-icon">⚡</span>
+      <span class="mobile-nav-label">Đặc biệt</span>
+    </button>
+  </nav>
+
 
   <!-- Kanji Inspection Slide-over / Modal -->
   <div class="modal-overlay" id="kanji-modal" onclick="if(event.target === this) app.closeKanjiModal()">
@@ -2697,12 +3049,22 @@
         this.currentView = viewName;
         document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
         document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.mobile-nav-item').forEach(b => b.classList.remove('active'));
 
         const targetView = document.getElementById(`view-${viewName}`);
         if (targetView) targetView.classList.add('active');
 
         const targetBtn = document.querySelector(`.nav-btn[data-view="${viewName}"]`);
         if (targetBtn) targetBtn.classList.add('active');
+
+        const targetMobileBtn = document.querySelector(`.mobile-nav-item[data-view="${viewName}"]`);
+        if (targetMobileBtn) targetMobileBtn.classList.add('active');
+
+        // Distraction-free: hide mobile bottom nav while in active study mode
+        const mobileNav = document.getElementById('mobile-nav');
+        if (mobileNav) {
+          mobileNav.style.display = (viewName === 'study') ? 'none' : '';
+        }
 
         if (viewName === 'home') {
           this.updateDashboard();
