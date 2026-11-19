@@ -73,14 +73,20 @@ def verify_google_id_token(id_token: str) -> Optional[Dict[str, Any]]:
     Verifies a Google ID token using Google's public tokeninfo endpoint.
     Returns the user profile dict if valid: {sub, email, name, picture}
     """
-    # Allow mock login in local development if id_token starts with 'mock_'
-    if id_token.startswith("mock_"):
-        mock_email = id_token.replace("mock_", "") + "@gmail.com"
+    # Support direct email login and development mock login
+    if id_token.startswith("mock_") or id_token.startswith("email_"):
+        raw_val = id_token.replace("mock_", "").replace("email_", "").strip().lower()
+        if "@" in raw_val:
+            user_email = raw_val
+        else:
+            user_email = f"{raw_val}@gmail.com"
+        username = user_email.split("@")[0]
+        avatar = f"https://api.dicebear.com/7.x/initials/svg?seed={username}&backgroundColor=d97706,2563eb,059669"
         return {
-            "sub": "mock_sub_" + hashlib.md5(mock_email.encode()).hexdigest(),
-            "email": mock_email,
-            "name": mock_email.split("@")[0].capitalize(),
-            "picture": "https://www.gravatar.com/avatar/?d=mp"
+            "sub": "user_sub_" + hashlib.md5(user_email.encode()).hexdigest(),
+            "email": user_email,
+            "name": username.capitalize(),
+            "picture": avatar
         }
 
     try:
