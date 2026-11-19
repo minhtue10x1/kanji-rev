@@ -1956,16 +1956,19 @@
             if (sessRes.ok) {
               const sessData = await sessRes.json();
               if (requestId !== this.levelSwitchRequestId || this.currentLevel !== targetLevel) return;
-              if (sessData.session && sessData.session.level === targetLevel) {
+              if (sessData.session && (sessData.session.level === targetLevel || !sessData.session.level)) {
+                const sData = sessData.session;
+                const curIdx = sData.currentIndex !== undefined ? sData.currentIndex : (sData.current_index !== undefined ? sData.current_index : 0);
+                const compCnt = sData.completed !== undefined ? sData.completed : (sData.completed_count !== undefined ? sData.completed_count : 0);
                 this.db.session = {
                   active: true,
-                  level: sessData.session.level,
-                  mode: sessData.session.mode,
-                  filter: sessData.session.filter_type || 'all',
-                  chapter: sessData.session.chapter_num,
-                  queue: sessData.session.queue || [],
-                  currentIndex: sessData.session.current_index || 0,
-                  completed: sessData.session.completed_count || 0
+                  level: targetLevel,
+                  mode: sData.mode || 'flashcard',
+                  filter: sData.filter || sData.filter_type || 'all',
+                  chapter: sData.chapter !== undefined ? sData.chapter : (sData.chapter_num || null),
+                  queue: sData.queue || [],
+                  currentIndex: curIdx,
+                  completed: compCnt
                 };
               } else {
                 this.db.session = {
@@ -2451,14 +2454,18 @@
                 if (sessRes.ok) {
                   const sessData = await sessRes.json();
                   if (sessData.session) {
+                    const sData = sessData.session;
+                    const curIdx = sData.currentIndex !== undefined ? sData.currentIndex : (sData.current_index !== undefined ? sData.current_index : 0);
+                    const compCnt = sData.completed !== undefined ? sData.completed : (sData.completed_count !== undefined ? sData.completed_count : 0);
                     this.db.session = {
                       active: true,
-                      mode: sessData.session.mode,
-                      filter: sessData.session.filter,
-                      chapter: sessData.session.chapter,
-                      queue: sessData.session.queue,
-                      currentIndex: sessData.session.currentIndex,
-                      completed: sessData.session.completed
+                      level: sData.level || this.currentLevel,
+                      mode: sData.mode || 'flashcard',
+                      filter: sData.filter || sData.filter_type || 'all',
+                      chapter: sData.chapter !== undefined ? sData.chapter : (sData.chapter_num || null),
+                      queue: sData.queue || [],
+                      currentIndex: curIdx,
+                      completed: compCnt
                     };
                   }
                 }
@@ -2794,6 +2801,13 @@
       // --- STUDY SESSION CONTROLLER ---
 
       startSession(mode, filter, chapter = null, forceShuffle = null) {
+        // If sequential flashcard and user already has an active ongoing session at current level:
+        const s = this.db.session;
+        if (filter === 'all' && mode === 'flashcard' && s && s.active && s.level === this.currentLevel && s.currentIndex > 0 && s.currentIndex < (s.queue ? s.queue.length : 0)) {
+          this.resumeSession();
+          return;
+        }
+
         let pool = [];
 
         if (filter === 'all') {
@@ -2820,10 +2834,24 @@
 
         // Determine ordering: sequential (default) or shuffle
         let queueIds = pool.map(k => k.id);
-        const shouldShuffle = forceShuffle !== null ? forceShuffle : this.db.settings.shuffleQueue;
+        const shouldShuffle = forceShuffle !== null ? forceShuffle : (this.db.settings && this.db.settings.shuffleQueue);
         if (shouldShuffle) {
           queueIds.sort(() => Math.random() - 0.5);
         }
+
+        // In sequential book order (chuẩn sách), intelligently jump to first unlearned kanji!
+        let initialIndex = 0;
+        if (!shouldShuffle && filter === 'all') {
+          const firstNewIdx = queueIds.findIndex(id => {
+            const c = this.db.cards && this.db.cards[String(id)];
+            return !c || c.status === 'new' || (c.repetitions || 0) === 0;
+          });
+          if (firstNewIdx > 0) {
+            initialIndex = firstNewIdx;
+          }
+        }
+
+        const startKanjiObj = pool.find(k => k.id === queueIds[initialIndex]) || pool[0];
 
         this.db.session = {
           active: true,
@@ -2832,10 +2860,10 @@
           filter: filter,
           chapter: chapter,
           queue: queueIds,
-          currentIndex: 0,
-          completed: 0,
-          lastKanjiId: queueIds[0],
-          lastKanjiChar: pool[0].kanji
+          currentIndex: initialIndex,
+          completed: initialIndex,
+          lastKanjiId: queueIds[initialIndex] || queueIds[0],
+          lastKanjiChar: startKanjiObj ? startKanjiObj.kanji : ''
         };
         this.saveLocal();
         this.syncSessionSaveToCloud();

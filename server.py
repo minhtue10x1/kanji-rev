@@ -391,10 +391,14 @@ def get_current_session(level: Optional[str] = None, user_id: str = Depends(get_
             "level": row["level"],
             "mode": row["mode"],
             "filter": row["filter_type"],
+            "filter_type": row["filter_type"],
             "chapter": row["chapter_num"],
+            "chapter_num": row["chapter_num"],
             "queue": json.loads(row["queue_json"]),
             "currentIndex": row["current_index"],
+            "current_index": row["current_index"],
             "completed": row["completed_count"],
+            "completed_count": row["completed_count"],
             "updatedAt": row["updated_at"]
         }
     }
