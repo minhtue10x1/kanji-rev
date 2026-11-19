@@ -48,8 +48,13 @@ async def vercel_path_rewrite_middleware(request: Request, call_next):
     return await call_next(request)
 
 @app.get("/api")
-def api_health():
-    return {"status": "ok", "message": "Kanji Master API operational"}
+def api_health(request: Request):
+    return {
+        "status": "ok",
+        "google_client_id": os.environ.get("GOOGLE_CLIENT_ID", ""),
+        "headers": dict(request.headers),
+        "scope_path": request.scope.get("path")
+    }
 
 # -------------------------------------------------------------
 # Dependency: Extract Current Authenticated User
