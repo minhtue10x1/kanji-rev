@@ -132,15 +132,29 @@ def get_db():
                 parsed = urllib.parse.urlparse(pg_url)
                 user = urllib.parse.unquote(parsed.username) if parsed.username else None
                 password = urllib.parse.unquote(parsed.password) if parsed.password else None
+                db_name = parsed.path.lstrip('/').split('?')[0]
                 ssl_ctx = ssl.create_default_context()
-                conn = pg8000.dbapi.connect(
-                    user=user,
-                    password=password,
-                    host=parsed.hostname,
-                    port=parsed.port or 5432,
-                    database=parsed.path.lstrip('/'),
-                    ssl_context=ssl_ctx
-                )
+                try:
+                    conn = pg8000.dbapi.connect(
+                        user=user,
+                        password=password,
+                        host=parsed.hostname,
+                        port=parsed.port or 5432,
+                        database=db_name,
+                        ssl_context=ssl_ctx
+                    )
+                except Exception as ssl_err:
+                    ssl_ctx_fallback = ssl.create_default_context()
+                    ssl_ctx_fallback.check_hostname = False
+                    ssl_ctx_fallback.verify_mode = ssl.CERT_NONE
+                    conn = pg8000.dbapi.connect(
+                        user=user,
+                        password=password,
+                        host=parsed.hostname,
+                        port=parsed.port or 5432,
+                        database=db_name,
+                        ssl_context=ssl_ctx_fallback
+                    )
                 return PostgresConnectionWrapper(conn)
             except Exception as e:
                 print(f"pg8000 connection warning: {e}")

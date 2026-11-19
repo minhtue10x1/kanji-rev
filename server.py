@@ -120,6 +120,63 @@ def get_public_config():
         "environment": "production" if os.environ.get("VERCEL") else "development"
     }
 
+@app.get("/api/health")
+@app.get("/health")
+def get_health():
+    """Diagnostics endpoint to verify DB engine and connection status."""
+    pg_url = os.environ.get("POSTGRES_URL") or os.environ.get("DATABASE_URL")
+    has_pg = bool(pg_url)
+    driver_errors = []
+    engine = "unknown"
+    test_query = None
+    table_count = None
+    
+    psy_ok = False
+    try:
+        import psycopg2
+        psy_ok = True
+    except Exception as e:
+        driver_errors.append(f"psycopg2 import: {e}")
+
+    pg8_ok = False
+    try:
+        import pg8000.dbapi
+        pg8_ok = True
+    except Exception as e:
+        driver_errors.append(f"pg8000 import: {e}")
+
+    try:
+        conn = get_db()
+        cursor = conn.cursor()
+        cursor.execute("SELECT 1")
+        test_query = cursor.fetchone()
+        if hasattr(conn, 'conn'):
+            engine = "postgresql"
+            try:
+                cursor.execute("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'public'")
+                table_count = cursor.fetchone()
+            except Exception as te:
+                table_count = str(te)
+        else:
+            engine = "sqlite"
+        conn.close()
+    except Exception as e:
+        driver_errors.append(f"get_db connection error: {e}")
+
+    env_keys = [k for k in os.environ if any(x in k for x in ["POSTGRES", "DATABASE", "VERCEL", "GOOGLE"])]
+
+    return {
+        "status": "ok",
+        "engine": engine,
+        "has_postgres_env": has_pg,
+        "env_keys_present": env_keys,
+        "psycopg2_available": psy_ok,
+        "pg8000_available": pg8_ok,
+        "test_query": str(test_query),
+        "table_count": str(table_count),
+        "errors": driver_errors
+    }
+
 @app.post("/api/auth/google")
 @app.post("/auth/google")
 def auth_google(req: GoogleAuthRequest):
