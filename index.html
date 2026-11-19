@@ -78,6 +78,12 @@
       z-index: 40;
     }
 
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
     .header-inner {
       max-width: 1080px;
       margin: 0 auto;
@@ -1245,10 +1251,18 @@
         padding: 0.85rem 0.75rem calc(4.6rem + env(safe-area-inset-bottom, 0px)) !important;
       }
 
-      /* Header adjustments */
+      /* Header adjustments - Compact, no overflow on phones */
       .header-inner {
-        padding: 0.6rem 0.75rem !important;
-        gap: 0.5rem !important;
+        padding: 0.5rem 0.65rem !important;
+        gap: 0.35rem !important;
+        flex-wrap: nowrap !important;
+      }
+
+      .header-left {
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.4rem !important;
+        flex-shrink: 0 !important;
       }
 
       /* Hide desktop top nav bar on mobile */
@@ -1256,39 +1270,64 @@
         display: none !important;
       }
 
-      /* Brand title compact */
+      /* On mobile phones, hide the Japanese text 漢字マスター to keep navbar clean and uncluttered */
       .brand {
-        gap: 0.45rem !important;
+        gap: 0 !important;
+        flex-shrink: 0 !important;
       }
       .brand-title {
-        font-size: 0.9rem !important;
+        display: none !important;
       }
       .brand-mark {
-        width: 1.85rem !important;
-        height: 1.85rem !important;
-        font-size: 1.15rem !important;
+        width: 2.05rem !important;
+        height: 2.05rem !important;
+        font-size: 1.25rem !important;
+        flex-shrink: 0 !important;
       }
 
       /* Level combobox */
       .level-combo-select {
-        font-size: 0.78rem !important;
-        padding: 0.3rem 1.6rem 0.3rem 0.5rem !important;
-        background-position: right 0.35rem center !important;
-        max-width: 125px !important;
+        font-size: 0.76rem !important;
+        padding: 0.25rem 1.35rem 0.25rem 0.45rem !important;
+        background-position: right 0.3rem center !important;
+        max-width: 108px !important;
+        height: 2.05rem !important;
+        white-space: nowrap !important;
+        text-overflow: ellipsis !important;
       }
 
       /* Header actions (User pill + Logout / Login) */
       .header-actions {
         gap: 0.3rem !important;
+        flex-shrink: 0 !important;
       }
 
       .user-pill {
-        padding: 0.2rem 0.45rem !important;
-        font-size: 0.75rem !important;
-        max-width: 110px !important;
+        padding: 0.2rem 0.4rem !important;
+        height: 2.05rem !important;
+        font-size: 0.74rem !important;
+        max-width: 100px !important;
+        gap: 0.3rem !important;
       }
       .user-pill span:first-of-type {
-        max-width: 55px !important;
+        max-width: 48px !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+      }
+
+      .btn-logout {
+        height: 2.05rem !important;
+        padding: 0.2rem 0.45rem !important;
+        font-size: 0.72rem !important;
+        gap: 0.2rem !important;
+        white-space: nowrap !important;
+      }
+
+      .icon-btn {
+        width: 2.05rem !important;
+        height: 2.05rem !important;
+        flex-shrink: 0 !important;
       }
 
       /* Stats Row */
@@ -1527,7 +1566,7 @@
   <!-- Top Header Navigation -->
   <header>
     <div class="header-inner">
-      <div style="display:flex; align-items:center; gap:1rem;">
+      <div class="header-left">
         <div class="brand" onclick="app.navigate('home')">
           <div class="brand-mark">漢</div>
           <span class="brand-title">漢字マスター</span>
@@ -2473,7 +2512,7 @@
                 <span style="font-weight:600; max-width:90px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${name}</span>
                 <span style="font-size:0.7rem; color:var(--success);" title="Đồng bộ đám mây trực tiếp">☁️</span>
               </div>
-              <button class="btn btn-sm" onclick="app.confirmLogout()" style="display:inline-flex; align-items:center; gap:0.3rem; padding:0.25rem 0.55rem; font-size:0.75rem; color:var(--text-muted); border:1px solid var(--border); border-radius:999px; background:var(--surface);" title="Đăng xuất">
+              <button class="btn btn-sm btn-logout" onclick="app.confirmLogout()" style="display:inline-flex; align-items:center; gap:0.3rem; padding:0.25rem 0.55rem; font-size:0.75rem; color:var(--text-muted); border:1px solid var(--border); border-radius:999px; background:var(--surface);" title="Đăng xuất">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
                 <span>Đăng xuất</span>
               </button>
@@ -3877,11 +3916,14 @@
           }
         });
 
-        chapterMap.forEach((name, num) => {
+        chapterMap.forEach((rawName, num) => {
+          // Normalize chapter title: remove redundant '1章' prefix if already present in data
+          const cleanName = (rawName || '').replace(/^\d+章\s*/, '').trim();
+
           // Dropdown option
           const opt = document.createElement('option');
           opt.value = num;
-          opt.textContent = `${num}章 ${name}`;
+          opt.textContent = `${num}章 ${cleanName}`;
           select.appendChild(opt);
 
           // Modal item
@@ -3889,7 +3931,7 @@
           btn.className = 'btn';
           btn.style.textAlign = 'left';
           btn.style.justifyContent = 'flex-start';
-          btn.innerHTML = `<strong>${num}章</strong> &nbsp; ${name}`;
+          btn.innerHTML = `<strong>${num}章</strong> &nbsp; ${cleanName}`;
           btn.onclick = () => {
             this.closeChapterModal();
             this.startSession('flashcard', 'chapter', num, false);
