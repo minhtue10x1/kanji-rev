@@ -37,23 +37,20 @@ app.add_middleware(
 @app.middleware("http")
 async def vercel_path_rewrite_middleware(request: Request, call_next):
     """Normalize paths rewritten by Vercel serverless environment."""
-    path = request.scope.get("path", "")
-    matched_path = request.headers.get("x-matched-path") or request.headers.get("x-vercel-matched-path")
-    if matched_path and (matched_path.startswith("/api/") or matched_path.startswith("/config")):
-        request.scope["path"] = matched_path
-    elif path.startswith("/api/index.py/"):
-        request.scope["path"] = path.replace("/api/index.py/", "/api/")
-    elif path == "/api/index.py":
+    subpath = request.query_params.get("__path__")
+    if subpath:
+        clean_subpath = subpath.lstrip("/")
+        request.scope["path"] = f"/api/{clean_subpath}"
+    elif request.scope.get("path") in ("/api/index.py", "/api/index.py/"):
         request.scope["path"] = "/api"
     return await call_next(request)
 
 @app.get("/api")
-def api_health(request: Request):
+def api_health():
     return {
         "status": "ok",
-        "google_client_id": os.environ.get("GOOGLE_CLIENT_ID", ""),
-        "headers": dict(request.headers),
-        "scope_path": request.scope.get("path")
+        "message": "Kanji Master API operational",
+        "google_client_id": os.environ.get("GOOGLE_CLIENT_ID", "")
     }
 
 # -------------------------------------------------------------
