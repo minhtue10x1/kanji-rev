@@ -1233,45 +1233,6 @@
       <!-- Resume Session Banner (Hiển thị khi có bài học đang dở) -->
       <div id="resume-container"></div>
 
-      <!-- Level Selection Cards (N5 - N1) -->
-      <div class="level-cards-row" id="home-level-cards">
-        <div class="level-card" data-lvl="N5" onclick="app.setLevel('N5')">
-          <div class="level-card-header">
-            <span class="level-card-badge">N5</span>
-            <span class="level-card-count">117 chữ</span>
-          </div>
-          <div class="level-card-sub">Cơ bản · 15 chương</div>
-        </div>
-        <div class="level-card" data-lvl="N4" onclick="app.setLevel('N4')">
-          <div class="level-card-header">
-            <span class="level-card-badge">N4</span>
-            <span class="level-card-count">207 chữ</span>
-          </div>
-          <div class="level-card-sub">Sơ cấp · 9 chương</div>
-        </div>
-        <div class="level-card active" data-lvl="N3" onclick="app.setLevel('N3')">
-          <div class="level-card-header">
-            <span class="level-card-badge">N3</span>
-            <span class="level-card-count">376 chữ</span>
-          </div>
-          <div class="level-card-sub">Trung cấp · 20 chương</div>
-        </div>
-        <div class="level-card" data-lvl="N2" onclick="app.setLevel('N2')">
-          <div class="level-card-header">
-            <span class="level-card-badge">N2</span>
-            <span class="level-card-count">504 chữ</span>
-          </div>
-          <div class="level-card-sub">Thượng cấp · 18 chương</div>
-        </div>
-        <div class="level-card" data-lvl="N1" onclick="app.setLevel('N1')">
-          <div class="level-card-header">
-            <span class="level-card-badge">N1</span>
-            <span class="level-card-count">942 chữ</span>
-          </div>
-          <div class="level-card-sub">Cao cấp · 30 chương</div>
-        </div>
-      </div>
-
       <!-- Quick Stats Counter -->
       <div class="stats-row">
         <div class="stat-box">
@@ -1721,6 +1682,8 @@
         this.currentQuiz = null;
         this.currentUser = null;
         this.userSettings = null;
+        this.levelSwitchRequestId = 0;
+        this.levelAbortController = null;
 
         this.init();
       }
@@ -1846,6 +1809,17 @@
 
       async setLevel(level, savePreference = true) {
         if (!['N5', 'N4', 'N3', 'N2', 'N1'].includes(level)) return;
+
+        // Increment request ID to cancel/ignore stale async returns
+        const requestId = ++this.levelSwitchRequestId;
+
+        // Cancel any pending network fetch from previous level switch
+        if (this.levelAbortController) {
+          try { this.levelAbortController.abort(); } catch (e) {}
+        }
+        this.levelAbortController = new AbortController();
+        const signal = this.levelAbortController.signal;
+
         // Persist outgoing level before switching
         if (this.currentLevel && this.db) {
           this.saveLocal();
@@ -1862,14 +1836,9 @@
           window.SPECIAL_READINGS = this.specialReadings;
         }
 
-        // Sync Level ComboBox in Header
+        // Sync Level ComboBox in Header (sole place to select level)
         const comboSelect = document.getElementById('level-combo-select');
         if (comboSelect) comboSelect.value = level;
-
-        // Sync Dashboard level cards
-        document.querySelectorAll('.level-card').forEach(card => {
-          card.classList.toggle('active', card.dataset.lvl === level);
-        });
 
         // Update Nav browse button text with exact kanji count of this level
         const browseBtn = document.getElementById('nav-browse-btn');
@@ -1905,8 +1874,13 @@
         // Re-populate chapter select dropdown and modal
         this.populateChapterDropdown();
 
-        // Load progress for this specific level
-        await this.loadLevelProgress();
+        // Load progress for this specific level with signal and requestId
+        await this.loadLevelProgress(level, requestId, signal);
+
+        // Guard against race conditions: If user switched level again while loading, discard
+        if (requestId !== this.levelSwitchRequestId || this.currentLevel !== level) {
+          return;
+        }
 
         // Re-render views if currently active
         if (this.currentView === 'browse') {
@@ -1932,42 +1906,54 @@
         this.showToast(`Đã chuyển sang cấp độ ${level} (${this.kanjiList.length} chữ)`);
       }
 
-      async loadLevelProgress() {
+      async loadLevelProgress(targetLevel = this.currentLevel, requestId = this.levelSwitchRequestId, signal = null) {
         const token = localStorage.getItem('kanji_auth_token');
         if (token && this.currentUser) {
           try {
-            const progRes = await fetch(`/api/progress?level=${this.currentLevel}`, {
-              headers: { 'Authorization': `Bearer ${token}` }
+            const progRes = await fetch(`/api/progress?level=${targetLevel}`, {
+              headers: { 'Authorization': `Bearer ${token}` },
+              signal: signal
             });
-            if (!this.db || (this.db.meta && this.db.meta.level !== this.currentLevel)) {
+
+            // Guard against stale response
+            if (requestId !== this.levelSwitchRequestId || this.currentLevel !== targetLevel) return;
+
+            if (!this.db || (this.db.meta && this.db.meta.level !== targetLevel)) {
               this.db = this.createDefaultDb();
             }
             if (progRes.ok) {
               const progData = await progRes.json();
+              if (requestId !== this.levelSwitchRequestId || this.currentLevel !== targetLevel) return;
               this.db.cards = progData.cards || {};
               this.db.bookmarks = progData.bookmarks || [];
             }
 
-            const sessRes = await fetch(`/api/session/current?level=${this.currentLevel}`, {
-              headers: { 'Authorization': `Bearer ${token}` }
+            const sessRes = await fetch(`/api/session/current?level=${targetLevel}`, {
+              headers: { 'Authorization': `Bearer ${token}` },
+              signal: signal
             });
+
+            // Guard against stale response
+            if (requestId !== this.levelSwitchRequestId || this.currentLevel !== targetLevel) return;
+
             if (sessRes.ok) {
               const sessData = await sessRes.json();
-              if (sessData.session && sessData.session.level === this.currentLevel) {
+              if (requestId !== this.levelSwitchRequestId || this.currentLevel !== targetLevel) return;
+              if (sessData.session && sessData.session.level === targetLevel) {
                 this.db.session = {
                   active: true,
                   level: sessData.session.level,
                   mode: sessData.session.mode,
-                  filter: sessData.session.filter,
-                  chapter: sessData.session.chapter,
-                  queue: sessData.session.queue,
-                  currentIndex: sessData.session.currentIndex,
-                  completed: sessData.session.completed
+                  filter: sessData.session.filter_type || 'all',
+                  chapter: sessData.session.chapter_num,
+                  queue: sessData.session.queue || [],
+                  currentIndex: sessData.session.current_index || 0,
+                  completed: sessData.session.completed_count || 0
                 };
               } else {
                 this.db.session = {
                   active: false,
-                  level: this.currentLevel,
+                  level: targetLevel,
                   mode: 'flashcard',
                   filter: 'all',
                   chapter: null,
@@ -1980,12 +1966,15 @@
             this.saveLocal();
             return;
           } catch (e) {
+            if (e.name === 'AbortError') return; // Cancelled cleanly
             console.warn('Error loading level progress from cloud:', e);
           }
         }
 
         // Offline / Guest mode: strictly per-level localStorage database
-        const localKey = this.getLocalDbKey();
+        if (requestId !== this.levelSwitchRequestId || this.currentLevel !== targetLevel) return;
+
+        const localKey = `kanji_master_${targetLevel.toLowerCase()}_db`;
         const localDbStr = localStorage.getItem(localKey);
         if (localDbStr) {
           try {
@@ -1994,14 +1983,14 @@
               this.populateDefaultCards();
             }
             if (!this.db.session) {
-              this.db.session = { active: false, level: this.currentLevel, queue: [] };
+              this.db.session = { active: false, level: targetLevel, queue: [] };
             }
           } catch (e) {
             this.db = this.createDefaultDb();
           }
         } else {
           // Check if fallback legacy data exists for N3
-          if (this.currentLevel === 'N3') {
+          if (targetLevel === 'N3') {
             const legacyN3 = localStorage.getItem('kanji_master_n3_db');
             if (legacyN3) {
               try {
@@ -2015,8 +2004,8 @@
           } else {
             this.db = this.createDefaultDb();
           }
-          this.saveLocal();
         }
+        this.saveLocal();
       }
 
       // --- AUTHENTICATION & MULTI-USER CLOUD SYNC ---
