@@ -33,7 +33,17 @@ def get_default_db_path() -> str:
     return os.path.join(os.path.dirname(__file__), "kanji_users.db")
 
 def get_postgres_url() -> Optional[str]:
-    return os.environ.get("POSTGRES_URL") or os.environ.get("DATABASE_URL")
+    # 1. Standard default Vercel / Cloud env keys
+    if os.environ.get("POSTGRES_URL"):
+        return os.environ.get("POSTGRES_URL")
+    if os.environ.get("DATABASE_URL"):
+        return os.environ.get("DATABASE_URL")
+    # 2. Vercel Storage custom store prefixes (e.g. KANJIREV_PROD_POSTGRES_URL)
+    for k, v in os.environ.items():
+        if k.endswith("_POSTGRES_URL") or k.endswith("_DATABASE_URL"):
+            if v and (v.startswith("postgres://") or v.startswith("postgresql://")):
+                return v
+    return None
 
 POSTGRES_URL = get_postgres_url()
 DB_FILE = os.environ.get("KANJI_DB_PATH", get_default_db_path())

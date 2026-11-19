@@ -14,7 +14,7 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from database import get_db, init_database
+from database import get_db, init_database, get_postgres_url
 from auth import verify_google_id_token, upsert_google_user, decode_jwt
 
 # Initialize database schema on startup safely
@@ -124,7 +124,7 @@ def get_public_config():
 @app.get("/health")
 def get_health():
     """Diagnostics endpoint to verify DB engine and connection status."""
-    pg_url = os.environ.get("POSTGRES_URL") or os.environ.get("DATABASE_URL")
+    pg_url = get_postgres_url()
     has_pg = bool(pg_url)
     driver_errors = []
     engine = "unknown"
