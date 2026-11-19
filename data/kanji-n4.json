@@ -1,0 +1,8601 @@
+[
+  {
+    "id": 1,
+    "kanji": "家",
+    "chapter": 1,
+    "chapterName": "1章 生かつ (Đời sống & Gia đình)",
+    "section": "1 家族",
+    "page": 21,
+    "strokeCount": 10,
+    "on": [
+      "カ",
+      "ケ"
+    ],
+    "kun": [
+      "いえ",
+      "や",
+      "うち"
+    ],
+    "hv": "GIA",
+    "meaning": "gia đình, trường phái học thuật hoặc kỹ thuật, chỗ ở",
+    "radicals": "Bộ cấu thành: 豕 (THỈ) + 宀 (MIÊN) → Mẹo nhớ: Nhà  em  mái  ngói, nuôi  chú heo  còi",
+    "examples": [
+      {
+        "word": "一家",
+        "reading": "いっか",
+        "meaning": "gia đình; cả gia đình; cả nhà"
+      },
+      {
+        "word": "上家",
+        "reading": "うわや",
+        "meaning": "lán"
+      },
+      {
+        "word": "家中",
+        "reading": "かちゅう",
+        "meaning": "cả nhà ."
+      },
+      {
+        "word": "家主",
+        "reading": "やぬし",
+        "meaning": "chủ nhà; chủ đất; gia chủ ."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "kanji": "族",
+    "chapter": 1,
+    "chapterName": "1章 生かつ (Đời sống & Gia đình)",
+    "section": "1 家族",
+    "page": 21,
+    "strokeCount": 11,
+    "on": [
+      "ゾク"
+    ],
+    "kun": [],
+    "hv": "TỘC",
+    "meaning": "bè bạn, tập trung, gia đình",
+    "radicals": "Bộ cấu thành: 𠂉 + 方 (PHƯƠNG) + 矢 (THỈ) → Mẹo nhớ: Hướng  về phía trước,  hai mũ lông chim , người  lớn  vững bước, dẫn đường bộ  tộc",
+    "examples": [
+      {
+        "word": "一族",
+        "reading": "いちぞく",
+        "meaning": "một gia đình"
+      },
+      {
+        "word": "同族",
+        "reading": "どうぞく",
+        "meaning": "nòi giống ."
+      },
+      {
+        "word": "姻族",
+        "reading": "いんぞく",
+        "meaning": "gia đình nhà bên vợ (chồng)"
+      },
+      {
+        "word": "家族",
+        "reading": "かぞく",
+        "meaning": "gia đình"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "kanji": "兄",
+    "chapter": 1,
+    "chapterName": "1章 生かつ (Đời sống & Gia đình)",
+    "section": "1 家族",
+    "page": 21,
+    "strokeCount": 5,
+    "on": [
+      "ケイ",
+      "キョウ"
+    ],
+    "kun": [
+      "あに"
+    ],
+    "hv": "HUYNH",
+    "meaning": "anh trai, kính xưng đối với bạn bè hoặc người cùng vai vế",
+    "radicals": "Bộ cấu thành: 口 (KHẨU) + 儿 (NHÂN) → Mẹo nhớ: Anh  tôi ngoạc  miệng  la,  xoạc chân  chạy thật xa",
+    "examples": [
+      {
+        "word": "仁兄",
+        "reading": "じんけい",
+        "meaning": "vẻ thanh lịch"
+      },
+      {
+        "word": "大兄",
+        "reading": "たいけい",
+        "meaning": "đại ca ."
+      },
+      {
+        "word": "兄嫁",
+        "reading": "あによめ",
+        "meaning": "chị dâu"
+      },
+      {
+        "word": "実兄",
+        "reading": "じっけい",
+        "meaning": "anh ruột ."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "kanji": "弟",
+    "chapter": 1,
+    "chapterName": "1章 生かつ (Đời sống & Gia đình)",
+    "section": "1 家族",
+    "page": 21,
+    "strokeCount": 7,
+    "on": [
+      "テイ",
+      "ダイ",
+      "デ"
+    ],
+    "kun": [
+      "おとうと"
+    ],
+    "hv": "ĐỆ",
+    "meaning": "em trai, từ dùng để tự khiêm nhường, đệ tử",
+    "radicals": "Bộ cấu thành: ノ + 弔 (ĐIẾU) + 丷 → Mẹo nhớ: Đuôi  tên   hai lông vũ ,  cây cung  gấp khúc cũ,  em trai  là cung thủ, làm chủ chúng  trong tay",
+    "examples": [
+      {
+        "word": "兄弟",
+        "reading": "きょうだい",
+        "meaning": "anh em; huynh đệ"
+      },
+      {
+        "word": "兄弟",
+        "reading": "けいてい",
+        "meaning": "đồng bào; anh em"
+      },
+      {
+        "word": "弟分",
+        "reading": "おとうとぶん",
+        "meaning": "người mà mình coi như em trai"
+      },
+      {
+        "word": "弟妹",
+        "reading": "ていまい",
+        "meaning": "em trai và em gái ."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "kanji": "姉",
+    "chapter": 1,
+    "chapterName": "1章 生かつ (Đời sống & Gia đình)",
+    "section": "1 家族",
+    "page": 21,
+    "strokeCount": 8,
+    "on": [
+      "シ"
+    ],
+    "kun": [
+      "あね",
+      "はは"
+    ],
+    "hv": "TỈ",
+    "meaning": "chị gái, cách gọi tôn kính đối với phụ nữ lớn tuổi hơn",
+    "radicals": "Bộ cấu thành: 女 (NỮ) + 市 (THỊ) → Mẹo nhớ: Chị  em  cô gái  bán rau,  rau đặt thúng ,  quàng khăn  màu đi buôn",
+    "examples": [
+      {
+        "word": "姉妹",
+        "reading": "きょうだい",
+        "meaning": "chị em"
+      },
+      {
+        "word": "姉妹",
+        "reading": "しまい",
+        "meaning": "chị em ."
+      },
+      {
+        "word": "姉婿",
+        "reading": "あねむこ",
+        "meaning": "anh rể ."
+      },
+      {
+        "word": "姉弟",
+        "reading": "きょうだい",
+        "meaning": "chị và em trai ."
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "kanji": "妹",
+    "chapter": 1,
+    "chapterName": "1章 生かつ (Đời sống & Gia đình)",
+    "section": "1 家族",
+    "page": 21,
+    "strokeCount": 8,
+    "on": [
+      "マイ"
+    ],
+    "kun": [
+      "いもうと"
+    ],
+    "hv": "MUỘI",
+    "meaning": "em gái, cách gọi thân mật cho vợ, người yêu",
+    "radicals": "Bộ cấu thành: 未 (VỊ) + 女 (NỮ) → Mẹo nhớ: Cô bé   em gái  tôi, bên  cây  non xanh tươi,  cành trên thua cành dưới , lá rung khẽ gọi mời",
+    "examples": [
+      {
+        "word": "姉妹",
+        "reading": "しまい",
+        "meaning": "chị em ."
+      },
+      {
+        "word": "姉妹",
+        "reading": "きょうだい",
+        "meaning": "chị em"
+      },
+      {
+        "word": "実妹",
+        "reading": "じつまい",
+        "meaning": "em ruột ."
+      },
+      {
+        "word": "弟妹",
+        "reading": "ていまい",
+        "meaning": "em trai và em gái ."
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "kanji": "私",
+    "chapter": 1,
+    "chapterName": "1章 生かつ (Đời sống & Gia đình)",
+    "section": "1 家族",
+    "page": 21,
+    "strokeCount": 7,
+    "on": [
+      "シ"
+    ],
+    "kun": [
+      "わたくし",
+      "わたし"
+    ],
+    "hv": "TƯ",
+    "meaning": "tôi, thầm kín, biến thành của riêng",
+    "radicals": "Bộ cấu thành: 厶 (KHƯ) + 禾 (HÒA) → Mẹo nhớ: Cây lúa một bông  nghiêng ngả, bên  căn lều  dã ngoại của  tôi",
+    "examples": [
+      {
+        "word": "私事",
+        "reading": "しじ",
+        "meaning": "chuyện bí mật; chuyện riêng tư; chuyện đời tư"
+      },
+      {
+        "word": "私人",
+        "reading": "しじん",
+        "meaning": "tư nhân ."
+      },
+      {
+        "word": "私供",
+        "reading": "わたしども",
+        "meaning": "chúng tôi"
+      },
+      {
+        "word": "私党",
+        "reading": "しとう",
+        "meaning": "bè phái"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "kanji": "育",
+    "chapter": 1,
+    "chapterName": "1章 生かつ (Đời sống & Gia đình)",
+    "section": "1 家族",
+    "page": 21,
+    "strokeCount": 8,
+    "on": [
+      "イク"
+    ],
+    "kun": [
+      "そだ.つ",
+      "そだ.ち",
+      "そだ.てる",
+      "はぐく.む"
+    ],
+    "hv": "DỤC",
+    "meaning": "nuôi nấng, lớn lên",
+    "radicals": "Bộ cấu thành: 𠫓 (ĐỘT) + 月 (NGUYỆT) → Mẹo nhớ: Bé dang tay ngồi co chân  còi cọc, phải ăn  thịt  vài tháng mới  lớn lên",
+    "examples": [
+      {
+        "word": "育ち",
+        "reading": "そだち",
+        "meaning": "sự lớn lên; sự phát triển"
+      },
+      {
+        "word": "育つ",
+        "reading": "そだつ",
+        "meaning": "lớn lên; khôn lớn; phát triển"
+      },
+      {
+        "word": "育て",
+        "reading": "そだて",
+        "meaning": "sự đưa lên"
+      },
+      {
+        "word": "育む",
+        "reading": "はぐくむ",
+        "meaning": "ấp ủ; nuôi dưỡng"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "kanji": "部",
+    "chapter": 1,
+    "chapterName": "1章 生かつ (Đời sống & Gia đình)",
+    "section": "2 マンション",
+    "page": 21,
+    "strokeCount": 11,
+    "on": [
+      "ブ"
+    ],
+    "kun": [
+      "-べ"
+    ],
+    "hv": "BỘ",
+    "meaning": "chia, đơn vị trong tổ chức, cơ quan nhà nước",
+    "radicals": "Bộ cấu thành: 咅 + ⻏ → Mẹo nhớ: Đứng  cạnh  lá cờ ,  miệng  hô to tên  bộ  trưởng",
+    "examples": [
+      {
+        "word": "一部",
+        "reading": "いちぶ",
+        "meaning": "một bản (copy)"
+      },
+      {
+        "word": "上部",
+        "reading": "じょうぶ",
+        "meaning": "mặt"
+      },
+      {
+        "word": "下部",
+        "reading": "かぶ",
+        "meaning": "hạ bộ ."
+      },
+      {
+        "word": "部下",
+        "reading": "ぶか",
+        "meaning": "bầy tôi"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "kanji": "屋",
+    "chapter": 1,
+    "chapterName": "1章 生かつ (Đời sống & Gia đình)",
+    "section": "2 マンション",
+    "page": 21,
+    "strokeCount": 9,
+    "on": [
+      "オク"
+    ],
+    "kun": [
+      "や"
+    ],
+    "hv": "ỐC",
+    "meaning": "nhà, từ gắn vào tên nghề nghiệp hoặc cửa hàng, mái nhà",
+    "radicals": "Bộ cấu thành: 尸 (THI) + 至 (CHÍ) → Mẹo nhớ: Dưới  mái hiên   nhà  xác, dưới  trần nhà  thấp tịt, tôi lom khom  cúi người , trên nền  đất  xám xịt",
+    "examples": [
+      {
+        "word": "上屋",
+        "reading": "うわや",
+        "meaning": "lán"
+      },
+      {
+        "word": "屋上",
+        "reading": "おくじょう",
+        "meaning": "mái nhà; nóc nhà"
+      },
+      {
+        "word": "人屋",
+        "reading": "ひとや",
+        "meaning": "nhà tù ."
+      },
+      {
+        "word": "伏屋",
+        "reading": "ふせや",
+        "meaning": "túp lều"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "kanji": "広",
+    "chapter": 1,
+    "chapterName": "1章 生かつ (Đời sống & Gia đình)",
+    "section": "2 マンション",
+    "page": 21,
+    "strokeCount": 5,
+    "on": [
+      "コウ"
+    ],
+    "kun": [
+      "ひろ.い",
+      "ひろ.まる",
+      "ひろ.める",
+      "ひろ.がる",
+      "ひろ.げる"
+    ],
+    "hv": "QUẢNG",
+    "meaning": "rộng, chiều ngang, mở rộng",
+    "radicals": "Bộ cấu thành: 厶 (KHƯ) + 广 (NGHIỄM) → Mẹo nhớ: Sau  vách đá   rộng   hồn ma  đi qua,  một người bó gối, khom lưng  trốn ma",
+    "examples": [
+      {
+        "word": "広々",
+        "reading": "ひろびろ",
+        "meaning": "Rộng lớn; rộng rãi ."
+      },
+      {
+        "word": "広い",
+        "reading": "ひろい",
+        "meaning": "rộng; rộng rãi; rộng lớn ."
+      },
+      {
+        "word": "広く",
+        "reading": "ひろく",
+        "meaning": "nhiều"
+      },
+      {
+        "word": "広さ",
+        "reading": "ひろさ",
+        "meaning": "biên độ"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "kanji": "低",
+    "chapter": 1,
+    "chapterName": "1章 生かつ (Đời sống & Gia đình)",
+    "section": "2 マンション",
+    "page": 21,
+    "strokeCount": 7,
+    "on": [
+      "テイ"
+    ],
+    "kun": [
+      "ひく.い",
+      "ひく.める",
+      "ひく.まる"
+    ],
+    "hv": "ĐÊ",
+    "meaning": "thấp về mức độ, số lượng, cấp bậc, thấp về độ cao, vị trí, rũ xuống",
+    "radicals": "Bộ cấu thành: 氐 (ĐỂ) + 亻 (NHÂN) → Mẹo nhớ: Người  gì mà  thấp  hơn  một   chồng giấy buộc dây",
+    "examples": [
+      {
+        "word": "低い",
+        "reading": "ひくい",
+        "meaning": "lè tè"
+      },
+      {
+        "word": "低く",
+        "reading": "ひくく",
+        "meaning": "làm yếu"
+      },
+      {
+        "word": "低下",
+        "reading": "ていか",
+        "meaning": "sự giảm; sự kém đi; sự suy giảm"
+      },
+      {
+        "word": "中低",
+        "reading": "なかびく",
+        "meaning": "lõm"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "kanji": "近",
+    "chapter": 1,
+    "chapterName": "1章 生かつ (Đời sống & Gia đình)",
+    "section": "2 マンション",
+    "page": 21,
+    "strokeCount": 7,
+    "on": [
+      "キン",
+      "コン"
+    ],
+    "kun": [
+      "ちか.い"
+    ],
+    "hv": "CẬN",
+    "meaning": "gần, (a) gần về khoảng cách, (b) gần về thời gian",
+    "radicals": "Bộ cấu thành: 斤 (CÂN) + ⻌ → Mẹo nhớ: Cầm  rìu  chặt bớt dăm cây, mở  đường  tới  đích  cho  gần  hơn xưa",
+    "examples": [
+      {
+        "word": "近々",
+        "reading": "ちかぢか",
+        "meaning": "trạng thái ở gần"
+      },
+      {
+        "word": "近い",
+        "reading": "ちかい",
+        "meaning": "cận"
+      },
+      {
+        "word": "近く",
+        "reading": "ちかく",
+        "meaning": "cận"
+      },
+      {
+        "word": "近世",
+        "reading": "きんせい",
+        "meaning": "cận đại"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "kanji": "遠",
+    "chapter": 1,
+    "chapterName": "1章 生かつ (Đời sống & Gia đình)",
+    "section": "2 マンション",
+    "page": 21,
+    "strokeCount": 13,
+    "on": [
+      "エン",
+      "オン"
+    ],
+    "kun": [
+      "とお.い"
+    ],
+    "hv": "VIỄN",
+    "meaning": "xa, nơi xa, giữ khoảng cách",
+    "radicals": "Bộ cấu thành: 袁 (VIÊN) + ⻌ → Mẹo nhớ: Từ miền  đất   xa xôi ,  Miệng  ta  k húc khích cười, chân tay vung vẩy bước, thẳng  đường tới đích  thôi!",
+    "examples": [
+      {
+        "word": "遠い",
+        "reading": "とおい",
+        "meaning": "hẻo"
+      },
+      {
+        "word": "遠く",
+        "reading": "とおく",
+        "meaning": "nơi xa; phía xa; đằng xa"
+      },
+      {
+        "word": "久遠",
+        "reading": "くおん",
+        "meaning": "sự bất diệt; sự tồn tại mãi mãi; sự vĩnh viễn"
+      },
+      {
+        "word": "以遠",
+        "reading": "いえん",
+        "meaning": "ở xa"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "kanji": "静",
+    "chapter": 1,
+    "chapterName": "1章 生かつ (Đời sống & Gia đình)",
+    "section": "2 マンション",
+    "page": 21,
+    "strokeCount": 14,
+    "on": [
+      "セイ",
+      "ジョウ"
+    ],
+    "kun": [
+      "しず-",
+      "しず.か",
+      "しず.まる",
+      "しず.める"
+    ],
+    "hv": "TĨNH",
+    "meaning": "làm dịu, yên tĩnh",
+    "radicals": "Bộ cấu thành: 争 (TRANH) + 青 (THANH) → Mẹo nhớ: Bên  mầm cây mọc từ ba lớp đất , dưới  trăng  xanh, người lính  đội mũ ôm súng đứng canh , trong  tĩnh lặng",
+    "examples": [
+      {
+        "word": "静か",
+        "reading": "しずか",
+        "meaning": "yên tĩnh; thanh bình ."
+      },
+      {
+        "word": "冷静",
+        "reading": "れいせい",
+        "meaning": "bình tĩnh; điềm tĩnh"
+      },
+      {
+        "word": "動静",
+        "reading": "どうせい",
+        "meaning": "sự động tĩnh; tình trạng ."
+      },
+      {
+        "word": "安静",
+        "reading": "あんせい",
+        "meaning": "điềm"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "kanji": "洋",
+    "chapter": 1,
+    "chapterName": "1章 生かつ (Đời sống & Gia đình)",
+    "section": "3 ファッション",
+    "page": 21,
+    "strokeCount": 9,
+    "on": [
+      "ヨウ"
+    ],
+    "kun": [],
+    "hv": "DƯƠNG",
+    "meaning": "các phần khi chia thế giới làm hai, viết tắt của 西洋 (phương Tây), biển",
+    "radicals": "Bộ cấu thành: 羊 (DƯƠNG) + 氵 (THỦY) → Mẹo nhớ: Con cừu đủ sừng tai mắt mũi , sũng  nước  lùi lũi vượt  đại dương",
+    "examples": [
+      {
+        "word": "洋上",
+        "reading": "ようじょう",
+        "meaning": "vệ sinh"
+      },
+      {
+        "word": "洋傘",
+        "reading": "ようがさ",
+        "meaning": "cái dù"
+      },
+      {
+        "word": "南洋",
+        "reading": "なんよう",
+        "meaning": "Vùng biển Nam Thái Bình Dương"
+      },
+      {
+        "word": "洋品",
+        "reading": "ようひん",
+        "meaning": "đồ kim chỉ; cửa hàng bán đồ kim chỉ"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "kanji": "服",
+    "chapter": 1,
+    "chapterName": "1章 生かつ (Đời sống & Gia đình)",
+    "section": "3 ファッション",
+    "page": 21,
+    "strokeCount": 8,
+    "on": [
+      "フク"
+    ],
+    "kun": [],
+    "hv": "PHỤC",
+    "meaning": "tuân theo, (a) đi theo, (b) làm việc",
+    "radicals": "Bộ cấu thành: ⺼ + 𠬝 → Mẹo nhớ: Chuẩn bị lấy bàn ủi để là",
+    "examples": [
+      {
+        "word": "一服",
+        "reading": "いっぷく",
+        "meaning": "liều lượng"
+      },
+      {
+        "word": "不服",
+        "reading": "ふふく",
+        "meaning": "dị nghị"
+      },
+      {
+        "word": "僧服",
+        "reading": "そうふく",
+        "meaning": "tăng phục; cách ăn mặc của các nhà sư"
+      },
+      {
+        "word": "克服",
+        "reading": "こくふく",
+        "meaning": "sự khắc phục; sự chinh phục; khắc phục; chinh phục"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "kanji": "短",
+    "chapter": 1,
+    "chapterName": "1章 生かつ (Đời sống & Gia đình)",
+    "section": "3 ファッション",
+    "page": 21,
+    "strokeCount": 12,
+    "on": [
+      "タン"
+    ],
+    "kun": [
+      "みじか.い"
+    ],
+    "hv": "ĐOẢN",
+    "meaning": "ngắn, vụng về",
+    "radicals": "Bộ cấu thành: 豆 (ĐẬU) + 矢 (THỈ) → Mẹo nhớ: Mũi tên   ngắn  khuấy  nồi đậu mở nắp , đun  trên lửa , chẳng mấy mà xong!",
+    "examples": [
+      {
+        "word": "短い",
+        "reading": "みじかい",
+        "meaning": "cụt"
+      },
+      {
+        "word": "短信",
+        "reading": "たんしん",
+        "meaning": "ngày sinh; lễ sinh nhật"
+      },
+      {
+        "word": "短冊",
+        "reading": "たんざく",
+        "meaning": "mảnh giấy nhỏ"
+      },
+      {
+        "word": "短刀",
+        "reading": "たんとう",
+        "meaning": "dao găm"
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "kanji": "玉",
+    "chapter": 1,
+    "chapterName": "1章 生かつ (Đời sống & Gia đình)",
+    "section": "3 ファッション",
+    "page": 21,
+    "strokeCount": 5,
+    "on": [
+      "ギョク"
+    ],
+    "kun": [
+      "たま",
+      "たま-",
+      "-だま"
+    ],
+    "hv": "NGỌC",
+    "meaning": "ngọc, (a) viết tắt của 玉将 (quân vua trong cờ shogi), (b) geisha",
+    "radicals": "Bộ cấu thành: 王 (VƯƠNG) + 丶 (CHỦ) → Mẹo nhớ: Ông vua  có  một viên   ngọc  quý",
+    "examples": [
+      {
+        "word": "お玉",
+        "reading": "おたま",
+        "meaning": "cái môi; cái muôi; muôi; môi"
+      },
+      {
+        "word": "玉子",
+        "reading": "たまご",
+        "meaning": "trứng (cá"
+      },
+      {
+        "word": "宝玉",
+        "reading": "ほうぎょく",
+        "meaning": "đá quí; châu ngọc ."
+      },
+      {
+        "word": "玉将",
+        "reading": "ぎょくしょう",
+        "meaning": "vua"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "kanji": "毛",
+    "chapter": 1,
+    "chapterName": "1章 生かつ (Đời sống & Gia đình)",
+    "section": "3 ファッション",
+    "page": 21,
+    "strokeCount": 4,
+    "on": [
+      "モウ"
+    ],
+    "kun": [
+      "け"
+    ],
+    "hv": "MAO",
+    "meaning": "lông, tóc, cây cỏ sinh trưởng, vật nhỏ và mảnh",
+    "radicals": "Mẹo nhớ: Chiếc lược không răng , mắc  hai sợi   tóc",
+    "examples": [
+      {
+        "word": "不毛",
+        "reading": "ふもう",
+        "meaning": "cằn cỗi; khô cằn"
+      },
+      {
+        "word": "冠毛",
+        "reading": "かんむりけ",
+        "meaning": "nùi bông nhẹ chứa đựng những hạt cây kế được gió thổi từ cây kế bay đi"
+      },
+      {
+        "word": "刷毛",
+        "reading": "はけ",
+        "meaning": "bàn chải ."
+      },
+      {
+        "word": "剛毛",
+        "reading": "ごうもう",
+        "meaning": "lông cứng"
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "kanji": "糸",
+    "chapter": 1,
+    "chapterName": "1章 生かつ (Đời sống & Gia đình)",
+    "section": "3 ファッション",
+    "page": 21,
+    "strokeCount": 6,
+    "on": [
+      "シ"
+    ],
+    "kun": [
+      "いと"
+    ],
+    "hv": "MỊCH",
+    "meaning": "đơn vị đo lường, sợi chỉ, nhạc cụ có dây",
+    "radicals": "Mẹo nhớ: Một xoắn nhỏ rồi lại một xoắn nhỏ , ba sợi  tơ  kết thành sợi chỉ to",
+    "examples": [
+      {
+        "word": "一糸",
+        "reading": "いっし",
+        "meaning": "dây"
+      },
+      {
+        "word": "糸口",
+        "reading": "いとぐち",
+        "meaning": "đầu mối chỉ; nút chỉ; bước đầu; manh mối; đầu mối"
+      },
+      {
+        "word": "糸屑",
+        "reading": "いとくず",
+        "meaning": "làm  cho mịn những đám nùi bông"
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "kanji": "光",
+    "chapter": 1,
+    "chapterName": "1章 生かつ (Đời sống & Gia đình)",
+    "section": "3 ファッション",
+    "page": 21,
+    "strokeCount": 6,
+    "on": [
+      "コウ"
+    ],
+    "kun": [
+      "ひか.る",
+      "ひかり"
+    ],
+    "hv": "QUANG",
+    "meaning": "thời gian, cảnh tượng, tỏa sáng",
+    "radicals": "Bộ cấu thành: 小 (TIỂU) + 兀 (NGỘT) → Mẹo nhớ: Ba tia   sáng  tỏa ra, từ  một  chiếc đèn pha, trước  ghi đông  xe đạp",
+    "examples": [
+      {
+        "word": "光る",
+        "reading": "ひかる",
+        "meaning": "bóng"
+      },
+      {
+        "word": "光体",
+        "reading": "ひかりたい",
+        "meaning": "sự xen nhau; sự xen kẽ"
+      },
+      {
+        "word": "余光",
+        "reading": "よこう",
+        "meaning": "ánh hồng ban chiếu"
+      },
+      {
+        "word": "偏光",
+        "reading": "へんこう",
+        "meaning": "sự phân cực"
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "kanji": "衣",
+    "chapter": 1,
+    "chapterName": "1章 生かつ (Đời sống & Gia đình)",
+    "section": "3 ファッション",
+    "page": 21,
+    "strokeCount": 6,
+    "on": [
+      "イ",
+      "エ"
+    ],
+    "kun": [
+      "ころも",
+      "きぬ",
+      "-ぎ"
+    ],
+    "hv": "Y",
+    "meaning": "mặc, áo, che phủ",
+    "radicals": "Mẹo nhớ: Trang phục  gồm một  mũ phớt  và một  áo dài hình chữ K cách điệu",
+    "examples": [
+      {
+        "word": "衣し",
+        "reading": "ころもし",
+        "meaning": "túi"
+      },
+      {
+        "word": "上衣",
+        "reading": "うわぎ",
+        "meaning": "áo choàng ngoài"
+      },
+      {
+        "word": "僧衣",
+        "reading": "そうい",
+        "meaning": "sự khác nhau"
+      },
+      {
+        "word": "囚衣",
+        "reading": "しゅうい",
+        "meaning": "vùng phụ cận"
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "kanji": "店",
+    "chapter": 2,
+    "chapterName": "2章 コンビニ (Cửa hàng tiện lợi)",
+    "section": "1 レジ",
+    "page": 43,
+    "strokeCount": 8,
+    "on": [
+      "テン"
+    ],
+    "kun": [
+      "みせ",
+      "たな"
+    ],
+    "hv": "ĐIẾM",
+    "meaning": "tiệm, nhà cho thuê",
+    "radicals": "Bộ cấu thành: 占 (CHIÊM) + 广 (NGHIỄM) → Mẹo nhớ: Dưới chân  vách đá ,  To ny, bày một  hộp nhỏ  -  tiệm  cà chua bi",
+    "examples": [
+      {
+        "word": "店主",
+        "reading": "てんしゅ",
+        "meaning": "chủ hiệu"
+      },
+      {
+        "word": "店先",
+        "reading": "みせさき",
+        "meaning": "mặt tiền của cửa hàng; mặt tiền cửa tiệm"
+      },
+      {
+        "word": "店内",
+        "reading": "てんない",
+        "meaning": "trong kho"
+      },
+      {
+        "word": "出店",
+        "reading": "でみせ",
+        "meaning": "cửa hàng chi nhánh ."
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "kanji": "客",
+    "chapter": 2,
+    "chapterName": "2章 コンビニ (Cửa hàng tiện lợi)",
+    "section": "1 レジ",
+    "page": 43,
+    "strokeCount": 9,
+    "on": [
+      "キャク",
+      "カク"
+    ],
+    "kun": [],
+    "hv": "KHÁCH",
+    "meaning": "người được mời, đối lập với bản thân, đối tác",
+    "radicals": "Bộ cấu thành: 各 (CÁC) + 宀 (MIÊN) → Mẹo nhớ: きゃく さま、 かく にんしていただけませんか。 Quý khách, xin vui lòng xác nhận được không ạ?  Dưới  mái nhà , vị  khách  già,  khóa lưng  đen,  chân bước  đến,  miệng  kêu lên, \"tôi tới rồi\"",
+    "examples": [
+      {
+        "word": "主客",
+        "reading": "しゅかく",
+        "meaning": "người uống"
+      },
+      {
+        "word": "乗客",
+        "reading": "じょうきゃく",
+        "meaning": "hành khách ."
+      },
+      {
+        "word": "客人",
+        "reading": "きゃくじん",
+        "meaning": "người đến thăm"
+      },
+      {
+        "word": "客体",
+        "reading": "かくたい",
+        "meaning": "đồ vật"
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "kanji": "親",
+    "chapter": 2,
+    "chapterName": "2章 コンビニ (Cửa hàng tiện lợi)",
+    "section": "1 レジ",
+    "page": 43,
+    "strokeCount": 16,
+    "on": [
+      "シン"
+    ],
+    "kun": [
+      "おや",
+      "おや-",
+      "した.しい",
+      "した.しむ"
+    ],
+    "hv": "THÂN",
+    "meaning": "thân thiết, tự mình, cha mẹ",
+    "radicals": "Bộ cấu thành: 亲 (THÂN) + 見 (KIẾN) → Mẹo nhớ: Cha mẹ   đứng  tít  cây  cao,  trông  theo con, nghĩ \"khi nào lớn khôn\"",
+    "examples": [
+      {
+        "word": "両親",
+        "reading": "ふたおや",
+        "meaning": "Cha mẹ; bố mẹ"
+      },
+      {
+        "word": "両親",
+        "reading": "りょうしん",
+        "meaning": "bố mẹ"
+      },
+      {
+        "word": "二親",
+        "reading": "ふたおや",
+        "meaning": "Cha mẹ; bố mẹ ."
+      },
+      {
+        "word": "親交",
+        "reading": "しんこう",
+        "meaning": "thâm giao"
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "kanji": "切",
+    "chapter": 2,
+    "chapterName": "2章 コンビニ (Cửa hàng tiện lợi)",
+    "section": "1 レジ",
+    "page": 43,
+    "strokeCount": 4,
+    "on": [
+      "セツ",
+      "サイ"
+    ],
+    "kun": [
+      "き.る",
+      "-き.る",
+      "き.り",
+      "-き.り",
+      "-ぎ.り",
+      "き.れる",
+      "-き.れる",
+      "き.れ",
+      "-き.れ",
+      "-ぎ.れ"
+    ],
+    "hv": "THIẾT",
+    "meaning": "cắt, cọ xát, tất cả",
+    "radicals": "Bộ cấu thành: 七 (THẤT) + 刀 (ĐAO) → Mẹo nhớ: Bảy thanh dao  kiếm  cắt  xé không gian",
+    "examples": [
+      {
+        "word": "切々",
+        "reading": "せつせつ",
+        "meaning": "sự lễ phép"
+      },
+      {
+        "word": "〆切",
+        "reading": "しめきり",
+        "meaning": "sự kết thúc"
+      },
+      {
+        "word": "切に",
+        "reading": "せつに",
+        "meaning": "hăm hở"
+      },
+      {
+        "word": "切り",
+        "reading": "きり",
+        "meaning": "cắt; thái"
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "kanji": "売",
+    "chapter": 2,
+    "chapterName": "2章 コンビニ (Cửa hàng tiện lợi)",
+    "section": "1 レジ",
+    "page": 43,
+    "strokeCount": 7,
+    "on": [
+      "バイ"
+    ],
+    "kun": [
+      "う.る",
+      "う.れる"
+    ],
+    "hv": "MẠI",
+    "meaning": "bán",
+    "radicals": "Bộ cấu thành: 士 (SĨ) + 㓁 → Mẹo nhớ: Hai chân  rảo bước, miệng rao vang",
+    "examples": [
+      {
+        "word": "売り",
+        "reading": "うり",
+        "meaning": "sự bán"
+      },
+      {
+        "word": "売る",
+        "reading": "うる",
+        "meaning": "bán; bán hàng"
+      },
+      {
+        "word": "売上",
+        "reading": "うりあげ",
+        "meaning": "số thu nhập; tiền lời"
+      },
+      {
+        "word": "売人",
+        "reading": "ばいにん",
+        "meaning": "nhà buôn"
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "kanji": "当",
+    "chapter": 2,
+    "chapterName": "2章 コンビニ (Cửa hàng tiện lợi)",
+    "section": "1 レジ",
+    "page": 43,
+    "strokeCount": 6,
+    "on": [
+      "トウ"
+    ],
+    "kun": [
+      "あ.たる",
+      "あ.たり",
+      "あ.てる",
+      "あ.て",
+      "まさ.に",
+      "まさ.にべし"
+    ],
+    "hv": "ĐƯƠNG",
+    "meaning": "đương nhiên, này, trúng",
+    "radicals": "Bộ cấu thành: ⺌ + ヨ → Mẹo nhớ: あ たる？ 本 ほん   とう に？ Trúng rồi? Thật hả?  Ninja  Yo shida  trúng   ba mũi tên , liền vật vã rên lên",
+    "examples": [
+      {
+        "word": "当て",
+        "reading": "あて",
+        "meaning": "mục tiêu; mục đích; điểm đến; sự hy vọng; sự trông đợi; sự kỳ vọng"
+      },
+      {
+        "word": "当り",
+        "reading": "あたり",
+        "meaning": "đòn"
+      },
+      {
+        "word": "不当",
+        "reading": "ふとう",
+        "meaning": "không hợp lý; không thỏa đáng"
+      },
+      {
+        "word": "当世",
+        "reading": "とうせい",
+        "meaning": "ngày nay"
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "kanji": "品",
+    "chapter": 2,
+    "chapterName": "2章 コンビニ (Cửa hàng tiện lợi)",
+    "section": "1 レジ",
+    "page": 43,
+    "strokeCount": 9,
+    "on": [
+      "ヒン",
+      "ホン"
+    ],
+    "kun": [
+      "しな"
+    ],
+    "hv": "PHẨM",
+    "meaning": "chủng loại, vật phẩm, đánh giá chất lượng vật phẩm",
+    "radicals": "Mẹo nhớ: Một thùng rồi lại hai thùng,  ba thùng   sản phẩm  xếp chồng lên nhau",
+    "examples": [
+      {
+        "word": "一品",
+        "reading": "いっぴん",
+        "meaning": "khoản"
+      },
+      {
+        "word": "上品",
+        "reading": "じょうひん",
+        "meaning": "sự lịch thiệp; tính nhu mì"
+      },
+      {
+        "word": "下品",
+        "reading": "げひん",
+        "meaning": "sản phẩm kém chất lượng"
+      },
+      {
+        "word": "人品",
+        "reading": "じんぴん",
+        "meaning": "nhân phẩm ."
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "kanji": "便",
+    "chapter": 2,
+    "chapterName": "2章 コンビニ (Cửa hàng tiện lợi)",
+    "section": "2 店内",
+    "page": 43,
+    "strokeCount": 9,
+    "on": [
+      "ベン",
+      "ビン"
+    ],
+    "kun": [
+      "たよ.り"
+    ],
+    "hv": "TIỆN",
+    "meaning": "thuận tiện, thư giãn, khéo miệng",
+    "radicals": "Bộ cấu thành: 亻 (NHÂN) + 更 (CANH) → Mẹo nhớ: びん で たよ りを 送 おく  るのは べん  利 り  ですね！ Gửi thư bằng chuyển phát thì tiện nhỉ!   Một người   một ngày  cắt hết cỏ, dùng  hai cái liềm  sẽ  tiện  hơn",
+    "examples": [
+      {
+        "word": "便り",
+        "reading": "たより",
+        "meaning": "thư; âm tín; tin tức"
+      },
+      {
+        "word": "不便",
+        "reading": "ふべん",
+        "meaning": "sự bất tiện; sự không thuận lợi"
+      },
+      {
+        "word": "便乗",
+        "reading": "びんじょう",
+        "meaning": "việc bạ đâu ngồi đấy"
+      },
+      {
+        "word": "別便",
+        "reading": "べつびん",
+        "meaning": "bưu kiện đặc biệt"
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "kanji": "利",
+    "chapter": 2,
+    "chapterName": "2章 コンビニ (Cửa hàng tiện lợi)",
+    "section": "2 店内",
+    "page": 43,
+    "strokeCount": 7,
+    "on": [
+      "リ"
+    ],
+    "kun": [
+      "き.く"
+    ],
+    "hv": "LỢI",
+    "meaning": "dùng để phiên âm tiếng Phạn hoặc tiếng nước ngoài, chỉ 利子 (tiền lãi) và 利息 (tiền lãi), có hiệu quả",
+    "radicals": "Bộ cấu thành: 禾 (HÒA) + 刂 (ĐAO) → Mẹo nhớ: Lợi  thay gặt  lúa một bông , bằng  đôi kiếm  sắc đỡ công nhọc nhằn",
+    "examples": [
+      {
+        "word": "利き",
+        "reading": "きき",
+        "meaning": "sự làm việc; việc"
+      },
+      {
+        "word": "利く",
+        "reading": "きく",
+        "meaning": "có lợi; có ích"
+      },
+      {
+        "word": "不利",
+        "reading": "ふり",
+        "meaning": "không lợi; bất lợi"
+      },
+      {
+        "word": "利他",
+        "reading": "りた",
+        "meaning": "chủ nghĩa vị tha"
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "kanji": "使",
+    "chapter": 2,
+    "chapterName": "2章 コンビニ (Cửa hàng tiện lợi)",
+    "section": "2 店内",
+    "page": 43,
+    "strokeCount": 8,
+    "on": [
+      "シ"
+    ],
+    "kun": [
+      "つか.う",
+      "つか.い",
+      "-つか.い",
+      "-づか.い"
+    ],
+    "hv": "SỬ",
+    "meaning": "dùng, khiến cho, sứ giả",
+    "radicals": "Bộ cấu thành: 吏 (LẠI) + 亻 (NHÂN) → Mẹo nhớ: Người  đời  dùng   bút  và dùng  miệng , kể lại chuyện  đao kiếm giao tranh",
+    "examples": [
+      {
+        "word": "使い",
+        "reading": "つかい",
+        "meaning": "cách sử dụng; việc sử dụng; người sử dụng ; sử dụng"
+      },
+      {
+        "word": "使う",
+        "reading": "つかう",
+        "meaning": "dụng"
+      },
+      {
+        "word": "使む",
+        "reading": "しむ",
+        "meaning": "chiếm"
+      },
+      {
+        "word": "使丁",
+        "reading": "してい",
+        "meaning": "người hầu"
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "kanji": "銀",
+    "chapter": 2,
+    "chapterName": "2章 コンビニ (Cửa hàng tiện lợi)",
+    "section": "2 店内",
+    "page": 43,
+    "strokeCount": 14,
+    "on": [
+      "ギン"
+    ],
+    "kun": [
+      "しろがね"
+    ],
+    "hv": "NGÂN",
+    "meaning": "màu trắng sáng lấp lánh như bạc, bạc, quân Bạc (một trong những quân cờ của cờ shogi)",
+    "radicals": "Bộ cấu thành: 艮 (CẤN) + 金 (KIM) → Mẹo nhớ: Lại muốn chế thành  bạc  hòn",
+    "examples": [
+      {
+        "word": "世銀",
+        "reading": "せぎん",
+        "meaning": "Ngân hàng thế giới.+ Xem International Bank For Reconstruction And Development."
+      },
+      {
+        "word": "銀坑",
+        "reading": "ぎんこう",
+        "meaning": "quặng"
+      },
+      {
+        "word": "銀将",
+        "reading": "ぎんしょう",
+        "meaning": "sự kể lại"
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "kanji": "白",
+    "chapter": 2,
+    "chapterName": "2章 コンビニ (Cửa hàng tiện lợi)",
+    "section": "2 店内",
+    "page": 43,
+    "strokeCount": 5,
+    "on": [
+      "ハク",
+      "ビャク"
+    ],
+    "kun": [
+      "しろ",
+      "しら-",
+      "しろ.い"
+    ],
+    "hv": "BẠCH",
+    "meaning": "màu trắng, làm cho trắng, sáng",
+    "radicals": "Bộ cấu thành: ノ + 日 (NHẬT) → Mẹo nhớ: Có  vệt sao chổi   trắng , lao về phía  mặt trời",
+    "examples": [
+      {
+        "word": "白い",
+        "reading": "しろい",
+        "meaning": "màu trắng"
+      },
+      {
+        "word": "乳白",
+        "reading": "にゅうはく",
+        "meaning": "Màu trắng sữa ."
+      },
+      {
+        "word": "白亜",
+        "reading": "はくあ",
+        "meaning": "đá phấn"
+      },
+      {
+        "word": "白人",
+        "reading": "はくじん",
+        "meaning": "người da trắng ."
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "kanji": "黒",
+    "chapter": 2,
+    "chapterName": "2章 コンビニ (Cửa hàng tiện lợi)",
+    "section": "2 店内",
+    "page": 43,
+    "strokeCount": 11,
+    "on": [
+      "コク"
+    ],
+    "kun": [
+      "くろ",
+      "くろ.ずむ",
+      "くろ.い"
+    ],
+    "hv": "HẮC",
+    "meaning": "đen, xấu",
+    "radicals": "Bộ cấu thành: 里 (LÍ) + 灬 (HỎA) → Mẹo nhớ: Một  cánh đồng , song song  hai lối ,  bốn ngọn lửa  thiêu, cháy  đen  rồi!",
+    "examples": [
+      {
+        "word": "黒々",
+        "reading": "くろぐろ",
+        "meaning": "màu đen thẫm ."
+      },
+      {
+        "word": "黒い",
+        "reading": "くろい",
+        "meaning": "đen; u ám; đen tối"
+      },
+      {
+        "word": "中黒",
+        "reading": "なかぐろ",
+        "meaning": "Dấu chấm (trong in ấn)"
+      },
+      {
+        "word": "黒丸",
+        "reading": "くろまる",
+        "meaning": "đoạn đường thường xảy ra tai nạn"
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "kanji": "紙",
+    "chapter": 2,
+    "chapterName": "2章 コンビニ (Cửa hàng tiện lợi)",
+    "section": "2 店内",
+    "page": 43,
+    "strokeCount": 10,
+    "on": [
+      "シ"
+    ],
+    "kun": [
+      "かみ"
+    ],
+    "hv": "CHỈ",
+    "meaning": "giấy, viết tắt của 新聞紙 (tờ báo), sách",
+    "radicals": "Bộ cấu thành: 氏 (THỊ) + 糸 (MỊCH) → Mẹo nhớ: 新聞 しんぶん   し の かみ さま Vị thần giấy báo  Dùng  chỉ  gai  buộc chữ thập   tập   giấy  dai",
+    "examples": [
+      {
+        "word": "ろ紙",
+        "reading": "ろし",
+        "meaning": "giấy lọc ."
+      },
+      {
+        "word": "上紙",
+        "reading": "うわがみ",
+        "meaning": "tờ bọc"
+      },
+      {
+        "word": "別紙",
+        "reading": "べっし",
+        "meaning": "sự rào lại"
+      },
+      {
+        "word": "包紙",
+        "reading": "つつみがみ",
+        "meaning": "bao giấy ."
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "kanji": "朝",
+    "chapter": 2,
+    "chapterName": "2章 コンビニ (Cửa hàng tiện lợi)",
+    "section": "3 24時間",
+    "page": 43,
+    "strokeCount": 12,
+    "on": [
+      "チョウ"
+    ],
+    "kun": [
+      "あさ"
+    ],
+    "hv": "TRIÊU",
+    "meaning": "buổi sáng, đất nước thiên tử cai trị, triều đình",
+    "radicals": "Bộ cấu thành: 月 (NGUYỆT) + 𠦝 → Mẹo nhớ: Trăng  đi ngủ, nhường  buổi sáng  mai",
+    "examples": [
+      {
+        "word": "朝に",
+        "reading": "あさに",
+        "meaning": "ban sớm ."
+      },
+      {
+        "word": "一朝",
+        "reading": "いっちょう",
+        "meaning": "một lần"
+      },
+      {
+        "word": "今朝",
+        "reading": "けさ",
+        "meaning": "hồi sáng"
+      },
+      {
+        "word": "今朝",
+        "reading": "こんちょう",
+        "meaning": "sáng nay ."
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "kanji": "晩",
+    "chapter": 2,
+    "chapterName": "2章 コンビニ (Cửa hàng tiện lợi)",
+    "section": "3 24時間",
+    "page": 43,
+    "strokeCount": 12,
+    "on": [
+      "バン"
+    ],
+    "kun": [],
+    "hv": "VÃN",
+    "meaning": "hoàng hôn, muộn",
+    "radicals": "Bộ cấu thành: 日 (NHẬT) + 免 (MIỄN) → Mẹo nhớ: Từ  tối  đến khi  mặt trời  mọc,  vẫn hai tay cầm sách ,  vừa đi vừa đọc",
+    "examples": [
+      {
+        "word": "一晩",
+        "reading": "ひとばん",
+        "meaning": "một đêm; cả đêm; trọn đêm"
+      },
+      {
+        "word": "今晩",
+        "reading": "こんばん",
+        "meaning": "đêm nay"
+      },
+      {
+        "word": "晩夏",
+        "reading": "ばんか",
+        "meaning": "cuối hạ ."
+      },
+      {
+        "word": "晩婚",
+        "reading": "ばんこん",
+        "meaning": "Sự kết hôn muộn ."
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "kanji": "昼",
+    "chapter": 2,
+    "chapterName": "2章 コンビニ (Cửa hàng tiện lợi)",
+    "section": "3 24時間",
+    "page": 43,
+    "strokeCount": 9,
+    "on": [
+      "チュウ"
+    ],
+    "kun": [
+      "ひる"
+    ],
+    "hv": "TRÚ",
+    "meaning": "trưa, giữa trưa",
+    "radicals": "Bộ cấu thành: 尺 (XÍCH) + 旦 (ĐÁN) → Mẹo nhớ: Buổi  trưa  đội  mũ che tai ,  mặt trời  ngồi  chiếu , tránh nắng dài",
+    "examples": [
+      {
+        "word": "お昼",
+        "reading": "おひる",
+        "meaning": "buổi trưa; bữa trưa"
+      },
+      {
+        "word": "昼光",
+        "reading": "ひるひかり",
+        "meaning": "ánh nắng ban ngày;  sự công khai"
+      },
+      {
+        "word": "昼前",
+        "reading": "ひるまえ",
+        "meaning": "thời điểm ngay trước buổi trưa ."
+      },
+      {
+        "word": "昼夜",
+        "reading": "ちゅうや",
+        "meaning": "ngày và đêm"
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "kanji": "夜",
+    "chapter": 2,
+    "chapterName": "2章 コンビニ (Cửa hàng tiện lợi)",
+    "section": "3 24時間",
+    "page": 43,
+    "strokeCount": 8,
+    "on": [
+      "ヤ"
+    ],
+    "kun": [
+      "よ",
+      "よる"
+    ],
+    "hv": "DẠ",
+    "meaning": "đêm",
+    "radicals": "Bộ cấu thành: 亻 (NHÂN) + 夂 (TRI) + 丶 (CHỦ) + 亠 (ĐẦU) → Mẹo nhớ: Đêm  hôm dưới  mái nhà , có một  người  tĩnh lặng, ngước mắt ngắm mây  trăng , và  một vệt sao băng",
+    "examples": [
+      {
+        "word": "一夜",
+        "reading": "いちや",
+        "meaning": "qua đêm"
+      },
+      {
+        "word": "七夜",
+        "reading": "しちや",
+        "meaning": "hiệu cầm đồ"
+      },
+      {
+        "word": "夜中",
+        "reading": "よなか",
+        "meaning": "nửa đêm; ban đêm"
+      },
+      {
+        "word": "今夜",
+        "reading": "こんや",
+        "meaning": "tối nay; đêm nay"
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "kanji": "前",
+    "chapter": 2,
+    "chapterName": "2章 コンビニ (Cửa hàng tiện lợi)",
+    "section": "3 24時間",
+    "page": 43,
+    "strokeCount": 9,
+    "on": [
+      "ゼン"
+    ],
+    "kun": [
+      "まえ",
+      "-まえ"
+    ],
+    "hv": "TIỀN",
+    "meaning": "từ trước, phía trước về mặt thứ tự, phía trước về mặt không gian",
+    "radicals": "Bộ cấu thành: 刖 (NGOẠT) + 䒑 → Mẹo nhớ: Chặt  đôi củ cải  trên  thớt   trước , rồi xắt thành hình bán  nguyệt  bằng  gươm",
+    "examples": [
+      {
+        "word": "前々",
+        "reading": "まえ々",
+        "meaning": "sẵn sàng trước"
+      },
+      {
+        "word": "お前",
+        "reading": "おまえ",
+        "meaning": "mày"
+      },
+      {
+        "word": "前に",
+        "reading": "まえに",
+        "meaning": "khi trước ."
+      },
+      {
+        "word": "上前",
+        "reading": "うわまえ",
+        "meaning": "tỷ lệ phần trăm"
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "kanji": "後",
+    "chapter": 2,
+    "chapterName": "2章 コンビニ (Cửa hàng tiện lợi)",
+    "section": "3 24時間",
+    "page": 43,
+    "strokeCount": 9,
+    "on": [
+      "ゴ",
+      "コウ"
+    ],
+    "kun": [
+      "のち",
+      "うし.ろ",
+      "うしろ",
+      "あと",
+      "おく.れる"
+    ],
+    "hv": "HẬU",
+    "meaning": "sau, muộn, phía sau",
+    "radicals": "Bộ cấu thành: 幺 (YÊU) + 彳 (XÍCH) + 夂 (TRI) → Mẹo nhớ: Hai người  lạc trong sương, mất  sợi chỉ  dẫn đường, người  sau   chân bước  tới, cứu họ khỏi mịt mùng",
+    "examples": [
+      {
+        "word": "後々",
+        "reading": "のちのち",
+        "meaning": "Tương lai xa ."
+      },
+      {
+        "word": "後で",
+        "reading": "あとで",
+        "meaning": "chốc nữa"
+      },
+      {
+        "word": "後に",
+        "reading": "あとに",
+        "meaning": "đàng sau ."
+      },
+      {
+        "word": "後れ",
+        "reading": "おくれ",
+        "meaning": "tình trạng lạc hậu"
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "kanji": "午",
+    "chapter": 2,
+    "chapterName": "2章 コンビニ (Cửa hàng tiện lợi)",
+    "section": "3 24時間",
+    "page": 43,
+    "strokeCount": 4,
+    "on": [
+      "ゴ"
+    ],
+    "kun": [
+      "うま"
+    ],
+    "hv": "NGỌ",
+    "meaning": "Ngọ (con giáp thứ bảy trong mười hai con giáp), trưa",
+    "radicals": "Bộ cấu thành: ノ + 干 (KIỀN) → Mẹo nhớ: Công chúa tóc dài  ngủ mơ, từ  trưa  đến tối  mười  giờ, nếu như nàng còn không dậy, sẽ thành rối gỗ khù khờ",
+    "examples": [
+      {
+        "word": "丙午",
+        "reading": "ひのえうま",
+        "meaning": "năm Bính Ngọ ."
+      },
+      {
+        "word": "亭午",
+        "reading": "ていご",
+        "meaning": "Buổi trưa ."
+      },
+      {
+        "word": "午刻",
+        "reading": "うまこく",
+        "meaning": "trưa"
+      },
+      {
+        "word": "午前",
+        "reading": "ごぜん",
+        "meaning": "buổi sáng; vào buổi sáng; sáng"
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "kanji": "早",
+    "chapter": 2,
+    "chapterName": "2章 コンビニ (Cửa hàng tiện lợi)",
+    "section": "3 24時間",
+    "page": 43,
+    "strokeCount": 6,
+    "on": [
+      "ソウ",
+      "サッ"
+    ],
+    "kun": [
+      "はや.い",
+      "はや",
+      "はや-",
+      "はや.まる",
+      "はや.める",
+      "さ-"
+    ],
+    "hv": "TẢO",
+    "meaning": "sớm (thời gian trong ngày), sớm trong mùa, sớm",
+    "radicals": "Bộ cấu thành: 十 (THẬP) + 日 (NHẬT) → Mẹo nhớ: Ngày  mùng  mười  phải dậy  sớm",
+    "examples": [
+      {
+        "word": "早々",
+        "reading": "はやばや",
+        "meaning": "sớm; nhanh chóng"
+      },
+      {
+        "word": "早々",
+        "reading": "そうそう",
+        "meaning": "sớm; nhanh chóng"
+      },
+      {
+        "word": "早い",
+        "reading": "はやい",
+        "meaning": "sớm; nhanh chóng"
+      },
+      {
+        "word": "早く",
+        "reading": "はやく",
+        "meaning": "sớm; nhanh chóng"
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "kanji": "荷",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "1 荷物",
+    "page": 65,
+    "strokeCount": 10,
+    "on": [
+      "カ"
+    ],
+    "kun": [
+      "に"
+    ],
+    "hv": "HÀ",
+    "meaning": "gánh vác, hành lý, hoa sen",
+    "radicals": "Bộ cấu thành: 何 (HÀ) + 艹 (THẢO) → Mẹo nhớ: Hành lý  có  gì ? Hành lý có  cỏ",
+    "examples": [
+      {
+        "word": "一荷",
+        "reading": "いちに",
+        "meaning": "vậy nặng"
+      },
+      {
+        "word": "荷主",
+        "reading": "にぬし",
+        "meaning": "nhà buôn chở hàng bằng tàu"
+      },
+      {
+        "word": "倉荷",
+        "reading": "くらに",
+        "meaning": "hàng hóa trong kho"
+      },
+      {
+        "word": "入荷",
+        "reading": "にゅうか",
+        "meaning": "sự nhập hàng; sự nhận hàng ."
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "kanji": "送",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "1 荷物",
+    "page": 65,
+    "strokeCount": 9,
+    "on": [
+      "ソウ"
+    ],
+    "kun": [
+      "おく.る"
+    ],
+    "hv": "TỐNG",
+    "meaning": "tiễn biệt, gửi đi",
+    "radicals": "Bộ cấu thành: 关 (QUAN) + ⻌ → Mẹo nhớ: Đường  xa bước  gửi  nàng thơ trên  đồi",
+    "examples": [
+      {
+        "word": "送り",
+        "reading": "おくり",
+        "meaning": "sự chôn cất"
+      },
+      {
+        "word": "送る",
+        "reading": "おくる",
+        "meaning": "gửi; truyền"
+      },
+      {
+        "word": "送付",
+        "reading": "そうふ",
+        "meaning": "sự gửi; việc chuyển tiền; việc chuyển tiền"
+      },
+      {
+        "word": "伝送",
+        "reading": "でんそう",
+        "meaning": "sự truyền đi"
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "kanji": "宅",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "1 荷物",
+    "page": 65,
+    "strokeCount": 6,
+    "on": [
+      "タク"
+    ],
+    "kun": [],
+    "hv": "TRẠCH",
+    "meaning": "nhà, nhà riêng",
+    "radicals": "Bộ cấu thành: 乇 + 宀 (MIÊN) → Mẹo nhớ: Mo mo trái đào dưới  mái   nhà  tranh",
+    "examples": [
+      {
+        "word": "お宅",
+        "reading": "おたく",
+        "meaning": "ông; bà; ngài; nhà ông; nhà bà; quý vị"
+      },
+      {
+        "word": "住宅",
+        "reading": "じゅうたく",
+        "meaning": "nhà ở; nơi sống ."
+      },
+      {
+        "word": "凶宅",
+        "reading": "きょうたく",
+        "meaning": "vật gửi"
+      },
+      {
+        "word": "宅地",
+        "reading": "たくち",
+        "meaning": "khu nhà; đất làm nhà"
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "kanji": "急",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "1 荷物",
+    "page": 65,
+    "strokeCount": 9,
+    "on": [
+      "キュウ"
+    ],
+    "kun": [
+      "いそ.ぐ",
+      "いそ.ぎ"
+    ],
+    "hv": "CẤP",
+    "meaning": "cấp bách, vội, đột ngột",
+    "radicals": "Bộ cấu thành: 心 (TÂM) + ⺈ + ヨ → Mẹo nhớ: Khẩn trương , bác sĩ  hai tay , cầm  máy sốc điện  hồi ngay  tim  ngừng",
+    "examples": [
+      {
+        "word": "急ぎ",
+        "reading": "いそぎ",
+        "meaning": "gấp"
+      },
+      {
+        "word": "急ぐ",
+        "reading": "いそぐ",
+        "meaning": "bước rảo"
+      },
+      {
+        "word": "急に",
+        "reading": "きゅうに",
+        "meaning": "bất thình lình"
+      },
+      {
+        "word": "急伸",
+        "reading": "きゅうしん",
+        "meaning": "sự nhảy"
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "kanji": "速",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "1 荷物",
+    "page": 65,
+    "strokeCount": 10,
+    "on": [
+      "ソク"
+    ],
+    "kun": [
+      "はや.い",
+      "はや-",
+      "はや.める",
+      "すみ.やか"
+    ],
+    "hv": "TỐC",
+    "meaning": "nhanh chóng, tốc độ",
+    "radicals": "Bộ cấu thành: 束 (THÚC) + ⻌ → Mẹo nhớ: Nhanh  chân cầm một  bó hoa , chạy trên  đường  tới cửa  nhà  người thương",
+    "examples": [
+      {
+        "word": "速い",
+        "reading": "はやい",
+        "meaning": "chóng"
+      },
+      {
+        "word": "速く",
+        "reading": "はやく",
+        "meaning": "mau lẹ"
+      },
+      {
+        "word": "速さ",
+        "reading": "はやさ",
+        "meaning": "sự nhanh chóng; sự mau lẹ"
+      },
+      {
+        "word": "中速",
+        "reading": "ちゅうそく",
+        "meaning": "bánh răng giữa ."
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "kanji": "遅",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "1 荷物",
+    "page": 65,
+    "strokeCount": 12,
+    "on": [
+      "チ"
+    ],
+    "kun": [
+      "おく.れる",
+      "おく.らす",
+      "おそ.い"
+    ],
+    "hv": "TRÌ",
+    "meaning": "chậm, muộn",
+    "radicals": "Bộ cấu thành: 羊 (DƯƠNG) + 尸 (THI) + ⻌ → Mẹo nhớ: Con cừu  dưới  mái nhà  dậy  muộn ,  cỏ  cuối  đường  bị ăn trụi từ lâu",
+    "examples": [
+      {
+        "word": "遅々",
+        "reading": "ちち",
+        "meaning": "chậm"
+      },
+      {
+        "word": "遅い",
+        "reading": "おそい",
+        "meaning": "muộn màng"
+      },
+      {
+        "word": "遅く",
+        "reading": "おそく",
+        "meaning": "muộn"
+      },
+      {
+        "word": "遅れ",
+        "reading": "おくれ",
+        "meaning": "sự muộn; sự chậm trễ"
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "kanji": "重",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "1 荷物",
+    "page": 65,
+    "strokeCount": 9,
+    "on": [
+      "ジュウ",
+      "チョウ"
+    ],
+    "kun": [
+      "え",
+      "おも.い",
+      "おも.り",
+      "おも.なう",
+      "かさ.ねる",
+      "かさ.なる",
+      "おも"
+    ],
+    "hv": "TRỌNG",
+    "meaning": "nghiêm trọng, nặng, uy nghiêm",
+    "radicals": "Mẹo nhớ: Xe gắn  trục sáu bánh , mới chuyển được vật  nặng",
+    "examples": [
+      {
+        "word": "重々",
+        "reading": "じゅうじゅう",
+        "meaning": "nhiều lần nhắc đi nhắc lại"
+      },
+      {
+        "word": "重い",
+        "reading": "おもい",
+        "meaning": "nặng; nặng nề"
+      },
+      {
+        "word": "重き",
+        "reading": "おもき",
+        "meaning": "sự quan trọng"
+      },
+      {
+        "word": "重さ",
+        "reading": "おもさ",
+        "meaning": "khối lượng; trọng lượng; sức nặng; cân nặng ."
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "kanji": "軽",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "1 荷物",
+    "page": 65,
+    "strokeCount": 12,
+    "on": [
+      "ケイ"
+    ],
+    "kun": [
+      "かる.い",
+      "かろ.やか",
+      "かろ.んじる"
+    ],
+    "hv": "KHINH",
+    "meaning": "nhẹ, coi nhẹ, nhẹ dạ",
+    "radicals": "Bộ cấu thành: 車 (XA) + 圣 (THÁNH) → Mẹo nhớ: Xe  đẩy di chuyển  bàn gấp , trượt trên mặt  đất   nhẹ nhàng",
+    "examples": [
+      {
+        "word": "軽々",
+        "reading": "けいけい",
+        "meaning": "nhẹ"
+      },
+      {
+        "word": "軽い",
+        "reading": "かるい",
+        "meaning": "nhẹ"
+      },
+      {
+        "word": "軽佻",
+        "reading": "けいちょう",
+        "meaning": "thiếu nghiêm trang"
+      },
+      {
+        "word": "軽侮",
+        "reading": "けいぶ",
+        "meaning": "sự coi thường; sự coi khinh; sự không hài lòng; sự khinh thường"
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "kanji": "住",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "2 あて先",
+    "page": 65,
+    "strokeCount": 7,
+    "on": [
+      "ジュウ",
+      "ヂュウ",
+      "チュウ"
+    ],
+    "kun": [
+      "す.む",
+      "す.まう",
+      "-ず.まい"
+    ],
+    "hv": "TRỤ",
+    "meaning": "chỗ ở, ở lại, sống",
+    "radicals": "Bộ cấu thành: 亻 (NHÂN) + 主 (CHỦ) → Mẹo nhớ: Người   sống  cạnh  vua  - chủ nhân  quyền trượng , tưởng là sướng, mà khổ hơn thường",
+    "examples": [
+      {
+        "word": "住い",
+        "reading": "すまい",
+        "meaning": "sự ở"
+      },
+      {
+        "word": "住む",
+        "reading": "すむ",
+        "meaning": "có thể giải quyết; có thể đối phó được"
+      },
+      {
+        "word": "住人",
+        "reading": "じゅうにん",
+        "meaning": "người cư trú; người ở ."
+      },
+      {
+        "word": "在住",
+        "reading": "ざいじゅう",
+        "meaning": "cư trú"
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "kanji": "所",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "2 あて先",
+    "page": 65,
+    "strokeCount": 8,
+    "on": [
+      "ショ"
+    ],
+    "kun": [
+      "ところ",
+      "-ところ",
+      "どころ",
+      "とこ"
+    ],
+    "hv": "SỞ",
+    "meaning": "nơi chốn, cái mà..., cơ sở thực hiện một công việc cụ thể",
+    "radicals": "Bộ cấu thành: 斤 (CÂN) + 戸 (HỘ) → Mẹo nhớ: Khắc  một đường  bén, trên  cánh cửa  son, bằng chiếc  rìu  con, \"đây là  chỗ  đẹp\"",
+    "examples": [
+      {
+        "word": "所々",
+        "reading": "ところどころ",
+        "meaning": "đây đó"
+      },
+      {
+        "word": "所が",
+        "reading": "ところが",
+        "meaning": "dẫu sao thì; thế còn; thậm chí ."
+      },
+      {
+        "word": "ご所",
+        "reading": "ごしょ",
+        "meaning": "cung điện hoàng gia cổ ."
+      },
+      {
+        "word": "所で",
+        "reading": "ところで",
+        "meaning": "thế còn ."
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "kanji": "様",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "2 あて先",
+    "page": 65,
+    "strokeCount": 14,
+    "on": [
+      "ヨウ",
+      "ショウ"
+    ],
+    "kun": [
+      "さま",
+      "さん"
+    ],
+    "hv": "DẠNG",
+    "meaning": "dáng vẻ, hình thức cố định, hoa văn",
+    "radicals": "Bộ cấu thành: 𦍌 + 水 (THỦY) + 木 (MỘC) → Mẹo nhớ: Hình dáng  lạ, chưa từng thấy trước đây",
+    "examples": [
+      {
+        "word": "様々",
+        "reading": "さまざま",
+        "meaning": "khác nhau; không giống nhau; thuộc về nhiều loại"
+      },
+      {
+        "word": "一様",
+        "reading": "いちよう",
+        "meaning": "đồng lòng"
+      },
+      {
+        "word": "上様",
+        "reading": "うえさま",
+        "meaning": "hoàng đế"
+      },
+      {
+        "word": "不様",
+        "reading": "ぶざま",
+        "meaning": "không có hình dáng đẹp"
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "kanji": "主",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "2 あて先",
+    "page": 65,
+    "strokeCount": 5,
+    "on": [
+      "シュ",
+      "ス",
+      "シュウ"
+    ],
+    "kun": [
+      "ぬし",
+      "おも",
+      "あるじ"
+    ],
+    "hv": "CHỦ",
+    "meaning": "chủ thể hành động, chính, chủ",
+    "radicals": "Bộ cấu thành: 王 (VƯƠNG) + 丶 (CHỦ) → Mẹo nhớ: Vị vua  xưng bá  chủ  thiên hạ, giơ  quyền trượng sáng lóa trên đầu",
+    "examples": [
+      {
+        "word": "お主",
+        "reading": "おぬし",
+        "meaning": "bạn; cậu; anh; mày"
+      },
+      {
+        "word": "主に",
+        "reading": "おもに",
+        "meaning": "chủ yếu; chính"
+      },
+      {
+        "word": "主上",
+        "reading": "しゅじょう",
+        "meaning": "hoàng đế"
+      },
+      {
+        "word": "主事",
+        "reading": "しゅじ",
+        "meaning": "người quản lý"
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "kanji": "番",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "2 あて先",
+    "page": 65,
+    "strokeCount": 12,
+    "on": [
+      "バン"
+    ],
+    "kun": [
+      "つが.い"
+    ],
+    "hv": "PHIÊN",
+    "meaning": "thứ tự, trận đấu, luân phiên đảm nhận công việc",
+    "radicals": "Bộ cấu thành: 釆 (BIỆN) + 田 (ĐIỀN) → Mẹo nhớ: Một chiếc  liềm  sắc, lúa  gạo  vàng ươm,  thay phiên nhau  gặt,  cánh đồng  chín thơm",
+    "examples": [
+      {
+        "word": "一番",
+        "reading": "いちばん",
+        "meaning": "nhất; tốt nhất"
+      },
+      {
+        "word": "三番",
+        "reading": "さんばん",
+        "meaning": "thứ ba"
+      },
+      {
+        "word": "下番",
+        "reading": "かばん",
+        "meaning": "bao"
+      },
+      {
+        "word": "二番",
+        "reading": "にばん",
+        "meaning": "Thứ 2 (số thứ tự)"
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "kanji": "地",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "2 あて先",
+    "page": 65,
+    "strokeCount": 6,
+    "on": [
+      "チ",
+      "ジ"
+    ],
+    "kun": [],
+    "hv": "ĐỊA",
+    "meaning": "nơi, của địa phương, đất",
+    "radicals": "Bộ cấu thành: 也 (DÃ) + 土 (THỔ) → Mẹo nhớ: Nhà có mảnh  đất , ở  Địa  Trung Hải,  hao hao chữ \"se\" (セ) , trồng  cây hoa cải",
+    "examples": [
+      {
+        "word": "地上",
+        "reading": "ちじょう",
+        "meaning": "trên mặt đất"
+      },
+      {
+        "word": "下地",
+        "reading": "したじ",
+        "meaning": "nền"
+      },
+      {
+        "word": "地下",
+        "reading": "ちか",
+        "meaning": "dưới đất"
+      },
+      {
+        "word": "地中",
+        "reading": "ちちゅう",
+        "meaning": "dưới đất"
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "kanji": "号",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "2 あて先",
+    "page": 65,
+    "strokeCount": 5,
+    "on": [
+      "ゴウ"
+    ],
+    "kun": [
+      "さけ.ぶ",
+      "よびな"
+    ],
+    "hv": "HÀO",
+    "meaning": "gào, hét, từ đi kèm tên phương tiện giao thông hoặc động vật, tín hiệu",
+    "radicals": "Bộ cấu thành: 丂 (KHẢO) + 口 (KHẨU) → Mẹo nhớ: Miệng  hô  số hiệu  0 5 !",
+    "examples": [
+      {
+        "word": "一号",
+        "reading": "いちごう",
+        "meaning": "miếng ; mảnh mẫu"
+      },
+      {
+        "word": "二号",
+        "reading": "にごう",
+        "meaning": "Vợ lẽ; nàng hầu; thiếp (thê thiếp) ."
+      },
+      {
+        "word": "号令",
+        "reading": "ごうれい",
+        "meaning": "hiệu lệnh"
+      },
+      {
+        "word": "信号",
+        "reading": "しんごう",
+        "meaning": "báo hiệu"
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "kanji": "京",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "2 あて先",
+    "page": 65,
+    "strokeCount": 8,
+    "on": [
+      "キョウ",
+      "ケイ",
+      "キン"
+    ],
+    "kun": [
+      "みやこ"
+    ],
+    "hv": "KINH",
+    "meaning": "viết tắt của Kyoto, viết tắt của Tokyo, kinh đô nơi thiên tử hoặc thiên hoàng ở",
+    "radicals": "Bộ cấu thành: 小 (TIỂU) + 口 (KHẨU) + 亠 (ĐẦU) → Mẹo nhớ: Xa xa  mái hoàng cung tháp nhọn ,  cổng   kinh đô   ba ngả  đổ về",
+    "examples": [
+      {
+        "word": "上京",
+        "reading": "じょうきょう",
+        "meaning": "việc đi tới Tokyo ."
+      },
+      {
+        "word": "入京",
+        "reading": "にゅうきょう",
+        "meaning": "Sự lên thủ đô; sự vào thủ đô ."
+      },
+      {
+        "word": "北京",
+        "reading": "ぺきん",
+        "meaning": "Bắc Kinh"
+      },
+      {
+        "word": "南京",
+        "reading": "なんきん",
+        "meaning": "Thành phố Nam Kinh"
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "kanji": "国",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "3 都道府県",
+    "page": 65,
+    "strokeCount": 8,
+    "on": [
+      "コク"
+    ],
+    "kun": [
+      "くに"
+    ],
+    "hv": "QUỐC",
+    "meaning": "quốc gia, tỉnh cổ (đơn vị hành chính thời xưa), quê hương",
+    "radicals": "Bộ cấu thành: 玉 (NGỌC) + 囗 (VI) → Mẹo nhớ: Đất nước  là  viên ngọc ,  vua  xây  thành  bao bọc",
+    "examples": [
+      {
+        "word": "国々",
+        "reading": "くにぐに",
+        "meaning": "các nước"
+      },
+      {
+        "word": "一国",
+        "reading": "いちこく",
+        "meaning": "bướng bỉnh"
+      },
+      {
+        "word": "万国",
+        "reading": "ばんこく",
+        "meaning": "các nước; quốc tế"
+      },
+      {
+        "word": "与国",
+        "reading": "よこく",
+        "meaning": "hòn bi"
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "kanji": "都",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "3 都道府県",
+    "page": 65,
+    "strokeCount": 11,
+    "on": [
+      "ト",
+      "ツ"
+    ],
+    "kun": [
+      "みやこ"
+    ],
+    "hv": "ĐÔ",
+    "meaning": "chỉ thủ đô Tokyo, kinh đô, (a) nơi đặt cung điện của thiên tử",
+    "radicals": "Bộ cấu thành: ⻏ + 者 (GIẢ) → Mẹo nhớ: Sải tay khua mái chèo, đưa thuyền  về  kinh đô , dưới  mặt trời  như thơ, cắm  cờ  bay rạng rỡ",
+    "examples": [
+      {
+        "word": "都人",
+        "reading": "とじん",
+        "meaning": "người thủ đô ."
+      },
+      {
+        "word": "都会",
+        "reading": "とかい",
+        "meaning": "đô hội"
+      },
+      {
+        "word": "僧都",
+        "reading": "そうず",
+        "meaning": "sự minh hoạ"
+      },
+      {
+        "word": "都内",
+        "reading": "とない",
+        "meaning": "khu vực thủ đô"
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "kanji": "道",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "3 都道府県",
+    "page": 65,
+    "strokeCount": 12,
+    "on": [
+      "ドウ",
+      "トウ"
+    ],
+    "kun": [
+      "みち"
+    ],
+    "hv": "ĐẠO",
+    "meaning": "đường, (a) đường đi, (b) đạo lý",
+    "radicals": "Bộ cấu thành: 首 (THỦ) + ⻌ → Mẹo nhớ: lộn ngược  trên  đường  khuya khoắt",
+    "examples": [
+      {
+        "word": "中道",
+        "reading": "ちゅうどう",
+        "meaning": "giữa hành trình; giữa chừng; lập trường đứng giữa; không đi theo hướng cực đoan; không đi theo cả chủ nghĩa khoái lạc và chủ nghĩa khổ hạnh (Phật); Lập trường tôn giáo đúng đắn đã vượt ra khỏi sự đối lập giữa sắc và không"
+      },
+      {
+        "word": "二道",
+        "reading": "ふたみち",
+        "meaning": "nơi hai đường gặp và cắt nhau"
+      },
+      {
+        "word": "人道",
+        "reading": "じんどう",
+        "meaning": "nhân đạo ."
+      },
+      {
+        "word": "仏道",
+        "reading": "ぶつどう",
+        "meaning": "Đạo phật"
+      }
+    ]
+  },
+  {
+    "id": 65,
+    "kanji": "府",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "3 都道府県",
+    "page": 65,
+    "strokeCount": 8,
+    "on": [
+      "フ"
+    ],
+    "kun": [],
+    "hv": "PHỦ",
+    "meaning": "cơ quan, thủ đô, phủ (đơn vị hành chính)",
+    "radicals": "Bộ cấu thành: 付 (PHÓ) + 广 (NGHIỄM) → Mẹo nhớ: Chính  phủ  cho  người  đặt  bù nhìn , dưới  vách núi đá  để ngăn  chim",
+    "examples": [
+      {
+        "word": "入府",
+        "reading": "にゅうふ",
+        "meaning": "Vào trong phủ ."
+      },
+      {
+        "word": "冥府",
+        "reading": "めいふ",
+        "meaning": "âm ty"
+      },
+      {
+        "word": "城府",
+        "reading": "じょうふ",
+        "meaning": "thành phố"
+      },
+      {
+        "word": "天府",
+        "reading": "てんぷ",
+        "meaning": "đất đai phì nhiêu"
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "kanji": "県",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "3 都道府県",
+    "page": 65,
+    "strokeCount": 9,
+    "on": [
+      "ケン"
+    ],
+    "kun": [
+      "か.ける"
+    ],
+    "hv": "HUYỆN",
+    "meaning": "tỉnh (đơn vị hành chính của Nhật), huyện (đơn vị hành chính địa phương Trung Quốc), <i>agata</i> (lãnh địa triều đình, đất cai quản của quan địa phương thời cổ)",
+    "radicals": "Bộ cấu thành: 小 (TIỂU) + 目 (MỤC) + 𠃊 → Mẹo nhớ: Vừa vào  tỉnh  Kền Kền, thấy ngay  biển ba chân , hình  con mắt  bí hiểm",
+    "examples": [
+      {
+        "word": "県下",
+        "reading": "けんか",
+        "meaning": "quận"
+      },
+      {
+        "word": "県会",
+        "reading": "けんかい",
+        "meaning": "hội đồng tỉnh; hội đồng nhân dân tỉnh"
+      },
+      {
+        "word": "県内",
+        "reading": "けんない",
+        "meaning": "trong tỉnh"
+      },
+      {
+        "word": "同県",
+        "reading": "どうけん",
+        "meaning": "sự nhìn thấu được bên trong sự vật"
+      }
+    ]
+  },
+  {
+    "id": 67,
+    "kanji": "市",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "3 都道府県",
+    "page": 65,
+    "strokeCount": 5,
+    "on": [
+      "シ"
+    ],
+    "kun": [
+      "いち"
+    ],
+    "hv": "THỊ",
+    "meaning": "thành phố, phố, chợ",
+    "radicals": "Bộ cấu thành: 巾 (CÂN) + 亠 (ĐẦU) → Mẹo nhớ: Rau đặt thúng  đội lên đầu,  chị quàng khăn  màu ra  chợ  bán rau",
+    "examples": [
+      {
+        "word": "市中",
+        "reading": "しちゅう",
+        "meaning": "của proposition"
+      },
+      {
+        "word": "互市",
+        "reading": "ごし",
+        "meaning": "nghề"
+      },
+      {
+        "word": "市会",
+        "reading": "しかい",
+        "meaning": "hội đồng thành phố"
+      },
+      {
+        "word": "市内",
+        "reading": "しない",
+        "meaning": "trong thành phố; nội thành; nội đô ."
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "kanji": "区",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "3 都道府県",
+    "page": 65,
+    "strokeCount": 4,
+    "on": [
+      "ク",
+      "オウ",
+      "コウ"
+    ],
+    "kun": [],
+    "hv": "KHU",
+    "meaning": "phần được chia, phân chia, rời rạc",
+    "radicals": "Bộ cấu thành: 㐅 + 匚 (PHƯƠNG) → Mẹo nhớ: Đây là  khu   C ao cấp, quy hoạch hình  chữ X",
+    "examples": [
+      {
+        "word": "区々",
+        "reading": "まちまち",
+        "meaning": "muôn hình muôn vẻ; nhiều loại khác nhau"
+      },
+      {
+        "word": "一区",
+        "reading": "いちく",
+        "meaning": "địa hạt"
+      },
+      {
+        "word": "区処",
+        "reading": "くしょ",
+        "meaning": "sự chia ra"
+      },
+      {
+        "word": "区分",
+        "reading": "くぶん",
+        "meaning": "sự phân chia; sự phân loại; sự sắp loại; phân chia; phân loại; sắp loại; sắp xếp"
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "kanji": "村",
+    "chapter": 3,
+    "chapterName": "3章 おくり物 (Gửi quà & Địa chỉ)",
+    "section": "3 都道府県",
+    "page": 65,
+    "strokeCount": 7,
+    "on": [
+      "ソン"
+    ],
+    "kun": [
+      "むら"
+    ],
+    "hv": "THÔN",
+    "meaning": "làng xóm, làng",
+    "radicals": "Bộ cấu thành: 寸 (THỐN) + 木 (MỘC) → Mẹo nhớ: Đầu  làng , bên gốc  cây  bàng,  bù nhìn treo ngọn đèn vàng  đứng canh",
+    "examples": [
+      {
+        "word": "村人",
+        "reading": "むらびと",
+        "meaning": "người trong làng"
+      },
+      {
+        "word": "村会",
+        "reading": "そんかい",
+        "meaning": "mối hại"
+      },
+      {
+        "word": "寒村",
+        "reading": "かんそん",
+        "meaning": "nơi khỉ ho cò gáy; nơi thâm sơn cùng cốc; vùng sâu vùng xa"
+      },
+      {
+        "word": "村庄",
+        "reading": "むらしょう",
+        "meaning": "làng"
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "kanji": "毎",
+    "chapter": 4,
+    "chapterName": "4章 スケジュール (Lịch trình & Công việc)",
+    "section": "1 デート",
+    "page": 87,
+    "strokeCount": 6,
+    "on": [
+      "マイ"
+    ],
+    "kun": [
+      "ごと",
+      "-ごと.に"
+    ],
+    "hv": "MỖI",
+    "meaning": "mỗi, tham lam",
+    "radicals": "Bộ cấu thành: 𠂉 + 毋 (VÔ) → Mẹo nhớ: Đứa con nằm ngủ  vô tư, để  mẹ  vất vả sớm trưa  mỗi  ngày",
+    "examples": [
+      {
+        "word": "毎々",
+        "reading": "ことごとく",
+        "meaning": "thường xuyên"
+      },
+      {
+        "word": "毎に",
+        "reading": "ごとに",
+        "meaning": "mỗi; mọi; cứ"
+      },
+      {
+        "word": "毎回",
+        "reading": "まいかい",
+        "meaning": "lần nào cũng"
+      },
+      {
+        "word": "毎年",
+        "reading": "まいとし",
+        "meaning": "hàng năm; mỗi năm; mọi năm"
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "kanji": "週",
+    "chapter": 4,
+    "chapterName": "4章 スケジュール (Lịch trình & Công việc)",
+    "section": "1 デート",
+    "page": 87,
+    "strokeCount": 11,
+    "on": [
+      "シュウ"
+    ],
+    "kun": [],
+    "hv": "CHU",
+    "meaning": "tuần, xoay quanh",
+    "radicals": "Bộ cấu thành: 周 (CHU) + ⻌ → Mẹo nhớ: Mỗi  tuần  tôi đều đi,  đường  quanh  khu đất  nọ, có ngôi mộ  thập giá , và  miệng giếng  cổ xưa",
+    "examples": [
+      {
+        "word": "一週",
+        "reading": "いっしゅう",
+        "meaning": "tuần lễ"
+      },
+      {
+        "word": "今週",
+        "reading": "こんしゅう",
+        "meaning": "tuần lễ này"
+      },
+      {
+        "word": "週令",
+        "reading": "しゅうれい",
+        "meaning": "một tuần nay; đã được một tuần; tuần trước"
+      },
+      {
+        "word": "週休",
+        "reading": "しゅうきゅう",
+        "meaning": "kì nghỉ hàng tuần ."
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "kanji": "映",
+    "chapter": 4,
+    "chapterName": "4章 スケジュール (Lịch trình & Công việc)",
+    "section": "1 デート",
+    "page": 87,
+    "strokeCount": 9,
+    "on": [
+      "エイ"
+    ],
+    "kun": [
+      "うつ.る",
+      "うつ.す",
+      "は.える",
+      "-ば.え"
+    ],
+    "hv": "ÁNH",
+    "meaning": "làm nổi bật, rạng rỡ, phản chiếu",
+    "radicals": "Bộ cấu thành: 央 (ƯƠNG) + 日 (NHẬT) → Mẹo nhớ: Mặt trời  rọi tới trong phòng,  chiếu  lên  ô cửa  bóng  người  lặng im",
+    "examples": [
+      {
+        "word": "映え",
+        "reading": "はえ",
+        "meaning": "danh tiếng"
+      },
+      {
+        "word": "映す",
+        "reading": "うつす",
+        "meaning": "chiếu (phim)"
+      },
+      {
+        "word": "映り",
+        "reading": "うつり",
+        "meaning": "sự phản chiếu"
+      },
+      {
+        "word": "映る",
+        "reading": "うつる",
+        "meaning": "được chiếu; phát"
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "kanji": "画",
+    "chapter": 4,
+    "chapterName": "4章 スケジュール (Lịch trình & Công việc)",
+    "section": "1 デート",
+    "page": 87,
+    "strokeCount": 8,
+    "on": [
+      "ガ",
+      "カク",
+      "エ",
+      "カイ"
+    ],
+    "kun": [
+      "えが.く",
+      "かく.する",
+      "かぎ.る",
+      "はかりごと",
+      "はか.る"
+    ],
+    "hv": "HỌA",
+    "meaning": "(ガ) vẽ, (ガ) tranh, (カク) nét chữ cấu thành chữ Hán",
+    "radicals": "Bộ cấu thành: 一 (NHẤT) + 由 (DO) + 凵 (KHẢM) → Mẹo nhớ: Vẽ  cánh đồng  rộng,  đường lên tít ngàn",
+    "examples": [
+      {
+        "word": "画く",
+        "reading": "かくく",
+        "meaning": "vẽ ."
+      },
+      {
+        "word": "一画",
+        "reading": "いちかく",
+        "meaning": "thăm"
+      },
+      {
+        "word": "画一",
+        "reading": "かくいつ",
+        "meaning": "tính giống nhau"
+      },
+      {
+        "word": "画人",
+        "reading": "がじん",
+        "meaning": "thợ sơn"
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "kanji": "館",
+    "chapter": 4,
+    "chapterName": "4章 スケジュール (Lịch trình & Công việc)",
+    "section": "1 デート",
+    "page": 87,
+    "strokeCount": 16,
+    "on": [
+      "カン"
+    ],
+    "kun": [
+      "やかた",
+      "たて"
+    ],
+    "hv": "QUÁN",
+    "meaning": "chỗ trọ, tòa nhà, dinh thự",
+    "radicals": "Bộ cấu thành: 官 (QUAN) + 飠 (THỰC) → Mẹo nhớ: Ông quan đầu to bụng phệ , dưới  mái  lữ  quán   ăn  cơm",
+    "examples": [
+      {
+        "word": "館主",
+        "reading": "かんしゅ",
+        "meaning": "người quản lý"
+      },
+      {
+        "word": "会館",
+        "reading": "かいかん",
+        "meaning": "hội quán; trung tâm"
+      },
+      {
+        "word": "公館",
+        "reading": "こうかん",
+        "meaning": "công quán; văn phòng đại diện; cơ sở đại diện"
+      },
+      {
+        "word": "函館",
+        "reading": "はこだて",
+        "meaning": "Hakodate"
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "kanji": "公",
+    "chapter": 4,
+    "chapterName": "4章 スケジュール (Lịch trình & Công việc)",
+    "section": "1 デート",
+    "page": 87,
+    "strokeCount": 4,
+    "on": [
+      "コウ",
+      "ク"
+    ],
+    "kun": [
+      "おおやけ"
+    ],
+    "hv": "CÔNG",
+    "meaning": "không thiên vị, công cộng, (a) liên quan đến quốc gia hoặc chính phủ",
+    "radicals": "Bộ cấu thành: ハ + 厶 (KHƯ) → Mẹo nhớ: Chính trị gia  mũi to , bị  công khai  bê bối, bị dân tình phản đối,  mày sụp  giữa đông người",
+    "examples": [
+      {
+        "word": "公事",
+        "reading": "こうじ",
+        "meaning": "việc công ."
+      },
+      {
+        "word": "公会",
+        "reading": "こうかい",
+        "meaning": "cuộc họp công chúng; công hội; hội nghị công khai"
+      },
+      {
+        "word": "公使",
+        "reading": "こうし",
+        "meaning": "công sứ"
+      },
+      {
+        "word": "公侯",
+        "reading": "こうこう",
+        "meaning": "công hầu ."
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "kanji": "園",
+    "chapter": 4,
+    "chapterName": "4章 スケジュール (Lịch trình & Công việc)",
+    "section": "1 デート",
+    "page": 87,
+    "strokeCount": 13,
+    "on": [
+      "エン"
+    ],
+    "kun": [
+      "その"
+    ],
+    "hv": "VIÊN",
+    "meaning": "vườn, khu vực nhất định và các cơ sở vật chất được thiết lập cho một mục đích nào đó",
+    "radicals": "Bộ cấu thành: 囗 (VI) + 袁 (VIÊN) → Mẹo nhớ: Mảnh  đất   vườn   vuông  vức,  Miệng   k húc khích đứng chơi",
+    "examples": [
+      {
+        "word": "園丁",
+        "reading": "えんてい",
+        "meaning": "người làm vườn"
+      },
+      {
+        "word": "入園",
+        "reading": "にゅうえん",
+        "meaning": "Vào học ở trường mẫu giáo ."
+      },
+      {
+        "word": "公園",
+        "reading": "こうえん",
+        "meaning": "công viên"
+      },
+      {
+        "word": "学園",
+        "reading": "がくえん",
+        "meaning": "khuôn viên trường; trong trường; khu sân bãi"
+      }
+    ]
+  },
+  {
+    "id": 77,
+    "kanji": "夫",
+    "chapter": 4,
+    "chapterName": "4章 スケジュール (Lịch trình & Công việc)",
+    "section": "2 けっこんきねん日",
+    "page": 87,
+    "strokeCount": 4,
+    "on": [
+      "フ",
+      "フウ",
+      "ブ"
+    ],
+    "kun": [
+      "おっと",
+      "それ"
+    ],
+    "hv": "PHU",
+    "meaning": "chồng, đàn ông, người lao động",
+    "radicals": "Bộ cấu thành: 二 (NHỊ) + 人 (NHÂN) → Mẹo nhớ: Chồng  em là  người  có  thêm  một  đôi cánh tay",
+    "examples": [
+      {
+        "word": "夫々",
+        "reading": "おっと々",
+        "meaning": "mỗi"
+      },
+      {
+        "word": "丈夫",
+        "reading": "じょうぶ",
+        "meaning": "sự bền; sự vững chắc; sức bền; sự dai sức"
+      },
+      {
+        "word": "亡夫",
+        "reading": "ぼうふ",
+        "meaning": "người chồng đã quá cố; vong phu; người chồng đã mất"
+      },
+      {
+        "word": "人夫",
+        "reading": "にんぷ",
+        "meaning": "người phu hồ; người làm cu ly; người lao động chân tay ."
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "kanji": "妻",
+    "chapter": 4,
+    "chapterName": "4章 スケジュール (Lịch trình & Công việc)",
+    "section": "2 けっこんきねん日",
+    "page": 87,
+    "strokeCount": 8,
+    "on": [
+      "サイ"
+    ],
+    "kun": [
+      "つま"
+    ],
+    "hv": "THÊ",
+    "meaning": "vợ, gả",
+    "radicals": "Bộ cấu thành: 女 (NỮ) + 一 (NHẤT) + 肀 → Mẹo nhớ: つま の さい  布 ふ  があさい！ Ví tiền của vợ mỏng quá!   Một chiếc trâm  vàng,  cặp tóc ba càng ,  búi cao  trên đỉnh,  vợ  tôi là  nàng",
+    "examples": [
+      {
+        "word": "亡妻",
+        "reading": "ぼうさい",
+        "meaning": "pháo đài"
+      },
+      {
+        "word": "人妻",
+        "reading": "ひとづま",
+        "meaning": "vợ người; người vợ"
+      },
+      {
+        "word": "内妻",
+        "reading": "ないさい",
+        "meaning": "Người vợ không hợp pháp ."
+      },
+      {
+        "word": "切妻",
+        "reading": "きりずま",
+        "meaning": "Đầu hồi; tây hiên"
+      }
+    ]
+  },
+  {
+    "id": 79,
+    "kanji": "特",
+    "chapter": 4,
+    "chapterName": "4章 スケジュール (Lịch trình & Công việc)",
+    "section": "2 けっこんきねん日",
+    "page": 87,
+    "strokeCount": 10,
+    "on": [
+      "トク"
+    ],
+    "kun": [],
+    "hv": "ĐẶC",
+    "meaning": "đặc biệt, một mình, bò đực",
+    "radicals": "Bộ cấu thành: 牜 + 寺 (TỰ) → Mẹo nhớ: Bò  là động vật  đặc biệt  với các  ngôi chùa",
+    "examples": [
+      {
+        "word": "特に",
+        "reading": "とくに",
+        "meaning": "nhất là; đặc biệt là"
+      },
+      {
+        "word": "特使",
+        "reading": "とくし",
+        "meaning": "đặc sứ"
+      },
+      {
+        "word": "特例",
+        "reading": "とくれい",
+        "meaning": "ví dụ đặc biệt"
+      },
+      {
+        "word": "特免",
+        "reading": "とくめん",
+        "meaning": "Sự miễn đặc biệt"
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "kanji": "思",
+    "chapter": 4,
+    "chapterName": "4章 スケジュール (Lịch trình & Công việc)",
+    "section": "2 けっこんきねん日",
+    "page": 87,
+    "strokeCount": 9,
+    "on": [
+      "シ"
+    ],
+    "kun": [
+      "おも.う",
+      "おもえら.く",
+      "おぼ.す"
+    ],
+    "hv": "TƯ",
+    "meaning": "suy nghĩ, thương nhớ",
+    "radicals": "Bộ cấu thành: 心 (TÂM) + 田 (ĐIỀN) → Mẹo nhớ: Trái tim  là  cánh đồng , \"trồng\" biết bao  suy nghĩ",
+    "examples": [
+      {
+        "word": "思い",
+        "reading": "おもい",
+        "meaning": "cảm thấy"
+      },
+      {
+        "word": "思う",
+        "reading": "おもう",
+        "meaning": "dự đoán; cho rằng"
+      },
+      {
+        "word": "再思",
+        "reading": "さいし",
+        "meaning": "sự xem xét lại; sự xét lại"
+      },
+      {
+        "word": "思弁",
+        "reading": "しべん",
+        "meaning": "sự suy xét"
+      }
+    ]
+  },
+  {
+    "id": 81,
+    "kanji": "料",
+    "chapter": 4,
+    "chapterName": "4章 スケジュール (Lịch trình & Công việc)",
+    "section": "2 けっこんきねん日",
+    "page": 87,
+    "strokeCount": 10,
+    "on": [
+      "リョウ"
+    ],
+    "kun": [],
+    "hv": "LIÊU",
+    "meaning": "tiền thù lao, nguyên liệu, đo lường",
+    "radicals": "Bộ cấu thành: 米 (MỄ) + 斗 (ĐẤU) → Mẹo nhớ: Từ hũ  gạo  trắng thơm, muôi múc ra  hai hạt , làm  nguyên liệu  nấu cơm",
+    "examples": [
+      {
+        "word": "料亭",
+        "reading": "りょうてい",
+        "meaning": "nhà hàng (kiểu Nhật) ."
+      },
+      {
+        "word": "供料",
+        "reading": "きょうりょう",
+        "meaning": "sự biếu"
+      },
+      {
+        "word": "原料",
+        "reading": "げんりょう",
+        "meaning": "chất liệu"
+      },
+      {
+        "word": "料地",
+        "reading": "りょうち",
+        "meaning": "đất đai"
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "kanji": "理",
+    "chapter": 4,
+    "chapterName": "4章 スケジュール (Lịch trình & Công việc)",
+    "section": "2 けっこんきねん日",
+    "page": 87,
+    "strokeCount": 11,
+    "on": [
+      "リ"
+    ],
+    "kun": [
+      "ことわり"
+    ],
+    "hv": "LÍ",
+    "meaning": "cai quản, khoa học tự nhiên, lẽ phải",
+    "radicals": "Bộ cấu thành: 里 (LÍ) + 王 (VƯƠNG) → Mẹo nhớ: \" Ruộng   đất  đều là của  vua \" là đạo  lý  từ thuở xưa",
+    "examples": [
+      {
+        "word": "一理",
+        "reading": "いちり",
+        "meaning": "gốc"
+      },
+      {
+        "word": "不理",
+        "reading": "ふり",
+        "meaning": "vô lý"
+      },
+      {
+        "word": "事理",
+        "reading": "じり",
+        "meaning": "lý do"
+      },
+      {
+        "word": "理事",
+        "reading": "りじ",
+        "meaning": "ban giám đốc; giám đốc; ủy viên quản trị (của một trường học"
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "kanji": "有",
+    "chapter": 4,
+    "chapterName": "4章 スケジュール (Lịch trình & Công việc)",
+    "section": "2 けっこんきねん日",
+    "page": 87,
+    "strokeCount": 6,
+    "on": [
+      "ユウ",
+      "ウ"
+    ],
+    "kun": [
+      "あ.る"
+    ],
+    "hv": "HỮU",
+    "meaning": "có, hơn nữa, sở hữu",
+    "radicals": "Bộ cấu thành: 𠂇 + 月 (NGUYỆT) → Mẹo nhớ: う ちの ア ンパンは ゆう  名 めい  ですよ！ Bánh anpan của chúng tôi nổi tiếng lắm đấy!  Mĩ nhân tựa ánh  trăng  trên nước, luôn ở đó, khó  có  trong  tay",
+    "examples": [
+      {
+        "word": "有る",
+        "reading": "ある",
+        "meaning": "có; tồn tại"
+      },
+      {
+        "word": "万有",
+        "reading": "ばんゆう",
+        "meaning": "thuộc vũ trụ"
+      },
+      {
+        "word": "有事",
+        "reading": "ゆうじ",
+        "meaning": "tình trạng khẩn cấp"
+      },
+      {
+        "word": "享有",
+        "reading": "きょうゆう",
+        "meaning": "sự được hưởng; hưởng; được hưởng"
+      }
+    ]
+  },
+  {
+    "id": 84,
+    "kanji": "会",
+    "chapter": 4,
+    "chapterName": "4章 スケジュール (Lịch trình & Công việc)",
+    "section": "3 しごと",
+    "page": 87,
+    "strokeCount": 6,
+    "on": [
+      "カイ",
+      "エ"
+    ],
+    "kun": [
+      "あ.う",
+      "あ.わせる",
+      "あつ.まる"
+    ],
+    "hv": "HỘI",
+    "meaning": "gặp gỡ, tập hợp, thời điểm",
+    "radicals": "Bộ cấu thành: 𠆢 + 云 (VÂN) → Mẹo nhớ: Lén  gặp gỡ , tâm sự nhỏ to",
+    "examples": [
+      {
+        "word": "会う",
+        "reading": "あう",
+        "meaning": "đón"
+      },
+      {
+        "word": "休会",
+        "reading": "きゅうかい",
+        "meaning": "sự hoãn lại"
+      },
+      {
+        "word": "停会",
+        "reading": "ていかい",
+        "meaning": "sự hoãn lại"
+      },
+      {
+        "word": "入会",
+        "reading": "にゅうかい",
+        "meaning": "sự nhập hội ."
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "kanji": "社",
+    "chapter": 4,
+    "chapterName": "4章 スケジュール (Lịch trình & Công việc)",
+    "section": "3 しごと",
+    "page": 87,
+    "strokeCount": 7,
+    "on": [
+      "シャ"
+    ],
+    "kun": [
+      "やしろ"
+    ],
+    "hv": "XÃ",
+    "meaning": "viết tắt của 会社 (công ty), thần đất, tổ chức",
+    "radicals": "Bộ cấu thành: 礻 (THỊ) + 土 (THỔ) → Mẹo nhớ: Ở  xã  này của Nepal, có  bàn thờ  thần  đất",
+    "examples": [
+      {
+        "word": "社中",
+        "reading": "しゃちゅう",
+        "meaning": "đoàn"
+      },
+      {
+        "word": "社交",
+        "reading": "しゃこう",
+        "meaning": "xã giao; giao tiếp"
+      },
+      {
+        "word": "社会",
+        "reading": "しゃかい",
+        "meaning": "xã hội ."
+      },
+      {
+        "word": "会社",
+        "reading": "かいしゃ",
+        "meaning": "công ty"
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "kanji": "働",
+    "chapter": 4,
+    "chapterName": "4章 スケジュール (Lịch trình & Công việc)",
+    "section": "3 しごと",
+    "page": 87,
+    "strokeCount": 13,
+    "on": [
+      "ドウ",
+      "リュク",
+      "リキ",
+      "ロク",
+      "リョク"
+    ],
+    "kun": [
+      "はたら.く"
+    ],
+    "hv": "ĐỘNG",
+    "meaning": "làm việc",
+    "radicals": "Bộ cấu thành: 亻 (NHÂN) + 動 (ĐỘNG) → Mẹo nhớ: Người   làm việc   nặng , phải dồn  sức  mới xong",
+    "examples": [
+      {
+        "word": "働き",
+        "reading": "はたらき",
+        "meaning": "công việc; việc làm; sự đảm nhiệm chức năng; sự hoạt động"
+      },
+      {
+        "word": "働く",
+        "reading": "はたらく",
+        "meaning": "làm"
+      },
+      {
+        "word": "働け",
+        "reading": "はたらけ",
+        "meaning": "làm đi ."
+      },
+      {
+        "word": "労働",
+        "reading": "ろうどう",
+        "meaning": "lao công"
+      }
+    ]
+  },
+  {
+    "id": 87,
+    "kanji": "作",
+    "chapter": 4,
+    "chapterName": "4章 スケジュール (Lịch trình & Công việc)",
+    "section": "3 しごと",
+    "page": 87,
+    "strokeCount": 7,
+    "on": [
+      "サク",
+      "サ"
+    ],
+    "kun": [
+      "つく.る",
+      "つく.り",
+      "-づく.り"
+    ],
+    "hv": "TÁC",
+    "meaning": "làm, làm việc, làm",
+    "radicals": "Bộ cấu thành: 乍 (SẠ) + 亻 (NHÂN) → Mẹo nhớ: Người  thợ cầm  chiếc lược, đầu chải và ba răng , chải một đường thẳng băng,  tạo  ra màu tóc mới",
+    "examples": [
+      {
+        "word": "作り",
+        "reading": "つくり",
+        "meaning": "đồ hoá trang"
+      },
+      {
+        "word": "作る",
+        "reading": "つくる",
+        "meaning": "chế biến"
+      },
+      {
+        "word": "上作",
+        "reading": "じょうさく",
+        "meaning": "kiệt tác"
+      },
+      {
+        "word": "下作",
+        "reading": "げさく",
+        "meaning": "điều hư cấu"
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "kanji": "工",
+    "chapter": 4,
+    "chapterName": "4章 スケジュール (Lịch trình & Công việc)",
+    "section": "3 しごと",
+    "page": 87,
+    "strokeCount": 3,
+    "on": [
+      "コウ",
+      "ク",
+      "グ"
+    ],
+    "kun": [],
+    "hv": "CÔNG",
+    "meaning": "viết tắt của 工業 (công nghiệp), chế tạo đồ vật, người chế tạo đồ vật",
+    "radicals": "Mẹo nhớ: Người thợ  dùng  dầm H  xây nhà nghỉ mát",
+    "examples": [
+      {
+        "word": "工事",
+        "reading": "こうじ",
+        "meaning": "công sự"
+      },
+      {
+        "word": "人工",
+        "reading": "じんこう",
+        "meaning": "hộ khẩu"
+      },
+      {
+        "word": "工人",
+        "reading": "こうじん",
+        "meaning": "Công nhân; thợ thủ công; nhân công ."
+      },
+      {
+        "word": "工作",
+        "reading": "こうさく",
+        "meaning": "nghề thủ công; môn thủ công"
+      }
+    ]
+  },
+  {
+    "id": 89,
+    "kanji": "場",
+    "chapter": 4,
+    "chapterName": "4章 スケジュール (Lịch trình & Công việc)",
+    "section": "3 しごと",
+    "page": 87,
+    "strokeCount": 12,
+    "on": [
+      "ジョウ",
+      "チョウ"
+    ],
+    "kun": [
+      "ば"
+    ],
+    "hv": "TRÀNG",
+    "meaning": "thời điểm, nơi chốn, phân đoạn trong kịch",
+    "radicals": "Bộ cấu thành: 昜 (DƯƠNG) + 土 (THỔ) → Mẹo nhớ: Cây năm  ngày là héo,  nắng hai tia  cháy vàng",
+    "examples": [
+      {
+        "word": "万場",
+        "reading": "まんば",
+        "meaning": "nhất trí"
+      },
+      {
+        "word": "場代",
+        "reading": "ばだい",
+        "meaning": "chỗ rách ; khe lá"
+      },
+      {
+        "word": "休場",
+        "reading": "きゅうじょう",
+        "meaning": "đỉnh đồi"
+      },
+      {
+        "word": "会場",
+        "reading": "かいじょう",
+        "meaning": "hội trường"
+      }
+    ]
+  },
+  {
+    "id": 90,
+    "kanji": "始",
+    "chapter": 4,
+    "chapterName": "4章 スケジュール (Lịch trình & Công việc)",
+    "section": "3 しごと",
+    "page": 87,
+    "strokeCount": 8,
+    "on": [
+      "シ"
+    ],
+    "kun": [
+      "はじ.める",
+      "-はじ.める",
+      "はじ.まる"
+    ],
+    "hv": "THỦY",
+    "meaning": "khởi đầu, bắt đầu",
+    "radicals": "Bộ cấu thành: 女 (NỮ) + 台 (THAI) → Mẹo nhớ: Nữ  trọng tài báo, \" Mu  sẽ gặp  Ro \", cả làng cùng hô,  bắt đầu  trận đấu!",
+    "examples": [
+      {
+        "word": "始め",
+        "reading": "はじめ",
+        "meaning": "lúc đầu; đầu tiên"
+      },
+      {
+        "word": "始値",
+        "reading": "はじね",
+        "meaning": "giá khởi điểm ."
+      },
+      {
+        "word": "元始",
+        "reading": "げんし",
+        "meaning": "gốc"
+      },
+      {
+        "word": "創始",
+        "reading": "そうし",
+        "meaning": "sự tạo thành"
+      }
+    ]
+  },
+  {
+    "id": 91,
+    "kanji": "終",
+    "chapter": 4,
+    "chapterName": "4章 スケジュール (Lịch trình & Công việc)",
+    "section": "3 しごと",
+    "page": 87,
+    "strokeCount": 11,
+    "on": [
+      "シュウ"
+    ],
+    "kun": [
+      "お.わる",
+      "-お.わる",
+      "おわ.る",
+      "お.える",
+      "つい",
+      "つい.に"
+    ],
+    "hv": "CHUNG",
+    "meaning": "sự kết thúc, cuối cùng, kết thúc",
+    "radicals": "Bộ cấu thành: 糸 (MỊCH) + 冬 (ĐÔNG) → Mẹo nhớ: この 仕事 しごと  は 今 こん   シュウ で お わる。 Công việc này đến tuần này là kết thúc   Sợi chỉ  dệt dùng đến  mùa đông  thì  hết",
+    "examples": [
+      {
+        "word": "終世",
+        "reading": "しゅうせい",
+        "meaning": "suốt đời"
+      },
+      {
+        "word": "終了",
+        "reading": "しゅうりょう",
+        "meaning": "sự kết thúc ."
+      },
+      {
+        "word": "終値",
+        "reading": "おわりね",
+        "meaning": "giá cuối ngày"
+      },
+      {
+        "word": "始終",
+        "reading": "しじゅう",
+        "meaning": "từ đầu đến cuối; từ đầu chí cuối ."
+      }
+    ]
+  },
+  {
+    "id": 92,
+    "kanji": "駅",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "1 駅",
+    "page": 111,
+    "strokeCount": 14,
+    "on": [
+      "エキ"
+    ],
+    "kun": [],
+    "hv": "DỊCH",
+    "meaning": "ga, trạm, ngựa trạm",
+    "radicals": "Bộ cấu thành: 馬 (MÃ) + 尺 (XÍCH) → Mẹo nhớ: Con ngựa  chạy trước tới  ga , còn  người khuân vác  rề rà theo sau",
+    "examples": [
+      {
+        "word": "駅前",
+        "reading": "えきまえ",
+        "meaning": "trước ga"
+      },
+      {
+        "word": "駅員",
+        "reading": "えきいん",
+        "meaning": "nhân viên nhà ga; người soát vé ở ga tàu"
+      },
+      {
+        "word": "宿駅",
+        "reading": "しゅくえき",
+        "meaning": "đài tiếp âm"
+      },
+      {
+        "word": "駅弁",
+        "reading": "えきべん",
+        "meaning": "cơm hộp bán tại nhà ga"
+      }
+    ]
+  },
+  {
+    "id": 93,
+    "kanji": "鉄",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "1 駅",
+    "page": 111,
+    "strokeCount": 13,
+    "on": [
+      "テツ"
+    ],
+    "kun": [
+      "くろがね"
+    ],
+    "hv": "THIẾT",
+    "meaning": "sắt, cứng và rắn như sắt, đồ sắc nhọn",
+    "radicals": "Bộ cấu thành: 失 (THẤT) + 金 (KIM) → Mẹo nhớ: Tưởng đâu  vàng  khối, ra là  sắt  đen",
+    "examples": [
+      {
+        "word": "鉄人",
+        "reading": "てつじん",
+        "meaning": "Người đàn ông mạnh khỏe"
+      },
+      {
+        "word": "鉄傘",
+        "reading": "てっさん",
+        "meaning": "cái chao bằng sắt ."
+      },
+      {
+        "word": "鉄兜",
+        "reading": "てつかぶと",
+        "meaning": "mũ sắt"
+      },
+      {
+        "word": "鉄分",
+        "reading": "てつぶん",
+        "meaning": "chất sắt ."
+      }
+    ]
+  },
+  {
+    "id": 94,
+    "kanji": "乗",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "1 駅",
+    "page": 111,
+    "strokeCount": 9,
+    "on": [
+      "ジョウ",
+      "ショウ"
+    ],
+    "kun": [
+      "の.る",
+      "-の.り",
+      "の.せる"
+    ],
+    "hv": "THỪA",
+    "meaning": "cưỡi, lên (xe, tàu), phép nhân, tận dụng cơ hội",
+    "radicals": "Bộ cấu thành: 禾 (HÒA) → Mẹo nhớ: Leo  lên   cây  lớn, mở màn diễn hay",
+    "examples": [
+      {
+        "word": "乗り",
+        "reading": "のり",
+        "meaning": "môn cưỡi ngựa"
+      },
+      {
+        "word": "乗る",
+        "reading": "のる",
+        "meaning": "cưỡi"
+      },
+      {
+        "word": "万乗",
+        "reading": "まんじょう",
+        "meaning": "quyền tối cao"
+      },
+      {
+        "word": "三乗",
+        "reading": "さんじょう",
+        "meaning": "sự thăm hỏi"
+      }
+    ]
+  },
+  {
+    "id": 95,
+    "kanji": "降",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "1 駅",
+    "page": 111,
+    "strokeCount": 10,
+    "on": [
+      "コウ",
+      "ゴ"
+    ],
+    "kun": [
+      "お.りる",
+      "お.ろす",
+      "ふ.る",
+      "ふ.り",
+      "くだ.る",
+      "くだ.す"
+    ],
+    "hv": "HÀNG",
+    "meaning": "xuống, sau đó, kể từ đó, đầu hàng",
+    "radicals": "Bộ cấu thành: ヰ + 夂 (TRI) + ⻖ → Mẹo nhớ: Đến  bến xe buýt cắm cờ , hành khách  bước tới bậc gờ ,  xuống  xe",
+    "examples": [
+      {
+        "word": "降り",
+        "reading": "ふり",
+        "meaning": "trận mưa rào"
+      },
+      {
+        "word": "降る",
+        "reading": "ふる",
+        "meaning": "rơi (mưa); đổ (mưa) ."
+      },
+      {
+        "word": "下降",
+        "reading": "かこう",
+        "meaning": "rơi xuống; tụt xuống"
+      },
+      {
+        "word": "降下",
+        "reading": "こうか",
+        "meaning": "sự rơi từ trên cao xuống; việc đưa từ trên cao xuống; rơi; rơi xuống; rơi vào; tụt ."
+      }
+    ]
+  },
+  {
+    "id": 96,
+    "kanji": "開",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "1 駅",
+    "page": 111,
+    "strokeCount": 12,
+    "on": [
+      "カイ"
+    ],
+    "kun": [
+      "ひら.く",
+      "ひら.き",
+      "-びら.き",
+      "ひら.ける",
+      "あ.く",
+      "あ.ける"
+    ],
+    "hv": "KHAI",
+    "meaning": "phát triển, bắt đầu, mở",
+    "radicals": "Bộ cấu thành: 开 (KHAI) + 門 (MÔN) → Mẹo nhớ: Cổng  đền,  cổng trời  luôn luôn  mở , dẫn lối tâm ta tới thần linh",
+    "examples": [
+      {
+        "word": "開き",
+        "reading": "ひらき",
+        "meaning": "khe hở"
+      },
+      {
+        "word": "開く",
+        "reading": "あく",
+        "meaning": "há"
+      },
+      {
+        "word": "開く",
+        "reading": "ひらく",
+        "meaning": "mở"
+      },
+      {
+        "word": "開会",
+        "reading": "かいかい",
+        "meaning": "sự khai mạc (cuộc họp)"
+      }
+    ]
+  },
+  {
+    "id": 97,
+    "kanji": "閉",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "1 駅",
+    "page": 111,
+    "strokeCount": 11,
+    "on": [
+      "ヘイ"
+    ],
+    "kun": [
+      "と.じる",
+      "と.ざす",
+      "し.める",
+      "し.まる",
+      "た.てる"
+    ],
+    "hv": "BẾ",
+    "meaning": "đóng, giam mình, kết thúc",
+    "radicals": "Bộ cấu thành: オ + 門 (MÔN) → Mẹo nhớ: Hết giờ  đóng   cửa  cắp  ô  đi về",
+    "examples": [
+      {
+        "word": "閉会",
+        "reading": "へいかい",
+        "meaning": "bế mạc hội nghị"
+      },
+      {
+        "word": "閉口",
+        "reading": "へいこう",
+        "meaning": "sự câm miệng; sự nín lặng; sự chịu đựng"
+      },
+      {
+        "word": "閉塞",
+        "reading": "へいそく",
+        "meaning": "bế tắc ."
+      },
+      {
+        "word": "密閉",
+        "reading": "みっぺい",
+        "meaning": "kín hơi"
+      }
+    ]
+  },
+  {
+    "id": 98,
+    "kanji": "発",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "1 駅",
+    "page": 111,
+    "strokeCount": 9,
+    "on": [
+      "ハツ",
+      "ホツ"
+    ],
+    "kun": [
+      "た.つ",
+      "あば.く",
+      "おこ.る",
+      "つか.わす",
+      "はな.つ"
+    ],
+    "hv": "PHÁT",
+    "meaning": "khởi hành, xảy ra, vạch trần",
+    "radicals": "Bộ cấu thành: 癶 (BÁT) + 二 (NHỊ) + 儿 (NHÂN) → Mẹo nhớ: Khởi phát  cuộc báo thù",
+    "examples": [
+      {
+        "word": "一発",
+        "reading": "いちはつ",
+        "meaning": "tạp chí một số (chỉ ra một số về một chuyên đề"
+      },
+      {
+        "word": "不発",
+        "reading": "ふはつ",
+        "meaning": "phát súng tịt; đạn không nổ; động cơ không nổ"
+      },
+      {
+        "word": "発令",
+        "reading": "はつれい",
+        "meaning": "sự ban bố pháp lệnh"
+      },
+      {
+        "word": "発作",
+        "reading": "ほっさ",
+        "meaning": "sự phát tác; sự phát ra (bệnh); sự lên cơn"
+      }
+    ]
+  },
+  {
+    "id": 99,
+    "kanji": "着",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "1 駅",
+    "page": 111,
+    "strokeCount": 12,
+    "on": [
+      "チャク",
+      "ジャク"
+    ],
+    "kun": [
+      "き.る",
+      "-ぎ",
+      "き.せる",
+      "-き.せ",
+      "つ.く",
+      "つ.ける"
+    ],
+    "hv": "TRỨ",
+    "meaning": "đi đến, ổn định, mặc quần áo",
+    "radicals": "Bộ cấu thành: ノ + 𦍌 + 目 (MỤC) → Mẹo nhớ: Con cừu  tuy  mang   mặt nạ sói , khó giấu nổi đôi  mắt  ngây ngô",
+    "examples": [
+      {
+        "word": "着々",
+        "reading": "ちゃくちゃく",
+        "meaning": "một cách vững chắc"
+      },
+      {
+        "word": "着く",
+        "reading": "つく",
+        "meaning": "cặp"
+      },
+      {
+        "word": "着る",
+        "reading": "きる",
+        "meaning": "bận"
+      },
+      {
+        "word": "上着",
+        "reading": "うわぎ",
+        "meaning": "áo vét; áo khoác ."
+      }
+    ]
+  },
+  {
+    "id": 100,
+    "kanji": "交",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "2 交さてん",
+    "page": 111,
+    "strokeCount": 6,
+    "on": [
+      "コウ"
+    ],
+    "kun": [
+      "まじ.わる",
+      "まじ.える",
+      "ま.じる",
+      "まじ.る",
+      "ま.ざる",
+      "ま.ぜる",
+      "-か.う",
+      "か.わす",
+      "かわ.す",
+      "こもごも"
+    ],
+    "hv": "GIAO",
+    "meaning": "trộn lẫn, đổi, giao nhau",
+    "radicals": "Bộ cấu thành: 六 (LỤC) + 父 (PHỤ) → Mẹo nhớ: Bố đội mũ đầu bếp  cuốc bộ qua  giao  lộ",
+    "examples": [
+      {
+        "word": "交す",
+        "reading": "かわす",
+        "meaning": "trao đổi; đổi chác cho nhau; giao dịch với nhau; cho nhau"
+      },
+      {
+        "word": "交互",
+        "reading": "こうご",
+        "meaning": "sự tương tác lẫn nhau; hỗ trợ"
+      },
+      {
+        "word": "交交",
+        "reading": "こもごも",
+        "meaning": "lần lượt nhau"
+      },
+      {
+        "word": "交付",
+        "reading": "こうふ",
+        "meaning": "sự cấp cho (giấy tờ); sự phát hành (giấy tờ); cấp; phát"
+      }
+    ]
+  },
+  {
+    "id": 101,
+    "kanji": "通",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "2 交さてん",
+    "page": 111,
+    "strokeCount": 10,
+    "on": [
+      "ツウ",
+      "ツ"
+    ],
+    "kun": [
+      "とお.る",
+      "とお.り",
+      "-とお.り",
+      "-どお.り",
+      "とお.す",
+      "とお.し",
+      "-どお.し",
+      "かよ.う"
+    ],
+    "hv": "THÔNG",
+    "meaning": "đi qua, đi lại, thông báo",
+    "radicals": "Bộ cấu thành: 甬 (DŨNG) + ⻌ → Mẹo nhớ: \"Xưa trên  đường tới trường ,\"  má  kể, \"phải trèo rào, lội  qua  suối đó con\"",
+    "examples": [
+      {
+        "word": "通う",
+        "reading": "かよう",
+        "meaning": "đi học; đi làm"
+      },
+      {
+        "word": "通し",
+        "reading": "とおし",
+        "meaning": "gửi"
+      },
+      {
+        "word": "通じ",
+        "reading": "つうじ",
+        "meaning": "sự đi qua"
+      },
+      {
+        "word": "通す",
+        "reading": "とおす",
+        "meaning": "(làm) theo (suy nghĩ)"
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "kanji": "台",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "2 交さてん",
+    "page": 111,
+    "strokeCount": 5,
+    "on": [
+      "ダイ",
+      "タイ"
+    ],
+    "kun": [
+      "うてな",
+      "われ",
+      "つかさ"
+    ],
+    "hv": "THAI",
+    "meaning": "đài, danh xưng tôn kính với đối phương, người hầu",
+    "radicals": "Bộ cấu thành: 厶 (KHƯ) + 口 (KHẨU) → Mẹo nhớ: Võ sĩ  Mu  và  Ro  đã lên võ  đài !",
+    "examples": [
+      {
+        "word": "一台",
+        "reading": "いちだい",
+        "meaning": "sự sinh ra"
+      },
+      {
+        "word": "台下",
+        "reading": "だいか",
+        "meaning": "giá"
+      },
+      {
+        "word": "十台",
+        "reading": "じゅうだい",
+        "meaning": "thanh thiếu niên; cho thanh thiếu niên"
+      },
+      {
+        "word": "土台",
+        "reading": "どだい",
+        "meaning": "nền tảng; cơ sở; nền; móng"
+      }
+    ]
+  },
+  {
+    "id": 103,
+    "kanji": "止",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "2 交さてん",
+    "page": 111,
+    "strokeCount": 4,
+    "on": [
+      "シ"
+    ],
+    "kun": [
+      "と.まる",
+      "-ど.まり",
+      "と.める",
+      "-と.める",
+      "-ど.め",
+      "とど.める",
+      "とど.め",
+      "とど.まる",
+      "や.める",
+      "や.む",
+      "-や.む",
+      "よ.す",
+      "-さ.す",
+      "-さ.し"
+    ],
+    "hv": "CHỈ",
+    "meaning": "ngăn chặn, dừng, dừng lại",
+    "radicals": "Mẹo nhớ: Gặp  cột đèn giao thông  chuyển đỏ,  bé  hiểu rõ,  dừng  trước  vỉa hè",
+    "examples": [
+      {
+        "word": "止す",
+        "reading": "よす",
+        "meaning": "bỏ (học)"
+      },
+      {
+        "word": "止む",
+        "reading": "やむ",
+        "meaning": "đình chỉ; dừng; ngừng"
+      },
+      {
+        "word": "止め",
+        "reading": "とめ",
+        "meaning": "lý lẽ vững chắc"
+      },
+      {
+        "word": "中止",
+        "reading": "ちゅうし",
+        "meaning": "sự cấm; sự ngừng"
+      }
+    ]
+  },
+  {
+    "id": 104,
+    "kanji": "色",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "2 交さてん",
+    "page": 111,
+    "strokeCount": 6,
+    "on": [
+      "ショク",
+      "シキ"
+    ],
+    "kun": [
+      "いろ"
+    ],
+    "hv": "SẮC",
+    "meaning": "màu sắc, dáng vẻ, vẻ mặt",
+    "radicals": "Bộ cấu thành: 巴 (BA) + ⺈ → Mẹo nhớ: Khay vuông hai ô , pha sắc hài hòa",
+    "examples": [
+      {
+        "word": "色々",
+        "reading": "いろいろ",
+        "meaning": "nhiều; phong phú ."
+      },
+      {
+        "word": "一色",
+        "reading": "いっしょく",
+        "meaning": "tất cả"
+      },
+      {
+        "word": "丹色",
+        "reading": "にいろ",
+        "meaning": "Màu đỏ thẫm; màu đỏ đất ."
+      },
+      {
+        "word": "乳色",
+        "reading": "にゅうしょく",
+        "meaning": "Màu sữa ."
+      }
+    ]
+  },
+  {
+    "id": 105,
+    "kanji": "赤",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "2 交さてん",
+    "page": 111,
+    "strokeCount": 7,
+    "on": [
+      "セキ",
+      "シャク"
+    ],
+    "kun": [
+      "あか",
+      "あか-",
+      "あか.い",
+      "あか.らむ",
+      "あか.らめる"
+    ],
+    "hv": "XÍCH",
+    "meaning": "màu đỏ, chủ nghĩa cộng sản, thành tâm",
+    "radicals": "Mẹo nhớ: Nung  đất  dưới  bốn ngọn lửa  nhỏ đến khi nóng  đỏ",
+    "examples": [
+      {
+        "word": "赤々",
+        "reading": "あか々",
+        "meaning": "sáng"
+      },
+      {
+        "word": "赤い",
+        "reading": "あかい",
+        "meaning": "đỏ"
+      },
+      {
+        "word": "赤化",
+        "reading": "せっか",
+        "meaning": "xô viết hoá"
+      },
+      {
+        "word": "赤味",
+        "reading": "あかみ",
+        "meaning": "Màu phớt đỏ"
+      }
+    ]
+  },
+  {
+    "id": 106,
+    "kanji": "黄",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "2 交さてん",
+    "page": 111,
+    "strokeCount": 11,
+    "on": [
+      "コウ",
+      "オウ"
+    ],
+    "kun": [
+      "き",
+      "こ-"
+    ],
+    "hv": "HOÀNG",
+    "meaning": "màu vàng, ngả vàng",
+    "radicals": "Bộ cấu thành: 共 (CỘNG) + 田 (ĐIỀN) → Mẹo nhớ: Trên  hai mảnh đất  cắm rào,  đồng lúa  tháng  Tám  rì rào  vàng  ươm",
+    "examples": [
+      {
+        "word": "黄土",
+        "reading": "おうど",
+        "meaning": "đất"
+      },
+      {
+        "word": "大黄",
+        "reading": "だいおう",
+        "meaning": "cây đại hoàng"
+      },
+      {
+        "word": "黄斑",
+        "reading": "きむら",
+        "meaning": "điểm vàng"
+      },
+      {
+        "word": "黄昏",
+        "reading": "たそがれ",
+        "meaning": "hoàng hôn"
+      }
+    ]
+  },
+  {
+    "id": 107,
+    "kanji": "青",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "2 交さてん",
+    "page": 111,
+    "strokeCount": 8,
+    "on": [
+      "セイ",
+      "ショウ"
+    ],
+    "kun": [
+      "あお",
+      "あお-",
+      "あお.い"
+    ],
+    "hv": "THANH",
+    "meaning": "màu xanh, trẻ",
+    "radicals": "Bộ cấu thành: 龶 + ⺝ → Mẹo nhớ: Mầm   xanh  trồi khỏi  ba tấc đất , tắm ánh  trăng  thành sắc da trời",
+    "examples": [
+      {
+        "word": "青々",
+        "reading": "あおあお",
+        "meaning": "ｘanh lá cây; xanh tươi; tươi tốt xum xuê; xanh tốt"
+      },
+      {
+        "word": "青い",
+        "reading": "あおい",
+        "meaning": "xanh"
+      },
+      {
+        "word": "丹青",
+        "reading": "たんせい",
+        "meaning": "sự sơn"
+      },
+      {
+        "word": "刺青",
+        "reading": "いれずみ",
+        "meaning": "xăm; xăm hình"
+      }
+    ]
+  },
+  {
+    "id": 108,
+    "kanji": "病",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "3 病院",
+    "page": 111,
+    "strokeCount": 10,
+    "on": [
+      "ビョウ",
+      "ヘイ"
+    ],
+    "kun": [
+      "や.む",
+      "-や.み",
+      "やまい"
+    ],
+    "hv": "BỆNH",
+    "meaning": "ốm, khuyết điểm",
+    "radicals": "Bộ cấu thành: 丙 (BÍNH) + 疒 (NẠCH) → Mẹo nhớ: Chăm cho  người   bệnh",
+    "examples": [
+      {
+        "word": "病む",
+        "reading": "やむ",
+        "meaning": "bị ốm"
+      },
+      {
+        "word": "病中",
+        "reading": "びょうちゅう",
+        "meaning": "Trong khi ốm ."
+      },
+      {
+        "word": "病人",
+        "reading": "びょうにん",
+        "meaning": "bệnh nhân"
+      },
+      {
+        "word": "仮病",
+        "reading": "けびょう",
+        "meaning": "sự giả vờ ốm"
+      }
+    ]
+  },
+  {
+    "id": 109,
+    "kanji": "院",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "3 病院",
+    "page": 111,
+    "strokeCount": 10,
+    "on": [
+      "イン"
+    ],
+    "kun": [],
+    "hv": "VIỆN",
+    "meaning": "địa điểm quy mô lớn có tường bao quanh, tôn xưng dành cho Thượng hoàng, Pháp hoàng, tường bao quanh",
+    "radicals": "Bộ cấu thành: 完 (HOÀN) + ⻖ → Mẹo nhớ: Bệnh  viện  có  mái  cắm  cờ , đưa sức khỏe về  nguyên  sơ ban đầu",
+    "examples": [
+      {
+        "word": "上院",
+        "reading": "じょういん",
+        "meaning": "thượng nghị viện"
+      },
+      {
+        "word": "下院",
+        "reading": "かいん",
+        "meaning": "hạ viện; hạ nghị viện"
+      },
+      {
+        "word": "両院",
+        "reading": "りょういん",
+        "meaning": "hai nghị viện ."
+      },
+      {
+        "word": "二院",
+        "reading": "にいん",
+        "meaning": "lưỡng viện"
+      }
+    ]
+  },
+  {
+    "id": 110,
+    "kanji": "医",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "3 病院",
+    "page": 111,
+    "strokeCount": 7,
+    "on": [
+      "イ"
+    ],
+    "kun": [
+      "い.やす",
+      "い.する",
+      "くすし"
+    ],
+    "hv": "Y",
+    "meaning": "chữa trị, thầy thuốc",
+    "radicals": "Bộ cấu thành: 矢 (THỈ) + 匚 (PHƯƠNG) → Mẹo nhớ: Mũi tên   to  trúng một người nọ, họ nằm  giường , kêu \" bác sĩ  đâu?\"",
+    "examples": [
+      {
+        "word": "医伯",
+        "reading": "いはく",
+        "meaning": "bác sĩ y khoa"
+      },
+      {
+        "word": "侍医",
+        "reading": "じい",
+        "meaning": "thầy thuốc"
+      },
+      {
+        "word": "名医",
+        "reading": "めいい",
+        "meaning": "lương y ."
+      },
+      {
+        "word": "医員",
+        "reading": "いいん",
+        "meaning": "bác sĩ y khoa"
+      }
+    ]
+  },
+  {
+    "id": 111,
+    "kanji": "科",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "3 病院",
+    "page": 111,
+    "strokeCount": 9,
+    "on": [
+      "カ"
+    ],
+    "kun": [],
+    "hv": "KHOA",
+    "meaning": "loại, quy định, tội lỗi",
+    "radicals": "Bộ cấu thành: 禾 (HÒA) + 斗 (ĐẤU) → Mẹo nhớ: Khoa  nông nghiệp mới tạo ra, một cái vá đong  hai hạt   lúa",
+    "examples": [
+      {
+        "word": "亜科",
+        "reading": "あか",
+        "meaning": "phân bộ"
+      },
+      {
+        "word": "科人",
+        "reading": "とがにん",
+        "meaning": "người phạm tội"
+      },
+      {
+        "word": "内科",
+        "reading": "ないか",
+        "meaning": "khoa nội"
+      },
+      {
+        "word": "分科",
+        "reading": "ぶんか",
+        "meaning": "phân khoa ."
+      }
+    ]
+  },
+  {
+    "id": 112,
+    "kanji": "薬",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "3 病院",
+    "page": 111,
+    "strokeCount": 16,
+    "on": [
+      "ヤク"
+    ],
+    "kun": [
+      "くすり"
+    ],
+    "hv": "DƯỢC",
+    "meaning": "thuốc, chất gây ra phản ứng hóa học",
+    "radicals": "Bộ cấu thành: 楽 (LẠC) + 艹 (THẢO) → Mẹo nhớ: Cỏ  nào uống vào ngủ được ngay, cả ngày  vui vẻ , ắt  thuốc  hay",
+    "examples": [
+      {
+        "word": "上薬",
+        "reading": "うわぐすり",
+        "meaning": "men"
+      },
+      {
+        "word": "下薬",
+        "reading": "したやく",
+        "meaning": "nhuận tràng"
+      },
+      {
+        "word": "丸薬",
+        "reading": "がんやく",
+        "meaning": "thuốc tễ"
+      },
+      {
+        "word": "仙薬",
+        "reading": "せんやく",
+        "meaning": "thuốc tiên ."
+      }
+    ]
+  },
+  {
+    "id": 113,
+    "kanji": "待",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "3 病院",
+    "page": 111,
+    "strokeCount": 9,
+    "on": [
+      "タイ"
+    ],
+    "kun": [
+      "ま.つ",
+      "-ま.ち"
+    ],
+    "hv": "ĐÃI",
+    "meaning": "chờ đợi, tiếp đãi",
+    "radicals": "Bộ cấu thành: 彳 (XÍCH) + 寺 (TỰ) → Mẹo nhớ: Người đứng trước, người bước sau , xếp hàng  đợi  lượt vào  chùa  cầu an",
+    "examples": [
+      {
+        "word": "待ち",
+        "reading": "まち",
+        "meaning": "sự đợi"
+      },
+      {
+        "word": "待つ",
+        "reading": "まつ",
+        "meaning": "chờ"
+      },
+      {
+        "word": "優待",
+        "reading": "ゆうたい",
+        "meaning": "ưu đãi ."
+      },
+      {
+        "word": "待合",
+        "reading": "まちあい",
+        "meaning": "cuộc mít tinh"
+      }
+    ]
+  },
+  {
+    "id": 114,
+    "kanji": "合",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "3 病院",
+    "page": 111,
+    "strokeCount": 6,
+    "on": [
+      "ゴウ",
+      "ガッ",
+      "カッ"
+    ],
+    "kun": [
+      "あ.う",
+      "-あ.う",
+      "あ.い",
+      "あい-",
+      "-あ.い",
+      "-あい",
+      "あ.わす",
+      "あ.わせる",
+      "-あ.わせる"
+    ],
+    "hv": "HỢP",
+    "meaning": "phù hợp, hợp, tập hợp",
+    "radicals": "Bộ cấu thành: 亼 + 口 (KHẨU) → Mẹo nhớ: Vung  nào  nồi  nấy, nhìn mấy cũng thấy  hợp",
+    "examples": [
+      {
+        "word": "合い",
+        "reading": "あい",
+        "meaning": "chỗ nối"
+      },
+      {
+        "word": "合う",
+        "reading": "あう",
+        "meaning": "ăn khớp; hợp"
+      },
+      {
+        "word": "合一",
+        "reading": "ごういつ",
+        "meaning": "sự thống nhất"
+      },
+      {
+        "word": "交合",
+        "reading": "こうごう",
+        "meaning": "sự giao hợp; giao hợp; giao cấu ."
+      }
+    ]
+  },
+  {
+    "id": 115,
+    "kanji": "計",
+    "chapter": 5,
+    "chapterName": "5章 町 (Phố xá & Bệnh viện)",
+    "section": "3 病院",
+    "page": 111,
+    "strokeCount": 9,
+    "on": [
+      "ケイ"
+    ],
+    "kun": [
+      "はか.る",
+      "はか.らう"
+    ],
+    "hv": "KẾ",
+    "meaning": "đếm, dụng cụ đo số lượng hoặc khối lượng, lập kế hoạch",
+    "radicals": "Bộ cấu thành: 十 (THẬP) + 言 (NGÔN) → Mẹo nhớ: Nói  kết quả  mười  câu  tính  nhẩm, hết tám câu sai, chỉ hai câu đúng",
+    "examples": [
+      {
+        "word": "計り",
+        "reading": "はかり",
+        "meaning": "sự đo"
+      },
+      {
+        "word": "計る",
+        "reading": "はかる",
+        "meaning": "cân"
+      },
+      {
+        "word": "一計",
+        "reading": "いっけい",
+        "meaning": "sơ đồ"
+      },
+      {
+        "word": "計上",
+        "reading": "けいじょう",
+        "meaning": "sự chiếm hữu"
+      }
+    ]
+  },
+  {
+    "id": 116,
+    "kanji": "研",
+    "chapter": 6,
+    "chapterName": "6章 学生 (Học sinh & Giao tiếp)",
+    "section": "1 研究",
+    "page": 133,
+    "strokeCount": 9,
+    "on": [
+      "ケン"
+    ],
+    "kun": [
+      "と.ぐ"
+    ],
+    "hv": "NGHIÊN",
+    "meaning": "tìm hiểu thấu đáo đạo lý của sự vật sự việc, mài giũa, nghiên mực",
+    "radicals": "Bộ cấu thành: 开 (KHAI) + 石 (THẠCH) → Mẹo nhớ: Nghiên cứu   tảng đá  cạnh  cổng trời",
+    "examples": [
+      {
+        "word": "研ぎ",
+        "reading": "とぎ",
+        "meaning": "Polish  Ba lan"
+      },
+      {
+        "word": "研ぐ",
+        "reading": "とぐ",
+        "meaning": "mài; mài cho sắc; mài giũa; chà xát cho bóng lên"
+      },
+      {
+        "word": "予研",
+        "reading": "よけん",
+        "meaning": "định đề"
+      },
+      {
+        "word": "研修",
+        "reading": "けんしゅう",
+        "meaning": "sự dạy dỗ"
+      }
+    ]
+  },
+  {
+    "id": 117,
+    "kanji": "究",
+    "chapter": 6,
+    "chapterName": "6章 学生 (Học sinh & Giao tiếp)",
+    "section": "1 研究",
+    "page": 133,
+    "strokeCount": 7,
+    "on": [
+      "キュウ",
+      "ク"
+    ],
+    "kun": [
+      "きわ.める"
+    ],
+    "hv": "CỨU",
+    "meaning": "tìm hiểu đến cùng",
+    "radicals": "Bộ cấu thành: 九 (CỬU) + 穴 (HUYỆT) → Mẹo nhớ: Dưới  mái nhà   tám  năm ròng, cáo  chín  đuôi  nghiên cứu  cách hóa người chẳng xong",
+    "examples": [
+      {
+        "word": "学究",
+        "reading": "がっきゅう",
+        "meaning": "sự học; sự nghiên cứu"
+      },
+      {
+        "word": "究める",
+        "reading": "きわめる",
+        "meaning": "bồi dưỡng; nâng cao; rèn luyện; đạt đến mức tối đa; đạt đến tột đỉnh"
+      },
+      {
+        "word": "探究",
+        "reading": "たんきゅう",
+        "meaning": "sự theo đuổi; sự tìm kiếm"
+      },
+      {
+        "word": "攻究",
+        "reading": "こうきゅう",
+        "meaning": "sự học tập; sự nghiên cứu"
+      }
+    ]
+  },
+  {
+    "id": 118,
+    "kanji": "語",
+    "chapter": 6,
+    "chapterName": "6章 学生 (Học sinh & Giao tiếp)",
+    "section": "1 研究",
+    "page": 133,
+    "strokeCount": 14,
+    "on": [
+      "ゴ"
+    ],
+    "kun": [
+      "かた.る",
+      "かた.らう"
+    ],
+    "hv": "NGỮ",
+    "meaning": "từ, kể, bảo",
+    "radicals": "Bộ cấu thành: 言 (NGÔN) + 五 (NGŨ) → Mẹo nhớ: Năm  cái  miệng   cất lời , tạo nên  ngôn ngữ  mới",
+    "examples": [
+      {
+        "word": "語り",
+        "reading": "かたり",
+        "meaning": "sự nói"
+      },
+      {
+        "word": "語る",
+        "reading": "かたる",
+        "meaning": "kể chuyện; kể lại; thuật lại"
+      },
+      {
+        "word": "一語",
+        "reading": "いちご",
+        "meaning": "đời"
+      },
+      {
+        "word": "不語",
+        "reading": "ふかたり",
+        "meaning": "sự lặng thinh"
+      }
+    ]
+  },
+  {
+    "id": 119,
+    "kanji": "文",
+    "chapter": 6,
+    "chapterName": "6章 学生 (Học sinh & Giao tiếp)",
+    "section": "1 研究",
+    "page": 133,
+    "strokeCount": 4,
+    "on": [
+      "ブン",
+      "モン"
+    ],
+    "kun": [
+      "ふみ",
+      "あや"
+    ],
+    "hv": "VĂN",
+    "meaning": "chữ, sách, văn bản",
+    "radicals": "Mẹo nhớ: Nhà  văn   đầu trọc   dang hai tay  xăm trổ, thân xăm sợi xích hình  chữ X  to đùng",
+    "examples": [
+      {
+        "word": "一文",
+        "reading": "いちぶん",
+        "meaning": "câu"
+      },
+      {
+        "word": "三文",
+        "reading": "さんもん",
+        "meaning": "sự rẻ"
+      },
+      {
+        "word": "上文",
+        "reading": "うえぶん",
+        "meaning": "nguyên văn"
+      },
+      {
+        "word": "不文",
+        "reading": "ふぶん",
+        "meaning": "không viết ra"
+      }
+    ]
+  },
+  {
+    "id": 120,
+    "kanji": "英",
+    "chapter": 6,
+    "chapterName": "6章 学生 (Học sinh & Giao tiếp)",
+    "section": "1 研究",
+    "page": 133,
+    "strokeCount": 8,
+    "on": [
+      "エイ"
+    ],
+    "kun": [
+      "はなぶさ"
+    ],
+    "hv": "ANH",
+    "meaning": "viết tắt của 英吉利 (nước Anh), xuất chúng, đài hoa",
+    "radicals": "Bộ cấu thành: 艹 (THẢO) + 央 (ƯƠNG) → Mẹo nhớ: Trong  lùm cỏ , trên  gối vuông ,  người  mơ mình hóa  anh hùng  bốn phương",
+    "examples": [
+      {
+        "word": "英京",
+        "reading": "えいきょう",
+        "meaning": "ảnh hưởng"
+      },
+      {
+        "word": "英人",
+        "reading": "ひでと",
+        "meaning": "người Bri"
+      },
+      {
+        "word": "英俊",
+        "reading": "えいしゅん",
+        "meaning": "thiên tài"
+      },
+      {
+        "word": "俊英",
+        "reading": "しゅんえい",
+        "meaning": "sự anh tuấn; sự giỏi giang; giỏi giang ."
+      }
+    ]
+  },
+  {
+    "id": 121,
+    "kanji": "化",
+    "chapter": 6,
+    "chapterName": "6章 学生 (Học sinh & Giao tiếp)",
+    "section": "1 研究",
+    "page": 133,
+    "strokeCount": 4,
+    "on": [
+      "カ",
+      "ケ"
+    ],
+    "kun": [
+      "ば.ける",
+      "ば.かす",
+      "ふ.ける",
+      "け.する"
+    ],
+    "hv": "HÓA",
+    "meaning": "biến hóa, trời đất tự nhiên sinh ra vạn vật, các chất khác nhau kết hợp tạo thành chất mới",
+    "radicals": "Bộ cấu thành: 亻 (NHÂN) + 匕 (CHỦY) → Mẹo nhớ: Nàng ngồi nâng bó hoa  tươi, còn  chàng cúi  hỏi \"Hoa tươi  hóa  nàng?\"",
+    "examples": [
+      {
+        "word": "化す",
+        "reading": "かす",
+        "meaning": "thay đổi"
+      },
+      {
+        "word": "乳化",
+        "reading": "にゅうか",
+        "meaning": "sự nhũ hóa ."
+      },
+      {
+        "word": "俗化",
+        "reading": "ぞっか",
+        "meaning": "sự thông tục hoá"
+      },
+      {
+        "word": "分化",
+        "reading": "ぶんか",
+        "meaning": "sự chuyên môn hoá"
+      }
+    ]
+  },
+  {
+    "id": 122,
+    "kanji": "数",
+    "chapter": 6,
+    "chapterName": "6章 学生 (Học sinh & Giao tiếp)",
+    "section": "1 研究",
+    "page": 133,
+    "strokeCount": 13,
+    "on": [
+      "スウ",
+      "ス",
+      "サク",
+      "ソク",
+      "シュ"
+    ],
+    "kun": [
+      "かず",
+      "かぞ.える",
+      "しばしば",
+      "せ.める",
+      "わずらわ.しい"
+    ],
+    "hv": "SỔ",
+    "meaning": "con số, thường xuyên, một vài",
+    "radicals": "Bộ cấu thành: 女 (NỮ) + 米 (MỄ) + 攵 (PHỘC) → Mẹo nhớ: Số   gạo  trắng như sương,  cô gái  đếm chán chường,  bàn gấp  chơ vơ lạnh, hội tan nơi cuối đường",
+    "examples": [
+      {
+        "word": "数々",
+        "reading": "かずかず",
+        "meaning": "nhiều"
+      },
+      {
+        "word": "お数",
+        "reading": "おかず",
+        "meaning": "thức ăn kèm"
+      },
+      {
+        "word": "丁数",
+        "reading": "ちょうすう",
+        "meaning": "số chẵn"
+      },
+      {
+        "word": "乗数",
+        "reading": "じょうすう",
+        "meaning": "số nhân ."
+      }
+    ]
+  },
+  {
+    "id": 123,
+    "kanji": "心",
+    "chapter": 6,
+    "chapterName": "6章 学生 (Học sinh & Giao tiếp)",
+    "section": "1 研究",
+    "page": 133,
+    "strokeCount": 4,
+    "on": [
+      "シン"
+    ],
+    "kun": [
+      "こころ",
+      "-ごころ"
+    ],
+    "hv": "TÂM",
+    "meaning": "trái tim, tâm, ở giữa",
+    "radicals": "Mẹo nhớ: Trái tim  em có  buồng tim  lớn,  ba mạch máu  đưa máu đi về",
+    "examples": [
+      {
+        "word": "一心",
+        "reading": "いっしん",
+        "meaning": "quyết tâm; đồng tâm; tập trung; mải mê; chăm chú; tận tâm"
+      },
+      {
+        "word": "下心",
+        "reading": "したごころ",
+        "meaning": "vận động"
+      },
+      {
+        "word": "中心",
+        "reading": "ちゅうしん",
+        "meaning": "lòng"
+      },
+      {
+        "word": "心中",
+        "reading": "しんちゅう",
+        "meaning": "động cơ thực sự"
+      }
+    ]
+  },
+  {
+    "id": 124,
+    "kanji": "若",
+    "chapter": 6,
+    "chapterName": "6章 学生 (Học sinh & Giao tiếp)",
+    "section": "2 コミュニケーション",
+    "page": 133,
+    "strokeCount": 8,
+    "on": [
+      "ジャク",
+      "ニャク",
+      "ニャ"
+    ],
+    "kun": [
+      "わか.い",
+      "わか-",
+      "も.しくわ",
+      "も.し",
+      "も.しくは",
+      "ごと.し"
+    ],
+    "hv": "NHƯỢC",
+    "meaning": "trẻ, ngươi, chữ dùng để phiên âm tiếng Phạn",
+    "radicals": "Bộ cấu thành: 右 (HỮU) + 艹 (THẢO) → Mẹo nhớ: Trên  cỏ  xanh  Na  tươi  miệng  cười, rạng ngời tuổi  trẻ  - mới đôi mươi",
+    "examples": [
+      {
+        "word": "若い",
+        "reading": "わかい",
+        "meaning": "bé"
+      },
+      {
+        "word": "若さ",
+        "reading": "わかさ",
+        "meaning": "sự trẻ trung"
+      },
+      {
+        "word": "若し",
+        "reading": "もし",
+        "meaning": "giả sử"
+      },
+      {
+        "word": "若人",
+        "reading": "わこうど",
+        "meaning": "người trẻ"
+      }
+    ]
+  },
+  {
+    "id": 125,
+    "kanji": "集",
+    "chapter": 6,
+    "chapterName": "6章 学生 (Học sinh & Giao tiếp)",
+    "section": "2 コミュニケーション",
+    "page": 133,
+    "strokeCount": 12,
+    "on": [
+      "シュウ"
+    ],
+    "kun": [
+      "あつ.まる",
+      "あつ.める",
+      "つど.う"
+    ],
+    "hv": "TẬP",
+    "meaning": "tuyển tập các tác phẩm, tập trung, cuộc họp",
+    "radicals": "Bộ cấu thành: 隹 (CHUY) + 木 (MỘC) → Mẹo nhớ: Lũ  chim   tụ tập  trên  cây",
+    "examples": [
+      {
+        "word": "集い",
+        "reading": "つどい",
+        "meaning": "cuộc mít tinh"
+      },
+      {
+        "word": "集う",
+        "reading": "つどう",
+        "meaning": "tập hợp lại; thu thập ."
+      },
+      {
+        "word": "集る",
+        "reading": "たかる",
+        "meaning": "trưng thu; thu thập; tập hợp; vơ vét ."
+      },
+      {
+        "word": "集中",
+        "reading": "しゅうちゅう",
+        "meaning": "tập trung"
+      }
+    ]
+  },
+  {
+    "id": 126,
+    "kanji": "知",
+    "chapter": 6,
+    "chapterName": "6章 学生 (Học sinh & Giao tiếp)",
+    "section": "2 コミュニケーション",
+    "page": 133,
+    "strokeCount": 8,
+    "on": [
+      "チ"
+    ],
+    "kun": [
+      "し.る",
+      "し.らせる"
+    ],
+    "hv": "TRI",
+    "meaning": "biết, quen biết, trí tuệ",
+    "radicals": "Bộ cấu thành: 矢 (THỈ) + 口 (KHẨU) → Mẹo nhớ: Nói như  tên  bắn,  miệng  lưỡi đao  to ,  hiểu biết  chẳng mấy, thùng rỗng kêu to",
+    "examples": [
+      {
+        "word": "知る",
+        "reading": "しる",
+        "meaning": "biết"
+      },
+      {
+        "word": "下知",
+        "reading": "げち",
+        "meaning": "lệnh"
+      },
+      {
+        "word": "了知",
+        "reading": "りょうち",
+        "meaning": "hiểu biết"
+      },
+      {
+        "word": "予知",
+        "reading": "よち",
+        "meaning": "sự tiên tri; sự dự đoán"
+      }
+    ]
+  },
+  {
+    "id": 127,
+    "kanji": "酒",
+    "chapter": 6,
+    "chapterName": "6章 学生 (Học sinh & Giao tiếp)",
+    "section": "2 コミュニケーション",
+    "page": 133,
+    "strokeCount": 10,
+    "on": [
+      "シュ"
+    ],
+    "kun": [
+      "さけ",
+      "さか-"
+    ],
+    "hv": "TỬU",
+    "meaning": "rượu",
+    "radicals": "Bộ cấu thành: 氵 (THỦY) + 酉 (DẬU) → Mẹo nhớ: Nước  đây chính là  rượu   Tây , uống vào  một  ngụm lập tức say",
+    "examples": [
+      {
+        "word": "お酒",
+        "reading": "おさけ",
+        "meaning": "rượu; rượu sakê"
+      },
+      {
+        "word": "酒仙",
+        "reading": "しゅせん",
+        "meaning": "sự uống rượu say ."
+      },
+      {
+        "word": "酒保",
+        "reading": "しゅほ",
+        "meaning": "căng tin"
+      },
+      {
+        "word": "酒処",
+        "reading": "さけどころ",
+        "meaning": "nơi uống rượu ."
+      }
+    ]
+  },
+  {
+    "id": 128,
+    "kanji": "歌",
+    "chapter": 6,
+    "chapterName": "6章 学生 (Học sinh & Giao tiếp)",
+    "section": "2 コミュニケーション",
+    "page": 133,
+    "strokeCount": 14,
+    "on": [
+      "カ"
+    ],
+    "kun": [
+      "うた",
+      "うた.う"
+    ],
+    "hv": "CA",
+    "meaning": "bài hát, thơ Yamato",
+    "radicals": "Bộ cấu thành: 欠 (KHIẾM) + 可 (KHẢ) → Mẹo nhớ: Tay gập chân choãi , say sưa ê a",
+    "examples": [
+      {
+        "word": "歌う",
+        "reading": "うたう",
+        "meaning": "ca hát"
+      },
+      {
+        "word": "作歌",
+        "reading": "さっか",
+        "meaning": "sự sáng tác ."
+      },
+      {
+        "word": "俗歌",
+        "reading": "ぞっか",
+        "meaning": "bài hát ngắn"
+      },
+      {
+        "word": "凱歌",
+        "reading": "がいか",
+        "meaning": "Bài hát chiến thắng; khúc khải hoàn ."
+      }
+    ]
+  },
+  {
+    "id": 129,
+    "kanji": "声",
+    "chapter": 6,
+    "chapterName": "6章 学生 (Học sinh & Giao tiếp)",
+    "section": "2 コミュニケーション",
+    "page": 133,
+    "strokeCount": 7,
+    "on": [
+      "セイ",
+      "ショウ"
+    ],
+    "kun": [
+      "こえ",
+      "こわ-"
+    ],
+    "hv": "THANH",
+    "meaning": "giọng nói, cách phát âm chữ Hán, phụ âm đầu",
+    "radicals": "Bộ cấu thành: 士 (SĨ) + 丨 (CỔN) + 尸 (THI) → Mẹo nhớ: せん せい の こわ い こえ を 聞 き  いて、にげま しょう か。 Tôi nghe thấy giọng đáng sợ của thầy, chúng ta chạy nhé?   Phù thủy dang tay khoanh chân ,  tiếng  hô vang giữa mưa dầm, ngỡ nghe được giọng thánh thần, té ra là tiếng  đôi loa sau rèm",
+    "examples": [
+      {
+        "word": "一声",
+        "reading": "いっせい",
+        "meaning": "tiếng kêu"
+      },
+      {
+        "word": "上声",
+        "reading": "じょうせい",
+        "meaning": "sự dậy"
+      },
+      {
+        "word": "人声",
+        "reading": "ひとごえ",
+        "meaning": "tiếng người"
+      },
+      {
+        "word": "仮声",
+        "reading": "かりこえ",
+        "meaning": "giọng the thé"
+      }
+    ]
+  },
+  {
+    "id": 130,
+    "kanji": "楽",
+    "chapter": 6,
+    "chapterName": "6章 学生 (Học sinh & Giao tiếp)",
+    "section": "2 コミュニケーション",
+    "page": 133,
+    "strokeCount": 13,
+    "on": [
+      "ガク",
+      "ラク",
+      "ゴウ"
+    ],
+    "kun": [
+      "たの.しい",
+      "たの.しむ",
+      "この.む"
+    ],
+    "hv": "LẠC",
+    "meaning": "(ラク) dễ chịu, (ラク) nhàn, (ラク) ngày cuối cùng của buổi biểu diễn",
+    "radicals": "Bộ cấu thành: 白 (BẠCH) + ⺢ + 木 (MỘC) → Mẹo nhớ: Vui  sao ngồi ngắm trên  cây ,  năm sao chổi  trắng bay về  vầng dương",
+    "examples": [
+      {
+        "word": "楽々",
+        "reading": "らくらく",
+        "meaning": "tiện lợi"
+      },
+      {
+        "word": "楽な",
+        "reading": "らくな",
+        "meaning": "dễ chịu"
+      },
+      {
+        "word": "享楽",
+        "reading": "きょうらく",
+        "meaning": "sự hưởng lạc; sự hưởng thụ; hưởng thụ; hưởng lạc"
+      },
+      {
+        "word": "楽典",
+        "reading": "がくてん",
+        "meaning": "quy tắc soạn nhạc ."
+      }
+    ]
+  },
+  {
+    "id": 131,
+    "kanji": "味",
+    "chapter": 6,
+    "chapterName": "6章 学生 (Học sinh & Giao tiếp)",
+    "section": "3 ラーメン屋",
+    "page": 133,
+    "strokeCount": 8,
+    "on": [
+      "ミ"
+    ],
+    "kun": [
+      "あじ",
+      "あじ.わう"
+    ],
+    "hv": "VỊ",
+    "meaning": "vị, (a) cảm giác của lưỡi, (b) sự thú vị",
+    "radicals": "Bộ cấu thành: 未 (VỊ) + 口 (KHẨU) → Mẹo nhớ: Miệng  nếm  vị  chiếc lá, của  cây  non xanh tươi,  cành trên thua cành dưới , lá rung khẽ gọi mời",
+    "examples": [
+      {
+        "word": "味な",
+        "reading": "あじな",
+        "meaning": "sự đau đớn"
+      },
+      {
+        "word": "一味",
+        "reading": "ひとあじ",
+        "meaning": "thị tộc"
+      },
+      {
+        "word": "不味",
+        "reading": "ふみ",
+        "meaning": "sự không thích"
+      },
+      {
+        "word": "中味",
+        "reading": "なかみ",
+        "meaning": "nội dung"
+      }
+    ]
+  },
+  {
+    "id": 132,
+    "kanji": "油",
+    "chapter": 6,
+    "chapterName": "6章 学生 (Học sinh & Giao tiếp)",
+    "section": "3 ラーメン屋",
+    "page": 133,
+    "strokeCount": 8,
+    "on": [
+      "ユ",
+      "ユウ"
+    ],
+    "kun": [
+      "あぶら"
+    ],
+    "hv": "DU",
+    "meaning": "dầu, dâng lên mạnh mẽ",
+    "radicals": "Bộ cấu thành: 氵 (THỦY) + 由 (DO) → Mẹo nhớ: Ba giọt  dầu sánh, nhẹ lăn sang",
+    "examples": [
+      {
+        "word": "油井",
+        "reading": "ゆせい",
+        "meaning": "giếng dầu ."
+      },
+      {
+        "word": "油単",
+        "reading": "ゆたん",
+        "meaning": "vải dầu"
+      },
+      {
+        "word": "原油",
+        "reading": "げんゆ",
+        "meaning": "căn do"
+      },
+      {
+        "word": "油圧",
+        "reading": "ゆあつ",
+        "meaning": "thuỷ lực học"
+      }
+    ]
+  },
+  {
+    "id": 133,
+    "kanji": "太",
+    "chapter": 6,
+    "chapterName": "6章 学生 (Học sinh & Giao tiếp)",
+    "section": "3 ラーメン屋",
+    "page": 133,
+    "strokeCount": 4,
+    "on": [
+      "タイ",
+      "タ"
+    ],
+    "kun": [
+      "ふと.い",
+      "ふと.る"
+    ],
+    "hv": "THÁI",
+    "meaning": "lớn, rất, nguồn gốc",
+    "radicals": "Bộ cấu thành: 大 (ĐẠI) + 丶 (CHỦ) → Mẹo nhớ: Chàng  to   béo  chén chiếc  giò heo",
+    "examples": [
+      {
+        "word": "太い",
+        "reading": "ふとい",
+        "meaning": "béo; dày; to"
+      },
+      {
+        "word": "太る",
+        "reading": "ふとる",
+        "meaning": "béo"
+      },
+      {
+        "word": "与太",
+        "reading": "よた",
+        "meaning": "lời nói vô lý"
+      },
+      {
+        "word": "丸太",
+        "reading": "まるた",
+        "meaning": "khúc gỗ mới đốn"
+      }
+    ]
+  },
+  {
+    "id": 134,
+    "kanji": "細",
+    "chapter": 6,
+    "chapterName": "6章 学生 (Học sinh & Giao tiếp)",
+    "section": "3 ラーメン屋",
+    "page": 133,
+    "strokeCount": 11,
+    "on": [
+      "サイ"
+    ],
+    "kun": [
+      "ほそ.い",
+      "ほそ.る",
+      "こま.か",
+      "こま.かい"
+    ],
+    "hv": "TẾ",
+    "meaning": "nhỏ, mảnh, kỹ lưỡng",
+    "radicals": "Bộ cấu thành: 糸 (MỊCH) + 田 (ĐIỀN) → Mẹo nhớ: Dùng  sợi chỉ  mỏng tang, đo  tỉ mỉ   thửa ruộng  bậc thang",
+    "examples": [
+      {
+        "word": "細い",
+        "reading": "ほそい",
+        "meaning": "thon dài; mảnh mai ."
+      },
+      {
+        "word": "細か",
+        "reading": "こまか",
+        "meaning": "cẩn thận; chi tiết; tỉ mỉ; tỏn mỏn; vụn vặt; nhỏ mọn"
+      },
+      {
+        "word": "細る",
+        "reading": "ほそる",
+        "meaning": "gầy đi; hao gầy"
+      },
+      {
+        "word": "中細",
+        "reading": "ちゅうぼそ",
+        "meaning": "độ tinh vừa (giũa) ."
+      }
+    ]
+  },
+  {
+    "id": 135,
+    "kanji": "皿",
+    "chapter": 6,
+    "chapterName": "6章 学生 (Học sinh & Giao tiếp)",
+    "section": "3 ラーメン屋",
+    "page": 133,
+    "strokeCount": 5,
+    "on": [
+      "ベイ"
+    ],
+    "kun": [
+      "さら"
+    ],
+    "hv": "MÃNH",
+    "meaning": "đĩa",
+    "radicals": "Mẹo nhớ: Trên  chạn vuông  xếp  hai cái   đĩa",
+    "examples": [
+      {
+        "word": "お皿",
+        "reading": "おさら",
+        "meaning": "đĩa"
+      },
+      {
+        "word": "一皿",
+        "reading": "いちさら",
+        "meaning": "bản"
+      },
+      {
+        "word": "大皿",
+        "reading": "おおざら",
+        "meaning": "cái đĩa lớn; cái đĩa to; đĩa lớn; đĩa to"
+      },
+      {
+        "word": "小皿",
+        "reading": "こざら",
+        "meaning": "cái đĩa nhỏ; đĩa nhỏ"
+      }
+    ]
+  },
+  {
+    "id": 136,
+    "kanji": "飯",
+    "chapter": 6,
+    "chapterName": "6章 学生 (Học sinh & Giao tiếp)",
+    "section": "3 ラーメン屋",
+    "page": 133,
+    "strokeCount": 12,
+    "on": [
+      "ハン"
+    ],
+    "kun": [
+      "めし"
+    ],
+    "hv": "PHẠN",
+    "meaning": "cơm, bữa ăn",
+    "radicals": "Bộ cấu thành: 反 (PHẢN) + 飠 (THỰC) → Mẹo nhớ: Ra tận  vách núi , trải  bàn gấp ,  ăn   cơm",
+    "examples": [
+      {
+        "word": "ご飯",
+        "reading": "ごはん",
+        "meaning": "cơm; bữa cơm"
+      },
+      {
+        "word": "一飯",
+        "reading": "いちめし",
+        "meaning": "bột"
+      },
+      {
+        "word": "中飯",
+        "reading": "ちゅうはん",
+        "meaning": "bữa ăn giữa trưa ."
+      },
+      {
+        "word": "飯台",
+        "reading": "はんだい",
+        "meaning": "bàn ăn kiểu Nhật ."
+      }
+    ]
+  },
+  {
+    "id": 137,
+    "kanji": "麦",
+    "chapter": 6,
+    "chapterName": "6章 学生 (Học sinh & Giao tiếp)",
+    "section": "3 ラーメン屋",
+    "page": 133,
+    "strokeCount": 7,
+    "on": [
+      "バク"
+    ],
+    "kun": [
+      "むぎ"
+    ],
+    "hv": "MẠCH",
+    "meaning": "lúa mạch",
+    "radicals": "Bộ cấu thành: 龶 + 夂 (TRI) → Mẹo nhớ: Một bó kia  ba cọng   lúa mì , tay  cào  tay  hái  gặt tù tì",
+    "examples": [
+      {
+        "word": "冷麦",
+        "reading": "ひやむぎ",
+        "meaning": "mì lạnh ."
+      },
+      {
+        "word": "大麦",
+        "reading": "おおむぎ",
+        "meaning": "đại mạch"
+      },
+      {
+        "word": "小麦",
+        "reading": "こむぎ",
+        "meaning": "lúa mì ."
+      },
+      {
+        "word": "ライ麦",
+        "reading": "ライむぎ",
+        "meaning": "lúa mạch đen ."
+      }
+    ]
+  },
+  {
+    "id": 138,
+    "kanji": "春",
+    "chapter": 7,
+    "chapterName": "7章 春夏秋冬 (Bốn mùa & Du lịch)",
+    "section": "1 きせつ",
+    "page": 155,
+    "strokeCount": 9,
+    "on": [
+      "シュン"
+    ],
+    "kun": [
+      "はる"
+    ],
+    "hv": "XUÂN",
+    "meaning": "mùa xuân, độ tuổi hoạt động sôi nổi, tuổi",
+    "radicals": "Bộ cấu thành: 𡗗 + 日 (NHẬT) → Mẹo nhớ: Ánh  mặt trời  hắt, ấm áp  xuân  về",
+    "examples": [
+      {
+        "word": "春休",
+        "reading": "はるやすみ",
+        "meaning": "kỳ nghỉ xuân ."
+      },
+      {
+        "word": "春先",
+        "reading": "はるさき",
+        "meaning": "đầu xuân ."
+      },
+      {
+        "word": "春分",
+        "reading": "しゅんぶん",
+        "meaning": "xuân phân ."
+      },
+      {
+        "word": "初春",
+        "reading": "しょしゅん",
+        "meaning": "năm mới"
+      }
+    ]
+  },
+  {
+    "id": 139,
+    "kanji": "夏",
+    "chapter": 7,
+    "chapterName": "7章 春夏秋冬 (Bốn mùa & Du lịch)",
+    "section": "1 きせつ",
+    "page": 155,
+    "strokeCount": 10,
+    "on": [
+      "カ",
+      "ガ",
+      "ゲ"
+    ],
+    "kun": [
+      "なつ"
+    ],
+    "hv": "HẠ",
+    "meaning": "mùa hè, lớn, nhà Hạ (triều đại cổ nhất của Trung Quốc)",
+    "radicals": "Bộ cấu thành: 一 (NHẤT) + 自 (TỰ) + 夂 (TRI) → Mẹo nhớ: なつ やすみがあります か 。 Bạn có kỳ nghỉ hè không?   Giơ bộ mi lên đầu  che nắng,  con mắt   đưa chân bước  giữa trời  hè",
+    "examples": [
+      {
+        "word": "九夏",
+        "reading": "きゅうなつ",
+        "meaning": "summer"
+      },
+      {
+        "word": "仲夏",
+        "reading": "ちゅうか",
+        "meaning": "giữa mùa hè"
+      },
+      {
+        "word": "初夏",
+        "reading": "しょか",
+        "meaning": "đầu hè ."
+      },
+      {
+        "word": "夏場",
+        "reading": "なつば",
+        "meaning": "time) /'sʌmətaim/"
+      }
+    ]
+  },
+  {
+    "id": 140,
+    "kanji": "秋",
+    "chapter": 7,
+    "chapterName": "7章 春夏秋冬 (Bốn mùa & Du lịch)",
+    "section": "1 きせつ",
+    "page": 155,
+    "strokeCount": 9,
+    "on": [
+      "シュウ"
+    ],
+    "kun": [
+      "あき",
+      "とき"
+    ],
+    "hv": "THU",
+    "meaning": "mùa thu, thời điểm, năm",
+    "radicals": "Bộ cấu thành: 禾 (HÒA) + 火 (HỎA) → Mẹo nhớ: Thu  sang,  lúa một bông  vàng như  lửa  cháy",
+    "examples": [
+      {
+        "word": "秋作",
+        "reading": "あきさく",
+        "meaning": "Sự canh tác thu hoạch vào mùa thu"
+      },
+      {
+        "word": "秋冷",
+        "reading": "しゅうれい",
+        "meaning": "có duyên"
+      },
+      {
+        "word": "秋分",
+        "reading": "しゅうぶん",
+        "meaning": "thu phân ."
+      },
+      {
+        "word": "初秋",
+        "reading": "しょしゅう",
+        "meaning": "đầu thu ."
+      }
+    ]
+  },
+  {
+    "id": 141,
+    "kanji": "冬",
+    "chapter": 7,
+    "chapterName": "7章 春夏秋冬 (Bốn mùa & Du lịch)",
+    "section": "1 きせつ",
+    "page": 155,
+    "strokeCount": 5,
+    "on": [
+      "トウ"
+    ],
+    "kun": [
+      "ふゆ"
+    ],
+    "hv": "ĐÔNG",
+    "meaning": "mùa đông",
+    "radicals": "Bộ cấu thành: ⺀ + 夂 (TRI) → Mẹo nhớ: Chân bước đi  giữa trời  đông  giá,  băng dưới chân hai mảnh  vỡ đôi",
+    "examples": [
+      {
+        "word": "仲冬",
+        "reading": "ちゅうとう",
+        "meaning": "giữa Đông ."
+      },
+      {
+        "word": "初冬",
+        "reading": "しょとう",
+        "meaning": "đầu đông ."
+      },
+      {
+        "word": "厳冬",
+        "reading": "げんとう",
+        "meaning": "Mùa đông khắc nghiệt"
+      },
+      {
+        "word": "冬季",
+        "reading": "とうき",
+        "meaning": "khoảng thời gian mùa đông"
+      }
+    ]
+  },
+  {
+    "id": 142,
+    "kanji": "空",
+    "chapter": 7,
+    "chapterName": "7章 春夏秋冬 (Bốn mùa & Du lịch)",
+    "section": "1 きせつ",
+    "page": 155,
+    "strokeCount": 8,
+    "on": [
+      "クウ"
+    ],
+    "kun": [
+      "そら",
+      "あ.く",
+      "あ.き",
+      "あ.ける",
+      "から",
+      "す.く",
+      "す.かす",
+      "むな.しい"
+    ],
+    "hv": "KHÔNG",
+    "meaning": "liên quan đến hàng không, bầu trời, trống",
+    "radicals": "Bộ cấu thành: 工 (CÔNG) + 穴 (HUYỆT) → Mẹo nhớ: Trèo  thang   đục lỗ   mái nhà ,  đứng lên  nhìn ngắm bao la  bầu trời",
+    "examples": [
+      {
+        "word": "空き",
+        "reading": "あき",
+        "meaning": "chỗ trống"
+      },
+      {
+        "word": "空く",
+        "reading": "あく",
+        "meaning": "để không; không dùng"
+      },
+      {
+        "word": "空く",
+        "reading": "すく",
+        "meaning": "mở; trống vắng; trống rỗng; vắng vẻ ."
+      },
+      {
+        "word": "空の",
+        "reading": "からの",
+        "meaning": "trống"
+      }
+    ]
+  },
+  {
+    "id": 143,
+    "kanji": "星",
+    "chapter": 7,
+    "chapterName": "7章 春夏秋冬 (Bốn mùa & Du lịch)",
+    "section": "1 きせつ",
+    "page": 155,
+    "strokeCount": 9,
+    "on": [
+      "セイ",
+      "ショウ"
+    ],
+    "kun": [
+      "ほし",
+      "-ぼし"
+    ],
+    "hv": "TINH",
+    "meaning": "ngôi sao, nhân vật quan trọng, mục tiêu",
+    "radicals": "Bộ cấu thành: 生 (SANH) + 日 (NHẬT) → Mẹo nhớ: Mặt trời  là  ngôi sao   sinh ra  từ một đám mây bụi khí khổng lồ",
+    "examples": [
+      {
+        "word": "七星",
+        "reading": "しちせい",
+        "meaning": "thất tinh ."
+      },
+      {
+        "word": "九星",
+        "reading": "きゅうせい",
+        "meaning": "thuật chiêm tinh"
+      },
+      {
+        "word": "星印",
+        "reading": "ほししるし",
+        "meaning": "sao"
+      },
+      {
+        "word": "星団",
+        "reading": "せいだん",
+        "meaning": "bàn thờ"
+      }
+    ]
+  },
+  {
+    "id": 144,
+    "kanji": "雲",
+    "chapter": 7,
+    "chapterName": "7章 春夏秋冬 (Bốn mùa & Du lịch)",
+    "section": "1 きせつ",
+    "page": 155,
+    "strokeCount": 12,
+    "on": [
+      "ウン"
+    ],
+    "kun": [
+      "くも",
+      "-ぐも"
+    ],
+    "hv": "VÂN",
+    "meaning": "mây, hình dạng như mây, bầu trời",
+    "radicals": "Bộ cấu thành: ⻗ + 云 (VÂN) → Mẹo nhớ: Đám mây  trông giống  đĩa bay , hình như báo hiệu vài ngày nữa  mưa",
+    "examples": [
+      {
+        "word": "雲井",
+        "reading": "くもい",
+        "meaning": "trời"
+      },
+      {
+        "word": "低雲",
+        "reading": "ていうん",
+        "meaning": "đám mây xà thấp ."
+      },
+      {
+        "word": "密雲",
+        "reading": "みつうん",
+        "meaning": "làm u ám"
+      }
+    ]
+  },
+  {
+    "id": 145,
+    "kanji": "去",
+    "chapter": 7,
+    "chapterName": "7章 春夏秋冬 (Bốn mùa & Du lịch)",
+    "section": "1 きせつ",
+    "page": 155,
+    "strokeCount": 5,
+    "on": [
+      "キョ",
+      "コ"
+    ],
+    "kun": [
+      "さ.る",
+      "-さ.る"
+    ],
+    "hv": "KHỨ",
+    "meaning": "chết, rời đi, loại bỏ",
+    "radicals": "Bộ cấu thành: 厶 (KHƯ) + 土 (THỔ) → Mẹo nhớ: Kẻ nằm co quắp   dưới đất  sâu, đã thành  quá khứ , hơi đâu đi tìm",
+    "examples": [
+      {
+        "word": "去る",
+        "reading": "さる",
+        "meaning": "cút"
+      },
+      {
+        "word": "去勢",
+        "reading": "きょせい",
+        "meaning": "sự thiến"
+      },
+      {
+        "word": "卒去",
+        "reading": "そっきょ",
+        "meaning": "sự chết; cái chết"
+      },
+      {
+        "word": "去年",
+        "reading": "きょねん",
+        "meaning": "năm ngoái; năm trước"
+      }
+    ]
+  },
+  {
+    "id": 146,
+    "kanji": "天",
+    "chapter": 7,
+    "chapterName": "7章 春夏秋冬 (Bốn mùa & Du lịch)",
+    "section": "2 天気",
+    "page": 155,
+    "strokeCount": 4,
+    "on": [
+      "テン"
+    ],
+    "kun": [
+      "あまつ",
+      "あめ",
+      "あま-"
+    ],
+    "hv": "THIÊN",
+    "meaning": "bầu trời, thời tiết, quy luật tự nhiên",
+    "radicals": "Bộ cấu thành: 大 (ĐẠI) → Mẹo nhớ: Có vị thần cao  lớn ,  một  mình đỡ  thiên đường",
+    "examples": [
+      {
+        "word": "一天",
+        "reading": "いってん",
+        "meaning": "bầu trời"
+      },
+      {
+        "word": "上天",
+        "reading": "じょうてん",
+        "meaning": "thiên đường"
+      },
+      {
+        "word": "天上",
+        "reading": "てんじょう",
+        "meaning": "thiên đàng"
+      },
+      {
+        "word": "天下",
+        "reading": "てんか",
+        "meaning": "cách riêng"
+      }
+    ]
+  },
+  {
+    "id": 147,
+    "kanji": "晴",
+    "chapter": 7,
+    "chapterName": "7章 春夏秋冬 (Bốn mùa & Du lịch)",
+    "section": "2 天気",
+    "page": 155,
+    "strokeCount": 12,
+    "on": [
+      "セイ"
+    ],
+    "kun": [
+      "は.れる",
+      "は.れ",
+      "は.れ-",
+      "-ば.れ",
+      "は.らす"
+    ],
+    "hv": "TÌNH",
+    "meaning": "quang đãng",
+    "radicals": "Bộ cấu thành: 日 (NHẬT) + 青 (THANH) → Mẹo nhớ: Cây trồi ba tấc , đón  xanh trong",
+    "examples": [
+      {
+        "word": "晴れ",
+        "reading": "はれ",
+        "meaning": "trời nắng"
+      },
+      {
+        "word": "晴天",
+        "reading": "せいてん",
+        "meaning": "tạnh ráo"
+      },
+      {
+        "word": "快晴",
+        "reading": "かいせい",
+        "meaning": "thời tiết đẹp"
+      },
+      {
+        "word": "晴らす",
+        "reading": "はらす",
+        "meaning": "làm khoẻ người lại; làm tỉnh táo (chính bản thân)"
+      }
+    ]
+  },
+  {
+    "id": 148,
+    "kanji": "雪",
+    "chapter": 7,
+    "chapterName": "7章 春夏秋冬 (Bốn mùa & Du lịch)",
+    "section": "2 天気",
+    "page": 155,
+    "strokeCount": 11,
+    "on": [
+      "セツ"
+    ],
+    "kun": [
+      "ゆき"
+    ],
+    "hv": "TUYẾT",
+    "meaning": "tuyết, rửa sạch, trắng như tuyết (ví von)",
+    "radicals": "Bộ cấu thành: ⻗ + ヨ → Mẹo nhớ: Tuyết  giống  mưa , cùng từ trời rơi xuống, nhưng khác mưa, khi nhẹ tựa  lông hồng",
+    "examples": [
+      {
+        "word": "雪冤",
+        "reading": "せつえん",
+        "meaning": "sự miễn"
+      },
+      {
+        "word": "初雪",
+        "reading": "はつゆき",
+        "meaning": "đợt tuyết đầu tiên (của mùa)"
+      },
+      {
+        "word": "吹雪",
+        "reading": "ふぶき",
+        "meaning": "bão tuyết"
+      },
+      {
+        "word": "大雪",
+        "reading": "おおゆき",
+        "meaning": "tuyết rơi nhiều; tuyết rơi dày"
+      }
+    ]
+  },
+  {
+    "id": 149,
+    "kanji": "風",
+    "chapter": 7,
+    "chapterName": "7章 春夏秋冬 (Bốn mùa & Du lịch)",
+    "section": "2 天気",
+    "page": 155,
+    "strokeCount": 9,
+    "on": [
+      "フウ",
+      "フ"
+    ],
+    "kun": [
+      "かぜ",
+      "かざ-",
+      "-かぜ"
+    ],
+    "hv": "PHONG",
+    "meaning": "gió, phong tục, phong thái",
+    "radicals": "Bộ cấu thành: ノ + 虫 (TRÙNG) + 𠘨 → Mẹo nhớ: Sau  tảng đá , chú  côn trùng  nhỏ,  đội lá con , co ro tránh  gió",
+    "examples": [
+      {
+        "word": "一風",
+        "reading": "いっぷう",
+        "meaning": "sự kỳ quặc; kỳ lạ; khác thường"
+      },
+      {
+        "word": "中風",
+        "reading": "ちゅうぶう",
+        "meaning": "chứng liệt ."
+      },
+      {
+        "word": "中風",
+        "reading": "ちゅうふう",
+        "meaning": "chứng liệt"
+      },
+      {
+        "word": "中風",
+        "reading": "ちゅうぶ",
+        "meaning": "chứng liệt"
+      }
+    ]
+  },
+  {
+    "id": 150,
+    "kanji": "強",
+    "chapter": 7,
+    "chapterName": "7章 春夏秋冬 (Bốn mùa & Du lịch)",
+    "section": "2 天気",
+    "page": 155,
+    "strokeCount": 11,
+    "on": [
+      "キョウ",
+      "ゴウ"
+    ],
+    "kun": [
+      "つよ.い",
+      "つよ.まる",
+      "つよ.める",
+      "し.いる",
+      "こわ.い"
+    ],
+    "hv": "CƯỜNG",
+    "meaning": "mạnh, tăng cường, hơn, dư (chỉ lượng hơi dư sau khi làm tròn số)",
+    "radicals": "Bộ cấu thành: 厶 (KHƯ) + 虫 (TRÙNG) + 弓 (CUNG) → Mẹo nhớ: Con bọ  hung nghĩ  sừng  của nó,  khỏe  đến mức kéo được  cây cung",
+    "examples": [
+      {
+        "word": "強い",
+        "reading": "つよい",
+        "meaning": "đanh"
+      },
+      {
+        "word": "強か",
+        "reading": "したたか",
+        "meaning": "nghiêm khắc; nghiêm nghị"
+      },
+      {
+        "word": "強さ",
+        "reading": "つよさ",
+        "meaning": "sức mạnh"
+      },
+      {
+        "word": "強ち",
+        "reading": "あながち",
+        "meaning": "không phải bao giờ; không nhất thiết"
+      }
+    ]
+  },
+  {
+    "id": 151,
+    "kanji": "弱",
+    "chapter": 7,
+    "chapterName": "7章 春夏秋冬 (Bốn mùa & Du lịch)",
+    "section": "2 天気",
+    "page": 155,
+    "strokeCount": 10,
+    "on": [
+      "ジャク"
+    ],
+    "kun": [
+      "よわ.い",
+      "よわ.る",
+      "よわ.まる",
+      "よわ.める"
+    ],
+    "hv": "NHƯỢC",
+    "meaning": "yếu, suy yếu, gần như",
+    "radicals": "Bộ cấu thành: 弜 + 羽 (VŨ) → Mẹo nhớ: Hai cây cung , mỗi cây  hai lông vũ , là cung  yếu , chớ dại mà dùng",
+    "examples": [
+      {
+        "word": "弱い",
+        "reading": "よわい",
+        "meaning": "hèn yếu"
+      },
+      {
+        "word": "弱さ",
+        "reading": "よわさ",
+        "meaning": "tính chất yếu"
+      },
+      {
+        "word": "ひ弱",
+        "reading": "ひよわ",
+        "meaning": "yếu"
+      },
+      {
+        "word": "弱み",
+        "reading": "よわみ",
+        "meaning": "nhược điểm; điểm yếu"
+      }
+    ]
+  },
+  {
+    "id": 152,
+    "kanji": "暑",
+    "chapter": 7,
+    "chapterName": "7章 春夏秋冬 (Bốn mùa & Du lịch)",
+    "section": "2 天気",
+    "page": 155,
+    "strokeCount": 12,
+    "on": [
+      "ショ"
+    ],
+    "kun": [
+      "あつ.い"
+    ],
+    "hv": "THỬ",
+    "meaning": "nóng, mùa nóng",
+    "radicals": "Bộ cấu thành: 日 (NHẬT) + 者 (GIẢ) → Mẹo nhớ: Người lái đò khua chèo  ra khơi, giữa  hai mặt trời ,  nóng  bở hơi",
+    "examples": [
+      {
+        "word": "暑い",
+        "reading": "あつい",
+        "meaning": "nóng"
+      },
+      {
+        "word": "暑さ",
+        "reading": "あつさ",
+        "meaning": "sự nóng bức; oi bức; nóng bức"
+      },
+      {
+        "word": "暑中",
+        "reading": "しょちゅう",
+        "meaning": "giữa hè ."
+      },
+      {
+        "word": "大暑",
+        "reading": "たいしょ",
+        "meaning": "ngày giữa mùa hè ."
+      }
+    ]
+  },
+  {
+    "id": 153,
+    "kanji": "寒",
+    "chapter": 7,
+    "chapterName": "7章 春夏秋冬 (Bốn mùa & Du lịch)",
+    "section": "2 天気",
+    "page": 155,
+    "strokeCount": 12,
+    "on": [
+      "カン"
+    ],
+    "kun": [
+      "さむ.い"
+    ],
+    "hv": "HÀN",
+    "meaning": "lạnh, Hàn (tiết lạnh, một trong hai mươi tư tiết khí), hoang vắng",
+    "radicals": "Bộ cấu thành: ⺀ + 共 (CỘNG) + 宀 (MIÊN) → Mẹo nhớ: Trời  lạnh  dưới  mái nhà , bên  vỉ than   bốc khói , nướng  hai miếng thịt  gà, ôi trông sao mà đói",
+    "examples": [
+      {
+        "word": "寒々",
+        "reading": "さむざむ",
+        "meaning": "bị tàn phá"
+      },
+      {
+        "word": "寒い",
+        "reading": "さむい",
+        "meaning": "cóng"
+      },
+      {
+        "word": "寒さ",
+        "reading": "さむさ",
+        "meaning": "giá lạnh; cái lạnh; cái rét ."
+      },
+      {
+        "word": "寒中",
+        "reading": "かんちゅう",
+        "meaning": "giữa mùa đông; vào mùa đông; trong mùa đông"
+      }
+    ]
+  },
+  {
+    "id": 154,
+    "kanji": "旅",
+    "chapter": 7,
+    "chapterName": "7章 春夏秋冬 (Bốn mùa & Du lịch)",
+    "section": "3 旅行",
+    "page": 155,
+    "strokeCount": 10,
+    "on": [
+      "リョ"
+    ],
+    "kun": [
+      "たび"
+    ],
+    "hv": "LỮ",
+    "meaning": "quân đội, chuyến đi",
+    "radicals": "Bộ cấu thành: 𠂉 + 方 (PHƯƠNG) + 𧘇 → Mẹo nhớ: Khi đi  du lịch   phương  xa,  mũ lông chim  với  áo choàng , nhớ mang",
+    "examples": [
+      {
+        "word": "旅亭",
+        "reading": "たびてい",
+        "meaning": "khách sạn"
+      },
+      {
+        "word": "旅人",
+        "reading": "たびびと",
+        "meaning": "người du lịch ."
+      },
+      {
+        "word": "旅先",
+        "reading": "たびさき",
+        "meaning": "điểm đến; nơi đi ."
+      },
+      {
+        "word": "旅券",
+        "reading": "りょけん",
+        "meaning": "hộ chiếu"
+      }
+    ]
+  },
+  {
+    "id": 155,
+    "kanji": "持",
+    "chapter": 7,
+    "chapterName": "7章 春夏秋冬 (Bốn mùa & Du lịch)",
+    "section": "3 旅行",
+    "page": 155,
+    "strokeCount": 9,
+    "on": [
+      "ジ"
+    ],
+    "kun": [
+      "も.つ",
+      "-も.ち",
+      "も.てる"
+    ],
+    "hv": "TRÌ",
+    "meaning": "cầm, duy trì",
+    "radicals": "Bộ cấu thành: 扌 (THỦ) + 寺 (TỰ) → Mẹo nhớ: Hai tay   nắm   lan can , ngắm  ngôi chùa  ngàn tuổi",
+    "examples": [
+      {
+        "word": "持ち",
+        "reading": "もち",
+        "meaning": "sự cầm nắm"
+      },
+      {
+        "word": "持つ",
+        "reading": "もつ",
+        "meaning": "cầm; nắm; mang"
+      },
+      {
+        "word": "主持",
+        "reading": "しゅうもち",
+        "meaning": "người làm"
+      },
+      {
+        "word": "持主",
+        "reading": "もちぬし",
+        "meaning": "người chủ"
+      }
+    ]
+  },
+  {
+    "id": 156,
+    "kanji": "世",
+    "chapter": 7,
+    "chapterName": "7章 春夏秋冬 (Bốn mùa & Du lịch)",
+    "section": "3 旅行",
+    "page": 155,
+    "strokeCount": 5,
+    "on": [
+      "セイ",
+      "セ",
+      "ソウ"
+    ],
+    "kun": [
+      "よ",
+      "さんじゅう"
+    ],
+    "hv": "THẾ",
+    "meaning": "thế giới, đời người, bước ngoặt lớn",
+    "radicals": "Mẹo nhớ: Thế  kỷ 7 chưa có máy may, phải luồn  kim  \" se \" chỉ khâu tay",
+    "examples": [
+      {
+        "word": "世々",
+        "reading": "よよ",
+        "meaning": "di truyền"
+      },
+      {
+        "word": "一世",
+        "reading": "いっせい",
+        "meaning": "đời"
+      },
+      {
+        "word": "万世",
+        "reading": "ばんせい",
+        "meaning": "tính vĩnh viễn"
+      },
+      {
+        "word": "上世",
+        "reading": "じょうせい",
+        "meaning": "tình trạng cổ xưa"
+      }
+    ]
+  },
+  {
+    "id": 157,
+    "kanji": "界",
+    "chapter": 7,
+    "chapterName": "7章 春夏秋冬 (Bốn mùa & Du lịch)",
+    "section": "3 旅行",
+    "page": 155,
+    "strokeCount": 9,
+    "on": [
+      "カイ"
+    ],
+    "kun": [],
+    "hv": "GIỚI",
+    "meaning": "ranh giới, thế giới, khu vực",
+    "radicals": "Bộ cấu thành: 介 (GIỚI) + 田 (ĐIỀN) → Mẹo nhớ: Cánh đồng  tận cùng thế  giới , có  mũi tên  chỉ lối tới nơi",
+    "examples": [
+      {
+        "word": "上界",
+        "reading": "うえかい",
+        "meaning": "thiên đường"
+      },
+      {
+        "word": "下界",
+        "reading": "げかい",
+        "meaning": "hạ giới"
+      },
+      {
+        "word": "世界",
+        "reading": "せかい",
+        "meaning": "hoàn cầu"
+      },
+      {
+        "word": "他界",
+        "reading": "たかい",
+        "meaning": "sự chết; cái chết"
+      }
+    ]
+  },
+  {
+    "id": 158,
+    "kanji": "写",
+    "chapter": 7,
+    "chapterName": "7章 春夏秋冬 (Bốn mùa & Du lịch)",
+    "section": "3 旅行",
+    "page": 155,
+    "strokeCount": 5,
+    "on": [
+      "シャ",
+      "ジャ"
+    ],
+    "kun": [
+      "うつ.す",
+      "うつ.る",
+      "うつ-",
+      "うつ.し"
+    ],
+    "hv": "TẢ",
+    "meaning": "sao chép, chụp ảnh",
+    "radicals": "Bộ cấu thành: 与 (DỮ) + 冖 (MỊCH) → Mẹo nhớ: Bức tranh  tả   số 5 có lông mày và lưỡi",
+    "examples": [
+      {
+        "word": "写し",
+        "reading": "うつし",
+        "meaning": "bản sao ."
+      },
+      {
+        "word": "写す",
+        "reading": "うつす",
+        "meaning": "chép"
+      },
+      {
+        "word": "写り",
+        "reading": "うつり",
+        "meaning": "chữ in"
+      },
+      {
+        "word": "写る",
+        "reading": "うつる",
+        "meaning": "chiếu; phản chiếu"
+      }
+    ]
+  },
+  {
+    "id": 159,
+    "kanji": "真",
+    "chapter": 7,
+    "chapterName": "7章 春夏秋冬 (Bốn mùa & Du lịch)",
+    "section": "3 旅行",
+    "page": 155,
+    "strokeCount": 10,
+    "on": [
+      "シン"
+    ],
+    "kun": [
+      "ま",
+      "ま-",
+      "まこと"
+    ],
+    "hv": "CHÂN",
+    "meaning": "lối viết Khải thư (kiểu chữ ngay ngắn), tự nhiên, chân thực",
+    "radicals": "Bộ cấu thành: 十 (THẬP) + 目 (MỤC) + 丌 (KÌ) → Mẹo nhớ: Ăng-ten chảo lớn ,  tivi hai vạch sóng ,  trên bàn hai chân , thu tin  thật  từ đài",
+    "examples": [
+      {
+        "word": "真に",
+        "reading": "まことに",
+        "meaning": "thật lòng ."
+      },
+      {
+        "word": "真の",
+        "reading": "しんの",
+        "meaning": "thật"
+      },
+      {
+        "word": "真中",
+        "reading": "まんなか",
+        "meaning": "chính giữa ."
+      },
+      {
+        "word": "真似",
+        "reading": "まね",
+        "meaning": "sự bắt chước; sự mô phỏng"
+      }
+    ]
+  },
+  {
+    "id": 160,
+    "kanji": "船",
+    "chapter": 7,
+    "chapterName": "7章 春夏秋冬 (Bốn mùa & Du lịch)",
+    "section": "3 旅行",
+    "page": 155,
+    "strokeCount": 11,
+    "on": [
+      "セン"
+    ],
+    "kun": [
+      "ふね",
+      "ふな-"
+    ],
+    "hv": "THUYỀN",
+    "meaning": "thuyền",
+    "radicals": "Bộ cấu thành: 舟 (CHU) + 㕣 → Mẹo nhớ: Soi lối  thuyền  con,  hai buồm một khoang  nhỏ",
+    "examples": [
+      {
+        "word": "船上",
+        "reading": "せんじょう",
+        "meaning": "trên tàu ."
+      },
+      {
+        "word": "船主",
+        "reading": "ふなぬし",
+        "meaning": "chủ tàu ."
+      },
+      {
+        "word": "乗船",
+        "reading": "じょうせん",
+        "meaning": "dấu sóng"
+      },
+      {
+        "word": "船人",
+        "reading": "ふなびと",
+        "meaning": "người chèo thuyền; người giữ thuyền"
+      }
+    ]
+  },
+  {
+    "id": 161,
+    "kanji": "勉",
+    "chapter": 8,
+    "chapterName": "8章 学校 (Trường học & Thư viện)",
+    "section": "1 勉強",
+    "page": 177,
+    "strokeCount": 10,
+    "on": [
+      "ベン"
+    ],
+    "kun": [
+      "つと.める"
+    ],
+    "hv": "MIỄN",
+    "meaning": "cố gắng",
+    "radicals": "Bộ cấu thành: 力 (LỰC) + 免 (MIỄN) → Mẹo nhớ: Hai tay cầm sách , vừa  đi  vừa đọc, dốc hết  sức  lực,  nỗ lực  học hành",
+    "examples": [
+      {
+        "word": "勉励",
+        "reading": "べんれい",
+        "meaning": "sự siêng năng"
+      },
+      {
+        "word": "勤勉",
+        "reading": "きんべん",
+        "meaning": "cần cù; chăm chỉ; siêng năng; chuyên cần"
+      },
+      {
+        "word": "勉学",
+        "reading": "べんがく",
+        "meaning": "siêng học"
+      },
+      {
+        "word": "勉強",
+        "reading": "べんきょう",
+        "meaning": "việc học hành; sự học hành"
+      }
+    ]
+  },
+  {
+    "id": 162,
+    "kanji": "漢",
+    "chapter": 8,
+    "chapterName": "8章 学校 (Trường học & Thư viện)",
+    "section": "1 勉強",
+    "page": 177,
+    "strokeCount": 13,
+    "on": [
+      "カン"
+    ],
+    "kun": [],
+    "hv": "HÁN",
+    "meaning": "triều đại nhà Hán, dải Ngân hà, sông Hán (Trung Quốc)",
+    "radicals": "Bộ cấu thành: 𦰩 + 氵 (THỦY) → Mẹo nhớ: Uống  nước   thảo  dược người  Hán  trao tay,  ro bot mọc thêm  hai cánh tay , cao  lớn",
+    "examples": [
+      {
+        "word": "漢人",
+        "reading": "かんじん",
+        "meaning": "hán tộc ."
+      },
+      {
+        "word": "兇漢",
+        "reading": "きょうかん",
+        "meaning": "côn đồ; kẻ hung ác"
+      },
+      {
+        "word": "凶漢",
+        "reading": "きょうかん",
+        "meaning": "côn đồ; kẻ hung ác"
+      },
+      {
+        "word": "漢和",
+        "reading": "かんわ",
+        "meaning": "tiếng Nhật lấy từ chữ Hán ."
+      }
+    ]
+  },
+  {
+    "id": 163,
+    "kanji": "宿",
+    "chapter": 8,
+    "chapterName": "8章 学校 (Trường học & Thư viện)",
+    "section": "1 勉強",
+    "page": 177,
+    "strokeCount": 11,
+    "on": [
+      "シュク"
+    ],
+    "kun": [
+      "やど",
+      "やど.る",
+      "やど.す"
+    ],
+    "hv": "TÚC",
+    "meaning": "trọ lại, chỗ trọ, cho trọ",
+    "radicals": "Bộ cấu thành: 佰 (BÁCH) + 宀 (MIÊN) → Mẹo nhớ: Mái  nhà  trọ  khang trang, một  người   trăm  đồng vàng",
+    "examples": [
+      {
+        "word": "宿す",
+        "reading": "やどす",
+        "meaning": "nghĩ"
+      },
+      {
+        "word": "宿り",
+        "reading": "やどり",
+        "meaning": "chỗ che"
+      },
+      {
+        "word": "宿る",
+        "reading": "やどる",
+        "meaning": "ở trọ; mang thai ."
+      },
+      {
+        "word": "下宿",
+        "reading": "げしゅく",
+        "meaning": "nhà trọ"
+      }
+    ]
+  },
+  {
+    "id": 164,
+    "kanji": "題",
+    "chapter": 8,
+    "chapterName": "8章 学校 (Trường học & Thư viện)",
+    "section": "1 勉強",
+    "page": 177,
+    "strokeCount": 18,
+    "on": [
+      "ダイ"
+    ],
+    "kun": [],
+    "hv": "ĐỀ",
+    "meaning": "câu hỏi, đầu, tiêu đề",
+    "radicals": "Bộ cấu thành: 頁 (HIỆT) + 是 (THỊ) → Mẹo nhớ: Mấy  ngày  nay, như có  chân , chuyện  con sò đu dây  đã \"chạy\" sang thành phố bên, trở thành  đề tài  nóng",
+    "examples": [
+      {
+        "word": "主題",
+        "reading": "しゅだい",
+        "meaning": "chủ đề"
+      },
+      {
+        "word": "例題",
+        "reading": "れいだい",
+        "meaning": "ví dụ mẫu; bài tập mẫu ."
+      },
+      {
+        "word": "傍題",
+        "reading": "ぼうだい",
+        "meaning": "tiểu đề"
+      },
+      {
+        "word": "出題",
+        "reading": "しゅつだい",
+        "meaning": "việc đề ra câu hỏi; sự đặt ra vấn đề ."
+      }
+    ]
+  },
+  {
+    "id": 165,
+    "kanji": "質",
+    "chapter": 8,
+    "chapterName": "8章 学校 (Trường học & Thư viện)",
+    "section": "1 勉強",
+    "page": 177,
+    "strokeCount": 15,
+    "on": [
+      "シツ",
+      "シチ",
+      "チ"
+    ],
+    "kun": [
+      "たち",
+      "ただ.す",
+      "もと",
+      "わりふ"
+    ],
+    "hv": "CHẤT",
+    "meaning": "bẩm sinh, chất phác, gốc",
+    "radicals": "Bộ cấu thành: 斤 (CÂN) + 貝 (BỐI) → Mẹo nhớ: Hai rìu  chặt xuống vỏ  sò , để xem  chất  lượng của sò đến đâu",
+    "examples": [
+      {
+        "word": "質す",
+        "reading": "ただす",
+        "meaning": "biết chắc; xác định; tìm hiểu chắc chắn"
+      },
+      {
+        "word": "乳質",
+        "reading": "にゅうしつ",
+        "meaning": "Chất lượng sữa ."
+      },
+      {
+        "word": "人質",
+        "reading": "ひとじち",
+        "meaning": "con tin; người tù"
+      },
+      {
+        "word": "体質",
+        "reading": "たいしつ",
+        "meaning": "thể chất ."
+      }
+    ]
+  },
+  {
+    "id": 166,
+    "kanji": "問",
+    "chapter": 8,
+    "chapterName": "8章 学校 (Trường học & Thư viện)",
+    "section": "1 勉強",
+    "page": 177,
+    "strokeCount": 11,
+    "on": [
+      "モン"
+    ],
+    "kun": [
+      "と.う",
+      "と.い",
+      "とん"
+    ],
+    "hv": "VẤN",
+    "meaning": "hỏi, tin tức, ghé thăm",
+    "radicals": "Bộ cấu thành: 口 (KHẨU) + 門 (MÔN) → Mẹo nhớ: Đứng trước  cổng ,  miệng   hỏi  đường đi",
+    "examples": [
+      {
+        "word": "問い",
+        "reading": "とい",
+        "meaning": "câu hỏi"
+      },
+      {
+        "word": "問う",
+        "reading": "とう",
+        "meaning": "cật vấn"
+      },
+      {
+        "word": "一問",
+        "reading": "いちもん",
+        "meaning": "câu hỏi"
+      },
+      {
+        "word": "下問",
+        "reading": "かもん",
+        "meaning": "sự điều tra"
+      }
+    ]
+  },
+  {
+    "id": 167,
+    "kanji": "教",
+    "chapter": 8,
+    "chapterName": "8章 学校 (Trường học & Thư viện)",
+    "section": "1 勉強",
+    "page": 177,
+    "strokeCount": 11,
+    "on": [
+      "キョウ"
+    ],
+    "kun": [
+      "おし.える",
+      "おそ.わる"
+    ],
+    "hv": "GIÁO",
+    "meaning": "dạy, giáo lý",
+    "radicals": "Bộ cấu thành: 孝 (HIẾU) + 攵 (PHỘC) → Mẹo nhớ: Giáo  viên như  người lái đò , đưa  trẻ nhỏ  đến bến bờ  bàn học",
+    "examples": [
+      {
+        "word": "教え",
+        "reading": "おしえ",
+        "meaning": "lời dạy dỗ; lời chỉ dẫn"
+      },
+      {
+        "word": "主教",
+        "reading": "しゅきょう",
+        "meaning": "giám mục"
+      },
+      {
+        "word": "仏教",
+        "reading": "ぶっきょう",
+        "meaning": "đạo phật; phật giáo"
+      },
+      {
+        "word": "教会",
+        "reading": "きょうかい",
+        "meaning": "giáo đường; nhà thờ"
+      }
+    ]
+  },
+  {
+    "id": 168,
+    "kanji": "室",
+    "chapter": 8,
+    "chapterName": "8章 学校 (Trường học & Thư viện)",
+    "section": "1 勉強",
+    "page": 177,
+    "strokeCount": 9,
+    "on": [
+      "シツ"
+    ],
+    "kun": [
+      "むろ"
+    ],
+    "hv": "THẤT",
+    "meaning": "phòng, gia tộc, vợ",
+    "radicals": "Bộ cấu thành: 至 (CHÍ) + 宀 (MIÊN) → Mẹo nhớ: Dưới  mái nhà  đỉnh nhọn, dưới  trần   phòng  thấp tịt, tôi lom khom  cúi người , trên nền  đất  xám xịt",
+    "examples": [
+      {
+        "word": "個室",
+        "reading": "こしつ",
+        "meaning": "tư gia ."
+      },
+      {
+        "word": "入室",
+        "reading": "にゅうしつ",
+        "meaning": "sự vào phòng ."
+      },
+      {
+        "word": "内室",
+        "reading": "ないしつ",
+        "meaning": "bà nhà; chị nhà; phu nhân"
+      },
+      {
+        "word": "室内",
+        "reading": "しつない",
+        "meaning": "phần nội thất"
+      }
+    ]
+  },
+  {
+    "id": 169,
+    "kanji": "試",
+    "chapter": 8,
+    "chapterName": "8章 学校 (Trường học & Thư viện)",
+    "section": "2 テスト",
+    "page": 177,
+    "strokeCount": 13,
+    "on": [
+      "シ"
+    ],
+    "kun": [
+      "こころ.みる",
+      "ため.す"
+    ],
+    "hv": "THÍ",
+    "meaning": "thử, kiểm tra",
+    "radicals": "Bộ cấu thành: 言 (NGÔN) + 式 (THỨC) → Mẹo nhớ: Ông thợ rèn  nói  như khoe mẽ, rồi  thử   kiếm  trên  đe",
+    "examples": [
+      {
+        "word": "試し",
+        "reading": "ためし",
+        "meaning": "việc nếm thử"
+      },
+      {
+        "word": "試す",
+        "reading": "ためす",
+        "meaning": "thử; thử nghiệm"
+      },
+      {
+        "word": "試み",
+        "reading": "こころみ",
+        "meaning": "việc thử"
+      },
+      {
+        "word": "試乗",
+        "reading": "しじょう",
+        "meaning": "quyền tối cao"
+      }
+    ]
+  },
+  {
+    "id": 170,
+    "kanji": "験",
+    "chapter": 8,
+    "chapterName": "8章 学校 (Trường học & Thư viện)",
+    "section": "2 テスト",
+    "page": 177,
+    "strokeCount": 18,
+    "on": [
+      "ケン",
+      "ゲン"
+    ],
+    "kun": [
+      "あかし",
+      "しるし",
+      "ため.す",
+      "ためし"
+    ],
+    "hv": "NGHIỆM",
+    "meaning": "thử, dấu hiệu, hiệu nghiệm nhờ tu hành, cầu nguyện",
+    "radicals": "Bộ cấu thành: 㑒 + 馬 (MÃ) → Mẹo nhớ: Chàng  đội nón ,  tay chống hông ,  chân dang rộng , mang  ngựa  con, đi  kiểm nghiệm",
+    "examples": [
+      {
+        "word": "体験",
+        "reading": "たいけん",
+        "meaning": "sự thể nghiệm; sự trải nghiệm"
+      },
+      {
+        "word": "効験",
+        "reading": "こうけん",
+        "meaning": "tính có hiệu quả; hiệu lực"
+      },
+      {
+        "word": "受験",
+        "reading": "じゅけん",
+        "meaning": "sự tham gia kì thi; dự thi"
+      },
+      {
+        "word": "実験",
+        "reading": "じっけん",
+        "meaning": "kinh nghiệm thực tế"
+      }
+    ]
+  },
+  {
+    "id": 171,
+    "kanji": "答",
+    "chapter": 8,
+    "chapterName": "8章 学校 (Trường học & Thư viện)",
+    "section": "2 テスト",
+    "page": 177,
+    "strokeCount": 12,
+    "on": [
+      "トウ"
+    ],
+    "kun": [
+      "こた.える",
+      "こた.え"
+    ],
+    "hv": "ĐÁP",
+    "meaning": "trả lời",
+    "radicals": "Bộ cấu thành: ⺮ + 合 (HỢP) → Mẹo nhớ: Câu  trả lời  hay, khớp ngay câu hỏi, như  hai tre  xứng đôi, như  nồi  nào  vung  nấy",
+    "examples": [
+      {
+        "word": "答え",
+        "reading": "こたえ",
+        "meaning": "sự trả lời; câu trả lời; thư trả lời; lời đối đáp"
+      },
+      {
+        "word": "口答",
+        "reading": "こうとう",
+        "meaning": "cãi giả; đối đáp; cãi; cãi lại"
+      },
+      {
+        "word": "名答",
+        "reading": "めいとう",
+        "meaning": "câu trả lời đúng ."
+      },
+      {
+        "word": "問答",
+        "reading": "もんどう",
+        "meaning": "sự hỏi đáp; câu hỏi và câu trả lời ."
+      }
+    ]
+  },
+  {
+    "id": 172,
+    "kanji": "考",
+    "chapter": 8,
+    "chapterName": "8章 学校 (Trường học & Thư viện)",
+    "section": "2 テスト",
+    "page": 177,
+    "strokeCount": 6,
+    "on": [
+      "コウ"
+    ],
+    "kun": [
+      "かんが.える",
+      "かんが.え"
+    ],
+    "hv": "KHẢO",
+    "meaning": "điều tra, suy nghĩ, người cha đã khuất",
+    "radicals": "Bộ cấu thành: 丂 (KHẢO) + 耂 → Mẹo nhớ: Nhà  khảo  cổ học lấy  cuốc  đào  đất , phát hiện bình lạ rất giống số  5",
+    "examples": [
+      {
+        "word": "考え",
+        "reading": "かんがえ",
+        "meaning": "suy nghĩ; ý kiến; ý tưởng; dự định"
+      },
+      {
+        "word": "一考",
+        "reading": "いっこう",
+        "meaning": "sự cân nhắc"
+      },
+      {
+        "word": "備考",
+        "reading": "びこう",
+        "meaning": "ghi chú ."
+      },
+      {
+        "word": "再考",
+        "reading": "さいこう",
+        "meaning": "sự xem xét lại; sự xét lại"
+      }
+    ]
+  },
+  {
+    "id": 173,
+    "kanji": "正",
+    "chapter": 8,
+    "chapterName": "8章 学校 (Trường học & Thư viện)",
+    "section": "2 テスト",
+    "page": 177,
+    "strokeCount": 5,
+    "on": [
+      "セイ",
+      "ショウ"
+    ],
+    "kun": [
+      "ただ.しい",
+      "ただ.す",
+      "まさ",
+      "まさ.に"
+    ],
+    "hv": "CHÁNH",
+    "meaning": "đúng, sửa cho đúng, đúng lúc",
+    "radicals": "Bộ cấu thành: 止 (CHỈ) + 一 (NHẤT) → Mẹo nhớ: Hàng máy quay  ngay trên cột đèn đỏ, xem người dân  dừng   đúng  luật hay không",
+    "examples": [
+      {
+        "word": "正々",
+        "reading": "ただし々",
+        "meaning": "đúng đắn"
+      },
+      {
+        "word": "正す",
+        "reading": "ただす",
+        "meaning": "sửa; sửa lại cho đúng"
+      },
+      {
+        "word": "正に",
+        "reading": "まさに",
+        "meaning": "đúng đắn; chính xác"
+      },
+      {
+        "word": "不正",
+        "reading": "ふせい",
+        "meaning": "bất chánh"
+      }
+    ]
+  },
+  {
+    "id": 174,
+    "kanji": "丸",
+    "chapter": 8,
+    "chapterName": "8章 学校 (Trường học & Thư viện)",
+    "section": "2 テスト",
+    "page": 177,
+    "strokeCount": 3,
+    "on": [
+      "ガン"
+    ],
+    "kun": [
+      "まる",
+      "まる.める",
+      "まる.い"
+    ],
+    "hv": "HOÀN",
+    "meaning": "một khối, tròn, hậu tố sau tên riêng (người, chó, kiếm, tàu thuyền, v.v.)",
+    "radicals": "Bộ cấu thành: 九 (CỬU) + 丶 (CHỦ) → Mẹo nhớ: Tay đưa lên , tay chống đất, cuộn  tròn  người cười ngất  chín  tầng mây",
+    "examples": [
+      {
+        "word": "丸々",
+        "reading": "まるまる",
+        "meaning": "hoàn toàn"
+      },
+      {
+        "word": "丸い",
+        "reading": "まるい",
+        "meaning": "tròn ."
+      },
+      {
+        "word": "丸で",
+        "reading": "まるで",
+        "meaning": "hoàn toàn"
+      },
+      {
+        "word": "丸み",
+        "reading": "まるみ",
+        "meaning": "hình tròn ."
+      }
+    ]
+  },
+  {
+    "id": 175,
+    "kanji": "不",
+    "chapter": 8,
+    "chapterName": "8章 学校 (Trường học & Thư viện)",
+    "section": "2 テスト",
+    "page": 177,
+    "strokeCount": 4,
+    "on": [
+      "フ",
+      "ブ"
+    ],
+    "kun": [],
+    "hv": "BẤT",
+    "meaning": "không...",
+    "radicals": "Chữ Hán: 不 (Âm Hán Việt: BẤT)",
+    "examples": [
+      {
+        "word": "不二",
+        "reading": "ふじ",
+        "meaning": "có một không hai"
+      },
+      {
+        "word": "不仁",
+        "reading": "ふじん",
+        "meaning": "Sự nhẫn tâm; tính vô nhân đạo ."
+      },
+      {
+        "word": "不仲",
+        "reading": "ふなか",
+        "meaning": "sự bất hoà; mối bất hoà"
+      },
+      {
+        "word": "不作",
+        "reading": "ふさく",
+        "meaning": "sự mất mùa; sự thất bát ."
+      }
+    ]
+  },
+  {
+    "id": 176,
+    "kanji": "同",
+    "chapter": 8,
+    "chapterName": "8章 学校 (Trường học & Thư viện)",
+    "section": "2 テスト",
+    "page": 177,
+    "strokeCount": 6,
+    "on": [
+      "ドウ"
+    ],
+    "kun": [
+      "おな.じ"
+    ],
+    "hv": "ĐỒNG",
+    "meaning": "giống, đó, cùng làm",
+    "radicals": "Bộ cấu thành: 一 (NHẤT) + 冋 → Mẹo nhớ: Ba que diêm xếp lại, thành  ba cạnh vuông to , chuyển  một que diêm  xuống,  giống y   hình vuông nhỏ",
+    "examples": [
+      {
+        "word": "同じ",
+        "reading": "おなじ",
+        "meaning": "bằng nhau"
+      },
+      {
+        "word": "一同",
+        "reading": "いちどう",
+        "meaning": "cả; tất cả"
+      },
+      {
+        "word": "同一",
+        "reading": "どういつ",
+        "meaning": "đồng nhất; cùng một đối tượng; giống; na ná"
+      },
+      {
+        "word": "同上",
+        "reading": "どうじょう",
+        "meaning": "như trên ."
+      }
+    ]
+  },
+  {
+    "id": 177,
+    "kanji": "貸",
+    "chapter": 8,
+    "chapterName": "8章 学校 (Trường học & Thư viện)",
+    "section": "3 図書館",
+    "page": 177,
+    "strokeCount": 12,
+    "on": [
+      "タイ"
+    ],
+    "kun": [
+      "か.す",
+      "か.し-",
+      "かし-"
+    ],
+    "hv": "THẢI",
+    "meaning": "cho mượn",
+    "radicals": "Bộ cấu thành: 代 (ĐẠI) + 貝 (BỐI) → Mẹo nhớ: Người   thuê   kiếm  phải trả tiền  sò",
+    "examples": [
+      {
+        "word": "貸し",
+        "reading": "かし",
+        "meaning": "sự cho vay; sự cho mượn; tiền hay vật đi vay mượn; cho vay; cho mượn; cho thuê"
+      },
+      {
+        "word": "貸す",
+        "reading": "かす",
+        "meaning": "bán đợ"
+      },
+      {
+        "word": "貸与",
+        "reading": "たいよ",
+        "meaning": "sự cho vay; sự cho mượn; tiền cho vay; vật cho mượn ."
+      },
+      {
+        "word": "貸主",
+        "reading": "かしぬし",
+        "meaning": "chủ nợ ."
+      }
+    ]
+  },
+  {
+    "id": 178,
+    "kanji": "借",
+    "chapter": 8,
+    "chapterName": "8章 学校 (Trường học & Thư viện)",
+    "section": "3 図書館",
+    "page": 177,
+    "strokeCount": 10,
+    "on": [
+      "シャク"
+    ],
+    "kun": [
+      "か.りる"
+    ],
+    "hv": "TÁ",
+    "meaning": "mượn, vay, tạm thời",
+    "radicals": "Bộ cấu thành: 昔 (TÍCH) + 亻 (NHÂN) → Mẹo nhớ: Đã nhiều  ngày  cứ khất mãi thôi",
+    "examples": [
+      {
+        "word": "借り",
+        "reading": "かり",
+        "meaning": "giấy vay nợ"
+      },
+      {
+        "word": "借る",
+        "reading": "かる",
+        "meaning": "vay"
+      },
+      {
+        "word": "借主",
+        "reading": "かりぬし",
+        "meaning": "người đi vay"
+      },
+      {
+        "word": "借人",
+        "reading": "かりにん",
+        "meaning": "Người đi vay; người vay; bên nợ ."
+      }
+    ]
+  },
+  {
+    "id": 179,
+    "kanji": "返",
+    "chapter": 8,
+    "chapterName": "8章 学校 (Trường học & Thư viện)",
+    "section": "3 図書館",
+    "page": 177,
+    "strokeCount": 7,
+    "on": [
+      "ヘン"
+    ],
+    "kun": [
+      "かえ.す",
+      "-かえ.す",
+      "かえ.る",
+      "-かえ.る"
+    ],
+    "hv": "PHẢN",
+    "meaning": "trở về, từ dùng để đếm số lần",
+    "radicals": "Bộ cấu thành: 反 (PHẢN) + ⻌ → Mẹo nhớ: Bàn gấp  đặt tiền rồi, ta  trả  con tin thôi!",
+    "examples": [
+      {
+        "word": "返す",
+        "reading": "かえす",
+        "meaning": "trả"
+      },
+      {
+        "word": "返る",
+        "reading": "かえる",
+        "meaning": "trở lại; trở về"
+      },
+      {
+        "word": "返上",
+        "reading": "へんじょう",
+        "meaning": "sự bỏ ngang (không làm nữa); sự phá ngang"
+      },
+      {
+        "word": "返事",
+        "reading": "へんじ",
+        "meaning": "sự trả lời; sự đáp lời"
+      }
+    ]
+  },
+  {
+    "id": 180,
+    "kanji": "冊",
+    "chapter": 8,
+    "chapterName": "8章 学校 (Trường học & Thư viện)",
+    "section": "3 図書館",
+    "page": 177,
+    "strokeCount": 5,
+    "on": [
+      "サツ",
+      "サク"
+    ],
+    "kun": [
+      "ふみ"
+    ],
+    "hv": "SÁCH",
+    "meaning": "sách, đơn vị đếm sách, lập",
+    "radicals": "Bộ cấu thành: 廾 (CỦNG) + 冂 (QUYNH) → Mẹo nhớ: Bộ ba   cuốn  truyện hài, được quấn bằng  một đai",
+    "examples": [
+      {
+        "word": "一冊",
+        "reading": "いちさつ",
+        "meaning": "văn kiện; tài liệu"
+      },
+      {
+        "word": "分冊",
+        "reading": "ぶんさつ",
+        "meaning": "quyển; tập"
+      },
+      {
+        "word": "別冊",
+        "reading": "べっさつ",
+        "meaning": "tập riêng"
+      },
+      {
+        "word": "冊子",
+        "reading": "さっし",
+        "meaning": "quyển sách nhỏ ."
+      }
+    ]
+  },
+  {
+    "id": 181,
+    "kanji": "歴",
+    "chapter": 8,
+    "chapterName": "8章 学校 (Trường học & Thư viện)",
+    "section": "3 図書館",
+    "page": 177,
+    "strokeCount": 14,
+    "on": [
+      "レキ",
+      "レッキ"
+    ],
+    "kun": [],
+    "hv": "LỊCH",
+    "meaning": "trải qua, rõ ràng, đi qua",
+    "radicals": "Bộ cấu thành: 止 (CHỈ) + 麻 (MA) → Mẹo nhớ: Dưới  vách đá , bé  dừng  chân tự hỏi,  đôi cây  kia đã  trải qua  mấy mùa",
+    "examples": [
+      {
+        "word": "歴任",
+        "reading": "れきにん",
+        "meaning": "sự kế nhiệm; sự nhậm chức"
+      },
+      {
+        "word": "歴伝",
+        "reading": "れきでん",
+        "meaning": "sự truyền miệng (truyện cổ tích"
+      },
+      {
+        "word": "前歴",
+        "reading": "ぜんれき",
+        "meaning": "tiền sử"
+      },
+      {
+        "word": "歴史",
+        "reading": "れきし",
+        "meaning": "lịch sử"
+      }
+    ]
+  },
+  {
+    "id": 182,
+    "kanji": "史",
+    "chapter": 8,
+    "chapterName": "8章 学校 (Trường học & Thư viện)",
+    "section": "3 図書館",
+    "page": 177,
+    "strokeCount": 5,
+    "on": [
+      "シ"
+    ],
+    "kun": [],
+    "hv": "SỬ",
+    "meaning": "sách, quan chép sử",
+    "radicals": "Bộ cấu thành: 乂 (NGHỆ) + 中 (TRUNG) → Mẹo nhớ: Miệng  kể lại chuyện  kiếm đao , giữ gìn lịch  sử  để trao sau này",
+    "examples": [
+      {
+        "word": "史上",
+        "reading": "しじょう",
+        "meaning": "xét về mặt lịch sử ."
+      },
+      {
+        "word": "史乗",
+        "reading": "しじょう",
+        "meaning": "sử"
+      },
+      {
+        "word": "侍史",
+        "reading": "じし",
+        "meaning": "lễ phép; kính cẩn"
+      },
+      {
+        "word": "修史",
+        "reading": "しゅうし",
+        "meaning": "sự làm xong"
+      }
+    ]
+  },
+  {
+    "id": 183,
+    "kanji": "図",
+    "chapter": 8,
+    "chapterName": "8章 学校 (Trường học & Thư viện)",
+    "section": "3 図書館",
+    "page": 177,
+    "strokeCount": 7,
+    "on": [
+      "ズ",
+      "ト"
+    ],
+    "kun": [
+      "え",
+      "はか.る"
+    ],
+    "hv": "ĐỒ",
+    "meaning": "hình vẽ, sách, mưu tính",
+    "radicals": "Bộ cấu thành: 斗 (ĐẤU) + 囗 (VI) → Mẹo nhớ: Bản đồ  kho báu  hình vuông ,  hai hòn đảo  nhỏ,  núi dài cắt nhau",
+    "examples": [
+      {
+        "word": "図る",
+        "reading": "はかる",
+        "meaning": "lập kế hoạch; vẽ sơ đồ; thiết kế; tiến hành"
+      },
+      {
+        "word": "不図",
+        "reading": "ふと",
+        "meaning": "đột nhiên; bất đồ ."
+      },
+      {
+        "word": "付図",
+        "reading": "ふず",
+        "meaning": "hình kèm theo ."
+      },
+      {
+        "word": "企図",
+        "reading": "きと",
+        "meaning": "dự án; chương trình; kế hoạch"
+      }
+    ]
+  },
+  {
+    "id": 184,
+    "kanji": "運",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "1 運動",
+    "page": 199,
+    "strokeCount": 12,
+    "on": [
+      "ウン"
+    ],
+    "kun": [
+      "はこ.ぶ"
+    ],
+    "hv": "VẬN",
+    "meaning": "vận dụng, vận chuyển, xoay quanh",
+    "radicals": "Bộ cấu thành: 軍 (QUÂN) + ⻌ → Mẹo nhớ: Trên  con đường lên núi , có chiếc  xe mái che , lúi húi  vận chuyển  hàng",
+    "examples": [
+      {
+        "word": "運び",
+        "reading": "はこび",
+        "meaning": "sự tiến tới"
+      },
+      {
+        "word": "運ぶ",
+        "reading": "はこぶ",
+        "meaning": "tải"
+      },
+      {
+        "word": "不運",
+        "reading": "ふうん",
+        "meaning": "hạn vận"
+      },
+      {
+        "word": "亨運",
+        "reading": "とおるうん",
+        "meaning": "sự thịnh vượng"
+      }
+    ]
+  },
+  {
+    "id": 185,
+    "kanji": "動",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "1 運動",
+    "page": 199,
+    "strokeCount": 11,
+    "on": [
+      "ドウ"
+    ],
+    "kun": [
+      "うご.く",
+      "うご.かす"
+    ],
+    "hv": "ĐỘNG",
+    "meaning": "cư xử, chuyển động, hỗn loạn",
+    "radicals": "Bộ cấu thành: 重 (TRỌNG) + 力 (LỰC) → Mẹo nhớ: どう してこのおもちゃは うご かないの？ Tại sao cái đồ chơi này không chạy vậy?  Lực sĩ dùng hết  sức  bình sinh,  di chuyển   trục sáu bánh  một mình",
+    "examples": [
+      {
+        "word": "動き",
+        "reading": "うごき",
+        "meaning": "sự chuyển động; sự hoạt động; sự biến động"
+      },
+      {
+        "word": "動く",
+        "reading": "うごく",
+        "meaning": "bị lay động"
+      },
+      {
+        "word": "不動",
+        "reading": "ふどう",
+        "meaning": "bất động ."
+      },
+      {
+        "word": "主動",
+        "reading": "しゅどう",
+        "meaning": "sự lânh đạo"
+      }
+    ]
+  },
+  {
+    "id": 186,
+    "kanji": "練",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "1 運動",
+    "page": 199,
+    "strokeCount": 14,
+    "on": [
+      "レン"
+    ],
+    "kun": [
+      "ね.る",
+      "ね.り"
+    ],
+    "hv": "LUYỆN",
+    "meaning": "luyện, (a) luyện tơ lụa, (b) rèn luyện tinh thần, thân thể, kỹ năng",
+    "radicals": "Bộ cấu thành: 東 (ĐÔNG) + 糸 (MỊCH) → Mẹo nhớ: Dùng  sợi chỉ  từ phương  Đông , chăm tay  luyện  dệt thành công vải rồng",
+    "examples": [
+      {
+        "word": "練り",
+        "reading": "ねり",
+        "meaning": "nước bóng"
+      },
+      {
+        "word": "練る",
+        "reading": "ねる",
+        "meaning": "gọt giũa; trau chuốt"
+      },
+      {
+        "word": "練乳",
+        "reading": "れんにゅう",
+        "meaning": "sữa đặc"
+      },
+      {
+        "word": "修練",
+        "reading": "しゅうれん",
+        "meaning": "sự mở mang; sự tu dưỡng; sự trau dồi"
+      }
+    ]
+  },
+  {
+    "id": 187,
+    "kanji": "習",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "1 運動",
+    "page": 199,
+    "strokeCount": 11,
+    "on": [
+      "シュウ",
+      "ジュ"
+    ],
+    "kun": [
+      "なら.う",
+      "なら.い"
+    ],
+    "hv": "TẬP",
+    "meaning": "học, thói quen",
+    "radicals": "Bộ cấu thành: 白 (BẠCH) + 羽 (VŨ) → Mẹo nhớ: Chú chim đôi  cánh   trắng , đang  tập  bay trong nắng",
+    "examples": [
+      {
+        "word": "習う",
+        "reading": "ならう",
+        "meaning": "học tập; luyện tập; học"
+      },
+      {
+        "word": "予習",
+        "reading": "よしゅう",
+        "meaning": "sự soạn bài ."
+      },
+      {
+        "word": "伝習",
+        "reading": "でんしゅう",
+        "meaning": "Học ."
+      },
+      {
+        "word": "習俗",
+        "reading": "しゅうぞく",
+        "meaning": "cách dùng"
+      }
+    ]
+  },
+  {
+    "id": 188,
+    "kanji": "走",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "1 運動",
+    "page": 199,
+    "strokeCount": 7,
+    "on": [
+      "ソウ"
+    ],
+    "kun": [
+      "はし.る"
+    ],
+    "hv": "TẨU",
+    "meaning": "người sai vặt, chạy, chạy trốn",
+    "radicals": "Mẹo nhớ: Trên nền  đất  phẳng,  cậu bé vung tay xoạc cẳng ,  chạy  như bay",
+    "examples": [
+      {
+        "word": "走る",
+        "reading": "はしる",
+        "meaning": "chạy"
+      },
+      {
+        "word": "奔走",
+        "reading": "ほんそう",
+        "meaning": "sự cố gắng; sự nỗ lực"
+      },
+      {
+        "word": "帆走",
+        "reading": "はんそう",
+        "meaning": "việc đi thuyền ."
+      },
+      {
+        "word": "師走",
+        "reading": "しわす",
+        "meaning": "tháng chạp ."
+      }
+    ]
+  },
+  {
+    "id": 189,
+    "kanji": "歩",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "1 運動",
+    "page": 199,
+    "strokeCount": 8,
+    "on": [
+      "ホ",
+      "ブ",
+      "フ"
+    ],
+    "kun": [
+      "ある.く",
+      "あゆ.む"
+    ],
+    "hv": "BỘ",
+    "meaning": "một bước chân, lập trường, tỉ lệ",
+    "radicals": "Bộ cấu thành: 少 (THIỂU) + 止 (CHỈ) → Mẹo nhớ: \" đi qua",
+    "examples": [
+      {
+        "word": "歩く",
+        "reading": "あるく",
+        "meaning": "đi bộ; đi; bước"
+      },
+      {
+        "word": "歩み",
+        "reading": "あゆみ",
+        "meaning": "sự đi"
+      },
+      {
+        "word": "歩む",
+        "reading": "あゆむ",
+        "meaning": "đi; bước đi"
+      },
+      {
+        "word": "一歩",
+        "reading": "いっぽ",
+        "meaning": "bước"
+      }
+    ]
+  },
+  {
+    "id": 190,
+    "kanji": "泳",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "1 運動",
+    "page": 199,
+    "strokeCount": 8,
+    "on": [
+      "エイ"
+    ],
+    "kun": [
+      "およ.ぐ"
+    ],
+    "hv": "VỊNH",
+    "meaning": "bơi",
+    "radicals": "Bộ cấu thành: 氵 (THỦY) + 永 (VĨNH) → Mẹo nhớ: Ba giọt nước  bắn ra, khi  một  dân bơi lội, nhảy xuống  nước  để  bơi",
+    "examples": [
+      {
+        "word": "泳ぎ",
+        "reading": "およぎ",
+        "meaning": "sự bơi"
+      },
+      {
+        "word": "泳ぐ",
+        "reading": "およぐ",
+        "meaning": "bơi"
+      },
+      {
+        "word": "水泳",
+        "reading": "すいえい",
+        "meaning": "lội"
+      },
+      {
+        "word": "泳法",
+        "reading": "えいほう",
+        "meaning": "cách bơi; phương pháp bơi"
+      }
+    ]
+  },
+  {
+    "id": 191,
+    "kanji": "才",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "1 運動",
+    "page": 199,
+    "strokeCount": 3,
+    "on": [
+      "サイ"
+    ],
+    "kun": [],
+    "hv": "TÀI",
+    "meaning": "hoạt động của trí não, chữ giản lược của 歳 để chỉ tuổi tác",
+    "radicals": "Mẹo nhớ: Samurai  dang tay   mũi chân quay trái ,  lưng dắt bảo kiếm  ra dáng thiên  tài",
+    "examples": [
+      {
+        "word": "万才",
+        "reading": "ばんざい",
+        "meaning": "hoan hô"
+      },
+      {
+        "word": "不才",
+        "reading": "ふさい",
+        "meaning": "sự thiếu khả năng"
+      },
+      {
+        "word": "世才",
+        "reading": "せさい",
+        "meaning": "sự thận trọng"
+      },
+      {
+        "word": "才人",
+        "reading": "さいじん",
+        "meaning": "tài nhân ."
+      }
+    ]
+  },
+  {
+    "id": 192,
+    "kanji": "自",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "2 リゾート",
+    "page": 199,
+    "strokeCount": 6,
+    "on": [
+      "ジ",
+      "シ"
+    ],
+    "kun": [
+      "みずか.ら",
+      "おの.ずから",
+      "おの.ずと"
+    ],
+    "hv": "TỰ",
+    "meaning": "mình, tự mình, theo ý muốn",
+    "radicals": "Mẹo nhớ: Khi  kim  đâm tới gần,  mắt   tự  khép thật nhanh",
+    "examples": [
+      {
+        "word": "自ら",
+        "reading": "みずから",
+        "meaning": "mình (đại từ nhân xưng)"
+      },
+      {
+        "word": "自主",
+        "reading": "じしゅ",
+        "meaning": "sự độc lập tự chủ; sự tự chủ ."
+      },
+      {
+        "word": "自乗",
+        "reading": "じじょう",
+        "meaning": "sự nâng lên lũy thừa bậc hai"
+      },
+      {
+        "word": "自今",
+        "reading": "じこん",
+        "meaning": "sau đây"
+      }
+    ]
+  },
+  {
+    "id": 193,
+    "kanji": "然",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "2 リゾート",
+    "page": 199,
+    "strokeCount": 12,
+    "on": [
+      "ゼン",
+      "ネン"
+    ],
+    "kun": [
+      "しか",
+      "しか.り",
+      "しか.し",
+      "さ"
+    ],
+    "hv": "NHIÊN",
+    "meaning": "từ thêm vào sau tính từ để biểu thị trạng thái, đúng như vậy, tuy nhiên",
+    "radicals": "Bộ cấu thành: 犬 (KHUYỂN) + ⺼ + 灬 (HỎA) → Mẹo nhớ: Dưới ánh  trăng  bên con  chó  trắng, nhóm  bốn ngọn lửa  sâu lắng ngắm thiên  nhiên",
+    "examples": [
+      {
+        "word": "然し",
+        "reading": "しかし",
+        "meaning": "tuy nhiên; nhưng"
+      },
+      {
+        "word": "然と",
+        "reading": "しかと",
+        "meaning": "quang cảnh"
+      },
+      {
+        "word": "然も",
+        "reading": "しかも",
+        "meaning": "hơn nữa"
+      },
+      {
+        "word": "然る",
+        "reading": "しかる",
+        "meaning": "đặc biệt"
+      }
+    ]
+  },
+  {
+    "id": 194,
+    "kanji": "草",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "2 リゾート",
+    "page": 199,
+    "strokeCount": 9,
+    "on": [
+      "ソウ"
+    ],
+    "kun": [
+      "くさ",
+      "くさ-",
+      "-ぐさ"
+    ],
+    "hv": "THẢO",
+    "meaning": "cỏ, bản nháp của thơ văn, chữ thảo (một kiểu chữ)",
+    "radicals": "Bộ cấu thành: 早 (TẢO) + 艹 (THẢO) → Mẹo nhớ: Ngày  mùng  mười  phải ra  h àng rào cắt  cỏ",
+    "examples": [
+      {
+        "word": "草々",
+        "reading": "そうそう",
+        "meaning": "tính khúc chiết; sự vắn tắt"
+      },
+      {
+        "word": "下草",
+        "reading": "したくさ",
+        "meaning": "underbrush"
+      },
+      {
+        "word": "乾草",
+        "reading": "かんそう",
+        "meaning": "cỏ khô"
+      },
+      {
+        "word": "仕草",
+        "reading": "しぐさ",
+        "meaning": "hành động"
+      }
+    ]
+  },
+  {
+    "id": 195,
+    "kanji": "原",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "2 リゾート",
+    "page": 199,
+    "strokeCount": 10,
+    "on": [
+      "ゲン"
+    ],
+    "kun": [
+      "はら"
+    ],
+    "hv": "NGUYÊN",
+    "meaning": "cánh đồng, nguồn gốc, viết tắt của 原子力 (năng lượng hạt nhân)",
+    "radicals": "Bộ cấu thành: 厂 (HÁN) + 小 (TIỂU) + 白 (BẠCH) → Mẹo nhớ: Vách đá   trắng  là  cội nguồn  của dòng suối  nhỏ",
+    "examples": [
+      {
+        "word": "中原",
+        "reading": "ちゅうげん",
+        "meaning": "trung nguyên ."
+      },
+      {
+        "word": "原作",
+        "reading": "げんさく",
+        "meaning": "nguyên bản; nguyên tác; kịch bản"
+      },
+      {
+        "word": "原価",
+        "reading": "げんか",
+        "meaning": "giá thành"
+      },
+      {
+        "word": "原像",
+        "reading": "げんぞう",
+        "meaning": "Pho tượng nguyên bản ."
+      }
+    ]
+  },
+  {
+    "id": 196,
+    "kanji": "湖",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "2 リゾート",
+    "page": 199,
+    "strokeCount": 12,
+    "on": [
+      "コ"
+    ],
+    "kun": [
+      "みずうみ"
+    ],
+    "hv": "HỒ",
+    "meaning": "hồ nước",
+    "radicals": "Bộ cấu thành: 胡 (HỒ) + 氵 (THỦY) → Mẹo nhớ: Ngắm  trăng  ở mộ  cổ  bên  hồ   nước",
+    "examples": [
+      {
+        "word": "塩湖",
+        "reading": "しおみずうみ",
+        "meaning": "sự kể lại"
+      },
+      {
+        "word": "湖水",
+        "reading": "こすい",
+        "meaning": "nước hồ; nước ao hồ"
+      },
+      {
+        "word": "江湖",
+        "reading": "こうこ",
+        "meaning": "sông và hồ; dân gian; thế gian; giang hồ ."
+      },
+      {
+        "word": "湖沼",
+        "reading": "こしょう",
+        "meaning": "ao; đầm; hồ; ao đầm; ao hồ đầm phá; hồ đầm"
+      }
+    ]
+  },
+  {
+    "id": 197,
+    "kanji": "谷",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "2 リゾート",
+    "page": 199,
+    "strokeCount": 7,
+    "on": [
+      "コク"
+    ],
+    "kun": [
+      "たに",
+      "きわ.まる"
+    ],
+    "hv": "CỐC",
+    "meaning": "thung lũng, cùng cực",
+    "radicals": "Bộ cấu thành: ハ + 𠆢 + 口 (KHẨU) → Mẹo nhớ: Giữa  hai triền núi  và  hai vách núi , là  khe núi  nước chảy ra  hồ",
+    "examples": [
+      {
+        "word": "谷地",
+        "reading": "やち",
+        "meaning": "đầm lầy"
+      },
+      {
+        "word": "峡谷",
+        "reading": "きょうこく",
+        "meaning": "hẻm núi; vực sâu; thung lũng hẹp; khe sâu"
+      },
+      {
+        "word": "谷川",
+        "reading": "たにがわ",
+        "meaning": "con suối nhỏ"
+      },
+      {
+        "word": "谷川",
+        "reading": "たにかわ",
+        "meaning": "suối"
+      }
+    ]
+  },
+  {
+    "id": 198,
+    "kanji": "海",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "2 リゾート",
+    "page": 199,
+    "strokeCount": 9,
+    "on": [
+      "カイ"
+    ],
+    "kun": [
+      "うみ"
+    ],
+    "hv": "HẢI",
+    "meaning": "biển, rộng lớn",
+    "radicals": "Bộ cấu thành: 氵 (THỦY) + 毎 (MỖI) → Mẹo nhớ: Tình  mẹ  mênh mông như  nước   biển , luôn cho  con nằm ngủ  an yên",
+    "examples": [
+      {
+        "word": "海上",
+        "reading": "かいじょう",
+        "meaning": "trên biển"
+      },
+      {
+        "word": "海亀",
+        "reading": "うみがめ",
+        "meaning": "đồi mồi ."
+      },
+      {
+        "word": "海人",
+        "reading": "あま",
+        "meaning": "người đánh cá"
+      },
+      {
+        "word": "入海",
+        "reading": "いりうみ",
+        "meaning": "vịnh nhỏ"
+      }
+    ]
+  },
+  {
+    "id": 199,
+    "kanji": "辺",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "2 リゾート",
+    "page": 199,
+    "strokeCount": 5,
+    "on": [
+      "ヘン"
+    ],
+    "kun": [
+      "あた.り",
+      "ほと.り",
+      "-べ"
+    ],
+    "hv": "BIÊN",
+    "meaning": "vùng lân cận, cạnh, cạnh của đa giác (hình học)",
+    "radicals": "Bộ cấu thành: 刀 (ĐAO) + ⻌ → Mẹo nhớ: Vùng lân cận  có  núi  cao, có  đường  bọn cướp cầm  dao  chực chờ",
+    "examples": [
+      {
+        "word": "辺り",
+        "reading": "あたり",
+        "meaning": "gần; vùng lân cận; hàng xóm; vùng"
+      },
+      {
+        "word": "上辺",
+        "reading": "うわべ",
+        "meaning": "có vẻ"
+      },
+      {
+        "word": "偏辺",
+        "reading": "へんあたり",
+        "meaning": "góc (tường"
+      },
+      {
+        "word": "側辺",
+        "reading": "がわあたり",
+        "meaning": "góc (tường"
+      }
+    ]
+  },
+  {
+    "id": 200,
+    "kanji": "里",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "3 いなか",
+    "page": 199,
+    "strokeCount": 7,
+    "on": [
+      "リ"
+    ],
+    "kun": [
+      "さと"
+    ],
+    "hv": "LÍ",
+    "meaning": "quãng đường, quê hương, nhà bố mẹ vợ hoặc chồng",
+    "radicals": "Mẹo nhớ: Làng  tôi có nhiều  ruộng   đất",
+    "examples": [
+      {
+        "word": "お里",
+        "reading": "おさと",
+        "meaning": "nguồn gốc; nơi sinh; quê quán; quê mùa"
+      },
+      {
+        "word": "里人",
+        "reading": "さとびと",
+        "meaning": "dân làng"
+      },
+      {
+        "word": "加里",
+        "reading": "かり",
+        "meaning": "ash) /'pə:læʃ/"
+      },
+      {
+        "word": "千里",
+        "reading": "せんり",
+        "meaning": "thiên lý; khoảng cách xa; một khoảng dài ."
+      }
+    ]
+  },
+  {
+    "id": 201,
+    "kanji": "野",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "3 いなか",
+    "page": 199,
+    "strokeCount": 11,
+    "on": [
+      "ヤ",
+      "ショ"
+    ],
+    "kun": [
+      "の",
+      "の-"
+    ],
+    "hv": "DÃ",
+    "meaning": "(ヤ) cánh đồng, (ヤ) ruộng vườn, (ヤ) tham vọng",
+    "radicals": "Bộ cấu thành: 予 (DƯ) + 里 (LÍ) → Mẹo nhớ: Làng   Ma-a  có  đồng cỏ  bao la",
+    "examples": [
+      {
+        "word": "野人",
+        "reading": "やじん",
+        "meaning": "người tuyết ở Himalaya"
+      },
+      {
+        "word": "野兎",
+        "reading": "のうさぎ",
+        "meaning": "Con thỏ rừng; thỏ rừng; thỏ hoang ."
+      },
+      {
+        "word": "野党",
+        "reading": "やとう",
+        "meaning": "đảng phản đối ."
+      },
+      {
+        "word": "内野",
+        "reading": "ないや",
+        "meaning": "khu vực trong gôn (bóng chày)"
+      }
+    ]
+  },
+  {
+    "id": 202,
+    "kanji": "緑",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "3 いなか",
+    "page": 199,
+    "strokeCount": 14,
+    "on": [
+      "リョク",
+      "ロク"
+    ],
+    "kun": [
+      "みどり"
+    ],
+    "hv": "LỤC",
+    "meaning": "màu xanh lá cây",
+    "radicals": "Bộ cấu thành: 录 (LỤC) + 糸 (MỊCH) → Mẹo nhớ: Sợi chỉ  ninja  Yo shida tạo ra, nhúng xuống  nước  sẽ có màu  xanh lá",
+    "examples": [
+      {
+        "word": "緑化",
+        "reading": "りょくか",
+        "meaning": "sự trồng cây gây rừng; sự biến thành rừng"
+      },
+      {
+        "word": "緑地",
+        "reading": "りょくち",
+        "meaning": "vùng đất xanh ."
+      },
+      {
+        "word": "帯緑",
+        "reading": "おびみどり",
+        "meaning": "hơi lục"
+      },
+      {
+        "word": "常緑",
+        "reading": "じょうりょく",
+        "meaning": "cây thường xanh ."
+      }
+    ]
+  },
+  {
+    "id": 203,
+    "kanji": "池",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "3 いなか",
+    "page": 199,
+    "strokeCount": 6,
+    "on": [
+      "チ"
+    ],
+    "kun": [
+      "いけ"
+    ],
+    "hv": "TRÌ",
+    "meaning": "ao, nơi chứa nước hoặc chất lỏng",
+    "radicals": "Bộ cấu thành: 也 (DÃ) + 氵 (THỦY) → Mẹo nhớ: Nhà có cái  ao ,  nước  nâu vẩn đục,  hao hao chữ \"se\" (セ) , trồng  cây hoa súng",
+    "examples": [
+      {
+        "word": "溜池",
+        "reading": "ためいけ",
+        "meaning": "bể chứa nước; đồ chưa"
+      },
+      {
+        "word": "電池",
+        "reading": "でんち",
+        "meaning": "cục pin"
+      },
+      {
+        "word": "溜め池",
+        "reading": "ためち",
+        "meaning": "bể chứa nước; đồ chưa"
+      }
+    ]
+  },
+  {
+    "id": 204,
+    "kanji": "鳥",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "3 いなか",
+    "page": 199,
+    "strokeCount": 11,
+    "on": [
+      "チョウ"
+    ],
+    "kun": [
+      "とり"
+    ],
+    "hv": "ĐIỂU",
+    "meaning": "chim",
+    "radicals": "Bộ cấu thành: 白 (BẠCH) + 丂 (KHẢO) + 灬 (HỎA) → Mẹo nhớ: Chú  chim   đầu chỏm ,  mắt vằn mỏ đỏm ,  từ đầu xuống cánh ,  bốn lông  óng ánh",
+    "examples": [
+      {
+        "word": "鳥人",
+        "reading": "ちょうじん",
+        "meaning": "Phi công; người lái máy bay ."
+      },
+      {
+        "word": "候鳥",
+        "reading": "こうちょう",
+        "meaning": "người sống rày đây mai đó"
+      },
+      {
+        "word": "鳥兜",
+        "reading": "とりかぶと",
+        "meaning": "cây phụ tử"
+      },
+      {
+        "word": "害鳥",
+        "reading": "がいちょう",
+        "meaning": "sâu; vật hại (chồn"
+      }
+    ]
+  },
+  {
+    "id": 205,
+    "kanji": "羽",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "3 いなか",
+    "page": 199,
+    "strokeCount": 6,
+    "on": [
+      "ウ"
+    ],
+    "kun": [
+      "は",
+      "わ",
+      "はね"
+    ],
+    "hv": "VŨ",
+    "meaning": "đơn vị đếm chim và các loài tương tự, lông vũ, viết tắt của tỉnh Dewa",
+    "radicals": "Mẹo nhớ: Đôi  cánh  xòe rạng rỡ,  hai lông vũ  màu đen",
+    "examples": [
+      {
+        "word": "合羽",
+        "reading": "かっぱ",
+        "meaning": "mưa"
+      },
+      {
+        "word": "羽子",
+        "reading": "はご",
+        "meaning": "quả cầu lông"
+      },
+      {
+        "word": "手羽",
+        "reading": "てば",
+        "meaning": "Cánh gà"
+      },
+      {
+        "word": "羽根",
+        "reading": "はね",
+        "meaning": "cánh; lông vũ"
+      }
+    ]
+  },
+  {
+    "id": 206,
+    "kanji": "馬",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "3 いなか",
+    "page": 199,
+    "strokeCount": 10,
+    "on": [
+      "バ"
+    ],
+    "kun": [
+      "うま",
+      "うま-",
+      "ま"
+    ],
+    "hv": "MÃ",
+    "meaning": "con ngựa",
+    "radicals": "Bộ cấu thành: 隹 (CHUY) + 灬 (HỎA) → Mẹo nhớ: Thành chú  ngựa  đẹp phi như bay",
+    "examples": [
+      {
+        "word": "馬丁",
+        "reading": "ばてい",
+        "meaning": "người phục vụ"
+      },
+      {
+        "word": "馬上",
+        "reading": "もうえ",
+        "meaning": "on horseback ngồi trên lưng ngựa"
+      },
+      {
+        "word": "主馬",
+        "reading": "しゅうま",
+        "meaning": "viên coi ngựa"
+      },
+      {
+        "word": "馬主",
+        "reading": "ばうし",
+        "meaning": "chủ ngựa"
+      }
+    ]
+  },
+  {
+    "id": 207,
+    "kanji": "鳴",
+    "chapter": 9,
+    "chapterName": "9章 夏休み (Nghỉ hè & Thể thao)",
+    "section": "3 いなか",
+    "page": 199,
+    "strokeCount": 14,
+    "on": [
+      "メイ"
+    ],
+    "kun": [
+      "な.く",
+      "な.る",
+      "な.らす"
+    ],
+    "hv": "MINH",
+    "meaning": "kêu, hót, cất tiếng",
+    "radicals": "Bộ cấu thành: 鳥 (ĐIỂU) + 口 (KHẨU) → Mẹo nhớ: Con  chim  ngoác  miệng   kêu  ăn",
+    "examples": [
+      {
+        "word": "鳴く",
+        "reading": "なく",
+        "meaning": "kêu; hót; hú"
+      },
+      {
+        "word": "鳴り",
+        "reading": "なり",
+        "meaning": "trong trẻo; vang vọng"
+      },
+      {
+        "word": "鳴る",
+        "reading": "なる",
+        "meaning": "gáy"
+      },
+      {
+        "word": "共鳴",
+        "reading": "きょうめい",
+        "meaning": "sự đồng cảm; sự cộng hưởng; đồng cảm; cộng hưởng"
+      }
+    ]
+  }
+]

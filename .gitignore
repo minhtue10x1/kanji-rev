@@ -1,0 +1,30 @@
+# Python & Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.log
+
+# Local Databases (Vercel uses Vercel Postgres / Neon via POSTGRES_URL)
+*.db
+*.sqlite
+*.sqlite3
+kanji_users.db
+kanji_users.db-shm
+kanji_users.db-wal
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Vercel deployment folder
+.vercel/
+
+# Heavy Raw Textbook Source PDFs (all extracted into kanji-data.js)
+*.pdf
+
+# Operating System & Editor artifacts
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

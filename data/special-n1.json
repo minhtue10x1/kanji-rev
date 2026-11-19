@@ -1,0 +1,552 @@
+[
+  {
+    "word": "明日",
+    "reading": "あす",
+    "meaning": "ngày mai (trang trọng)"
+  },
+  {
+    "word": "小豆",
+    "reading": "あずき",
+    "meaning": "đậu đỏ nhỏ"
+  },
+  {
+    "word": "海女",
+    "reading": "あま",
+    "meaning": "nữ thợ lặn mò ngọc trai"
+  },
+  {
+    "word": "硫黄",
+    "reading": "いおう",
+    "meaning": "lưu huỳnh"
+  },
+  {
+    "word": "意気地",
+    "reading": "いくじ",
+    "meaning": "nghị lực, dũng khí, khí phách"
+  },
+  {
+    "word": "田舎",
+    "reading": "いなか",
+    "meaning": "nông thôn, vùng quê"
+  },
+  {
+    "word": "息吹",
+    "reading": "いぶき",
+    "meaning": "hơi thở, luồng sinh khí (mùa xuân)"
+  },
+  {
+    "word": "海原",
+    "reading": "うなばら",
+    "meaning": "biển rộng bao la"
+  },
+  {
+    "word": "乳母",
+    "reading": "うば",
+    "meaning": "vú em, mẹ nuôi"
+  },
+  {
+    "word": "浮気",
+    "reading": "うわき",
+    "meaning": "ngoại tình, lăng nhăng"
+  },
+  {
+    "word": "浮つく",
+    "reading": "うわつく",
+    "meaning": "nông nổi, bồng bột, lơ lửng"
+  },
+  {
+    "word": "笑顔",
+    "reading": "えがお",
+    "meaning": "nụ cười rạng rỡ"
+  },
+  {
+    "word": "叔父",
+    "reading": "おじ",
+    "meaning": "chú, cậu"
+  },
+  {
+    "word": "大人",
+    "reading": "おとな",
+    "meaning": "người lớn"
+  },
+  {
+    "word": "乙女",
+    "reading": "おとめ",
+    "meaning": "thiếu nữ, trinh nữ"
+  },
+  {
+    "word": "叔母",
+    "reading": "おば",
+    "meaning": "cô, dì"
+  },
+  {
+    "word": "お神酒",
+    "reading": "おみき",
+    "meaning": "rượu cúng thần linh Thần đạo"
+  },
+  {
+    "word": "母屋",
+    "reading": "おもや",
+    "meaning": "nhà chính, gian nhà lớn"
+  },
+  {
+    "word": "神楽",
+    "reading": "かぐら",
+    "meaning": "điệu múa tế thần cổ truyền"
+  },
+  {
+    "word": "河岸",
+    "reading": "かし",
+    "meaning": "bờ sông, chợ cá bên sông"
+  },
+  {
+    "word": "鍛冶",
+    "reading": "かじ",
+    "meaning": "thợ rèn kim loại"
+  },
+  {
+    "word": "風邪",
+    "reading": "かぜ",
+    "meaning": "cảm lạnh"
+  },
+  {
+    "word": "固唾",
+    "reading": "かたず",
+    "meaning": "nước bọt (nuốt nước bọt nín thở)"
+  },
+  {
+    "word": "仮名",
+    "reading": "かな",
+    "meaning": "chữ kana"
+  },
+  {
+    "word": "蚊帳",
+    "reading": "かや",
+    "meaning": "màn ngủ chống muỗi"
+  },
+  {
+    "word": "為替",
+    "reading": "かわせ",
+    "meaning": "hối đoái ngoại tệ, ngân phiếu"
+  },
+  {
+    "word": "河原",
+    "reading": "かわら",
+    "meaning": "bãi sông cát sỏi"
+  },
+  {
+    "word": "昨日",
+    "reading": "きのう",
+    "meaning": "hôm qua"
+  },
+  {
+    "word": "今日",
+    "reading": "きょう",
+    "meaning": "hôm nay"
+  },
+  {
+    "word": "果物",
+    "reading": "くだもの",
+    "meaning": "hoa quả, trái cây"
+  },
+  {
+    "word": "玄人",
+    "reading": "くろうと",
+    "meaning": "chuyên gia lão luyện, nhà nghề"
+  },
+  {
+    "word": "今朝",
+    "reading": "けさ",
+    "meaning": "sáng nay"
+  },
+  {
+    "word": "景色",
+    "reading": "けしき",
+    "meaning": "cảnh sắc, phong cảnh"
+  },
+  {
+    "word": "心地",
+    "reading": "ここち",
+    "meaning": "cảm giác trong lòng (dễ chịu...)"
+  },
+  {
+    "word": "居士",
+    "reading": "こじ",
+    "meaning": "cư sĩ, người ẩn dật"
+  },
+  {
+    "word": "今年",
+    "reading": "ことし",
+    "meaning": "năm nay"
+  },
+  {
+    "word": "早乙女",
+    "reading": "さおとめ",
+    "meaning": "cô gái cấy lúa non"
+  },
+  {
+    "word": "雑魚",
+    "reading": "ざこ",
+    "meaning": "cá tạp nhỏ, kẻ tép riu vô danh"
+  },
+  {
+    "word": "桟敷",
+    "reading": "さじき",
+    "meaning": "khán đài bằng gỗ kê cao"
+  },
+  {
+    "word": "差し支える",
+    "reading": "さしつかえる",
+    "meaning": "cản trở, phiền hà"
+  },
+  {
+    "word": "五月",
+    "reading": "さつき",
+    "meaning": "tháng 5 âm lịch"
+  },
+  {
+    "word": "早苗",
+    "reading": "さなえ",
+    "meaning": "mạ non vừa nhổ cấy"
+  },
+  {
+    "word": "五月雨",
+    "reading": "さみだれ",
+    "meaning": "mưa dầm rả rích đầu hè"
+  },
+  {
+    "word": "時雨",
+    "reading": "しぐれ",
+    "meaning": "mưa rào thoáng qua mùa thu đông"
+  },
+  {
+    "word": "竹刀",
+    "reading": "しない",
+    "meaning": "kiếm tre tập Kendo"
+  },
+  {
+    "word": "老舗",
+    "reading": "しにせ",
+    "meaning": "cửa hàng truyền thống lâu đời"
+  },
+  {
+    "word": "芝生",
+    "reading": "しばふ",
+    "meaning": "bãi cỏ, thảm cỏ xanh"
+  },
+  {
+    "word": "清水",
+    "reading": "しみず",
+    "meaning": "dòng nước suối trong lành"
+  },
+  {
+    "word": "三味線",
+    "reading": "しゃみせん",
+    "meaning": "đàn 3 dây shamisen của Nhật"
+  },
+  {
+    "word": "砂利",
+    "reading": "じゃり",
+    "meaning": "sỏi đá răm trải đường"
+  },
+  {
+    "word": "数珠",
+    "reading": "じゅず",
+    "meaning": "tràng hạt niệm Phật"
+  },
+  {
+    "word": "上手",
+    "reading": "じょうず",
+    "meaning": "giỏi, khéo léo"
+  },
+  {
+    "word": "白髪",
+    "reading": "しらが",
+    "meaning": "tóc bạc"
+  },
+  {
+    "word": "素人",
+    "reading": "しろうと",
+    "meaning": "người nghiệp dư, không chuyên"
+  },
+  {
+    "word": "師走",
+    "reading": "しわす",
+    "meaning": "tháng 12 âm lịch chạp"
+  },
+  {
+    "word": "数寄屋",
+    "reading": "すきや",
+    "meaning": "nhà trà đạo thanh tịnh mộc mạc"
+  },
+  {
+    "word": "相撲",
+    "reading": "すもう",
+    "meaning": "đấu vật Sumo"
+  },
+  {
+    "word": "草履",
+    "reading": "ぞうり",
+    "meaning": "dép cói rơm truyền thống Nhật"
+  },
+  {
+    "word": "山車",
+    "reading": "だし",
+    "meaning": "xe rước lễ hội rực rỡ"
+  },
+  {
+    "word": "太刀",
+    "reading": "たち",
+    "meaning": "thanh kiếm dài Nhật Bản"
+  },
+  {
+    "word": "立ち退く",
+    "reading": "たちのく",
+    "meaning": "di dời, giải tỏa khỏi nơi ở"
+  },
+  {
+    "word": "七夕",
+    "reading": "たなばた",
+    "meaning": "lễ thất tịch ngưu lang chức nữ"
+  },
+  {
+    "word": "足袋",
+    "reading": "たび",
+    "meaning": "tất truyền thống Nhật rẽ ngón"
+  },
+  {
+    "word": "稚児",
+    "reading": "ちご",
+    "meaning": "trẻ thơ rước lễ ở đền chùa"
+  },
+  {
+    "word": "一日",
+    "reading": "ついたち",
+    "meaning": "ngày mùng một đầu tháng"
+  },
+  {
+    "word": "築山",
+    "reading": "つきやま",
+    "meaning": "hòn non bộ, đồi giả trong vườn"
+  },
+  {
+    "word": "梅雨",
+    "reading": "つゆ",
+    "meaning": "mùa mưa Nhật Bản"
+  },
+  {
+    "word": "凸凹",
+    "reading": "でこぼこ",
+    "meaning": "gồ ghề lồi lõm"
+  },
+  {
+    "word": "手伝う",
+    "reading": "てつだう",
+    "meaning": "phụ giúp, giúp đỡ"
+  },
+  {
+    "word": "伝馬船",
+    "reading": "てんません",
+    "meaning": "thuyền chèo tay nhỏ trung chuyển"
+  },
+  {
+    "word": "投網",
+    "reading": "とあみ",
+    "meaning": "lưới quăng đánh bắt cá"
+  },
+  {
+    "word": "十重二十重",
+    "reading": "とえはたえ",
+    "meaning": "trùng trùng điệp điệp nhiều lớp"
+  },
+  {
+    "word": "読経",
+    "reading": "どきょう",
+    "meaning": "tụng kinh Phật giáo"
+  },
+  {
+    "word": "時計",
+    "reading": "とけい",
+    "meaning": "đồng hồ"
+  },
+  {
+    "word": "友達",
+    "reading": "ともだち",
+    "meaning": "bạn bè"
+  },
+  {
+    "word": "仲人",
+    "reading": "なこうど",
+    "meaning": "người mai mối hôn nhân"
+  },
+  {
+    "word": "名残",
+    "reading": "なごり",
+    "meaning": "dấu vết còn lại, lưu luyến"
+  },
+  {
+    "word": "雪崩",
+    "reading": "なだれ",
+    "meaning": "lở tuyết ầm ầm"
+  },
+  {
+    "word": "野良",
+    "reading": "のら",
+    "meaning": "đồng ruộng hoang dã (chó hoang, mèo hoang)"
+  },
+  {
+    "word": "祝詞",
+    "reading": "のりと",
+    "meaning": "bài văn khấn tế Thần đạo"
+  },
+  {
+    "word": "博士",
+    "reading": "はかせ",
+    "meaning": "tiến sĩ, nhà thông thái"
+  },
+  {
+    "word": "二十",
+    "reading": "はたち",
+    "meaning": "hai mươi tuổi"
+  },
+  {
+    "word": "二十日",
+    "reading": "はつか",
+    "meaning": "ngày hai mươi"
+  },
+  {
+    "word": "波止場",
+    "reading": "はとば",
+    "meaning": "bến tàu chắn sóng"
+  },
+  {
+    "word": "一人",
+    "reading": "ひとり",
+    "meaning": "một người, đơn độc"
+  },
+  {
+    "word": "日和",
+    "reading": "ひより",
+    "meaning": "thời tiết đẹp, dịp tốt lành"
+  },
+  {
+    "word": "二人",
+    "reading": "ふたり",
+    "meaning": "hai người"
+  },
+  {
+    "word": "二日",
+    "reading": "ふつか",
+    "meaning": "ngày mùng hai, 2 ngày"
+  },
+  {
+    "word": "吹雪",
+    "reading": "ふぶき",
+    "meaning": "bão tuyết gió mạnh"
+  },
+  {
+    "word": "下手",
+    "reading": "へた",
+    "meaning": "kém cỏi, vụng về"
+  },
+  {
+    "word": "部屋",
+    "reading": "へや",
+    "meaning": "căn phòng"
+  },
+  {
+    "word": "迷子",
+    "reading": "まいご",
+    "meaning": "trẻ lạc"
+  },
+  {
+    "word": "真面目",
+    "reading": "まじめ",
+    "meaning": "chăm chỉ, nghiêm túc"
+  },
+  {
+    "word": "真っ赤",
+    "reading": "まっか",
+    "meaning": "đỏ tươi, đỏ bừng mặt"
+  },
+  {
+    "word": "真っ青",
+    "reading": "まっさお",
+    "meaning": "xanh ngắt, tái mét mặt"
+  },
+  {
+    "word": "土産",
+    "reading": "みやげ",
+    "meaning": "quà lưu niệm đặc sản"
+  },
+  {
+    "word": "息子",
+    "reading": "むすこ",
+    "meaning": "con trai"
+  },
+  {
+    "word": "眼鏡",
+    "reading": "めがね",
+    "meaning": "kính mắt"
+  },
+  {
+    "word": "猛者",
+    "reading": "もさ",
+    "meaning": "người dũng mãnh quả cảm, tay cừ khôi"
+  },
+  {
+    "word": "紅葉",
+    "reading": "もみじ",
+    "meaning": "lá phong mùa thu"
+  },
+  {
+    "word": "木綿",
+    "reading": "もめん",
+    "meaning": "vải bông sợi cotton"
+  },
+  {
+    "word": "最寄り",
+    "reading": "もより",
+    "meaning": "gần nhất (nhà ga gần nhất)"
+  },
+  {
+    "word": "八百長",
+    "reading": "やおちょう",
+    "meaning": "trận đấu dàn xếp tỉ số, đóng kịch"
+  },
+  {
+    "word": "八百屋",
+    "reading": "やおや",
+    "meaning": "cửa hàng rau củ quả"
+  },
+  {
+    "word": "大和",
+    "reading": "やまと",
+    "meaning": "nước Nhật cổ, tinh thần Yamato"
+  },
+  {
+    "word": "弥生",
+    "reading": "やよい",
+    "meaning": "tháng 3 âm lịch (mùa xuân sang)"
+  },
+  {
+    "word": "浴衣",
+    "reading": "ゆかた",
+    "meaning": "áo kimono mùa hè bằng vải mỏng"
+  },
+  {
+    "word": "行方",
+    "reading": "ゆくえ",
+    "meaning": "tung tích nơi đến"
+  },
+  {
+    "word": "寄席",
+    "reading": "よせ",
+    "meaning": "nhà hát biểu diễn tấu hài Rakugo"
+  },
+  {
+    "word": "若人",
+    "reading": "わこうど",
+    "meaning": "người trẻ tuổi, thanh niên"
+  }
+]

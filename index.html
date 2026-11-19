@@ -1,0 +1,3529 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>漢字マスター (N5 - N1) — Kanji Study App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAFAF9;
+      --surface: #FFFFFF;
+      --surface-elevated: #F5F5F4;
+      --border: #E7E5E4;
+      --border-strong: #D6D3D1;
+      --text: #1C1917;
+      --text-muted: #78716C;
+      --text-subtle: #A8A29E;
+      --accent: #C2410C;
+      --accent-soft: #FFEDD5;
+      --accent-hover: #9A3412;
+      --success: #15803D;
+      --success-soft: #DCFCE7;
+      --danger: #B91C1C;
+      --danger-soft: #FEE2E2;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+      --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-kanji: 'Noto Serif JP', 'Yu Mincho', serif;
+      --font-jp: 'Noto Sans JP', sans-serif;
+      --radius: 10px;
+    }
+
+    [data-theme="dark"] {
+      --bg: #121214;
+      --surface: #18181B;
+      --surface-elevated: #27272A;
+      --border: #2E2E33;
+      --border-strong: #3F3F46;
+      --text: #F4F4F5;
+      --text-muted: #A1A1AA;
+      --text-subtle: #71717A;
+      --accent: #F97316;
+      --accent-soft: #431407;
+      --accent-hover: #FB923C;
+      --success: #22C55E;
+      --success-soft: #14532D;
+      --danger: #EF4444;
+      --danger-soft: #450A0A;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-ui);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Minimalist Header */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+
+    .header-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0.85rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-mark {
+      font-family: var(--font-kanji);
+      font-size: 1.35rem;
+      font-weight: 700;
+      background: var(--text);
+      color: var(--surface);
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+    }
+
+    .brand-title {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-subtitle {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-left: 0.35rem;
+      font-weight: 400;
+      padding: 0.1rem 0.4rem;
+      background: var(--surface-elevated);
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+
+    /* Level Selector Pills in Header */
+    .level-select-wrapper {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .level-combo-select {
+      appearance: none;
+      -webkit-appearance: none;
+      background: var(--surface-elevated);
+      border: 1.5px solid var(--border-strong);
+      color: var(--text);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.35rem 2rem 0.35rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2371717A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.5rem center;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+
+    .level-combo-select:hover {
+      border-color: var(--text);
+      background-color: var(--surface);
+    }
+
+    .level-combo-select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-soft);
+    }
+
+    /* Level Selector Cards in Dashboard */
+    .level-cards-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .level-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.85rem 1rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .level-card:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-1px);
+    }
+
+    .level-card.active {
+      border-color: var(--text);
+      background: var(--surface-elevated);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .level-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .level-card-badge {
+      font-size: 1.15rem;
+      font-weight: 700;
+      font-family: var(--font-kanji);
+      color: var(--text);
+    }
+
+    .level-card-count {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--surface);
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .level-card.active .level-card-count {
+      background: var(--text);
+      color: var(--surface);
+      border-color: var(--text);
+    }
+
+    .level-card-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+
+    @media (max-width: 768px) {
+      .level-cards-row { grid-template-columns: repeat(3, 1fr); }
+      .level-pills { display: none; }
+    }
+    @media (max-width: 480px) {
+      .level-cards-row { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 0.45rem 0.85rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .nav-btn:hover {
+      color: var(--text);
+      background: var(--surface-elevated);
+    }
+
+    .nav-btn.active {
+      color: var(--text);
+      background: var(--surface-elevated);
+      border-color: var(--border-strong);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .icon-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: 2rem;
+      height: 2rem;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.15s ease;
+    }
+
+    .icon-btn:hover {
+      color: var(--text);
+      background: var(--surface-elevated);
+      border-color: var(--border-strong);
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      max-width: 1080px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 3rem;
+    }
+
+    /* Views */
+    .view {
+      display: none;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: var(--surface-elevated);
+      border-color: var(--border-strong);
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: var(--surface);
+      border-color: var(--text);
+    }
+
+    .btn-primary:hover {
+      background: #3F3F46;
+      border-color: #3F3F46;
+      color: #FFFFFF;
+    }
+
+    [data-theme="dark"] .btn-primary:hover {
+      background: #D4D4D8;
+      border-color: #D4D4D8;
+      color: #18181B;
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: #FFFFFF;
+      border-color: var(--accent);
+    }
+
+    .btn-accent:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+
+    .btn-sm {
+      padding: 0.35rem 0.75rem;
+      font-size: 0.8rem;
+    }
+
+    /* Resume Session Card (Minimalist Hero) */
+    .resume-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .resume-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--accent);
+    }
+
+    .resume-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .resume-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .resume-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .resume-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .resume-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    /* Section Cards Grid */
+    .section-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .study-launcher-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .launch-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .launch-card:hover {
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-1px);
+    }
+
+    .launch-card.highlight {
+      border-color: var(--accent);
+      background: var(--surface);
+    }
+
+    .launch-icon {
+      font-size: 1.25rem;
+      color: var(--text);
+    }
+
+    .launch-name {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .launch-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-value {
+      font-size: 1.6rem;
+      font-weight: 600;
+      font-feature-settings: "tnum";
+    }
+
+    /* SRS Explanation Info Banner */
+    .info-banner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      margin-bottom: 2rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      line-height: 1.5;
+    }
+
+    /* Flashcard View */
+    .study-container {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .study-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 3px;
+      background: var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--text);
+      transition: width 0.25s ease;
+    }
+
+    /* 3D Flashcard */
+    .flashcard-wrapper {
+      perspective: 1200px;
+      margin-bottom: 1.5rem;
+    }
+
+    .flashcard {
+      width: 100%;
+      min-height: 400px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .flashcard.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.25rem 2rem;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-front {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+      overflow-y: auto;
+    }
+
+    .kanji-display {
+      font-family: var(--font-kanji);
+      font-size: 6.5rem;
+      line-height: 1;
+      margin-bottom: 1rem;
+      color: var(--text);
+      user-select: none;
+    }
+
+    .card-badge {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .flip-hint {
+      position: absolute;
+      bottom: 1.25rem;
+      font-size: 0.8rem;
+      color: var(--text-subtle);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .kbd {
+      padding: 0.15rem 0.4rem;
+      font-size: 0.75rem;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: monospace;
+      color: var(--text);
+    }
+
+    /* Back Card Content */
+    .kanji-header-back {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.85rem;
+      margin-bottom: 1rem;
+    }
+
+    .kanji-back-char {
+      font-family: var(--font-kanji);
+      font-size: 2.75rem;
+      line-height: 1;
+    }
+
+    .kanji-back-hv {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+
+    .radicals-block {
+      background: var(--surface-elevated);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      text-align: left;
+    }
+
+    .radicals-block .label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .radicals-block .value {
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .grid-hv {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 0.2rem;
+      letter-spacing: 0.03em;
+    }
+
+    .kanji-back-meaning {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .card-srs-status-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      background: var(--surface-elevated);
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      margin-bottom: 1rem;
+    }
+
+    .readings-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      background: var(--surface-elevated);
+      padding: 0.85rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.25rem;
+      border: 1px solid var(--border);
+    }
+
+    .reading-item .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .reading-item .value {
+      font-family: var(--font-jp);
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .examples-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .example-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 0.95rem;
+      padding: 0.4rem 0;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .example-word {
+      font-family: var(--font-jp);
+      font-size: 1.05rem;
+    }
+
+    ruby rt {
+      font-size: 0.65em;
+      color: var(--accent);
+    }
+
+    .example-meaning {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      text-align: right;
+    }
+
+    /* Study Controls (Clean Buttons - No confusing numbers) */
+    .study-controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .btn-study-action {
+      padding: 0.9rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.2rem;
+      border-radius: var(--radius);
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-study-action:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-study-action.again {
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+
+    .btn-study-action.again:hover {
+      background: var(--danger-soft);
+    }
+
+    .btn-study-action.good {
+      border-color: var(--text);
+      background: var(--text);
+      color: var(--surface);
+    }
+
+    .btn-study-action.good:hover {
+      background: #3F3F46;
+      border-color: #3F3F46;
+      color: #FFFFFF;
+    }
+
+    [data-theme="dark"] .btn-study-action.good:hover {
+      background: #D4D4D8;
+      border-color: #D4D4D8;
+      color: #18181B;
+    }
+
+    .action-main-text {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .action-sub-text {
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .keyboard-shortcuts-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      font-size: 0.75rem;
+      color: var(--text-subtle);
+      margin-top: 0.5rem;
+    }
+
+    /* Multiple Choice Quiz */
+    .quiz-question-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .quiz-type-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      padding: 0.2rem 0.6rem;
+      background: var(--surface-elevated);
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .quiz-prompt {
+      font-family: var(--font-kanji);
+      font-size: 5rem;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+
+    .quiz-prompt-text {
+      font-family: var(--font-jp);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .quiz-context {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .quiz-option-btn {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      font-family: var(--font-jp);
+      font-size: 1.1rem;
+      color: var(--text);
+      cursor: pointer;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: all 0.15s ease;
+    }
+
+    .quiz-option-btn:hover:not(:disabled) {
+      border-color: var(--text);
+      background: var(--surface-elevated);
+    }
+
+    .quiz-option-key {
+      font-size: 0.75rem;
+      color: var(--text-subtle);
+      width: 1.4rem;
+      height: 1.4rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: monospace;
+      flex-shrink: 0;
+    }
+
+    .quiz-option-btn.correct {
+      background: var(--success-soft);
+      border-color: var(--success);
+      color: var(--success);
+    }
+
+    .quiz-option-btn.incorrect {
+      background: var(--danger-soft);
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+
+    .quiz-feedback {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-top: 1rem;
+      display: none;
+      animation: fadeIn 0.15s ease;
+    }
+
+    .quiz-feedback.active {
+      display: block;
+    }
+
+    /* Browse View */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .search-input {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.55rem 0.85rem;
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      color: var(--text);
+      width: 260px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .search-input:focus {
+      border-color: var(--text);
+    }
+
+    .select-dropdown {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.55rem 0.85rem;
+      border-radius: var(--radius);
+      font-size: 0.85rem;
+      color: var(--text);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .kanji-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .grid-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 0.75rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+      position: relative;
+      content-visibility: auto;
+      contain-intrinsic-size: 130px 145px;
+    }
+
+    .grid-card:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .grid-kanji {
+      font-family: var(--font-kanji);
+      font-size: 2.25rem;
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+
+    .grid-reading {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-family: var(--font-jp);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .grid-meaning {
+      font-size: 0.7rem;
+      color: var(--text-subtle);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      position: absolute;
+      top: 0.6rem;
+      right: 0.6rem;
+    }
+
+    .status-new { background: var(--border-strong); }
+    .status-learning { background: var(--accent); }
+    .status-mastered { background: var(--success); }
+
+    /* Body scroll lock when any modal is open */
+    body.modal-open {
+      overflow: hidden !important;
+    }
+
+    /* High-Performance Modal System (60fps hardware accelerated) */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 18, 24, 0.65);
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      overflow: hidden; /* Avoid conflicting scroll containers with .modal-card */
+    }
+
+    .modal-overlay.active {
+      display: flex;
+      animation: overlayFadeIn 0.12s ease-out;
+    }
+
+    .modal-overlay.active .modal-card {
+      animation: modalPopIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      max-width: 520px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+      padding: 1.75rem;
+      position: relative;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+      transform: translateZ(0); /* Promote to dedicated GPU compositor layer */
+      will-change: transform;
+    }
+
+    @keyframes overlayFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes modalPopIn {
+      from { opacity: 0; transform: scale(0.96) translateY(8px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: transparent;
+      border: none;
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    /* Notification Toast */
+    .toast {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background: var(--text);
+      color: var(--surface);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius);
+      font-size: 0.85rem;
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: var(--shadow-md);
+      z-index: 60;
+    }
+
+    .toast.active {
+      display: flex;
+      animation: fadeIn 0.2s ease;
+    }
+
+    /* Special Reading Table */
+    .special-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      background: var(--surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .special-table th, .special-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+
+    .special-table th {
+      background: var(--surface-elevated);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .quiz-options { grid-template-columns: 1fr; }
+      .resume-card { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .header-inner { padding: 0.75rem 1rem; }
+      .study-controls { grid-template-columns: 1fr; }
+    }
+  </style>
+  <!-- Google Identity Services (GIS) for Google OAuth2 -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+
+  <!-- Top Header Navigation -->
+  <header>
+    <div class="header-inner">
+      <div style="display:flex; align-items:center; gap:1rem;">
+        <div class="brand" onclick="app.navigate('home')">
+          <div class="brand-mark">漢</div>
+          <span class="brand-title">漢字マスター</span>
+        </div>
+
+        <!-- Level Selector ComboBox -->
+        <div class="level-select-wrapper">
+          <select id="level-combo-select" class="level-combo-select" onchange="app.handleLevelSelectChange(this.value)" title="Chọn trình độ JLPT">
+            <option value="N5">JLPT N5 (117 chữ)</option>
+            <option value="N4">JLPT N4 (207 chữ)</option>
+            <option value="N3" selected>JLPT N3 (376 chữ)</option>
+            <option value="N2">JLPT N2 (504 chữ)</option>
+            <option value="N1">JLPT N1 (942 chữ)</option>
+          </select>
+        </div>
+      </div>
+
+      <nav>
+        <button class="nav-btn active" data-view="home" onclick="app.navigate('home')">Trang chủ</button>
+        <button class="nav-btn" data-view="browse" onclick="app.navigate('browse')" id="nav-browse-btn">Danh sách chữ (376)</button>
+        <button class="nav-btn" data-view="special" onclick="app.navigate('special')">Cách đọc đặc biệt</button>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Google Auth Profile / Button container -->
+        <div id="auth-header-container" style="display:flex; align-items:center;"></div>
+        <button class="icon-btn" title="Đổi giao diện Sáng / Tối" onclick="app.toggleTheme()">🌓</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main>
+
+    <!-- 1. DASHBOARD VIEW -->
+    <section id="view-home" class="view active">
+      
+      <!-- Resume Session Banner (Hiển thị khi có bài học đang dở) -->
+      <div id="resume-container"></div>
+
+      <!-- Level Selection Cards (N5 - N1) -->
+      <div class="level-cards-row" id="home-level-cards">
+        <div class="level-card" data-lvl="N5" onclick="app.setLevel('N5')">
+          <div class="level-card-header">
+            <span class="level-card-badge">N5</span>
+            <span class="level-card-count">117 chữ</span>
+          </div>
+          <div class="level-card-sub">Cơ bản · 15 chương</div>
+        </div>
+        <div class="level-card" data-lvl="N4" onclick="app.setLevel('N4')">
+          <div class="level-card-header">
+            <span class="level-card-badge">N4</span>
+            <span class="level-card-count">207 chữ</span>
+          </div>
+          <div class="level-card-sub">Sơ cấp · 9 chương</div>
+        </div>
+        <div class="level-card active" data-lvl="N3" onclick="app.setLevel('N3')">
+          <div class="level-card-header">
+            <span class="level-card-badge">N3</span>
+            <span class="level-card-count">376 chữ</span>
+          </div>
+          <div class="level-card-sub">Trung cấp · 20 chương</div>
+        </div>
+        <div class="level-card" data-lvl="N2" onclick="app.setLevel('N2')">
+          <div class="level-card-header">
+            <span class="level-card-badge">N2</span>
+            <span class="level-card-count">504 chữ</span>
+          </div>
+          <div class="level-card-sub">Thượng cấp · 18 chương</div>
+        </div>
+        <div class="level-card" data-lvl="N1" onclick="app.setLevel('N1')">
+          <div class="level-card-header">
+            <span class="level-card-badge">N1</span>
+            <span class="level-card-count">942 chữ</span>
+          </div>
+          <div class="level-card-sub">Cao cấp · 30 chương</div>
+        </div>
+      </div>
+
+      <!-- Quick Stats Counter -->
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="stat-label" id="stat-total-label">Tổng số chữ (N3)</div>
+          <div class="stat-value" id="stat-total">376</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Đã thuộc (Mastered)</div>
+          <div class="stat-value" id="stat-mastered" style="color: var(--success);">0</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Đang học (Learning)</div>
+          <div class="stat-value" id="stat-learning" style="color: var(--accent);">0</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Chuỗi ngày học</div>
+          <div class="stat-value" id="stat-streak">1d</div>
+        </div>
+      </div>
+
+      <!-- Info & Sync Banner -->
+      <div class="info-banner" id="user-sync-banner">
+        <span style="font-size:1.1rem;">💡</span>
+        <div id="user-sync-banner-text">
+          <strong>Học tập tự do & Đồng bộ tài khoản:</strong> Bạn có thể tự ôn tập theo thứ tự giáo trình, luyện thi trắc nghiệm hoặc chọn từng bài học cụ thể. Hãy đăng nhập Gmail để lưu vĩnh viễn tiến trình học, đánh dấu từ khó và đồng bộ trên mọi thiết bị.
+        </div>
+      </div>
+
+      <!-- Start Study Session -->
+      <div class="section-title">
+        <span>Chọn chế độ học tập</span>
+        <label style="font-size:0.8rem; font-weight:normal; text-transform:none; cursor:pointer; display:flex; align-items:center; gap:0.35rem;">
+          <input type="checkbox" id="setting-shuffle" onchange="app.toggleShuffleSetting(this.checked)">
+          <span>Xáo trộn ngẫu nhiên (Mặc định: Tuần tự chuẩn sách)</span>
+        </label>
+      </div>
+
+      <div class="study-launcher-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+        
+        <!-- Standard Order Study -->
+        <div class="launch-card highlight" onclick="app.startSession('flashcard', 'all', null, false)">
+          <div>
+            <div class="launch-icon">📚</div>
+            <div class="launch-name" id="launch-name-sequential">Học tuần tự chuẩn sách</div>
+            <div class="launch-desc" id="launch-desc-sequential">Học lần lượt từng chữ Hán theo thứ tự giáo trình Kanji Master, không xáo trộn.</div>
+          </div>
+          <button class="btn btn-sm btn-primary">Bắt đầu học tuần tự →</button>
+        </div>
+
+        <!-- Multiple Choice Quiz -->
+        <div class="launch-card" onclick="app.startSession('quiz', 'all')">
+          <div>
+            <div class="launch-icon">⚡</div>
+            <div class="launch-name" id="launch-name-quiz">Luyện tập Trắc nghiệm JLPT</div>
+            <div class="launch-desc" id="launch-desc-quiz">Mô phỏng sát đề thi JLPT: Mondai 1 (Đọc từ ghép Kanji → Hiragana), Mondai 2 (Viết Hiragana → Từ ghép Kanji).</div>
+          </div>
+          <button class="btn btn-sm btn-accent">Bắt đầu Trắc nghiệm JLPT →</button>
+        </div>
+
+        <!-- Study by Chapter -->
+        <div class="launch-card" onclick="app.openChapterModal()">
+          <div>
+            <div class="launch-icon">📖</div>
+            <div class="launch-name" id="launch-name-chapters">Học theo từng Chương</div>
+            <div class="launch-desc" id="launch-desc-chapters">Tập trung học theo chủ đề các bài học trong giáo trình.</div>
+          </div>
+          <button class="btn btn-sm">Chọn chương cụ thể →</button>
+        </div>
+
+        <!-- Bookmarked Kanji -->
+        <div class="launch-card" onclick="app.startSession('flashcard', 'bookmarks')">
+          <div>
+            <div class="launch-icon">🔖</div>
+            <div class="launch-name">Chữ Hán đã đánh dấu</div>
+            <div class="launch-desc" id="launch-desc-bookmarks">Ôn lại riêng những chữ Hán khó mà bạn đã chủ động gắn cờ bookmark trong cấp độ này.</div>
+          </div>
+          <button class="btn btn-sm" id="btn-start-bookmarks">Ôn chữ đã đánh dấu (0) →</button>
+        </div>
+
+      </div>
+
+      <!-- Database Info Footer -->
+      <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:1rem; font-size:0.8rem; color:var(--text-muted);">
+        <span id="db-status-text">Cơ sở dữ liệu: đã đồng bộ</span>
+        <button class="btn btn-sm" onclick="app.resetProgress()" style="color:var(--danger); border-color:transparent;">Đặt lại toàn bộ tiến độ</button>
+      </div>
+
+    </section>
+
+    <!-- 2. STUDY VIEW (Flashcard & Multiple Choice) -->
+    <section id="view-study" class="view">
+      <div class="study-container">
+        
+        <div class="study-topbar">
+          <button class="btn btn-sm" onclick="app.exitStudy()">← Tạm dừng & Lưu</button>
+          <span id="study-progress-text">Thẻ 1 / 20</span>
+          <button class="btn btn-sm" id="btn-toggle-bookmark" onclick="app.toggleCurrentBookmark()">🔖 Đánh dấu</button>
+        </div>
+
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" id="study-progress-fill" style="width: 0%;"></div>
+        </div>
+
+        <!-- Mode A: FLASHCARD -->
+        <div id="study-flashcard-mode">
+          <div class="flashcard-wrapper">
+            <div class="flashcard" id="active-card" onclick="app.flipCard()">
+              
+              <!-- Front Face -->
+              <div class="card-face card-front">
+                <div class="card-badge" id="card-chapter-tag">1章 生活</div>
+                <div class="kanji-display" id="card-kanji-char">起</div>
+                <div class="card-badge" id="card-stroke-tag">10 nét · Trang 8</div>
+                <div class="flip-hint">Nhấp chuột hoặc phím <span class="kbd">Space</span> để xem Hán Việt, nghĩa & bộ thủ</div>
+              </div>
+
+              <!-- Back Face -->
+              <div class="card-face card-back">
+                <div class="kanji-header-back">
+                  <div>
+                    <div style="display:flex; align-items:baseline; gap:0.6rem;">
+                      <div class="kanji-back-char" id="back-kanji-char">起</div>
+                      <div class="kanji-back-hv" id="back-kanji-hv">[KHỞI]</div>
+                    </div>
+                    <div style="font-size:0.75rem; color:var(--text-muted); margin-top:0.2rem;" id="back-chapter-name">1章 生活 · 生活1</div>
+                  </div>
+                  <div class="kanji-back-meaning" id="back-kanji-meaning">thức dậy, xảy ra, bắt đầu</div>
+                </div>
+
+                <!-- SRS Card Status on Back -->
+                <div class="card-srs-status-box" id="card-srs-status-display">
+                  <span>Trạng thái: <strong id="back-srs-status">Mới</strong></span>
+                  <span>Đã ôn: <strong id="back-srs-reps">0 lần</strong></span>
+                  <span>Khoảng cách: <strong id="back-srs-interval">1 ngày</strong></span>
+                </div>
+
+                <div class="readings-block">
+                  <div class="reading-item">
+                    <div class="label">Âm On (音読み)</div>
+                    <div class="value" id="back-on-reading">キ</div>
+                  </div>
+                  <div class="reading-item">
+                    <div class="label">Âm Kun (訓読み)</div>
+                    <div class="value" id="back-kun-reading">お.きる, お.こる</div>
+                  </div>
+                </div>
+
+                <!-- Radicals & Chiết tự -->
+                <div class="radicals-block" id="back-radicals-box">
+                  <div class="label">🧩 Bộ thủ & Chiết tự ghi nhớ</div>
+                  <div class="value" id="back-radicals-text"></div>
+                </div>
+
+                <div class="section-title" style="margin-top:0.5rem;">
+                  <span>Ví dụ & Từ ghép trong sách (例文・語彙)</span>
+                  <button class="icon-btn" title="Phát âm" onclick="event.stopPropagation(); app.speakCurrent();" style="width:1.6rem;height:1.6rem;font-size:0.75rem;">🔊</button>
+                </div>
+                <div class="examples-list" id="back-examples-list">
+                  <!-- Injected via JS with ruby -->
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Controls for Flashcard SRS (No confusing 1/2 labels) -->
+          <div class="study-controls">
+            <button class="btn-study-action again" onclick="app.answerCard(false)">
+              <span class="action-main-text">← Chưa thuộc / Học lại</span>
+              <span class="action-sub-text">lặp lại sớm trong buổi này (Phím mũi tên trái)</span>
+            </button>
+            <button class="btn-study-action good" onclick="app.answerCard(true)">
+              <span class="action-main-text">Đã nhớ / Tiếp tục →</span>
+              <span class="action-sub-text">tăng chu kỳ giãn cách (Phím mũi tên phải)</span>
+            </button>
+          </div>
+
+          <div class="keyboard-shortcuts-bar">
+            <span><span class="kbd">Space</span> Lật thẻ</span>
+            <span><span class="kbd">←</span> Chưa thuộc</span>
+            <span><span class="kbd">→</span> Đã nhớ</span>
+            <span><span class="kbd">B</span> Đánh dấu</span>
+            <span><span class="kbd">R</span> Phát âm</span>
+          </div>
+        </div>
+
+        <!-- Mode B: MULTIPLE CHOICE QUIZ -->
+        <div id="study-quiz-mode" style="display:none;">
+          <div class="quiz-question-box">
+            <div class="quiz-type-badge" id="quiz-type-label">Kanji Meaning</div>
+            <div id="quiz-prompt-container">
+              <div class="quiz-prompt" id="quiz-kanji-prompt">起</div>
+            </div>
+            <div class="quiz-context" id="quiz-subtext">Chọn ý nghĩa tiếng Anh tương ứng</div>
+          </div>
+
+          <div class="quiz-options" id="quiz-options-grid">
+            <!-- 4 Option buttons injected dynamically -->
+          </div>
+
+          <div class="quiz-feedback" id="quiz-feedback-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+              <span id="quiz-feedback-title" style="font-weight:600;">Chính xác!</span>
+              <button class="btn btn-sm btn-primary" onclick="app.nextQuizQuestion()">Câu tiếp theo (Enter) →</button>
+            </div>
+            <div id="quiz-feedback-detail" style="font-size:0.9rem; color:var(--text-muted);"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. BROWSE / REFERENCE VIEW -->
+    <section id="view-browse" class="view">
+      
+      <div class="filter-bar">
+        <input type="text" class="search-input" id="browse-search" placeholder="Tìm chữ Hán, cách đọc, ý nghĩa..." oninput="app.renderBrowseGrid()">
+        
+        <div style="display:flex; gap:0.5rem;">
+          <select class="select-dropdown" id="browse-chapter-filter" onchange="app.renderBrowseGrid()">
+            <option value="all">Tất cả các chương (1–20)</option>
+            <!-- 20 chapters options injected via JS -->
+          </select>
+
+          <select class="select-dropdown" id="browse-status-filter" onchange="app.renderBrowseGrid()">
+            <option value="all">Mọi trạng thái</option>
+            <option value="new">Chưa học (New)</option>
+            <option value="learning">Đang học (Learning)</option>
+            <option value="mastered">Đã thuộc (Mastered)</option>
+            <option value="bookmarked">Đã đánh dấu 🔖</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="kanji-grid" id="browse-grid">
+        <!-- 376 Kanji Cards injected dynamically -->
+      </div>
+
+    </section>
+
+    <!-- 4. SPECIAL READINGS VIEW -->
+    <section id="view-special" class="view">
+      <div style="max-width: 800px; margin: 0 auto;">
+        <div class="section-title">
+          <span>とくべつな読み方をする漢字 (Trang 164 Giáo trình)</span>
+          <span style="font-size:0.75rem; color:var(--text-muted);">36 Từ vựng đọc đặc biệt</span>
+        </div>
+        <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1.5rem;">
+          Đây là các từ ghép chữ Hán có cách đọc biến âm đặc biệt (熟字訓 - jukujikun) xuất hiện trực tiếp trong đề thi JLPT N3.
+        </p>
+
+        <table class="special-table">
+          <thead>
+            <tr>
+              <th>Từ vựng</th>
+              <th>Cách đọc (ふりがな)</th>
+              <th>Ý nghĩa</th>
+              <th>Phát âm</th>
+            </tr>
+          </thead>
+          <tbody id="special-readings-tbody">
+            <!-- Injected via JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Kanji Inspection Slide-over / Modal -->
+  <div class="modal-overlay" id="kanji-modal" onclick="if(event.target === this) app.closeKanjiModal()">
+    <div class="modal-card">
+      <button class="modal-close" onclick="app.closeKanjiModal()">✕</button>
+      <div id="modal-content">
+        <!-- Injected on click -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter Selection Modal -->
+  <div class="modal-overlay" id="chapter-modal" onclick="if(event.target === this) app.closeChapterModal()">
+    <div class="modal-card" style="max-width: 600px;">
+      <button class="modal-close" onclick="app.closeChapterModal()">✕</button>
+      <div class="section-title" style="margin-bottom:1.25rem;">Chọn chương để học</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; max-height:60vh; overflow-y:auto;" id="chapter-selection-list">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Auth Required / Feature Gating Modal for Guest -->
+  <div class="modal-overlay" id="auth-prompt-modal" onclick="if(event.target === this) app.closeAuthPromptModal()">
+    <div class="modal-card" style="max-width: 420px; text-align:center;">
+      <button class="modal-close" onclick="app.closeAuthPromptModal()">✕</button>
+      <div style="font-size:2.5rem; margin-bottom:0.5rem;">🔒</div>
+      <div style="font-size:1.15rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;" id="auth-prompt-title">Tính năng dành cho thành viên</div>
+      <div style="font-size:0.875rem; color:var(--text-muted); line-height:1.5; margin-bottom:1.5rem;" id="auth-prompt-desc">
+        Đăng nhập Gmail để lưu vĩnh viễn tiến trình học tập, mở khóa đánh dấu chữ khó (★) và đồng bộ trên mọi thiết bị máy tính & điện thoại.
+      </div>
+      <div style="display:flex; flex-direction:column; gap:0.6rem;">
+        <button class="btn btn-primary" onclick="app.closeAuthPromptModal(); app.promptGoogleLogin();" style="justify-content:center; padding:0.75rem; font-size:0.9rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" style="margin-right:6px;"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+          Đăng nhập bằng Gmail
+        </button>
+        <button class="btn" onclick="app.closeAuthPromptModal()" style="justify-content:center; color:var(--text-muted);">
+          Tiếp tục học ở chế độ khách
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Exit Study On Level Change Modal -->
+  <div class="modal-overlay" id="confirm-exit-study-modal" onclick="if(event.target === this) app.cancelExitStudy()">
+    <div class="modal-card" style="max-width: 420px; text-align:center;">
+      <button class="modal-close" onclick="app.cancelExitStudy()">✕</button>
+      <div style="font-size:2.4rem; margin-bottom:0.5rem;">⚠️</div>
+      <div style="font-size:1.15rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;">Thoát tiến trình học?</div>
+      <div style="font-size:0.875rem; color:var(--text-muted); line-height:1.5; margin-bottom:1.5rem;">
+        Bạn đang trong quá trình học hoặc luyện tập. Bạn có muốn thoát tiến trình học hiện tại để chuyển sang cấp độ <strong id="confirm-target-level-text" style="color:var(--text);">N2</strong> không?
+      </div>
+      <div style="display:flex; gap:0.75rem; justify-content:center;">
+        <button class="btn" onclick="app.cancelExitStudy()" style="flex:1; justify-content:center;">
+          Hủy
+        </button>
+        <button class="btn btn-primary" onclick="app.confirmExitStudyAndSwitch()" style="flex:1; justify-content:center; background:var(--danger); border-color:var(--danger);">
+          Thoát
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- User Account Modal -->
+  <div class="modal-overlay" id="account-modal" onclick="if(event.target === this) app.closeUserAccountModal()">
+    <div class="modal-card" style="max-width: 440px;">
+      <button class="modal-close" onclick="app.closeUserAccountModal()">✕</button>
+      <div style="text-align:center; padding:0.5rem 0 1.25rem 0;">
+        <img id="acc-modal-avatar" src="" style="width:68px; height:68px; border-radius:50%; margin:0 auto 0.75rem auto; border:2px solid var(--accent); object-fit:cover; display:block;" onerror="this.src='https://www.gravatar.com/avatar/?d=mp'" />
+        <div id="acc-modal-name" style="font-size:1.25rem; font-weight:700; color:var(--text);"></div>
+        <div id="acc-modal-email" style="font-size:0.85rem; color:var(--text-muted); margin-top:0.2rem;"></div>
+        <div id="acc-modal-created" style="font-size:0.75rem; color:var(--text-subtle); margin-top:0.4rem;"></div>
+      </div>
+
+      <div style="background:var(--surface-elevated); padding:0.85rem 1rem; border-radius:8px; border:1px solid var(--border); margin-bottom:1.25rem; font-size:0.85rem;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;">
+          <span style="color:var(--text-muted);">Trạng thái:</span>
+          <strong style="color:var(--success);">☁️ Database Riêng Biệt</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between;">
+          <span style="color:var(--text-muted);">Cơ chế lưu:</span>
+          <strong>Multi-User Isolation</strong>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:0.6rem;">
+        <button class="btn btn-primary" onclick="app.closeUserAccountModal(); app.exportDatabase();">
+          💾 Xuất bản sao lưu dữ liệu cá nhân (db.json)
+        </button>
+        <button class="btn" onclick="app.closeUserAccountModal(); app.logout();" style="color:var(--danger); border-color:var(--danger);">
+          Đăng xuất khỏi tài khoản
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div class="toast" id="toast">
+    <span id="toast-message">Đã lưu tiến độ thành công</span>
+  </div>
+
+  <!-- Load Static Kanji Dataset -->
+  <script src="kanji-data.js"></script>
+
+  <!-- Main App Script -->
+  <script>
+    /**
+     * Minimalist JLPT N3 Kanji Master Study Engine
+     */
+    class KanjiApp {
+      constructor() {
+        this.currentLevel = localStorage.getItem('kanji_level') || 'N3';
+        this.db = null;
+        this.kanjiList = (window.KANJI_DATA_BY_LEVEL && window.KANJI_DATA_BY_LEVEL[this.currentLevel]) || window.KANJI_DATA || [];
+        this.specialReadings = (window.SPECIAL_READINGS_BY_LEVEL && window.SPECIAL_READINGS_BY_LEVEL[this.currentLevel]) || window.SPECIAL_READINGS || [];
+        this.currentView = 'home';
+        this.session = null;
+        this.currentQuiz = null;
+        this.currentUser = null;
+        this.userSettings = null;
+
+        this.init();
+      }
+
+      syncModalScrollLock() {
+        const hasOpenModal = !!document.querySelector('.modal-overlay.active');
+        document.body.classList.toggle('modal-open', hasOpenModal);
+      }
+
+      async init() {
+        // 1. Initialize Google Identity Services if client ID is set
+        this.initGoogleAuth();
+
+        // 2. Initialize or load personal database (Cloud or Local)
+        await this.loadDatabase();
+
+        // 3. Set theme & shuffle setting
+        this.applyTheme(this.db.settings.theme || 'light');
+        const shuffleCheckbox = document.getElementById('setting-shuffle');
+        if (shuffleCheckbox) {
+          shuffleCheckbox.checked = !!this.db.settings.shuffleQueue;
+        }
+
+        // 4. Set current level and build UI elements
+        await this.setLevel(this.currentLevel, false);
+        this.populateChapterDropdown();
+        this.renderSpecialReadings();
+        this.updateDashboard();
+
+        // 5. Setup keyboard shortcuts
+        this.setupKeyboardListeners();
+
+        // 6. Setup automatic background scroll lock observer for all modals
+        const modalObserver = new MutationObserver(() => this.syncModalScrollLock());
+        document.querySelectorAll('.modal-overlay').forEach(el => {
+          modalObserver.observe(el, { attributes: true, attributeFilter: ['class', 'style'] });
+        });
+
+        // 7. Initial route
+        this.navigate('home');
+      }
+
+      // --- GUEST FEATURE GATING MODAL ---
+
+      showAuthPromptModal(featureName, message) {
+        const modal = document.getElementById('auth-prompt-modal');
+        if (!modal) return;
+        if (featureName) {
+          document.getElementById('auth-prompt-title').textContent = featureName;
+        }
+        if (message) {
+          document.getElementById('auth-prompt-desc').textContent = message;
+        }
+        modal.classList.add('active');
+        this.syncModalScrollLock();
+      }
+
+      closeAuthPromptModal() {
+        const modal = document.getElementById('auth-prompt-modal');
+        if (modal) modal.classList.remove('active');
+        this.syncModalScrollLock();
+      }
+
+      // --- MULTI-LEVEL SWITCHER (N5 - N1) ---
+
+      handleLevelSelectChange(newLevel) {
+        if (!['N5', 'N4', 'N3', 'N2', 'N1'].includes(newLevel)) return;
+        if (newLevel === this.currentLevel) return;
+
+        // If currently in study view (either flashcard or quiz)
+        if (this.currentView === 'study') {
+          this.pendingTargetLevel = newLevel;
+          const modal = document.getElementById('confirm-exit-study-modal');
+          const targetText = document.getElementById('confirm-target-level-text');
+          if (targetText) targetText.textContent = `JLPT ${newLevel}`;
+          if (modal) {
+            modal.classList.add('active');
+            this.syncModalScrollLock();
+          }
+          return;
+        }
+
+        // If not studying, switch level immediately
+        this.setLevel(newLevel);
+      }
+
+      cancelExitStudy() {
+        const modal = document.getElementById('confirm-exit-study-modal');
+        if (modal) modal.classList.remove('active');
+        this.syncModalScrollLock();
+        // Revert combobox to current level
+        const combo = document.getElementById('level-combo-select');
+        if (combo) combo.value = this.currentLevel;
+        this.pendingTargetLevel = null;
+      }
+
+      async confirmExitStudyAndSwitch() {
+        const target = this.pendingTargetLevel;
+        const modal = document.getElementById('confirm-exit-study-modal');
+        if (modal) modal.classList.remove('active');
+        this.syncModalScrollLock();
+
+        if (!target) return;
+
+        // 1. Save and persist current session state so it can be resumed later
+        this.saveLocal();
+        await this.syncSessionSaveToCloud();
+
+        // 2. Switch to target level
+        await this.setLevel(target);
+
+        // 3. Jump to home view of the newly selected level
+        this.navigate('home');
+
+        this.pendingTargetLevel = null;
+      }
+
+      getChapterCount() {
+        if (!this.kanjiList || this.kanjiList.length === 0) return 0;
+        const set = new Set(this.kanjiList.map(k => k.chapter));
+        return set.size;
+      }
+
+      async setLevel(level, savePreference = true) {
+        if (!['N5', 'N4', 'N3', 'N2', 'N1'].includes(level)) return;
+        // Persist outgoing level before switching
+        if (this.currentLevel && this.db) {
+          this.saveLocal();
+        }
+        this.currentLevel = level;
+        localStorage.setItem('kanji_level', level);
+
+        if (window.KANJI_DATA_BY_LEVEL && window.KANJI_DATA_BY_LEVEL[level]) {
+          this.kanjiList = window.KANJI_DATA_BY_LEVEL[level];
+          window.KANJI_DATA = this.kanjiList;
+        }
+        if (window.SPECIAL_READINGS_BY_LEVEL && window.SPECIAL_READINGS_BY_LEVEL[level]) {
+          this.specialReadings = window.SPECIAL_READINGS_BY_LEVEL[level];
+          window.SPECIAL_READINGS = this.specialReadings;
+        }
+
+        // Sync Level ComboBox in Header
+        const comboSelect = document.getElementById('level-combo-select');
+        if (comboSelect) comboSelect.value = level;
+
+        // Sync Dashboard level cards
+        document.querySelectorAll('.level-card').forEach(card => {
+          card.classList.toggle('active', card.dataset.lvl === level);
+        });
+
+        // Update Nav browse button text with exact kanji count of this level
+        const browseBtn = document.getElementById('nav-browse-btn');
+        if (browseBtn) browseBtn.textContent = `Danh sách chữ (${this.kanjiList.length})`;
+
+        // Update Stat counters
+        const statTotal = document.getElementById('stat-total');
+        if (statTotal) statTotal.textContent = this.kanjiList.length;
+
+        const statLabel = document.getElementById('stat-total-label');
+        if (statLabel) statLabel.textContent = `Tổng số chữ (${level})`;
+
+        // Dynamic labels on Dashboard launcher cards
+        const chCount = this.getChapterCount();
+        const seqTitle = document.getElementById('launch-name-sequential');
+        if (seqTitle) seqTitle.textContent = `Học tuần tự chuẩn sách (${this.kanjiList.length} chữ)`;
+        const seqDesc = document.getElementById('launch-desc-sequential');
+        if (seqDesc) seqDesc.textContent = `Học lần lượt từng chữ Hán theo thứ tự giáo trình 漢字マスター ${level} (${chCount} chương), không xáo trộn.`;
+
+        const quizTitle = document.getElementById('launch-name-quiz');
+        if (quizTitle) quizTitle.textContent = `Luyện tập Trắc nghiệm JLPT ${level}`;
+        const quizDesc = document.getElementById('launch-desc-quiz');
+        if (quizDesc) quizDesc.textContent = `Mô phỏng bài thi JLPT ${level}: Mondai 1 (Đọc từ ghép Kanji → Hiragana), Mondai 2 (Viết Hiragana → Từ ghép Kanji).`;
+
+        const chTitle = document.getElementById('launch-name-chapters');
+        if (chTitle) chTitle.textContent = `Học theo từng Chương (1–${chCount})`;
+        const chDesc = document.getElementById('launch-desc-chapters');
+        if (chDesc) chDesc.textContent = `Tập trung ôn luyện chuyên sâu theo từng chủ đề trong ${chCount} chương của giáo trình ${level}.`;
+
+        const bmDesc = document.getElementById('launch-desc-bookmarks');
+        if (bmDesc) bmDesc.textContent = `Ôn lại riêng những chữ Hán khó mà bạn đã chủ động gắn cờ bookmark trong cấp độ ${level}.`;
+
+        // Re-populate chapter select dropdown and modal
+        this.populateChapterDropdown();
+
+        // Load progress for this specific level
+        await this.loadLevelProgress();
+
+        // Re-render views if currently active
+        if (this.currentView === 'browse') {
+          this.renderBrowseGrid();
+        } else if (this.currentView === 'special') {
+          this.renderSpecialReadings();
+        }
+
+        this.updateDashboard();
+
+        // Save active level setting to cloud database if logged in
+        if (savePreference && this.currentUser) {
+          const token = localStorage.getItem('kanji_auth_token');
+          if (token) {
+            fetch('/api/auth/settings', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+              body: JSON.stringify({ current_level: level })
+            }).catch(() => {});
+          }
+        }
+
+        this.showToast(`Đã chuyển sang cấp độ ${level} (${this.kanjiList.length} chữ)`);
+      }
+
+      async loadLevelProgress() {
+        const token = localStorage.getItem('kanji_auth_token');
+        if (token && this.currentUser) {
+          try {
+            const progRes = await fetch(`/api/progress?level=${this.currentLevel}`, {
+              headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (!this.db || (this.db.meta && this.db.meta.level !== this.currentLevel)) {
+              this.db = this.createDefaultDb();
+            }
+            if (progRes.ok) {
+              const progData = await progRes.json();
+              this.db.cards = progData.cards || {};
+              this.db.bookmarks = progData.bookmarks || [];
+            }
+
+            const sessRes = await fetch(`/api/session/current?level=${this.currentLevel}`, {
+              headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (sessRes.ok) {
+              const sessData = await sessRes.json();
+              if (sessData.session && sessData.session.level === this.currentLevel) {
+                this.db.session = {
+                  active: true,
+                  level: sessData.session.level,
+                  mode: sessData.session.mode,
+                  filter: sessData.session.filter,
+                  chapter: sessData.session.chapter,
+                  queue: sessData.session.queue,
+                  currentIndex: sessData.session.currentIndex,
+                  completed: sessData.session.completed
+                };
+              } else {
+                this.db.session = {
+                  active: false,
+                  level: this.currentLevel,
+                  mode: 'flashcard',
+                  filter: 'all',
+                  chapter: null,
+                  queue: [],
+                  currentIndex: 0,
+                  completed: 0
+                };
+              }
+            }
+            this.saveLocal();
+            return;
+          } catch (e) {
+            console.warn('Error loading level progress from cloud:', e);
+          }
+        }
+
+        // Offline / Guest mode: strictly per-level localStorage database
+        const localKey = this.getLocalDbKey();
+        const localDbStr = localStorage.getItem(localKey);
+        if (localDbStr) {
+          try {
+            this.db = JSON.parse(localDbStr);
+            if (!this.db.cards || Object.keys(this.db.cards).length === 0) {
+              this.populateDefaultCards();
+            }
+            if (!this.db.session) {
+              this.db.session = { active: false, level: this.currentLevel, queue: [] };
+            }
+          } catch (e) {
+            this.db = this.createDefaultDb();
+          }
+        } else {
+          // Check if fallback legacy data exists for N3
+          if (this.currentLevel === 'N3') {
+            const legacyN3 = localStorage.getItem('kanji_master_n3_db');
+            if (legacyN3) {
+              try {
+                this.db = JSON.parse(legacyN3);
+              } catch (e) {
+                this.db = this.createDefaultDb();
+              }
+            } else {
+              this.db = this.createDefaultDb();
+            }
+          } else {
+            this.db = this.createDefaultDb();
+          }
+          this.saveLocal();
+        }
+      }
+
+      // --- AUTHENTICATION & MULTI-USER CLOUD SYNC ---
+
+      async initGoogleAuth() {
+        if (!window.GOOGLE_CLIENT_ID) {
+          try {
+            const res = await fetch('/api/config');
+            if (res.ok) {
+              const cfg = await res.json();
+              if (cfg.google_client_id) {
+                window.GOOGLE_CLIENT_ID = cfg.google_client_id;
+              }
+            }
+          } catch (e) {}
+        }
+
+        if (window.google && window.google.accounts && window.GOOGLE_CLIENT_ID) {
+          try {
+            google.accounts.id.initialize({
+              client_id: window.GOOGLE_CLIENT_ID,
+              callback: (res) => this.handleGoogleCredentialResponse(res)
+            });
+          } catch (e) {
+            console.warn('Google Identity Services init warning:', e);
+          }
+        }
+      }
+
+      renderAuthUI() {
+        const container = document.getElementById('auth-header-container');
+        if (!container) return;
+
+        if (this.currentUser) {
+          const avatar = this.currentUser.avatar_url || 'https://www.gravatar.com/avatar/?d=mp';
+          const name = this.currentUser.name || this.currentUser.email.split('@')[0];
+          container.innerHTML = `
+            <div class="user-pill" onclick="app.showUserAccountModal()" style="display:inline-flex; align-items:center; gap:0.45rem; padding:0.25rem 0.65rem; background:var(--surface-elevated); border:1px solid var(--border); border-radius:999px; cursor:pointer; font-size:0.8rem;" title="Tài khoản Google đang kết nối cơ sở dữ liệu riêng biệt">
+              <img src="${avatar}" style="width:20px; height:20px; border-radius:50%; object-fit:cover;" onerror="this.src='https://www.gravatar.com/avatar/?d=mp'" />
+              <span style="font-weight:600; max-width:100px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${name}</span>
+              <span style="font-size:0.7rem; color:var(--success);" title="Đồng bộ đám mây trực tiếp">☁️</span>
+            </div>
+          `;
+        } else {
+          container.innerHTML = `
+            <button class="btn btn-sm" onclick="app.promptGoogleLogin()" style="display:inline-flex; align-items:center; gap:0.4rem; padding:0.35rem 0.65rem; font-size:0.78rem; font-weight:600;">
+              <svg width="14" height="14" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+              <span>Đăng nhập Gmail</span>
+            </button>
+          `;
+        }
+      }
+
+      promptGoogleLogin() {
+        if (window.google && window.google.accounts && window.GOOGLE_CLIENT_ID) {
+          google.accounts.id.prompt();
+          return;
+        }
+
+        // Production-ready mock login dialog for local dev & testing
+        const email = prompt("ĐĂNG NHẬP GOOGLE OAUTH2 (Tài khoản Gmail)\nNhập email của bạn để kết nối Cơ sở dữ liệu riêng biệt trên máy chủ:\n(Khi triển khai production, hệ thống sẽ mở trực tiếp popup Google Sign-In)", "minh@gmail.com");
+        if (email && email.includes('@')) {
+          this.loginWithToken(`mock_${email.split('@')[0]}`);
+        }
+      }
+
+      async handleGoogleCredentialResponse(response) {
+        if (response && response.credential) {
+          await this.loginWithToken(response.credential);
+        }
+      }
+
+      async loginWithToken(idToken) {
+        try {
+          const res = await fetch('/api/auth/google', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id_token: idToken })
+          });
+
+          if (!res.ok) {
+            const err = await res.json();
+            alert('Lỗi đăng nhập: ' + (err.detail || 'Không thể xác thực Google'));
+            return;
+          }
+
+          const data = await res.json();
+          localStorage.setItem('kanji_auth_token', data.token);
+          this.currentUser = data.user;
+          this.showToast(`Xin chào ${data.user.name || data.user.email}!`);
+
+          // Ask to merge offline local progress if available
+          const localDb = localStorage.getItem('kanji_master_n3_db');
+          if (localDb) {
+            try {
+              const parsed = JSON.parse(localDb);
+              if (parsed.cards && Object.values(parsed.cards).some(c => c.repetitions > 0)) {
+                if (confirm('Phát hiện bạn có dữ liệu học tập trên máy này. Bạn có muốn đồng bộ toàn bộ lên tài khoản cá nhân mới không?')) {
+                  await fetch('/api/sync/import-local', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': `Bearer ${data.token}`
+                    },
+                    body: JSON.stringify({
+                      cards: parsed.cards,
+                      bookmarks: parsed.bookmarks || []
+                    })
+                  });
+                }
+              }
+            } catch (err) {}
+          }
+
+          await this.loadDatabase();
+          this.updateDashboard();
+          this.renderBrowseGrid();
+        } catch (e) {
+          alert('Lỗi kết nối tới máy chủ API: ' + e.message);
+        }
+      }
+
+      logout() {
+        if (confirm('Bạn có muốn đăng xuất khỏi tài khoản Google này?')) {
+          localStorage.removeItem('kanji_auth_token');
+          this.currentUser = null;
+          this.renderAuthUI();
+          this.loadDatabase();
+          this.updateDashboard();
+          this.renderBrowseGrid();
+          this.showToast('Đã đăng xuất.');
+        }
+      }
+
+      showUserAccountModal() {
+        if (!this.currentUser) return;
+        const modal = document.getElementById('account-modal');
+        if (!modal) return;
+        
+        document.getElementById('acc-modal-avatar').src = this.currentUser.avatar_url || 'https://www.gravatar.com/avatar/?d=mp';
+        document.getElementById('acc-modal-name').textContent = this.currentUser.name || 'Người học Kanji';
+        document.getElementById('acc-modal-email').textContent = this.currentUser.email;
+        const createdDate = this.currentUser.created_at ? new Date(this.currentUser.created_at).toLocaleDateString('vi-VN') : 'Hôm nay';
+        document.getElementById('acc-modal-created').textContent = `Thành viên từ: ${createdDate}`;
+        modal.classList.add('active');
+        this.syncModalScrollLock();
+      }
+
+      closeUserAccountModal() {
+        const modal = document.getElementById('account-modal');
+        if (modal) modal.classList.remove('active');
+        this.syncModalScrollLock();
+      }
+
+      async syncReviewToCloud(kanjiId, isCorrect, mode = 'flashcard') {
+        const token = localStorage.getItem('kanji_auth_token');
+        if (!token) return;
+        try {
+          await fetch('/api/progress/review', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ level: this.currentLevel, kanji_id: kanjiId, is_correct: isCorrect, mode })
+          });
+        } catch (e) {
+          console.warn('Sync review to cloud error:', e);
+        }
+      }
+
+      async syncBookmarkToCloud(kanjiId) {
+        const token = localStorage.getItem('kanji_auth_token');
+        if (!token) return;
+        try {
+          await fetch('/api/progress/bookmark', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ level: this.currentLevel, kanji_id: kanjiId })
+          });
+        } catch (e) {
+          console.warn('Sync bookmark to cloud error:', e);
+        }
+      }
+
+      async syncSessionSaveToCloud() {
+        const token = localStorage.getItem('kanji_auth_token');
+        if (!token || !this.db.session || !this.db.session.active) return;
+        try {
+          const s = this.db.session;
+          await fetch('/api/session/save', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+              level: this.currentLevel,
+              mode: s.mode,
+              filter_type: s.filter || 'all',
+              chapter_num: s.chapter || null,
+              queue: s.queue || [],
+              current_index: s.currentIndex || 0,
+              completed_count: s.completed || 0
+            })
+          });
+        } catch (e) {
+          console.warn('Sync session to cloud error:', e);
+        }
+      }
+
+      async syncSessionCompleteToCloud() {
+        const token = localStorage.getItem('kanji_auth_token');
+        if (!token) return;
+        try {
+          await fetch('/api/session/complete', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+        } catch (e) {}
+      }
+
+      // --- DATABASE LAYER ---
+
+      async loadDatabase() {
+        // Priority 0: Authenticated Cloud User
+        const token = localStorage.getItem('kanji_auth_token');
+        if (token) {
+          try {
+            const meRes = await fetch('/api/auth/me', {
+              headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (meRes.ok) {
+              const meData = await meRes.json();
+              this.currentUser = meData.user;
+              this.userSettings = meData.settings || {};
+              this.renderAuthUI();
+
+              // Fetch user's isolated cloud progress
+              const progRes = await fetch('/api/progress', {
+                headers: { 'Authorization': `Bearer ${token}` }
+              });
+              if (progRes.ok) {
+                const progData = await progRes.json();
+                this.db = this.createDefaultDb();
+                this.db.cards = progData.cards || {};
+                this.db.bookmarks = progData.bookmarks || [];
+
+                // Fetch active session if any
+                const sessRes = await fetch('/api/session/current', {
+                  headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (sessRes.ok) {
+                  const sessData = await sessRes.json();
+                  if (sessData.session) {
+                    this.db.session = {
+                      active: true,
+                      mode: sessData.session.mode,
+                      filter: sessData.session.filter,
+                      chapter: sessData.session.chapter,
+                      queue: sessData.session.queue,
+                      currentIndex: sessData.session.currentIndex,
+                      completed: sessData.session.completed
+                    };
+                  }
+                }
+                this.saveLocal();
+                this.updateDbStatusText(`Database đám mây (${this.currentUser.email})`);
+                return;
+              }
+            } else {
+              localStorage.removeItem('kanji_auth_token');
+              this.currentUser = null;
+            }
+          } catch (e) {
+            console.warn('Cloud sync offline or unreachable, falling back to local storage', e);
+          }
+        }
+
+        this.renderAuthUI();
+
+        // Priority 1: localStorage mirror for current level (Guest mode)
+        const localCached = localStorage.getItem(this.getLocalDbKey());
+        if (localCached) {
+          try {
+            this.db = JSON.parse(localCached);
+            if (!this.db.cards || Object.keys(this.db.cards).length === 0) {
+              this.populateDefaultCards();
+            }
+            this.updateDbStatusText('Chế độ khách (Lưu cục bộ - Chưa đăng nhập)');
+            return;
+          } catch (e) {
+            console.error('Failed to parse cached DB', e);
+          }
+        }
+
+        // Priority 2: Fetch local db.json
+        try {
+          const res = await fetch('./db.json');
+          if (res.ok) {
+            this.db = await res.json();
+            this.saveLocal();
+            this.updateDbStatusText('Chế độ khách (Khởi tạo từ db.json)');
+            return;
+          }
+        } catch (e) {
+          console.warn('Could not fetch db.json directly; using default initialization.', e);
+        }
+
+        // Priority 3: Fallback bootstrap skeleton
+        this.db = this.createDefaultDb();
+        this.saveLocal();
+        this.updateDbStatusText('Chế độ khách (Cơ sở dữ liệu mới)');
+      }
+
+      getLocalDbKey(lvl = null) {
+        const l = (lvl || this.currentLevel || 'N3').toLowerCase();
+        return `kanji_master_${l}_db`;
+      }
+
+      createDefaultDb() {
+        const cards = {};
+        if (this.kanjiList && this.kanjiList.length > 0) {
+          this.kanjiList.forEach(k => {
+            cards[String(k.id)] = {
+              id: k.id,
+              kanji: k.kanji,
+              chapter: k.chapter,
+              status: 'new',
+              repetitions: 0,
+              intervalDays: 0,
+              easeFactor: 2.5,
+              lastReviewed: null,
+              nextReview: null,
+              correctCount: 0,
+              incorrectCount: 0
+            };
+          });
+        }
+
+        return {
+          meta: {
+            version: 1,
+            level: this.currentLevel,
+            title: `Kanji Master ${this.currentLevel} Study Database`,
+            createdAt: new Date().toISOString(),
+            lastSavedAt: new Date().toISOString()
+          },
+          session: {
+            active: false,
+            level: this.currentLevel,
+            mode: "flashcard",
+            filter: "all",
+            chapter: null,
+            queue: [],
+            currentIndex: 0,
+            completed: 0,
+            lastKanjiId: null,
+            lastKanjiChar: null
+          },
+          cards: cards,
+          bookmarks: [],
+          stats: {
+            totalReviews: 0,
+            totalCorrect: 0,
+            totalIncorrect: 0,
+            currentStreak: 1,
+            bestStreak: 1,
+            lastActiveDate: new Date().toISOString().slice(0, 10),
+            dailyHistory: {}
+          },
+          settings: {
+            theme: "light",
+            showFurigana: true,
+            autoAudio: false,
+            shuffleQueue: false, // Default is sequential order (Chuẩn sách giáo trình)
+            dailyGoal: 20
+          }
+        };
+      }
+
+      populateDefaultCards() {
+        if (!this.db.cards) this.db.cards = {};
+        if (this.kanjiList && this.kanjiList.length > 0) {
+          this.kanjiList.forEach(k => {
+            if (!this.db.cards[String(k.id)]) {
+              this.db.cards[String(k.id)] = {
+                id: k.id,
+                kanji: k.kanji,
+                chapter: k.chapter,
+                status: 'new',
+                repetitions: 0,
+                intervalDays: 0,
+                easeFactor: 2.5,
+                lastReviewed: null,
+                nextReview: null,
+                correctCount: 0,
+                incorrectCount: 0
+              };
+            }
+          });
+        }
+      }
+
+      saveLocal() {
+        if (!this.db) return;
+        this.db.meta.lastSavedAt = new Date().toISOString();
+        if (!this.db.meta.level) this.db.meta.level = this.currentLevel;
+        if (this.db.session) this.db.session.level = this.currentLevel;
+        localStorage.setItem(this.getLocalDbKey(), JSON.stringify(this.db));
+      }
+
+      updateDbStatusText(msg) {
+        const el = document.getElementById('db-status-text');
+        if (el) el.textContent = `Cơ sở dữ liệu: ${msg}`;
+      }
+
+      exportDatabase() {
+        this.db.meta.lastSavedAt = new Date().toISOString();
+        const jsonStr = JSON.stringify(this.db, null, 2);
+        const blob = new Blob([jsonStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `kanji_master_${this.currentLevel.toLowerCase()}_db_${new Date().toISOString().slice(0, 10)}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        this.showToast('Đã xuất file database (db.json)! Lưu trữ thành công.');
+      }
+
+      importDatabase(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          try {
+            const imported = JSON.parse(e.target.result);
+            if (imported.cards && imported.session) {
+              this.db = imported;
+              this.saveLocal();
+              this.updateDashboard();
+              this.renderBrowseGrid();
+              this.showToast('Đã nhập dữ liệu từ file thành công!');
+            } else {
+              alert('Cấu trúc file db.json không hợp lệ.');
+            }
+          } catch (err) {
+            alert('Lỗi đọc file JSON: ' + err.message);
+          }
+        };
+        reader.readAsText(file);
+      }
+
+      resetProgress() {
+        if (confirm('Bạn có chắc chắn muốn đặt lại toàn bộ tiến độ học tập? Toàn bộ thẻ sẽ quay về trạng thái Chưa học (New).')) {
+          this.db = this.createDefaultDb();
+          this.saveLocal();
+          this.updateDashboard();
+          this.renderBrowseGrid();
+          this.showToast('Đã đặt lại tiến độ.');
+        }
+      }
+
+      // --- THEME & SETTINGS ---
+
+      toggleTheme() {
+        const current = document.documentElement.getAttribute('data-theme') || 'light';
+        const next = current === 'dark' ? 'light' : 'dark';
+        this.applyTheme(next);
+        this.db.settings.theme = next;
+        this.saveLocal();
+      }
+
+      applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+      }
+
+      toggleShuffleSetting(val) {
+        this.db.settings.shuffleQueue = val;
+        this.saveLocal();
+        this.showToast(val ? 'Đã bật xáo trộn ngẫu nhiên' : 'Đã chuyển sang học tuần tự chuẩn sách');
+      }
+
+      navigate(viewName) {
+        this.currentView = viewName;
+        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+        const targetView = document.getElementById(`view-${viewName}`);
+        if (targetView) targetView.classList.add('active');
+
+        const targetBtn = document.querySelector(`.nav-btn[data-view="${viewName}"]`);
+        if (targetBtn) targetBtn.classList.add('active');
+
+        if (viewName === 'home') {
+          this.updateDashboard();
+        } else if (viewName === 'browse') {
+          this.renderBrowseGrid();
+        }
+      }
+
+      showToast(msg) {
+        const toast = document.getElementById('toast');
+        const text = document.getElementById('toast-message');
+        text.textContent = msg;
+        toast.classList.add('active');
+        setTimeout(() => toast.classList.remove('active'), 2500);
+      }
+
+      // --- DASHBOARD LAYER ---
+
+      updateDashboard() {
+        if (!this.db) return;
+
+        let mastered = 0;
+        let learning = 0;
+        let dueCount = 0;
+        const now = new Date();
+
+        Object.values(this.db.cards).forEach(c => {
+          if (c.status === 'mastered') mastered++;
+          else if (c.status === 'learning') {
+            learning++;
+            if (!c.nextReview || new Date(c.nextReview) <= now) {
+              dueCount++;
+            }
+          }
+        });
+
+        document.getElementById('stat-total').textContent = this.kanjiList.length;
+        document.getElementById('stat-mastered').textContent = mastered;
+        document.getElementById('stat-learning').textContent = learning;
+        document.getElementById('stat-streak').textContent = `${this.db.stats.currentStreak}d`;
+
+        const bookmarkCount = this.db.bookmarks ? this.db.bookmarks.length : 0;
+        const btnBookmarks = document.getElementById('btn-start-bookmarks');
+        if (btnBookmarks) btnBookmarks.textContent = `Ôn chữ đã đánh dấu (${bookmarkCount}) →`;
+
+        const dueDesc = document.getElementById('srs-due-desc');
+        const dueBtn = document.getElementById('btn-start-due');
+        if (dueDesc && dueBtn) {
+          if (dueCount > 0) {
+            dueDesc.textContent = `Hiện có ${dueCount} chữ đã đến hạn cần ôn lại hôm nay theo chu kỳ SRS.`;
+            dueBtn.textContent = `Ôn ngay (${dueCount} chữ) →`;
+          } else {
+            dueDesc.textContent = `Tuyệt vời! Hiện không có chữ nào quá hạn ôn. Tất cả thẻ đang được ghi nhớ tốt.`;
+            dueBtn.textContent = `Kiểm tra thẻ đang học →`;
+          }
+        }
+
+        // Render Resume Session Container
+        const resumeContainer = document.getElementById('resume-container');
+        const s = this.db.session;
+
+        // Display ongoing session reminder ONLY if it strictly belongs to the CURRENTLY active level!
+        if (s && s.active && s.level === this.currentLevel && s.queue && s.queue.length > 0 && s.currentIndex < s.queue.length) {
+          const remaining = s.queue.length - s.currentIndex;
+          const currentKanjiId = s.queue[s.currentIndex];
+          const kanjiObj = this.kanjiList.find(k => k.id === currentKanjiId);
+          const modeName = s.mode === 'flashcard' ? 'Flashcard' : 'Trắc nghiệm';
+          const charLabel = kanjiObj ? `${kanjiObj.kanji} (${kanjiObj.meaning})` : '';
+
+          // Clear, intuitive progress display (eliminating confusing 'Còn lại 20/20')
+          let progressInfo = '';
+          if (s.currentIndex === 0) {
+            progressInfo = `Đang ở chữ đầu tiên (0 / ${s.queue.length} chữ đã học)`;
+          } else {
+            progressInfo = `Đã học ${s.currentIndex} / ${s.queue.length} chữ · Còn lại ${remaining} chữ`;
+          }
+
+          resumeContainer.innerHTML = `
+            <div class="resume-card">
+              <div class="resume-meta">
+                <span class="resume-tag">Buổi học ${this.currentLevel} đang tiếp diễn</span>
+                <div class="resume-title">${modeName} (${this.currentLevel}) · ${progressInfo}</div>
+                <div class="resume-desc">Chữ kế tiếp: <strong>${charLabel}</strong> · Phạm vi: Chương ${s.chapter || 'Tất cả'}</div>
+              </div>
+              <div class="resume-actions">
+                <button class="btn btn-primary" onclick="app.resumeSession()">Học tiếp ngay →</button>
+                <button class="btn btn-sm" onclick="app.dismissSession()" style="color:var(--text-muted);">Bỏ qua</button>
+              </div>
+            </div>
+          `;
+        } else {
+          resumeContainer.innerHTML = '';
+        }
+      }
+
+      // --- STUDY SESSION CONTROLLER ---
+
+      startSession(mode, filter, chapter = null, forceShuffle = null) {
+        let pool = [];
+
+        if (filter === 'all') {
+          pool = [...this.kanjiList];
+        } else if (filter === 'chapter' && chapter !== null) {
+          pool = this.kanjiList.filter(k => k.chapter === Number(chapter));
+        } else if (filter === 'bookmarks') {
+          if (!this.currentUser) {
+            this.showAuthPromptModal('Chữ Hán đã đánh dấu', 'Đăng nhập Gmail để truy cập danh sách chữ Hán bạn đã đánh dấu yêu thích và đồng bộ lên đám mây.');
+            return;
+          }
+          const bms = this.db.bookmarks || [];
+          if (bms.length === 0) {
+            alert(`Bạn chưa đánh dấu chữ nào trong cấp độ ${this.currentLevel}! Hãy bấm 🔖 trên bất kỳ chữ nào trong danh sách để lưu lại.`);
+            return;
+          }
+          pool = this.kanjiList.filter(k => bms.includes(k.id));
+        }
+
+        if (pool.length === 0) {
+          alert('Không tìm thấy chữ Hán nào trong mục này.');
+          return;
+        }
+
+        // Determine ordering: sequential (default) or shuffle
+        let queueIds = pool.map(k => k.id);
+        const shouldShuffle = forceShuffle !== null ? forceShuffle : this.db.settings.shuffleQueue;
+        if (shouldShuffle) {
+          queueIds.sort(() => Math.random() - 0.5);
+        }
+
+        this.db.session = {
+          active: true,
+          level: this.currentLevel,
+          mode: mode,
+          filter: filter,
+          chapter: chapter,
+          queue: queueIds,
+          currentIndex: 0,
+          completed: 0,
+          lastKanjiId: queueIds[0],
+          lastKanjiChar: pool[0].kanji
+        };
+        this.saveLocal();
+        this.syncSessionSaveToCloud();
+
+        this.launchActiveSession();
+      }
+
+      startDueReviewSession() {
+        const now = new Date();
+        const dueIds = [];
+
+        Object.values(this.db.cards).forEach(c => {
+          if (c.status === 'learning') {
+            if (!c.nextReview || new Date(c.nextReview) <= now) {
+              dueIds.push(c.id);
+            }
+          }
+        });
+
+        if (dueIds.length === 0) {
+          // If no cards strictly overdue, offer to practice all currently learning cards
+          const learningIds = Object.values(this.db.cards).filter(c => c.status === 'learning').map(c => c.id);
+          if (learningIds.length === 0) {
+            alert('Chưa có thẻ nào trong danh sách đang học! Bạn hãy bắt đầu học một số chữ mới trước.');
+            return;
+          }
+          if (confirm(`Hiện chưa có thẻ nào quá hạn. Bạn có muốn ôn lại toàn bộ ${learningIds.length} thẻ đang học không?`)) {
+            this.db.session = {
+              active: true,
+              mode: 'flashcard',
+              filter: 'learning',
+              chapter: null,
+              queue: learningIds,
+              currentIndex: 0,
+              completed: 0,
+              lastKanjiId: learningIds[0],
+              lastKanjiChar: ''
+            };
+            this.saveLocal();
+            this.launchActiveSession();
+          }
+          return;
+        }
+
+        this.db.session = {
+          active: true,
+          mode: 'flashcard',
+          filter: 'due',
+          chapter: null,
+          queue: dueIds,
+          currentIndex: 0,
+          completed: 0,
+          lastKanjiId: dueIds[0],
+          lastKanjiChar: ''
+        };
+        this.saveLocal();
+        this.launchActiveSession();
+      }
+
+      resumeSession() {
+        if (!this.db.session || !this.db.session.active) return;
+        if (this.db.session.level && this.db.session.level !== this.currentLevel) {
+          this.setLevel(this.db.session.level);
+        }
+        this.launchActiveSession();
+      }
+
+      dismissSession() {
+        this.db.session.active = false;
+        this.saveLocal();
+        this.updateDashboard();
+      }
+
+      launchActiveSession() {
+        this.navigate('study');
+        const s = this.db.session;
+
+        if (s.mode === 'flashcard') {
+          document.getElementById('study-flashcard-mode').style.display = 'block';
+          document.getElementById('study-quiz-mode').style.display = 'none';
+          this.loadFlashcardStep();
+        } else {
+          document.getElementById('study-flashcard-mode').style.display = 'none';
+          document.getElementById('study-quiz-mode').style.display = 'block';
+          this.loadQuizStep();
+        }
+      }
+
+      exitStudy() {
+        this.navigate('home');
+      }
+
+      updateStudyProgress(current, total) {
+        const pct = Math.round((current / total) * 100);
+        document.getElementById('study-progress-fill').style.width = `${pct}%`;
+        document.getElementById('study-progress-text').textContent = `Thẻ ${current + 1} / ${total}`;
+      }
+
+      // --- FLASHCARD ENGINE ---
+
+      loadFlashcardStep() {
+        const s = this.db.session;
+        if (s.currentIndex >= s.queue.length) {
+          this.completeSession();
+          return;
+        }
+
+        const kanjiId = s.queue[s.currentIndex];
+        const kanjiObj = this.kanjiList.find(k => k.id === kanjiId);
+        if (!kanjiObj) return;
+
+        this.updateStudyProgress(s.currentIndex, s.queue.length);
+
+        // Reset flip
+        const cardEl = document.getElementById('active-card');
+        cardEl.classList.remove('flipped');
+
+        // Populate front
+        document.getElementById('card-chapter-tag').textContent = `${kanjiObj.chapter}章 ${kanjiObj.chapterName} · ${kanjiObj.section}`;
+        document.getElementById('card-kanji-char').textContent = kanjiObj.kanji;
+        document.getElementById('card-stroke-tag').textContent = `${kanjiObj.strokeCount} nét · Trang ${kanjiObj.page}`;
+
+        // Populate back
+        document.getElementById('back-kanji-char').textContent = kanjiObj.kanji;
+        document.getElementById('back-kanji-hv').textContent = kanjiObj.hv ? `[${kanjiObj.hv}]` : '';
+        document.getElementById('back-chapter-name').textContent = `${kanjiObj.chapter}章 ${kanjiObj.chapterName} · ${kanjiObj.section} (Trang ${kanjiObj.page})`;
+        document.getElementById('back-kanji-meaning').textContent = kanjiObj.meaning;
+        document.getElementById('back-radicals-text').textContent = kanjiObj.radicals || '—';
+        document.getElementById('back-on-reading').textContent = kanjiObj.on && kanjiObj.on.length > 0 ? kanjiObj.on.join(', ') : '—';
+        document.getElementById('back-kun-reading').textContent = kanjiObj.kun && kanjiObj.kun.length > 0 ? kanjiObj.kun.join(', ') : '—';
+
+        // SRS status info on back
+        const cardRecord = this.db.cards[String(kanjiId)] || { status: 'new', repetitions: 0, intervalDays: 1, correctCount: 0 };
+        const statusMap = { 'new': 'Mới', 'learning': 'Đang học', 'mastered': 'Đã thuộc' };
+        document.getElementById('back-srs-status').textContent = statusMap[cardRecord.status] || cardRecord.status;
+        document.getElementById('back-srs-reps').textContent = `${cardRecord.repetitions || 0} lần (Đúng: ${cardRecord.correctCount || 0})`;
+        document.getElementById('back-srs-interval').textContent = `${cardRecord.intervalDays || 1} ngày`;
+
+        // Render examples with robust key fallbacks (word/w, reading/r, meaning/m)
+        const exListEl = document.getElementById('back-examples-list');
+        const examples = kanjiObj.examples || [];
+        if (examples.length === 0) {
+          exListEl.innerHTML = '<div style="color:var(--text-muted);font-size:0.85rem;padding:0.5rem 0;">Chưa có ví dụ mẫu</div>';
+        } else {
+          exListEl.innerHTML = examples.map(ex => {
+            const word = ex.word || ex.w || '';
+            const reading = ex.reading || ex.r || '';
+            const meaning = ex.meaning || ex.m || '';
+            return `
+              <div class="example-row">
+                <span class="example-word">
+                  <ruby>${word}<rt>${reading}</rt></ruby>
+                </span>
+                <span class="example-meaning">${meaning}</span>
+              </div>
+            `;
+          }).join('');
+        }
+
+        // Bookmark button state
+        const isBm = (this.db.bookmarks || []).includes(kanjiId);
+        const bmBtn = document.getElementById('btn-toggle-bookmark');
+        bmBtn.textContent = isBm ? '★ Đã đánh dấu' : '🔖 Đánh dấu';
+        bmBtn.style.color = isBm ? 'var(--accent)' : 'inherit';
+      }
+
+      flipCard() {
+        const cardEl = document.getElementById('active-card');
+        cardEl.classList.toggle('flipped');
+      }
+
+      answerCard(isCorrect) {
+        const s = this.db.session;
+        const kanjiId = s.queue[s.currentIndex];
+        let cardRecord = this.db.cards[String(kanjiId)];
+
+        if (!cardRecord) {
+          cardRecord = {
+            id: kanjiId,
+            status: 'new',
+            repetitions: 0,
+            intervalDays: 1,
+            correctCount: 0,
+            incorrectCount: 0
+          };
+          this.db.cards[String(kanjiId)] = cardRecord;
+        }
+
+        cardRecord.repetitions = (cardRecord.repetitions || 0) + 1;
+        cardRecord.lastReviewed = new Date().toISOString();
+
+        if (isCorrect) {
+          // USER KNOWS THE CARD
+          cardRecord.correctCount = (cardRecord.correctCount || 0) + 1;
+          if (cardRecord.status === 'new') {
+            cardRecord.status = 'learning';
+            cardRecord.intervalDays = 1;
+          } else if (cardRecord.status === 'learning') {
+            cardRecord.intervalDays = Math.max(1, Math.round((cardRecord.intervalDays || 1) * 2));
+            if (cardRecord.intervalDays >= 8) {
+              cardRecord.status = 'mastered';
+            }
+          }
+          // Set next review date = now + intervalDays
+          const nextDate = new Date();
+          nextDate.setDate(nextDate.getDate() + (cardRecord.intervalDays || 1));
+          cardRecord.nextReview = nextDate.toISOString();
+        } else {
+          // USER DOES NOT KNOW THE CARD (AGAIN)
+          cardRecord.incorrectCount = (cardRecord.incorrectCount || 0) + 1;
+          cardRecord.status = 'learning';
+          cardRecord.intervalDays = 1;
+          const nextDate = new Date();
+          nextDate.setDate(nextDate.getDate() + 1);
+          cardRecord.nextReview = nextDate.toISOString();
+
+          // Push card back into queue to review again in this current session!
+          s.queue.push(kanjiId);
+        }
+
+        this.db.stats.totalReviews = (this.db.stats.totalReviews || 0) + 1;
+        if (isCorrect) this.db.stats.totalCorrect = (this.db.stats.totalCorrect || 0) + 1;
+        else this.db.stats.totalIncorrect = (this.db.stats.totalIncorrect || 0) + 1;
+
+        s.currentIndex++;
+        s.completed = (s.completed || 0) + 1;
+        this.saveLocal();
+        this.syncReviewToCloud(kanjiId, isCorrect, 'flashcard');
+        this.syncSessionSaveToCloud();
+
+        this.loadFlashcardStep();
+      }
+
+      findKanjiByChar(char) {
+        if (!char) return null;
+        if (this.kanjiList) {
+          const found = this.kanjiList.find(k => k.kanji === char);
+          if (found) return found;
+        }
+        if (window.KANJI_DATA_BY_LEVEL) {
+          for (const lvl of ['N5', 'N4', 'N3', 'N2', 'N1']) {
+            const list = window.KANJI_DATA_BY_LEVEL[lvl] || [];
+            const found = list.find(k => k.kanji === char);
+            if (found) return found;
+          }
+        }
+        return null;
+      }
+
+      // --- MULTIPLE CHOICE QUIZ ENGINE ---
+
+      loadQuizStep() {
+        const s = this.db.session;
+        if (s.currentIndex >= s.queue.length) {
+          this.completeSession();
+          return;
+        }
+
+        const targetId = s.queue[s.currentIndex];
+        const targetKanji = this.kanjiList.find(k => k.id === targetId);
+        if (!targetKanji) return;
+
+        this.updateStudyProgress(s.currentIndex, s.queue.length);
+
+        // Hide feedback
+        const feedbackBox = document.getElementById('quiz-feedback-box');
+        feedbackBox.classList.remove('active');
+
+        // Select 3 random distractors
+        const others = this.kanjiList.filter(k => k.id !== targetId);
+        const distractors = [];
+        const used = new Set();
+        while (distractors.length < 3 && distractors.length < others.length) {
+          const rand = others[Math.floor(Math.random() * others.length)];
+          if (!used.has(rand.id)) {
+            used.add(rand.id);
+            distractors.push(rand);
+          }
+        }
+
+        // JLPT Real Exam Standard: Strictly Mondai 1 (漢字読み) and Mondai 2 (表記)
+        // No meaning prompts in questions or options to prevent easy guessing
+        const types = [
+          'jlpt_kanji_to_furi',
+          'jlpt_furi_to_kanji'
+        ];
+        const qType = types[Math.floor(Math.random() * types.length)];
+
+        // Pick one compound word from targetKanji's book examples
+        const exList = targetKanji.examples || [];
+        const targetEx = exList.length > 0 
+          ? exList[Math.floor(Math.random() * exList.length)] 
+          : { word: targetKanji.kanji, reading: (targetKanji.kun[0] || targetKanji.on[0] || '').replace(/\./g, ''), meaning: targetKanji.meaning };
+        
+        const targetWord = targetEx.word || targetEx.w || targetKanji.kanji;
+        const targetReading = targetEx.reading || targetEx.r || '';
+        const targetMeaning = targetEx.meaning || targetEx.m || targetKanji.meaning;
+
+        let questionText = '';
+        let contextText = '';
+        let correctValue = '';
+        let options = [];
+
+        if (qType === 'jlpt_kanji_to_furi') {
+          document.getElementById('quiz-type-label').textContent = `JLPT ${this.currentLevel} · Mondai 1 (漢字読み)`;
+          questionText = `<div class="quiz-prompt-text" style="font-size:2.6rem; font-family:var(--font-kanji); font-weight:700; letter-spacing:0.04em;">【${targetWord}】</div>`;
+          contextText = `Chọn cách đọc Hiragana đúng của từ 【${targetWord}】:`;
+          correctValue = targetReading;
+          const wrongFuris = this.generateFuriganaDistractors(targetReading, targetWord);
+          options = [
+            { text: targetReading, correct: true },
+            { text: wrongFuris[0] || '—', correct: false },
+            { text: wrongFuris[1] || '—', correct: false },
+            { text: wrongFuris[2] || '—', correct: false }
+          ];
+        } else {
+          document.getElementById('quiz-type-label').textContent = `JLPT ${this.currentLevel} · Mondai 2 (表記)`;
+          questionText = `<div class="quiz-prompt-text" style="font-size:2.2rem; font-family:var(--font-jp); color:var(--accent); font-weight:700;">【${targetReading}】</div>`;
+          contextText = `Từ 【${targetReading}】 được viết bằng chữ Hán nào?`;
+          correctValue = targetWord;
+          const wrongKanjis = this.generateKanjiDistractors(targetWord, targetKanji, distractors);
+          options = [
+            { text: targetWord, correct: true },
+            { text: wrongKanjis[0] || '—', correct: false },
+            { text: wrongKanjis[1] || '—', correct: false },
+            { text: wrongKanjis[2] || '—', correct: false }
+          ];
+        }
+
+        // Shuffle options
+        options.sort(() => Math.random() - 0.5);
+
+        this.currentQuiz = {
+          targetKanji,
+          targetWord,
+          targetReading,
+          targetMeaning,
+          qType,
+          correctValue,
+          options,
+          answered: false
+        };
+
+        // Render prompt and options
+        document.getElementById('quiz-prompt-container').innerHTML = questionText;
+        document.getElementById('quiz-subtext').textContent = contextText;
+
+        const optionsGrid = document.getElementById('quiz-options-grid');
+        const letterKeys = ['1', '2', '3', '4'];
+        optionsGrid.innerHTML = options.map((opt, i) => `
+          <button class="quiz-option-btn" id="quiz-opt-${i}" onclick="app.selectQuizOption(${i})">
+            <span class="quiz-option-key">${letterKeys[i]}</span>
+            <span>${opt.text}</span>
+          </button>
+        `).join('');
+
+        // Bookmark button
+        const isBm = (this.db.bookmarks || []).includes(targetId);
+        const bmBtn = document.getElementById('btn-toggle-bookmark');
+        bmBtn.textContent = isBm ? '★ Đã đánh dấu' : '🔖 Đánh dấu';
+        bmBtn.style.color = isBm ? 'var(--accent)' : 'inherit';
+      }
+
+      generateFuriganaDistractors(correct, targetWord) {
+        const distractors = new Set();
+        
+        // 1. Phonetic mutations (Dakuten, Choon, Sokuon)
+        const daku = {
+          'か':'が','き':'ぎ','く':'ぐ','け':'げ','こ':'ご',
+          'が':'か','ぎ':'き','ぐ':'く','げ':'け','ご':'こ',
+          'さ':'ざ','し':'じ','す':'ず','せ':'ぜ','そ':'ぞ',
+          'ざ':'さ','じ':'し','ず':'す','ぜ':'せ','ぞ':'そ',
+          'た':'だ','ち':'ぢ','つ':'づ','て':'で','と':'ど',
+          'だ':'た','ぢ':'ち','づ':'つ','で':'て','ど':'と',
+          'は':'ば','ひ':'び','ふ':'ぶ','へ':'べ','ほ':'ぼ',
+          'ば':'は','び':'ひ','ぶ':'ふ','べ':'へ','ぼ':'ほ'
+        };
+
+        // Mutate dakuten
+        for (let i = 0; i < correct.length; i++) {
+          const ch = correct[i];
+          if (daku[ch]) {
+            const mut = correct.slice(0, i) + daku[ch] + correct.slice(i + 1);
+            if (mut !== correct) distractors.add(mut);
+            if (distractors.size >= 2) break;
+          }
+        }
+
+        // Mutate long vowels
+        if (correct.endsWith('う') && correct.length > 2) {
+          distractors.add(correct.slice(0, -1));
+        } else if (!correct.endsWith('う') && correct.length >= 2) {
+          distractors.add(correct + 'う');
+        }
+        if (correct.includes('ょう')) {
+          distractors.add(correct.replace('ょう', 'ょ'));
+          distractors.add(correct.replace('ょう', 'ゅう'));
+        }
+        if (correct.includes('ゅう')) {
+          distractors.add(correct.replace('ゅう', 'ゅ'));
+        }
+        if (correct.includes('っ')) {
+          distractors.add(correct.replace('っ', 'つ'));
+          distractors.add(correct.replace('っ', ''));
+        }
+
+        // Fallback: real readings of other words with similar length
+        const pool = [];
+        for (const k of this.kanjiList) {
+          for (const ex of (k.examples || [])) {
+            const r = ex.reading || ex.r;
+            if (r && r !== correct && !distractors.has(r)) {
+              if (Math.abs(r.length - correct.length) <= 1) {
+                pool.push(r);
+              }
+            }
+          }
+        }
+        pool.sort(() => Math.random() - 0.5);
+        for (const r of pool) {
+          if (distractors.size >= 3) break;
+          distractors.add(r);
+        }
+
+        return Array.from(distractors).slice(0, 3);
+      }
+
+      generateKanjiDistractors(correctWord, targetKanji, distractors) {
+        const result = new Set();
+
+        // 1. Substitute one kanji in 2-kanji words using distractor kanjis
+        if (correctWord.length === 2) {
+          if (distractors[0] && distractors[0].kanji !== correctWord[1]) {
+            result.add(distractors[0].kanji + correctWord[1]);
+          }
+          if (distractors[1] && distractors[1].kanji !== correctWord[0]) {
+            result.add(correctWord[0] + distractors[1].kanji);
+          }
+        }
+
+        // 2. Pick compound words from distractors with same character length
+        for (const d of distractors) {
+          for (const ex of (d.examples || [])) {
+            const w = ex.word || ex.w;
+            if (w && w !== correctWord && !result.has(w) && w.length === correctWord.length) {
+              result.add(w);
+              break;
+            }
+          }
+          if (result.size >= 3) break;
+        }
+
+        // 3. Fallback from all kanji list with same length
+        const pool = [];
+        for (const k of this.kanjiList) {
+          for (const ex of (k.examples || [])) {
+            const w = ex.word || ex.w;
+            if (w && w !== correctWord && !result.has(w) && w.length === correctWord.length) {
+              pool.push(w);
+            }
+          }
+        }
+        pool.sort(() => Math.random() - 0.5);
+        for (const w of pool) {
+          if (result.size >= 3) break;
+          result.add(w);
+        }
+
+        return Array.from(result).slice(0, 3);
+      }
+
+      selectQuizOption(index) {
+        if (!this.currentQuiz || this.currentQuiz.answered) return;
+        this.currentQuiz.answered = true;
+
+        const chosen = this.currentQuiz.options[index];
+        const isCorrect = chosen.correct;
+        const target = this.currentQuiz.targetKanji;
+
+        // Visual feedback on buttons
+        this.currentQuiz.options.forEach((opt, idx) => {
+          const btn = document.getElementById(`quiz-opt-${idx}`);
+          if (opt.correct) {
+            btn.classList.add('correct');
+          } else if (idx === index) {
+            btn.classList.add('incorrect');
+          }
+          btn.disabled = true;
+        });
+
+        // Update card SRS record
+        const s = this.db.session;
+        let cardRecord = this.db.cards[String(target.id)];
+        if (!cardRecord) {
+          cardRecord = { id: target.id, status: 'new', repetitions: 0, intervalDays: 1, correctCount: 0, incorrectCount: 0 };
+          this.db.cards[String(target.id)] = cardRecord;
+        }
+
+        cardRecord.repetitions = (cardRecord.repetitions || 0) + 1;
+        cardRecord.lastReviewed = new Date().toISOString();
+        if (isCorrect) {
+          cardRecord.correctCount = (cardRecord.correctCount || 0) + 1;
+          if (cardRecord.status === 'new') cardRecord.status = 'learning';
+        } else {
+          cardRecord.incorrectCount = (cardRecord.incorrectCount || 0) + 1;
+          cardRecord.status = 'learning';
+          s.queue.push(target.id);
+        }
+
+        this.db.stats.totalReviews = (this.db.stats.totalReviews || 0) + 1;
+        if (isCorrect) this.db.stats.totalCorrect = (this.db.stats.totalCorrect || 0) + 1;
+        else this.db.stats.totalIncorrect = (this.db.stats.totalIncorrect || 0) + 1;
+
+        this.saveLocal();
+        this.syncReviewToCloud(target.id, isCorrect, 'quiz');
+        this.syncSessionSaveToCloud();
+
+        // Show feedback panel
+        const feedbackBox = document.getElementById('quiz-feedback-box');
+        const feedbackTitle = document.getElementById('quiz-feedback-title');
+        const feedbackDetail = document.getElementById('quiz-feedback-detail');
+
+        const quizData = this.currentQuiz;
+        const targetWord = quizData.targetWord || target.kanji;
+        const targetReading = quizData.targetReading || '';
+        const targetMeaning = quizData.targetMeaning || target.meaning;
+        const correctVal = quizData.correctValue;
+
+        feedbackTitle.textContent = isCorrect ? '✓ Chính xác!' : `✗ Chưa chính xác (Đáp án đúng: ${correctVal})`;
+        feedbackTitle.style.color = isCorrect ? 'var(--success)' : 'var(--danger)';
+
+        // Extract all Kanji characters from the compound word
+        const kanjiChars = (targetWord.match(/[\u4e00-\u9faf]/g) || [target.kanji]);
+        const uniqueChars = Array.from(new Set(kanjiChars));
+
+        const kanjiBreakdownHtml = uniqueChars.map(ch => {
+          const k = this.findKanjiByChar(ch);
+          if (k) {
+            const onStr = (k.on || []).join(', ') || '—';
+            const kunStr = (k.kun || []).join(', ') || '—';
+            return `
+              <div style="background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:0.6rem 0.85rem; margin-top:0.4rem;">
+                <div style="display:flex; align-items:baseline; gap:0.5rem; margin-bottom:0.25rem;">
+                  <strong style="font-family:var(--font-kanji); font-size:1.35rem; color:var(--text);">${k.kanji}</strong>
+                  <span style="color:var(--accent); font-weight:700; font-size:0.95rem;">[${k.hv || ''}]</span>
+                  <span style="color:var(--text); font-size:0.9rem;">${k.meaning}</span>
+                </div>
+                <div style="display:flex; flex-wrap:wrap; gap:0.8rem; font-size:0.78rem; color:var(--text-muted); margin-bottom:0.2rem;">
+                  <span>Âm On: <strong style="font-family:var(--font-jp); color:var(--text);">${onStr}</strong></span>
+                  <span>Âm Kun: <strong style="font-family:var(--font-jp); color:var(--text);">${kunStr}</strong></span>
+                </div>
+                ${k.radicals ? `<div style="font-size:0.78rem; color:var(--text-muted); font-style:italic;">🧩 ${k.radicals}</div>` : ''}
+              </div>
+            `;
+          } else {
+            return `
+              <div style="background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:0.5rem 0.85rem; margin-top:0.4rem;">
+                <strong style="font-family:var(--font-kanji); font-size:1.25rem;">${ch}</strong>
+              </div>
+            `;
+          }
+        }).join('');
+
+        feedbackDetail.innerHTML = `
+          <!-- Compound Word Header with Meaning -->
+          <div style="background:var(--surface-elevated); border:1px solid var(--border); border-radius:10px; padding:0.75rem 1rem; margin-bottom:0.6rem;">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.25rem;">
+              <div style="display:flex; align-items:baseline; gap:0.5rem;">
+                <strong style="font-family:var(--font-kanji); font-size:1.6rem; color:var(--text);">${targetWord}</strong>
+                <span style="font-family:var(--font-jp); color:var(--accent); font-size:1.15rem; font-weight:600;">【${targetReading}】</span>
+              </div>
+              <button class="icon-btn" title="Phát âm" onclick="event.stopPropagation(); app.speakText('${targetWord}')" style="width:1.8rem;height:1.8rem;font-size:0.8rem;">🔊</button>
+            </div>
+            <div style="font-size:0.95rem; color:var(--text); font-weight:600;">
+              👉 Ý nghĩa: <span style="color:var(--text); font-weight:normal;">${targetMeaning}</span>
+            </div>
+          </div>
+
+          <!-- Explanation for ALL Kanji characters in this compound word -->
+          <div style="margin-top:0.4rem;">
+            <div style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-muted); font-weight:700; margin-bottom:0.25rem;">
+              Chiết tự & Giải thích các chữ Hán cấu thành (${uniqueChars.length} chữ):
+            </div>
+            ${kanjiBreakdownHtml}
+          </div>
+        `;
+        feedbackBox.classList.add('active');
+      }
+
+      nextQuizQuestion() {
+        if (!this.currentQuiz || !this.currentQuiz.answered) return;
+        const s = this.db.session;
+        s.currentIndex++;
+        s.completed = (s.completed || 0) + 1;
+        this.saveLocal();
+        this.loadQuizStep();
+      }
+
+      completeSession() {
+        this.db.session.active = false;
+        this.saveLocal();
+        this.syncSessionCompleteToCloud();
+        alert('🎉 Xin chúc mừng! Bạn đã hoàn thành toàn bộ thẻ trong buổi học này!');
+        this.navigate('home');
+      }
+
+      // --- BOOKMARK CONTROLLER ---
+
+      toggleCurrentBookmark() {
+        if (!this.db.session || !this.db.session.active) return;
+        const kanjiId = this.db.session.queue[this.db.session.currentIndex];
+        this.toggleBookmark(kanjiId);
+
+        const isBm = (this.db.bookmarks || []).includes(kanjiId);
+        const bmBtn = document.getElementById('btn-toggle-bookmark');
+        bmBtn.textContent = isBm ? '★ Đã đánh dấu' : '🔖 Đánh dấu';
+        bmBtn.style.color = isBm ? 'var(--accent)' : 'inherit';
+      }
+
+      toggleBookmark(kanjiId) {
+        if (!this.db.bookmarks) this.db.bookmarks = [];
+        const idx = this.db.bookmarks.indexOf(kanjiId);
+        if (idx === -1) {
+          this.db.bookmarks.push(kanjiId);
+          this.showToast('Đã đánh dấu chữ Hán này! 🔖');
+        } else {
+          this.db.bookmarks.splice(idx, 1);
+          this.showToast('Đã bỏ đánh dấu.');
+        }
+        this.saveLocal();
+        this.syncBookmarkToCloud(kanjiId);
+      }
+
+      // --- BROWSE & REFERENCE GRID ---
+
+      populateChapterDropdown() {
+        const select = document.getElementById('browse-chapter-filter');
+        const chapterListModal = document.getElementById('chapter-selection-list');
+        if (!select || !chapterListModal) return;
+
+        select.innerHTML = '<option value="all">Tất cả các chương</option>';
+        chapterListModal.innerHTML = '';
+
+        // Extract unique chapters
+        const chapterMap = new Map();
+        this.kanjiList.forEach(k => {
+          if (!chapterMap.has(k.chapter)) {
+            chapterMap.set(k.chapter, k.chapterName);
+          }
+        });
+
+        chapterMap.forEach((name, num) => {
+          // Dropdown option
+          const opt = document.createElement('option');
+          opt.value = num;
+          opt.textContent = `${num}章 ${name}`;
+          select.appendChild(opt);
+
+          // Modal item
+          const btn = document.createElement('button');
+          btn.className = 'btn';
+          btn.style.textAlign = 'left';
+          btn.style.justifyContent = 'flex-start';
+          btn.innerHTML = `<strong>${num}章</strong> &nbsp; ${name}`;
+          btn.onclick = () => {
+            this.closeChapterModal();
+            this.startSession('flashcard', 'chapter', num, false);
+          };
+          chapterListModal.appendChild(btn);
+        });
+      }
+
+      renderBrowseGrid() {
+        const query = (document.getElementById('browse-search').value || '').toLowerCase().trim();
+        const chFilter = document.getElementById('browse-chapter-filter').value;
+        const stFilter = document.getElementById('browse-status-filter').value;
+
+        const grid = document.getElementById('browse-grid');
+        const bms = this.db.bookmarks || [];
+
+        const filtered = this.kanjiList.filter(k => {
+          // Chapter
+          if (chFilter !== 'all' && k.chapter !== Number(chFilter)) return false;
+
+          // Status
+          const cardRecord = this.db.cards[String(k.id)] || { status: 'new' };
+          if (stFilter === 'bookmarked') {
+            if (!bms.includes(k.id)) return false;
+          } else if (stFilter !== 'all' && cardRecord.status !== stFilter) {
+            return false;
+          }
+
+          // Search
+          if (query) {
+            const matchKanji = k.kanji.includes(query);
+            const matchHv = (k.hv || '').toLowerCase().includes(query);
+            const matchMeaning = k.meaning.toLowerCase().includes(query);
+            const matchReading = [...(k.on || []), ...(k.kun || [])].some(r => r.toLowerCase().includes(query));
+            const matchEx = (k.examples || []).some(e => {
+              const w = e.word || e.w || '';
+              const m = e.meaning || e.m || '';
+              return w.includes(query) || m.toLowerCase().includes(query);
+            });
+            return matchKanji || matchHv || matchMeaning || matchReading || matchEx;
+          }
+
+          return true;
+        });
+
+        grid.innerHTML = filtered.map(k => {
+          const cardRecord = this.db.cards[String(k.id)] || { status: 'new' };
+          const statusClass = `status-${cardRecord.status}`;
+          const isBm = bms.includes(k.id);
+
+          return `
+            <div class="grid-card" onclick="app.inspectKanji(${k.id})">
+              <span class="status-dot ${statusClass}"></span>
+              <div class="grid-kanji">${k.kanji}</div>
+              <div class="grid-hv">${k.hv || ''}</div>
+              <div class="grid-reading">${(k.on && k.on[0]) || (k.kun && k.kun[0]) || '—'}</div>
+              <div class="grid-meaning">${k.meaning}</div>
+              ${isBm ? '<div style="position:absolute; bottom:6px; right:8px; font-size:0.75rem; color:var(--accent);">★</div>' : ''}
+            </div>
+          `;
+        }).join('');
+      }
+
+      inspectKanji(id) {
+        const k = this.kanjiList.find(item => item.id === id);
+        if (!k) return;
+
+        const cardRecord = this.db.cards[String(id)] || { status: 'new' };
+        const isBm = (this.db.bookmarks || []).includes(id);
+
+        const statusMap = { 'new': 'Chưa học', 'learning': 'Đang học', 'mastered': 'Đã thuộc' };
+        const statusLabel = statusMap[cardRecord.status] || cardRecord.status;
+
+        const modalContent = document.getElementById('modal-content');
+        modalContent.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem;">
+            <div>
+              <div style="display:flex; align-items:baseline; gap:0.75rem;">
+                <div style="font-family:var(--font-kanji); font-size:4.5rem; line-height:1; color:var(--text);">${k.kanji}</div>
+                <div style="font-size:1.5rem; font-weight:700; color:var(--accent); letter-spacing:0.05em;">[${k.hv || ''}]</div>
+              </div>
+              <div style="font-size:0.85rem; color:var(--text-muted); margin-top:0.25rem;">${k.chapter}章 ${k.chapterName} · ${k.section} · Trang ${k.page}</div>
+            </div>
+            <div style="text-align:right;">
+              <span class="card-badge">${k.strokeCount} nét</span>
+              <div style="margin-top:0.5rem; font-size:0.85rem; text-transform:capitalize; font-weight:600; color:var(--accent);">${statusLabel}</div>
+            </div>
+          </div>
+
+          <div style="font-size:1.2rem; font-weight:600; color:var(--accent); margin-bottom:1rem;">${k.meaning}</div>
+
+          <!-- Radicals & Chiết tự -->
+          ${k.radicals ? `
+          <div class="radicals-block" style="margin-bottom:1.25rem;">
+            <div class="label">🧩 Bộ thủ & Chiết tự ghi nhớ</div>
+            <div class="value">${k.radicals}</div>
+          </div>
+          ` : ''}
+
+          <div class="readings-block">
+            <div class="reading-item">
+              <div class="label">Âm On</div>
+              <div class="value">${k.on && k.on.length ? k.on.join(', ') : '—'}</div>
+            </div>
+            <div class="reading-item">
+              <div class="label">Âm Kun</div>
+              <div class="value">${k.kun && k.kun.length ? k.kun.join(', ') : '—'}</div>
+            </div>
+          </div>
+
+          <div class="section-title">
+            <span>Từ ghép & Ví dụ trong sách</span>
+            <button class="icon-btn" title="Phát âm" onclick="app.speakText('${k.kanji}')" style="width:1.5rem;height:1.5rem;font-size:0.75rem;">🔊</button>
+          </div>
+          <div class="examples-list" style="margin-bottom:1.5rem;">
+            ${(k.examples || []).map(ex => {
+              const word = ex.word || ex.w || '';
+              const reading = ex.reading || ex.r || '';
+              const meaning = ex.meaning || ex.m || '';
+              return `
+                <div class="example-row">
+                  <span class="example-word"><ruby>${word}<rt>${reading}</rt></ruby></span>
+                  <span class="example-meaning">${meaning}</span>
+                </div>
+              `;
+            }).join('')}
+          </div>
+
+          <div style="display:flex; gap:0.5rem;">
+            <button class="btn btn-sm" onclick="app.toggleBookmark(${k.id}); app.inspectKanji(${k.id}); app.renderBrowseGrid();" style="flex:1;">
+              ${isBm ? '★ Đã đánh dấu' : '🔖 Đánh dấu'}
+            </button>
+            <button class="btn btn-sm btn-primary" onclick="app.closeKanjiModal(); app.startSession('flashcard', 'chapter', ${k.chapter}, false);" style="flex:1;">
+              Học chương ${k.chapter} →
+            </button>
+          </div>
+        `;
+
+        const modalCard = document.querySelector('#kanji-modal .modal-card');
+        if (modalCard) modalCard.scrollTop = 0;
+
+        document.getElementById('kanji-modal').classList.add('active');
+        this.syncModalScrollLock();
+      }
+
+      closeKanjiModal() {
+        document.getElementById('kanji-modal').classList.remove('active');
+        this.syncModalScrollLock();
+      }
+
+      openChapterModal() {
+        document.getElementById('chapter-modal').classList.add('active');
+        this.syncModalScrollLock();
+      }
+
+      closeChapterModal() {
+        document.getElementById('chapter-modal').classList.remove('active');
+        this.syncModalScrollLock();
+      }
+
+      // --- SPECIAL READINGS VIEW ---
+
+      renderSpecialReadings() {
+        const tbody = document.getElementById('special-readings-tbody');
+        tbody.innerHTML = this.specialReadings.map(item => `
+          <tr>
+            <td style="font-family:var(--font-kanji); font-size:1.2rem; font-weight:600;">${item.word}</td>
+            <td style="font-family:var(--font-jp); color:var(--accent);">${item.reading}</td>
+            <td style="color:var(--text-muted);">${item.meaning}</td>
+            <td>
+              <button class="icon-btn" title="Phát âm" onclick="app.speakText('${item.word}')" style="width:1.6rem;height:1.6rem;font-size:0.75rem;">🔊</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      // --- SPEECH SYNTHESIS ---
+
+      speakCurrent() {
+        if (!this.db.session || !this.db.session.active) return;
+        const currentId = this.db.session.queue[this.db.session.currentIndex];
+        const kanjiObj = this.kanjiList.find(k => k.id === currentId);
+        if (kanjiObj) this.speakText(kanjiObj.kanji);
+      }
+
+      speakText(text) {
+        if (!('speechSynthesis' in window)) return;
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = 'ja-JP';
+        utter.rate = 0.9;
+        window.speechSynthesis.speak(utter);
+      }
+
+      // --- KEYBOARD LISTENERS ---
+
+      setupKeyboardListeners() {
+        document.addEventListener('keydown', (e) => {
+          // Global save shortcut Ctrl+S / Cmd+S
+          if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+            e.preventDefault();
+            this.exportDatabase();
+            return;
+          }
+
+          // If any modal is active, handle modal Escape and suppress shortcuts
+          if (document.querySelector('.modal-overlay.active')) {
+            if (e.key === 'Escape') {
+              this.closeKanjiModal();
+              this.closeChapterModal();
+              this.closeAuthPromptModal();
+              this.closeUserAccountModal();
+              this.cancelExitStudy();
+            }
+            return;
+          }
+
+          if (e.key === 'Escape') {
+            if (this.currentView === 'study') {
+              this.exitStudy();
+            }
+            return;
+          }
+
+          // Study mode shortcuts
+          if (this.currentView === 'study' && this.db.session && this.db.session.active) {
+            const s = this.db.session;
+
+            if (s.mode === 'flashcard') {
+              if (e.code === 'Space' || e.key === 'Enter') {
+                e.preventDefault();
+                this.flipCard();
+              } else if (e.key === 'ArrowLeft') {
+                // Arrow Left = Chưa thuộc / Học lại
+                e.preventDefault();
+                this.answerCard(false);
+              } else if (e.key === 'ArrowRight') {
+                // Arrow Right = Đã thuộc / Tiếp tục
+                e.preventDefault();
+                this.answerCard(true);
+              } else if (e.key.toLowerCase() === 'b') {
+                this.toggleCurrentBookmark();
+              } else if (e.key.toLowerCase() === 'r') {
+                this.speakCurrent();
+              }
+            } else if (s.mode === 'quiz') {
+              if (['1', '2', '3', '4'].includes(e.key)) {
+                const idx = parseInt(e.key, 10) - 1;
+                this.selectQuizOption(idx);
+              } else if (e.key === 'Enter' && this.currentQuiz && this.currentQuiz.answered) {
+                this.nextQuizQuestion();
+              }
+            }
+          }
+        });
+      }
+    }
+
+    // Initialize application on DOM ready
+    window.addEventListener('DOMContentLoaded', () => {
+      window.app = new KanjiApp();
+    });
+  </script>
+</body>
+</html>

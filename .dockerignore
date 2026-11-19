@@ -1,0 +1,12 @@
+__pycache__
+*.pyc
+*.pyo
+.git
+.github
+.vscode
+.gemini
+*.log
+*.pdf
+make_data*.py
+gen_*.py
+test_*.js
