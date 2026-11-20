@@ -73,6 +73,7 @@ def get_current_user_id(authorization: Optional[str] = Header(None)) -> str:
 # -------------------------------------------------------------
 class GoogleAuthRequest(BaseModel):
     id_token: str
+    level: Optional[str] = "N3"
 
 class SettingsUpdateRequest(BaseModel):
     current_level: Optional[str] = None
@@ -177,38 +178,109 @@ def get_health():
         "errors": driver_errors
     }
 
-@app.post("/api/auth/google")
-@app.post("/auth/google")
-def auth_google(req: GoogleAuthRequest):
-    """Authenticate with Google ID Token from Google Identity Services."""
-    profile = verify_google_id_token(req.id_token)
-    if not profile:
-        raise HTTPException(status_code=400, detail="Google Token không hợp lệ hoặc đã hết hạn")
-
-    result = upsert_google_user(profile)
-    return result
-
-@app.get("/api/auth/me")
-@app.get("/auth/me")
-def get_current_user(user_id: str = Depends(get_current_user_id)):
-    """Fetch current user profile and preferences."""
+def fetch_user_bundle(user_id: str, level: str = "N3") -> Dict[str, Any]:
+    """Helper to fetch full user state (profile, settings, progress, active session) in one fast connection."""
     conn = get_db()
     cursor = conn.cursor()
+    lvl = (level or "N3").upper()
 
     cursor.execute("SELECT id, email, name, avatar_url, created_at, last_login_at FROM users WHERE id = ?", (user_id,))
     user_row = cursor.fetchone()
     if not user_row:
         conn.close()
-        raise HTTPException(status_code=404, detail="Không tìm thấy người dùng")
+        return {}
 
     cursor.execute("SELECT * FROM user_settings WHERE user_id = ?", (user_id,))
     settings_row = cursor.fetchone()
 
+    cursor.execute("""
+        SELECT kanji_id, status, repetitions, interval_days, ease_factor,
+               correct_count, incorrect_count, is_bookmarked, last_reviewed_at, next_review_at
+        FROM user_kanji_progress
+        WHERE user_id = ? AND level = ?
+        ORDER BY kanji_id ASC
+    """, (user_id, lvl))
+    rows = cursor.fetchall()
+    cards = {}
+    bookmarks = []
+    for r in rows:
+        kid_str = str(r["kanji_id"])
+        cards[kid_str] = {
+            "id": r["kanji_id"],
+            "status": r["status"],
+            "repetitions": r["repetitions"],
+            "intervalDays": r["interval_days"],
+            "easeFactor": r["ease_factor"],
+            "correctCount": r["correct_count"],
+            "incorrectCount": r["incorrect_count"],
+            "isBookmarked": bool(r["is_bookmarked"]),
+            "lastReviewed": r["last_reviewed_at"],
+            "nextReview": r["next_review_at"]
+        }
+        if r["is_bookmarked"]:
+            bookmarks.append(r["kanji_id"])
+
+    cursor.execute("""
+        SELECT id, level, mode, filter_type, chapter_num, queue_json, current_index, completed_count, updated_at
+        FROM study_sessions
+        WHERE user_id = ? AND level = ? AND is_active = 1
+        ORDER BY updated_at DESC LIMIT 1
+    """, (user_id, lvl))
+    sess_row = cursor.fetchone()
+    session_data = None
+    if sess_row:
+        try:
+            q_list = json.loads(sess_row["queue_json"])
+        except Exception:
+            q_list = []
+        session_data = {
+            "id": sess_row["id"],
+            "level": sess_row["level"],
+            "mode": sess_row["mode"],
+            "filter": sess_row["filter_type"],
+            "chapter": sess_row["chapter_num"],
+            "queue": q_list,
+            "currentIndex": sess_row["current_index"],
+            "completed": sess_row["completed_count"],
+            "updatedAt": sess_row["updated_at"]
+        }
+
     conn.close()
     return {
         "user": dict(user_row),
-        "settings": dict(settings_row) if settings_row else {}
+        "settings": dict(settings_row) if settings_row else {},
+        "progress": {
+            "level": lvl,
+            "cards": cards,
+            "bookmarks": bookmarks
+        },
+        "session": session_data
     }
+
+@app.post("/api/auth/google")
+@app.post("/auth/google")
+def auth_google(req: GoogleAuthRequest):
+    """Authenticate with Google ID Token and immediately bundle user, settings, progress, and active session."""
+    profile = verify_google_id_token(req.id_token)
+    if not profile:
+        raise HTTPException(status_code=400, detail="Google Token không hợp lệ hoặc đã hết hạn")
+
+    auth_res = upsert_google_user(profile)
+    user_id = auth_res["user"]["id"]
+    lvl = (req.level or "N3").upper()
+
+    bundle = fetch_user_bundle(user_id, lvl)
+    bundle["token"] = auth_res["token"]
+    return bundle
+
+@app.get("/api/auth/me")
+@app.get("/auth/me")
+def get_current_user(level: Optional[str] = "N3", user_id: str = Depends(get_current_user_id)):
+    """Fetch current user profile, preferences, level progress and active session in one call."""
+    bundle = fetch_user_bundle(user_id, level or "N3")
+    if not bundle or "user" not in bundle:
+        raise HTTPException(status_code=404, detail="Không tìm thấy người dùng")
+    return bundle
 
 @app.post("/api/auth/settings")
 @app.post("/auth/settings")

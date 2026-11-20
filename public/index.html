@@ -2638,10 +2638,11 @@
 
       async loginWithToken(token) {
         try {
+          const authPayload = { id_token: token, level: this.currentLevel };
           let res = await fetch('/api/auth/google', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id_token: token })
+            body: JSON.stringify(authPayload)
           });
 
           if (!res.ok) {
@@ -2649,7 +2650,7 @@
             res = await fetch('/auth/google', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ id_token: token })
+              body: JSON.stringify(authPayload)
             });
           }
 
@@ -2662,52 +2663,101 @@
           const data = await res.json();
           localStorage.setItem('kanji_auth_token', data.token);
           this.currentUser = data.user;
-          this.userSettings = null;
+          this.userSettings = data.settings || {};
           this.currentQuiz = null;
 
-          const resumeContainer = document.getElementById('resume-container');
-          if (resumeContainer) resumeContainer.innerHTML = '';
+          // 1. Immediately apply bundle data from the single login response
+          if (!this.db || (this.db.meta && this.db.meta.level !== this.currentLevel)) {
+            this.db = this.createDefaultDb();
+          }
 
-          this.showToast(`Xin chào ${data.user.name || data.user.email}!`);
+          let localMirror = null;
+          try {
+            const localRaw = localStorage.getItem(this.getLocalDbKey());
+            if (localRaw) localMirror = JSON.parse(localRaw);
+          } catch (e) {}
 
-          // Safeguard: Check if local storage (under user ID, guest mode, or legacy key)
-          // has existing progress for any level (N5..N1) and auto-sync it to the server
-          const allLevels = ['n1', 'n2', 'n3', 'n4', 'n5'];
-          for (const lvl of allLevels) {
-            const userKey = `kanji_user_${data.user.id}_${lvl}_db`;
-            const guestKey = `kanji_guest_${lvl}_db`;
-            const legacyKey = `kanji_master_${lvl}_db`;
-            const candidateStr = localStorage.getItem(userKey) || localStorage.getItem(guestKey) || localStorage.getItem(legacyKey);
-            if (candidateStr) {
-              try {
-                const parsed = JSON.parse(candidateStr);
-                const hasLearned = parsed.cards && Object.values(parsed.cards).some(c => (c.repetitions > 0) || (c.status && c.status !== 'new'));
-                if (hasLearned) {
-                  localStorage.setItem(userKey, candidateStr);
-                  await fetch('/api/sync/import-local', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                      'Authorization': `Bearer ${data.token}`
-                    },
-                    body: JSON.stringify({
-                      level: lvl.toUpperCase(),
-                      cards: parsed.cards,
-                      bookmarks: parsed.bookmarks || [],
-                      session: parsed.session || null
-                    })
-                  }).catch(() => {});
+          if (data.progress) {
+            this.db.cards = data.progress.cards || {};
+            this.db.bookmarks = data.progress.bookmarks || [];
+            if (localMirror && localMirror.cards) {
+              for (const [kId, lCard] of Object.entries(localMirror.cards)) {
+                if (!this.db.cards[kId] || (lCard.repetitions > (this.db.cards[kId].repetitions || 0))) {
+                  this.db.cards[kId] = lCard;
                 }
-              } catch (e) {}
+              }
             }
           }
 
-          await this.loadDatabase();
+          if (data.session) {
+            this.db.session = {
+              active: true,
+              level: data.session.level || this.currentLevel,
+              mode: data.session.mode || 'flashcard',
+              filter: data.session.filter || 'all',
+              chapter: data.session.chapter || null,
+              queue: data.session.queue || [],
+              currentIndex: data.session.currentIndex || 0,
+              completed: data.session.completed || 0
+            };
+          } else if (localMirror && localMirror.session && localMirror.session.active && (localMirror.session.currentIndex > 0 || localMirror.session.completed > 0)) {
+            this.db.session = localMirror.session;
+          }
+
+          this.saveLocal();
+
+          // 2. Render UI immediately (Zero delay, instant data display!)
+          this.renderAuthUI();
+          this.updateDbStatusText(`Database đám mây (${this.currentUser.email})`);
           this.updateDashboard();
           this.renderBrowseGrid();
+
+          this.showToast(`Đăng nhập thành công! Xin chào ${data.user.name || data.user.email}`);
+
+          // 3. Background sync of any offline local data (does NOT block UI or wait!)
+          this.backgroundSyncOfflineData(data.user.id, data.token);
         } catch (e) {
           alert('Lỗi kết nối tới máy chủ API: ' + e.message);
         }
+      }
+
+      backgroundSyncOfflineData(userId, token) {
+        setTimeout(async () => {
+          try {
+            const allLevels = ['n1', 'n2', 'n3', 'n4', 'n5'];
+            for (const lvl of allLevels) {
+              const userKey = `kanji_user_${userId}_${lvl}_db`;
+              const guestKey = `kanji_guest_${lvl}_db`;
+              const legacyKey = `kanji_master_${lvl}_db`;
+              const candidateStr = localStorage.getItem(guestKey) || localStorage.getItem(legacyKey);
+              if (candidateStr) {
+                try {
+                  const parsed = JSON.parse(candidateStr);
+                  const hasLearned = parsed.cards && Object.values(parsed.cards).some(c => (c.repetitions > 0) || (c.status && c.status !== 'new'));
+                  if (hasLearned) {
+                    await fetch('/api/sync/import-local', {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                      },
+                      body: JSON.stringify({
+                        level: lvl.toUpperCase(),
+                        cards: parsed.cards,
+                        bookmarks: parsed.bookmarks || [],
+                        session: parsed.session || null
+                      })
+                    });
+                    localStorage.removeItem(guestKey);
+                    localStorage.removeItem(legacyKey);
+                  }
+                } catch (e) {}
+              }
+            }
+          } catch (err) {
+            console.warn('Background offline sync warning:', err);
+          }
+        }, 100);
       }
 
       logout() {
@@ -2879,7 +2929,7 @@
         const token = localStorage.getItem('kanji_auth_token');
         if (token) {
           try {
-            const meRes = await fetch('/api/auth/me', {
+            const meRes = await fetch(`/api/auth/me?level=${this.currentLevel}`, {
               headers: { 'Authorization': `Bearer ${token}` }
             });
             if (meRes.ok) {
@@ -2888,72 +2938,58 @@
               this.userSettings = meData.settings || {};
               this.renderAuthUI();
 
-              // Fetch user's isolated cloud progress for current level
-              const progRes = await fetch(`/api/progress?level=${this.currentLevel}`, {
-                headers: { 'Authorization': `Bearer ${token}` }
-              });
-              if (progRes.ok) {
-                const progData = await progRes.json();
+              let localMirror = null;
+              try {
+                const localRaw = localStorage.getItem(this.getLocalDbKey());
+                if (localRaw) localMirror = JSON.parse(localRaw);
+              } catch (e) {}
 
-                let localMirror = null;
-                try {
-                  const localRaw = localStorage.getItem(this.getLocalDbKey());
-                  if (localRaw) localMirror = JSON.parse(localRaw);
-                } catch (e) {}
+              this.db = this.createDefaultDb();
 
-                this.db = this.createDefaultDb();
+              const progData = meData.progress || {};
+              const cloudLearned = progData.cards ? Object.values(progData.cards).filter(c => (c.repetitions > 0) || (c.status && c.status !== 'new')).length : 0;
+              const localLearned = (localMirror && localMirror.cards) ? Object.values(localMirror.cards).filter(c => (c.repetitions > 0) || (c.status && c.status !== 'new')).length : 0;
 
-                const cloudLearned = progData.cards ? Object.values(progData.cards).filter(c => (c.repetitions > 0) || (c.status && c.status !== 'new')).length : 0;
-                const localLearned = (localMirror && localMirror.cards) ? Object.values(localMirror.cards).filter(c => (c.repetitions > 0) || (c.status && c.status !== 'new')).length : 0;
-
-                if (cloudLearned === 0 && localLearned > 0) {
-                  // Cloud DB was wiped (e.g. cold restart on Vercel), but local has user progress!
-                  // Preserve user's local progress and push up to cloud!
-                  this.db.cards = localMirror.cards;
-                  this.db.bookmarks = localMirror.bookmarks || [];
-                  if (localMirror.session && localMirror.session.active) this.db.session = localMirror.session;
-                  this.syncBulkToCloud(this.currentLevel, this.db);
-                } else {
-                  this.db.cards = progData.cards || {};
-                  this.db.bookmarks = progData.bookmarks || [];
-                  if (localMirror && localMirror.cards) {
-                    for (const [kId, lCard] of Object.entries(localMirror.cards)) {
-                      if (!this.db.cards[kId] || (lCard.repetitions > (this.db.cards[kId].repetitions || 0))) {
-                        this.db.cards[kId] = lCard;
-                      }
+              if (cloudLearned === 0 && localLearned > 0) {
+                // Cloud DB was empty/wiped, but local has user progress!
+                this.db.cards = localMirror.cards;
+                this.db.bookmarks = localMirror.bookmarks || [];
+                if (localMirror.session && localMirror.session.active) this.db.session = localMirror.session;
+                this.syncBulkToCloud(this.currentLevel, this.db);
+              } else {
+                this.db.cards = progData.cards || {};
+                this.db.bookmarks = progData.bookmarks || [];
+                if (localMirror && localMirror.cards) {
+                  for (const [kId, lCard] of Object.entries(localMirror.cards)) {
+                    if (!this.db.cards[kId] || (lCard.repetitions > (this.db.cards[kId].repetitions || 0))) {
+                      this.db.cards[kId] = lCard;
                     }
                   }
                 }
-
-                // Fetch active session for current level if any
-                const sessRes = await fetch(`/api/session/current?level=${this.currentLevel}`, {
-                  headers: { 'Authorization': `Bearer ${token}` }
-                });
-                if (sessRes.ok) {
-                  const sessData = await sessRes.json();
-                  if (sessData.session) {
-                    const sData = sessData.session;
-                    const curIdx = sData.currentIndex !== undefined ? sData.currentIndex : (sData.current_index !== undefined ? sData.current_index : 0);
-                    const compCnt = sData.completed !== undefined ? sData.completed : (sData.completed_count !== undefined ? sData.completed_count : 0);
-                    this.db.session = {
-                      active: true,
-                      level: sData.level || this.currentLevel,
-                      mode: sData.mode || 'flashcard',
-                      filter: sData.filter || sData.filter_type || 'all',
-                      chapter: sData.chapter !== undefined ? sData.chapter : (sData.chapter_num || null),
-                      queue: sData.queue || [],
-                      currentIndex: curIdx,
-                      completed: compCnt
-                    };
-                  } else if (localMirror && localMirror.session && localMirror.session.active && (localMirror.session.currentIndex > 0 || localMirror.session.completed > 0)) {
-                    this.db.session = localMirror.session;
-                    this.syncSessionSaveToCloud().catch(() => {});
-                  }
-                }
-                this.saveLocal();
-                this.updateDbStatusText(`Database đám mây (${this.currentUser.email})`);
-                return;
               }
+
+              if (meData.session) {
+                const sData = meData.session;
+                const curIdx = sData.currentIndex !== undefined ? sData.currentIndex : (sData.current_index !== undefined ? sData.current_index : 0);
+                const compCnt = sData.completed !== undefined ? sData.completed : (sData.completed_count !== undefined ? sData.completed_count : 0);
+                this.db.session = {
+                  active: true,
+                  level: sData.level || this.currentLevel,
+                  mode: sData.mode || 'flashcard',
+                  filter: sData.filter || sData.filter_type || 'all',
+                  chapter: sData.chapter !== undefined ? sData.chapter : (sData.chapter_num || null),
+                  queue: sData.queue || [],
+                  currentIndex: curIdx,
+                  completed: compCnt
+                };
+              } else if (localMirror && localMirror.session && localMirror.session.active && (localMirror.session.currentIndex > 0 || localMirror.session.completed > 0)) {
+                this.db.session = localMirror.session;
+                this.syncSessionSaveToCloud().catch(() => {});
+              }
+
+              this.saveLocal();
+              this.updateDbStatusText(`Database đám mây (${this.currentUser.email})`);
+              return;
             } else {
               localStorage.removeItem('kanji_auth_token');
               this.currentUser = null;
