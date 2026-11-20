@@ -3880,7 +3880,7 @@
 
         if (qType === 'jlpt_kanji_to_furi') {
           document.getElementById('quiz-type-label').textContent = `JLPT ${this.currentLevel} · Mondai 1 (漢字読み)`;
-          questionText = `<div class="quiz-prompt-text" style="font-size:2.6rem; font-family:var(--font-kanji); font-weight:700; letter-spacing:0.04em;">【${targetWord}】</div>`;
+          questionText = `<div class="quiz-prompt-text" style="font-size:2.6rem; font-family:var(--font-kanji); font-weight:700; letter-spacing:0.04em;">${targetWord}</div>`;
           contextText = `Chọn cách đọc Hiragana đúng của từ 【${targetWord}】:`;
           correctValue = targetReading;
           const wrongFuris = this.generateFuriganaDistractors(targetReading, targetWord);
@@ -3892,7 +3892,7 @@
           ];
         } else {
           document.getElementById('quiz-type-label').textContent = `JLPT ${this.currentLevel} · Mondai 2 (表記)`;
-          questionText = `<div class="quiz-prompt-text" style="font-size:2.2rem; font-family:var(--font-jp); color:var(--accent); font-weight:700;">【${targetReading}】</div>`;
+          questionText = `<div class="quiz-prompt-text" style="font-size:2.2rem; font-family:var(--font-jp); color:var(--accent); font-weight:700;">${targetReading}</div>`;
           contextText = `Từ 【${targetReading}】 được viết bằng chữ Hán nào?`;
           correctValue = targetWord;
           const wrongKanjis = this.generateKanjiDistractors(targetWord, targetKanji, distractors);
