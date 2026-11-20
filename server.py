@@ -98,7 +98,7 @@ class SessionSaveRequest(BaseModel):
     mode: str
     filter_type: str
     chapter_num: Optional[int] = None
-    queue: List[int]
+    queue: List[Any]
     current_index: int
     completed_count: int
 

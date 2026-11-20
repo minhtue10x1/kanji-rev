@@ -1920,14 +1920,24 @@
       </div>
 
       <!-- Mode 1: Random All -->
-      <div class="launch-card highlight" onclick="app.startQuizAll()" style="margin-bottom:1rem; cursor:pointer; padding:0.9rem 1rem; border:1.5px solid var(--accent); background:var(--surface);">
-        <div style="display:flex; align-items:center; gap:0.75rem;">
+      <div style="background:var(--surface-elevated); border:1px solid var(--border); border-radius:10px; padding:0.9rem 1rem; margin-bottom:1.15rem;">
+        <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.75rem;">
           <div style="font-size:1.75rem; background:var(--accent-soft); width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">⚡</div>
           <div style="flex:1;">
             <div style="font-weight:700; font-size:1rem; color:var(--text); margin-bottom:0.15rem;">Chế độ 1: Ngẫu nhiên Tất cả (Random All)</div>
-            <div style="font-size:0.8rem; color:var(--text-muted); line-height:1.4;" id="quiz-random-all-desc">Xáo trộn câu hỏi từ tất cả các chương của cấp độ hiện tại. Mô phỏng giống đề thi JLPT thực tế.</div>
+            <div style="font-size:0.8rem; color:var(--text-muted); line-height:1.4;" id="quiz-random-all-desc">Xáo trộn câu hỏi từ tất cả các chương, bao quát đầy đủ âm On và âm Kun.</div>
           </div>
-          <button class="btn btn-sm btn-accent" style="white-space:nowrap; flex-shrink:0;">Bắt đầu ngay →</button>
+        </div>
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <button class="btn btn-sm btn-accent" onclick="app.startQuizAll(40)" style="flex:1; justify-content:center; min-width:130px; font-weight:600;">
+            ⚡ 40 câu (Chuẩn JLPT)
+          </button>
+          <button class="btn btn-sm" onclick="app.startQuizAll(60)" style="flex:1; justify-content:center; min-width:130px; font-weight:600;">
+            🎯 60 câu (Chuyên sâu)
+          </button>
+          <button class="btn btn-sm" onclick="app.startQuizAll(null)" style="justify-content:center; color:var(--text-muted);">
+            Tất cả
+          </button>
         </div>
       </div>
 
@@ -3308,17 +3318,18 @@
         // Display ongoing session reminder ONLY if it strictly belongs to the CURRENTLY active level!
         if (s && s.active && s.level === this.currentLevel && s.queue && s.queue.length > 0 && s.currentIndex < s.queue.length) {
           const remaining = s.queue.length - s.currentIndex;
-          const currentKanjiId = s.queue[s.currentIndex];
+          const currentItem = s.queue[s.currentIndex];
+          const currentKanjiId = typeof currentItem === 'object' ? currentItem.id : currentItem;
           const kanjiObj = this.kanjiList.find(k => k.id === currentKanjiId);
           const modeName = s.mode === 'flashcard' ? 'Flashcard' : 'Trắc nghiệm';
           const charLabel = kanjiObj ? `${kanjiObj.kanji} (${kanjiObj.meaning})` : '';
+          const unit = s.mode === 'flashcard' ? 'chữ' : 'câu';
 
-          // Clear, intuitive progress display (eliminating confusing 'Còn lại 20/20')
           let progressInfo = '';
           if (s.currentIndex === 0) {
-            progressInfo = `Đang ở chữ đầu tiên (0 / ${s.queue.length} chữ đã học)`;
+            progressInfo = `Đang ở ${unit} đầu tiên (0 / ${s.queue.length} ${unit} đã học)`;
           } else {
-            progressInfo = `Đã học ${s.currentIndex} / ${s.queue.length} chữ · Còn lại ${remaining} chữ`;
+            progressInfo = `Đã học ${s.currentIndex} / ${s.queue.length} ${unit} · Còn lại ${remaining} ${unit}`;
           }
 
           resumeContainer.innerHTML = `
@@ -3341,7 +3352,7 @@
 
       // --- STUDY SESSION CONTROLLER ---
 
-      startSession(mode, filter, chapter = null, forceShuffle = null) {
+      startSession(mode, filter, chapter = null, forceShuffle = null, questionCount = null) {
         // If sequential flashcard and user already has an active ongoing session at current level:
         const s = this.db.session;
         if (filter === 'all' && mode === 'flashcard' && s && s.active && s.level === this.currentLevel && s.currentIndex > 0 && s.currentIndex < (s.queue ? s.queue.length : 0)) {
@@ -3373,26 +3384,38 @@
           return;
         }
 
-        // Determine ordering: sequential (default) or shuffle
-        let queueIds = pool.map(k => k.id);
-        const shouldShuffle = forceShuffle !== null ? forceShuffle : (this.db.settings && this.db.settings.shuffleQueue);
-        if (shouldShuffle) {
-          queueIds.sort(() => Math.random() - 0.5);
-        }
-
-        // In sequential book order (chuẩn sách), intelligently jump to first unlearned kanji!
+        let finalQueue = [];
         let initialIndex = 0;
-        if (!shouldShuffle && filter === 'all') {
-          const firstNewIdx = queueIds.findIndex(id => {
-            const c = this.db.cards && this.db.cards[String(id)];
-            return !c || c.status === 'new' || (c.repetitions || 0) === 0;
-          });
-          if (firstNewIdx > 0) {
-            initialIndex = firstNewIdx;
+
+        if (mode === 'quiz') {
+          // Comprehensive Quiz Generator:
+          // Generates 40-60 diverse questions covering both ON and KUN readings!
+          const targetLimit = filter === 'all' ? (questionCount || 50) : null;
+          finalQueue = this.buildQuizQueue(pool, targetLimit);
+        } else {
+          // Flashcard Queue: 1 card per Kanji
+          let queueIds = pool.map(k => k.id);
+          const shouldShuffle = forceShuffle !== null ? forceShuffle : (this.db.settings && this.db.settings.shuffleQueue);
+          if (shouldShuffle) {
+            queueIds.sort(() => Math.random() - 0.5);
+          }
+          finalQueue = queueIds;
+
+          // In sequential book order (chuẩn sách), intelligently jump to first unlearned kanji!
+          if (!shouldShuffle && filter === 'all') {
+            const firstNewIdx = finalQueue.findIndex(id => {
+              const c = this.db.cards && this.db.cards[String(id)];
+              return !c || c.status === 'new' || (c.repetitions || 0) === 0;
+            });
+            if (firstNewIdx > 0) {
+              initialIndex = firstNewIdx;
+            }
           }
         }
 
-        const startKanjiObj = pool.find(k => k.id === queueIds[initialIndex]) || pool[0];
+        const firstItem = finalQueue[initialIndex];
+        const firstKanjiId = typeof firstItem === 'object' ? firstItem.id : firstItem;
+        const startKanjiObj = pool.find(k => k.id === firstKanjiId) || pool[0];
 
         this.db.session = {
           active: true,
@@ -3400,16 +3423,151 @@
           mode: mode,
           filter: filter,
           chapter: chapter,
-          queue: queueIds,
+          queue: finalQueue,
           currentIndex: initialIndex,
           completed: initialIndex,
-          lastKanjiId: queueIds[initialIndex] || queueIds[0],
+          lastKanjiId: firstKanjiId,
           lastKanjiChar: startKanjiObj ? startKanjiObj.kanji : ''
         };
         this.saveLocal();
         this.syncSessionSaveToCloud();
 
         this.launchActiveSession();
+      }
+
+      buildQuizQueue(pool, targetCount = null) {
+        const rawItems = [];
+
+        pool.forEach(k => {
+          const exList = k.examples || [];
+          if (exList.length === 0) {
+            const defaultReading = ((k.kun && k.kun[0]) || (k.on && k.on[0]) || '').replace(/\./g, '');
+            rawItems.push({
+              id: k.id,
+              word: k.kanji,
+              reading: defaultReading,
+              meaning: k.meaning,
+              qType: 'jlpt_kanji_to_furi'
+            });
+            rawItems.push({
+              id: k.id,
+              word: k.kanji,
+              reading: defaultReading,
+              meaning: k.meaning,
+              qType: 'jlpt_furi_to_kanji'
+            });
+            return;
+          }
+
+          // Separate examples into Kunyomi (has okurigana/hiragana) and Onyomi (pure kanji compound)
+          const kunExamples = [];
+          const onExamples = [];
+          exList.forEach(ex => {
+            const w = ex.word || ex.w || '';
+            const r = ex.reading || ex.r || '';
+            const m = ex.meaning || ex.m || '';
+            if (!w || !r) return;
+            const hasKana = /[\u3040-\u309f]/.test(w);
+            if (hasKana) {
+              kunExamples.push({ word: w, reading: r, meaning: m });
+            } else {
+              onExamples.push({ word: w, reading: r, meaning: m });
+            }
+          });
+
+          // Interleave On and Kun examples to maximize phonetic variety
+          const chosen = [];
+          const maxPerKanji = pool.length <= 25 ? 3 : 2; // In chapter mode (<=25 kanji), take up to 3 diverse examples!
+
+          let iOn = 0, iKun = 0;
+          while (chosen.length < maxPerKanji && (iOn < onExamples.length || iKun < kunExamples.length)) {
+            if (iOn < onExamples.length && (chosen.length % 2 === 0 || iKun >= kunExamples.length)) {
+              chosen.push(onExamples[iOn++]);
+            } else if (iKun < kunExamples.length) {
+              chosen.push(kunExamples[iKun++]);
+            } else if (iOn < onExamples.length) {
+              chosen.push(onExamples[iOn++]);
+            }
+          }
+
+          // If still less than 2, fill from remaining examples
+          if (chosen.length < 2 && exList.length > chosen.length) {
+            for (const ex of exList) {
+              const w = ex.word || ex.w;
+              if (!chosen.some(c => c.word === w)) {
+                chosen.push({ word: w, reading: ex.reading || ex.r, meaning: ex.meaning || ex.m });
+                if (chosen.length >= 2) break;
+              }
+            }
+          }
+
+          // If only 1 example available in data, add it twice with both Mondai 1 and Mondai 2
+          if (chosen.length === 1) {
+            rawItems.push({
+              id: k.id,
+              word: chosen[0].word,
+              reading: chosen[0].reading,
+              meaning: chosen[0].meaning,
+              qType: 'jlpt_kanji_to_furi'
+            });
+            rawItems.push({
+              id: k.id,
+              word: chosen[0].word,
+              reading: chosen[0].reading,
+              meaning: chosen[0].meaning,
+              qType: 'jlpt_furi_to_kanji'
+            });
+          } else {
+            chosen.forEach((ex, idx) => {
+              rawItems.push({
+                id: k.id,
+                word: ex.word,
+                reading: ex.reading,
+                meaning: ex.meaning,
+                qType: idx % 2 === 0 ? 'jlpt_kanji_to_furi' : 'jlpt_furi_to_kanji'
+              });
+            });
+          }
+        });
+
+        // Anti-clustering shuffle: ensure the same Kanji character is spaced apart
+        return this.antiClusterShuffle(rawItems, targetCount);
+      }
+
+      antiClusterShuffle(items, maxCount = null) {
+        if (!items || items.length <= 1) return items;
+
+        // Group by id
+        const byId = {};
+        items.forEach(it => {
+          if (!byId[it.id]) byId[it.id] = [];
+          byId[it.id].push(it);
+        });
+
+        // Randomize order within each group
+        Object.values(byId).forEach(group => {
+          group.sort(() => Math.random() - 0.5);
+        });
+
+        const remaining = [...items];
+        const result = [];
+        const lastSeen = {};
+
+        const totalToPick = (maxCount && maxCount < items.length) ? maxCount : items.length;
+
+        for (let step = 0; step < totalToPick; step++) {
+          remaining.sort((a, b) => {
+            const distA = step - (lastSeen[a.id] !== undefined ? lastSeen[a.id] : -9999);
+            const distB = step - (lastSeen[b.id] !== undefined ? lastSeen[b.id] : -9999);
+            return (distB + Math.random() * 2) - (distA + Math.random() * 2);
+          });
+
+          const picked = remaining.shift();
+          result.push(picked);
+          lastSeen[picked.id] = step;
+        }
+
+        return result;
       }
 
       startDueReviewSession() {
@@ -3500,7 +3658,8 @@
       updateStudyProgress(current, total) {
         const pct = Math.round((current / total) * 100);
         document.getElementById('study-progress-fill').style.width = `${pct}%`;
-        document.getElementById('study-progress-text').textContent = `Thẻ ${current + 1} / ${total}`;
+        const unit = (this.db.session && this.db.session.mode === 'quiz') ? 'Câu' : 'Thẻ';
+        document.getElementById('study-progress-text').textContent = `${unit} ${current + 1} / ${total}`;
       }
 
       // --- FLASHCARD ENGINE ---
@@ -3663,7 +3822,8 @@
           return;
         }
 
-        const targetId = s.queue[s.currentIndex];
+        const queueItem = s.queue[s.currentIndex];
+        const targetId = (typeof queueItem === 'object' && queueItem.id !== undefined) ? queueItem.id : queueItem;
         const targetKanji = this.kanjiList.find(k => k.id === targetId);
         if (!targetKanji) return;
 
@@ -3685,23 +3845,33 @@
           }
         }
 
-        // JLPT Real Exam Standard: Strictly Mondai 1 (漢字読み) and Mondai 2 (表記)
-        // No meaning prompts in questions or options to prevent easy guessing
-        const types = [
-          'jlpt_kanji_to_furi',
-          'jlpt_furi_to_kanji'
-        ];
-        const qType = types[Math.floor(Math.random() * types.length)];
+        let targetWord = '';
+        let targetReading = '';
+        let targetMeaning = '';
+        let qType = 'jlpt_kanji_to_furi';
 
-        // Pick one compound word from targetKanji's book examples
-        const exList = targetKanji.examples || [];
-        const targetEx = exList.length > 0 
-          ? exList[Math.floor(Math.random() * exList.length)] 
-          : { word: targetKanji.kanji, reading: (targetKanji.kun[0] || targetKanji.on[0] || '').replace(/\./g, ''), meaning: targetKanji.meaning };
-        
-        const targetWord = targetEx.word || targetEx.w || targetKanji.kanji;
-        const targetReading = targetEx.reading || targetEx.r || '';
-        const targetMeaning = targetEx.meaning || targetEx.m || targetKanji.meaning;
+        if (typeof queueItem === 'object' && queueItem.word) {
+          targetWord = queueItem.word;
+          targetReading = queueItem.reading;
+          targetMeaning = queueItem.meaning || targetKanji.meaning;
+          qType = queueItem.qType || (Math.random() < 0.5 ? 'jlpt_kanji_to_furi' : 'jlpt_furi_to_kanji');
+        } else {
+          // Fallback for legacy int queue
+          const types = [
+            'jlpt_kanji_to_furi',
+            'jlpt_furi_to_kanji'
+          ];
+          qType = types[Math.floor(Math.random() * types.length)];
+
+          const exList = targetKanji.examples || [];
+          const targetEx = exList.length > 0 
+            ? exList[Math.floor(Math.random() * exList.length)] 
+            : { word: targetKanji.kanji, reading: (targetKanji.kun[0] || targetKanji.on[0] || '').replace(/\./g, ''), meaning: targetKanji.meaning };
+          
+          targetWord = targetEx.word || targetEx.w || targetKanji.kanji;
+          targetReading = targetEx.reading || targetEx.r || '';
+          targetMeaning = targetEx.meaning || targetEx.m || targetKanji.meaning;
+        }
 
         let questionText = '';
         let contextText = '';
@@ -3911,7 +4081,8 @@
         } else {
           cardRecord.incorrectCount = (cardRecord.incorrectCount || 0) + 1;
           cardRecord.status = 'learning';
-          s.queue.push(target.id);
+          const currentItem = s.queue[s.currentIndex];
+          s.queue.push(currentItem !== undefined ? currentItem : target.id);
         }
 
         this.db.stats.totalReviews = (this.db.stats.totalReviews || 0) + 1;
@@ -4004,10 +4175,11 @@
       }
 
       completeSession() {
+        const isQuiz = this.db.session && this.db.session.mode === 'quiz';
         this.db.session.active = false;
         this.saveLocal();
         this.syncSessionCompleteToCloud();
-        alert('🎉 Xin chúc mừng! Bạn đã hoàn thành toàn bộ thẻ trong buổi học này!');
+        alert(isQuiz ? '🎉 Xin chúc mừng! Bạn đã hoàn thành toàn bộ câu hỏi trong buổi luyện tập này!' : '🎉 Xin chúc mừng! Bạn đã hoàn thành toàn bộ thẻ trong buổi học này!');
         this.navigate('home');
       }
 
@@ -4015,7 +4187,8 @@
 
       toggleCurrentBookmark() {
         if (!this.db.session || !this.db.session.active) return;
-        const kanjiId = this.db.session.queue[this.db.session.currentIndex];
+        const item = this.db.session.queue[this.db.session.currentIndex];
+        const kanjiId = typeof item === 'object' ? item.id : item;
         this.toggleBookmark(kanjiId);
 
         const isBm = (this.db.bookmarks || []).includes(kanjiId);
@@ -4069,11 +4242,17 @@
           select.appendChild(opt);
 
           // Modal item for Flashcard
+          const chKanjiList = this.kanjiList.filter(k => k.chapter === num);
           const btn = document.createElement('button');
           btn.className = 'btn';
           btn.style.textAlign = 'left';
-          btn.style.justifyContent = 'flex-start';
-          btn.innerHTML = `<strong>${num}章</strong> &nbsp; ${cleanName}`;
+          btn.style.display = 'flex';
+          btn.style.justifyContent = 'space-between';
+          btn.style.alignItems = 'center';
+          btn.innerHTML = `
+            <span><strong>${num}章</strong> &nbsp; ${cleanName}</span>
+            <span style="font-size:0.75rem; color:var(--text-muted);">${chKanjiList.length} chữ</span>
+          `;
           btn.onclick = () => {
             this.closeChapterModal();
             this.startSession('flashcard', 'chapter', num, false);
@@ -4082,11 +4261,21 @@
 
           // Modal item for Quiz (Multiple Choice)
           if (quizChapterListModal) {
+            let approxQ = 0;
+            chKanjiList.forEach(k => {
+              const exCount = (k.examples || []).length;
+              approxQ += (exCount === 0) ? 2 : Math.min(3, Math.max(2, exCount));
+            });
             const qBtn = document.createElement('button');
             qBtn.className = 'btn';
             qBtn.style.textAlign = 'left';
-            qBtn.style.justifyContent = 'flex-start';
-            qBtn.innerHTML = `<strong>${num}章</strong> &nbsp; ${cleanName}`;
+            qBtn.style.display = 'flex';
+            qBtn.style.justifyContent = 'space-between';
+            qBtn.style.alignItems = 'center';
+            qBtn.innerHTML = `
+              <span><strong>${num}章</strong> &nbsp; ${cleanName}</span>
+              <span style="font-size:0.75rem; background:var(--accent-soft); color:var(--accent); padding:2px 8px; border-radius:12px; font-weight:600;">~${approxQ} câu</span>
+            `;
             qBtn.onclick = () => {
               this.closeQuizModeModal();
               this.startSession('quiz', 'chapter', num, true);
@@ -4267,9 +4456,9 @@
         this.syncModalScrollLock();
       }
 
-      startQuizAll() {
+      startQuizAll(count = null) {
         this.closeQuizModeModal();
-        this.startSession('quiz', 'all', null, true);
+        this.startSession('quiz', 'all', null, true, count);
       }
 
       // --- SPECIAL READINGS VIEW ---
@@ -4292,9 +4481,14 @@
 
       speakCurrent() {
         if (!this.db.session || !this.db.session.active) return;
-        const currentId = this.db.session.queue[this.db.session.currentIndex];
-        const kanjiObj = this.kanjiList.find(k => k.id === currentId);
-        if (kanjiObj) this.speakText(kanjiObj.kanji);
+        const currentItem = this.db.session.queue[this.db.session.currentIndex];
+        if (typeof currentItem === 'object' && currentItem.word) {
+          this.speakText(currentItem.word);
+        } else {
+          const currentId = typeof currentItem === 'object' ? currentItem.id : currentItem;
+          const kanjiObj = this.kanjiList.find(k => k.id === currentId);
+          if (kanjiObj) this.speakText(kanjiObj.kanji);
+        }
       }
 
       speakText(text) {
