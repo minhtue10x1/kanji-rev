@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>漢字マスター (N5 - N1) — Kanji Study App</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
@@ -1619,7 +1619,7 @@
         </div>
         <div class="stat-box">
           <div class="stat-label">Chuỗi ngày học</div>
-          <div class="stat-value" id="stat-streak">1d</div>
+          <div class="stat-value" id="stat-streak">0d</div>
         </div>
       </div>
 
@@ -2034,25 +2034,8 @@
         <div id="google-signin-btn-container"></div>
       </div>
 
-      <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.85rem;">
-        <div style="flex: 1; height: 1px; background: var(--border);"></div>
-        <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">hoặc đăng nhập nhanh bằng email</span>
-        <div style="flex: 1; height: 1px; background: var(--border);"></div>
-      </div>
-
-      <!-- Fast Email Login Form -->
-      <form onsubmit="event.preventDefault(); app.submitEmailLogin();" style="display: flex; flex-direction: column; gap: 0.75rem;">
-        <div style="text-align: left;">
-          <label style="font-size: 0.8rem; font-weight: 600; color: var(--text); margin-bottom: 0.35rem; display: block;">Địa chỉ Gmail / Email của bạn:</label>
-          <input type="email" id="login-email-input" class="search-input" style="width: 100%; box-sizing: border-box; padding: 0.7rem 0.9rem;" placeholder="example@gmail.com" required />
-        </div>
-        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 0.75rem; font-weight: 600;">
-          Đăng nhập ngay →
-        </button>
-      </form>
-
-      <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 1rem; line-height: 1.4;">
-        🔒 Cơ sở dữ liệu riêng biệt theo từng tài khoản trên đám mây.
+      <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; line-height: 1.4;">
+        🔒 Cơ sở dữ liệu riêng biệt theo từng tài khoản Google trên đám mây.
       </div>
     </div>
   </div>
@@ -2136,18 +2119,25 @@
         // 1. Initialize Google Identity Services if client ID is set
         this.initGoogleAuth();
 
-        // 2. Initialize or load personal database (Cloud or Local)
+        // 2. Initialize or load personal database (Cloud bundle or Local)
         await this.loadDatabase();
 
-        // 3. Set theme & shuffle setting
-        this.applyTheme(this.db.settings.theme || 'light');
+        // 3. Set theme & shuffle setting (Cloud userSettings take priority when logged in)
+        const effectiveTheme = (this.userSettings && this.userSettings.theme) || (this.db.settings && this.db.settings.theme) || 'light';
+        const effectiveShuffle = (this.userSettings && this.userSettings.shuffle_queue !== undefined)
+          ? Boolean(this.userSettings.shuffle_queue)
+          : !!(this.db.settings && this.db.settings.shuffleQueue);
+        if (!this.db.settings) this.db.settings = {};
+        this.db.settings.theme = effectiveTheme;
+        this.db.settings.shuffleQueue = effectiveShuffle;
+        this.applyTheme(effectiveTheme);
         const shuffleCheckbox = document.getElementById('setting-shuffle');
         if (shuffleCheckbox) {
-          shuffleCheckbox.checked = !!this.db.settings.shuffleQueue;
+          shuffleCheckbox.checked = effectiveShuffle;
         }
 
-        // 4. Set current level and build UI elements
-        await this.setLevel(this.currentLevel, false);
+        // 4. Set current level UI (skip redundant /api/progress + /api/session/current for currentLevel already bundled)
+        await this.setLevel(this.currentLevel, false, true);
         this.populateChapterDropdown();
         this.renderSpecialReadings();
         this.updateDashboard();
@@ -2246,7 +2236,7 @@
         return set.size;
       }
 
-      async setLevel(level, savePreference = true) {
+      async setLevel(level, savePreference = true, skipProgressFetch = false) {
         if (!['N5', 'N4', 'N3', 'N2', 'N1'].includes(level)) return;
 
         // Increment request ID to cancel/ignore stale async returns
@@ -2313,8 +2303,10 @@
         // Re-populate chapter select dropdown and modal
         this.populateChapterDropdown();
 
-        // Load progress for this specific level with signal and requestId
-        await this.loadLevelProgress(level, requestId, signal);
+        // Load progress for this specific level unless already bundled in loadDatabase()
+        if (!skipProgressFetch) {
+          await this.loadLevelProgress(level, requestId, signal);
+        }
 
         // Guard against race conditions: If user switched level again while loading, discard
         if (requestId !== this.levelSwitchRequestId || this.currentLevel !== level) {
@@ -2332,17 +2324,12 @@
 
         // Save active level setting to cloud database if logged in
         if (savePreference && this.currentUser) {
-          const token = localStorage.getItem('kanji_auth_token');
-          if (token) {
-            fetch('/api/auth/settings', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-              body: JSON.stringify({ current_level: level })
-            }).catch(() => {});
-          }
+          this.syncSettingsToCloud({ current_level: level });
         }
 
-        this.showToast(`Đã chuyển sang cấp độ ${level} (${this.kanjiList.length} chữ)`);
+        if (savePreference) {
+          this.showToast(`Đã chuyển sang cấp độ ${level} (${this.kanjiList.length} chữ)`);
+        }
       }
 
       async loadLevelProgress(targetLevel = this.currentLevel, requestId = this.levelSwitchRequestId, signal = null) {
@@ -2365,7 +2352,13 @@
             if (requestId !== this.levelSwitchRequestId || this.currentLevel !== targetLevel) return;
 
             if (!this.db || (this.db.meta && this.db.meta.level !== targetLevel)) {
+              const prevStats = this.db && this.db.stats ? this.db.stats : null;
               this.db = this.createDefaultDb();
+              if (prevStats) {
+                this.db.stats.currentStreak = prevStats.currentStreak || 0;
+                this.db.stats.bestStreak = prevStats.bestStreak || 0;
+                this.db.stats.totalReviews = prevStats.totalReviews || 0;
+              }
             }
             if (progRes.ok) {
               const progData = await progRes.json();
@@ -2563,16 +2556,31 @@
       renderAuthUI() {
         const container = document.getElementById('auth-header-container');
         if (!container) return;
+        container.textContent = '';
 
         if (this.currentUser) {
-          const avatar = this.currentUser.avatar_url || 'https://www.gravatar.com/avatar/?d=mp';
-          const name = this.currentUser.name || this.currentUser.email.split('@')[0];
-          container.innerHTML = `
-            <div class="user-pill" onclick="app.showUserAccountModal()" style="display:inline-flex; align-items:center; gap:0.45rem; padding:0.25rem 0.65rem; background:var(--surface-elevated); border:1px solid var(--border); border-radius:999px; cursor:pointer; font-size:0.8rem;" title="Xem thông tin tài khoản">
-              <img src="${avatar}" style="width:22px; height:22px; border-radius:50%; object-fit:cover;" onerror="this.src='https://www.gravatar.com/avatar/?d=mp'" />
-              <span style="font-weight:600; max-width:110px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${name}</span>
-            </div>
-          `;
+          const rawAvatar = String(this.currentUser.avatar_url || '');
+          const safeAvatar = /^https?:\/\//i.test(rawAvatar) ? rawAvatar : 'https://www.gravatar.com/avatar/?d=mp';
+          const safeName = String(this.currentUser.name || (this.currentUser.email ? this.currentUser.email.split('@')[0] : 'User'));
+
+          const pill = document.createElement('div');
+          pill.className = 'user-pill';
+          pill.title = 'Xem thông tin tài khoản';
+          pill.style.cssText = 'display:inline-flex; align-items:center; gap:0.45rem; padding:0.25rem 0.65rem; background:var(--surface-elevated); border:1px solid var(--border); border-radius:999px; cursor:pointer; font-size:0.8rem;';
+          pill.onclick = () => this.showUserAccountModal();
+
+          const img = document.createElement('img');
+          img.src = safeAvatar;
+          img.style.cssText = 'width:22px; height:22px; border-radius:50%; object-fit:cover;';
+          img.onerror = function () { this.src = 'https://www.gravatar.com/avatar/?d=mp'; };
+
+          const nameSpan = document.createElement('span');
+          nameSpan.style.cssText = 'font-weight:600; max-width:110px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;';
+          nameSpan.textContent = safeName;
+
+          pill.appendChild(img);
+          pill.appendChild(nameSpan);
+          container.appendChild(pill);
         } else {
           container.innerHTML = `
             <button class="btn btn-sm" onclick="app.promptGoogleLogin()" style="display:inline-flex; align-items:center; gap:0.4rem; padding:0.35rem 0.65rem; font-size:0.78rem; font-weight:600;">
@@ -2621,7 +2629,7 @@
           this.closeLoginModal();
           this.promptGoogleLogin();
         } else {
-          alert('Chưa nhận được GOOGLE_CLIENT_ID từ máy chủ. Bạn có thể nhập email bên dưới để tiếp tục.');
+          alert('Dịch vụ Google OAuth2 chưa sẵn sàng. Vui lòng thử tải lại trang.');
         }
       }
 
@@ -2630,8 +2638,6 @@
         if (modal) {
           modal.classList.add('active');
           this.syncModalScrollLock();
-          const emailInput = document.getElementById('login-email-input');
-          if (emailInput) setTimeout(() => emailInput.focus(), 150);
         }
       }
 
@@ -2641,17 +2647,6 @@
           modal.classList.remove('active');
           this.syncModalScrollLock();
         }
-      }
-
-      submitEmailLogin() {
-        const input = document.getElementById('login-email-input');
-        const email = (input ? input.value : '').trim().toLowerCase();
-        if (!email || !email.includes('@')) {
-          alert('Vui lòng nhập địa chỉ email hợp lệ.');
-          return;
-        }
-        this.closeLoginModal();
-        this.loginWithToken(`email_${email}`);
       }
 
       async handleGoogleCredentialResponse(response) {
@@ -2726,6 +2721,24 @@
             };
           } else if (localMirror && localMirror.session && localMirror.session.active && (localMirror.session.currentIndex > 0 || localMirror.session.completed > 0)) {
             this.db.session = localMirror.session;
+          }
+
+          if (data.stats) {
+            this.applyCloudStats(data.stats);
+          }
+
+          if (data.settings) {
+            if (!this.db.settings) this.db.settings = {};
+            if (data.settings.theme) {
+              this.db.settings.theme = data.settings.theme;
+              this.applyTheme(data.settings.theme);
+            }
+            if (data.settings.shuffle_queue !== undefined) {
+              const shuf = Boolean(data.settings.shuffle_queue);
+              this.db.settings.shuffleQueue = shuf;
+              const shuffleCheckbox = document.getElementById('setting-shuffle');
+              if (shuffleCheckbox) shuffleCheckbox.checked = shuf;
+            }
           }
 
           this.saveLocal();
@@ -2851,11 +2864,65 @@
         this.syncModalScrollLock();
       }
 
+      applyCloudStats(stats) {
+        if (!this.db || !stats) return;
+        if (!this.db.stats) this.db.stats = {};
+        if (stats.currentStreak !== undefined) this.db.stats.currentStreak = stats.currentStreak;
+        if (stats.bestStreak !== undefined) this.db.stats.bestStreak = stats.bestStreak;
+        if (stats.totalReviews !== undefined) this.db.stats.totalReviews = stats.totalReviews;
+      }
+
+      bumpLocalStreak() {
+        if (!this.db) return;
+        if (!this.db.stats) {
+          this.db.stats = {
+            totalReviews: 0,
+            totalCorrect: 0,
+            totalIncorrect: 0,
+            currentStreak: 0,
+            bestStreak: 0,
+            lastActiveDate: null,
+            dailyHistory: {}
+          };
+        }
+        const now = new Date();
+        const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+        const last = this.db.stats.lastActiveDate;
+        if (last === today) {
+          if ((this.db.stats.currentStreak || 0) < 1) this.db.stats.currentStreak = 1;
+        } else if (last) {
+          const yDt = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+          const yesterday = `${yDt.getFullYear()}-${String(yDt.getMonth() + 1).padStart(2, '0')}-${String(yDt.getDate()).padStart(2, '0')}`;
+          this.db.stats.currentStreak = (last === yesterday) ? (this.db.stats.currentStreak || 0) + 1 : 1;
+        } else {
+          this.db.stats.currentStreak = 1;
+        }
+        this.db.stats.bestStreak = Math.max(this.db.stats.bestStreak || 0, this.db.stats.currentStreak);
+        this.db.stats.lastActiveDate = today;
+      }
+
+      async syncSettingsToCloud(patch) {
+        const token = localStorage.getItem('kanji_auth_token');
+        if (!token || !this.currentUser) return;
+        try {
+          await fetch('/api/auth/settings', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(patch)
+          });
+        } catch (e) {
+          console.warn('Sync settings error:', e);
+        }
+      }
+
       async syncReviewToCloud(kanjiId, isCorrect, mode = 'flashcard') {
         const token = localStorage.getItem('kanji_auth_token');
         if (!token) return;
         try {
-          await fetch('/api/progress/review', {
+          const res = await fetch('/api/progress/review', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -2863,6 +2930,25 @@
             },
             body: JSON.stringify({ level: this.currentLevel, kanji_id: kanjiId, is_correct: isCorrect, mode })
           });
+          if (res.ok) {
+            const data = await res.json();
+            if (this.db && this.db.cards) {
+              const key = String(kanjiId);
+              const existing = this.db.cards[key] || { id: kanjiId };
+              this.db.cards[key] = {
+                ...existing,
+                id: kanjiId,
+                status: data.status,
+                repetitions: data.repetitions,
+                intervalDays: data.intervalDays,
+                nextReview: data.nextReview,
+                correctCount: data.correctCount,
+                incorrectCount: data.incorrectCount
+              };
+            }
+            this.applyCloudStats(data);
+            this.saveLocal();
+          }
         } catch (e) {
           console.warn('Sync review to cloud error:', e);
         }
@@ -2915,7 +3001,7 @@
         const token = localStorage.getItem('kanji_auth_token');
         if (!token) return;
         try {
-          await fetch('/api/session/complete', {
+          await fetch(`/api/session/complete?level=${encodeURIComponent(this.currentLevel)}`, {
             method: 'POST',
             headers: {
               'Authorization': `Bearer ${token}`
@@ -3009,6 +3095,10 @@
               } else if (localMirror && localMirror.session && localMirror.session.active && (localMirror.session.currentIndex > 0 || localMirror.session.completed > 0)) {
                 this.db.session = localMirror.session;
                 this.syncSessionSaveToCloud().catch(() => {});
+              }
+
+              if (meData.stats) {
+                this.applyCloudStats(meData.stats);
               }
 
               this.saveLocal();
@@ -3113,9 +3203,9 @@
             totalReviews: 0,
             totalCorrect: 0,
             totalIncorrect: 0,
-            currentStreak: 1,
-            bestStreak: 1,
-            lastActiveDate: new Date().toISOString().slice(0, 10),
+            currentStreak: 0,
+            bestStreak: 0,
+            lastActiveDate: null,
             dailyHistory: {}
           },
           settings: {
@@ -3204,10 +3294,36 @@
         reader.readAsText(file);
       }
 
-      resetProgress() {
+      async resetProgress() {
         if (confirm('Bạn có chắc chắn muốn đặt lại toàn bộ tiến độ học tập? Toàn bộ thẻ sẽ quay về trạng thái Chưa học (New).')) {
+          const prevStats = this.db && this.db.stats ? this.db.stats : null;
+          const prevSettings = this.db && this.db.settings ? this.db.settings : null;
           this.db = this.createDefaultDb();
+          if (prevStats) {
+            this.db.stats.currentStreak = prevStats.currentStreak || 0;
+            this.db.stats.bestStreak = prevStats.bestStreak || 0;
+          }
+          if (prevSettings) {
+            this.db.settings = prevSettings;
+          }
           this.saveLocal();
+
+          const token = localStorage.getItem('kanji_auth_token');
+          if (token && this.currentUser) {
+            try {
+              await fetch('/api/progress/reset', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ level: this.currentLevel })
+              });
+            } catch (e) {
+              console.warn('Reset cloud progress error:', e);
+            }
+          }
+
           this.updateDashboard();
           this.renderBrowseGrid();
           this.showToast('Đã đặt lại tiến độ.');
@@ -3222,6 +3338,7 @@
         this.applyTheme(next);
         this.db.settings.theme = next;
         this.saveLocal();
+        this.syncSettingsToCloud({ theme: next });
       }
 
       applyTheme(theme) {
@@ -3231,6 +3348,7 @@
       toggleShuffleSetting(val) {
         this.db.settings.shuffleQueue = val;
         this.saveLocal();
+        this.syncSettingsToCloud({ shuffle_queue: Boolean(val) });
         this.showToast(val ? 'Đã bật xáo trộn ngẫu nhiên' : 'Đã chuyển sang học tuần tự chuẩn sách');
       }
 
@@ -3293,7 +3411,7 @@
         document.getElementById('stat-total').textContent = this.kanjiList.length;
         document.getElementById('stat-mastered').textContent = mastered;
         document.getElementById('stat-learning').textContent = learning;
-        document.getElementById('stat-streak').textContent = `${this.db.stats.currentStreak}d`;
+        document.getElementById('stat-streak').textContent = `${this.db.stats.currentStreak || 0}d`;
 
         const bookmarkCount = this.db.bookmarks ? this.db.bookmarks.length : 0;
         const btnBookmarks = document.getElementById('btn-start-bookmarks');
@@ -3787,6 +3905,7 @@
         this.db.stats.totalReviews = (this.db.stats.totalReviews || 0) + 1;
         if (isCorrect) this.db.stats.totalCorrect = (this.db.stats.totalCorrect || 0) + 1;
         else this.db.stats.totalIncorrect = (this.db.stats.totalIncorrect || 0) + 1;
+        this.bumpLocalStreak();
 
         s.currentIndex++;
         s.completed = (s.completed || 0) + 1;
@@ -4077,10 +4196,27 @@
         cardRecord.lastReviewed = new Date().toISOString();
         if (isCorrect) {
           cardRecord.correctCount = (cardRecord.correctCount || 0) + 1;
-          if (cardRecord.status === 'new') cardRecord.status = 'learning';
+          if (cardRecord.status === 'new') {
+            cardRecord.status = 'learning';
+            cardRecord.intervalDays = 1;
+          } else if (cardRecord.status === 'learning') {
+            cardRecord.intervalDays = Math.max(1, Math.round((cardRecord.intervalDays || 1) * 2));
+            if (cardRecord.intervalDays >= 8) {
+              cardRecord.status = 'mastered';
+            }
+          } else if (cardRecord.status === 'mastered') {
+            cardRecord.intervalDays = Math.max(8, Math.round((cardRecord.intervalDays || 8) * 2.2));
+          }
+          const nextDate = new Date();
+          nextDate.setDate(nextDate.getDate() + (cardRecord.intervalDays || 1));
+          cardRecord.nextReview = nextDate.toISOString();
         } else {
           cardRecord.incorrectCount = (cardRecord.incorrectCount || 0) + 1;
           cardRecord.status = 'learning';
+          cardRecord.intervalDays = 1;
+          const nextDate = new Date();
+          nextDate.setDate(nextDate.getDate() + 1);
+          cardRecord.nextReview = nextDate.toISOString();
           const currentItem = s.queue[s.currentIndex];
           s.queue.push(currentItem !== undefined ? currentItem : target.id);
         }
@@ -4088,6 +4224,7 @@
         this.db.stats.totalReviews = (this.db.stats.totalReviews || 0) + 1;
         if (isCorrect) this.db.stats.totalCorrect = (this.db.stats.totalCorrect || 0) + 1;
         else this.db.stats.totalIncorrect = (this.db.stats.totalIncorrect || 0) + 1;
+        this.bumpLocalStreak();
 
         this.saveLocal();
         this.syncReviewToCloud(target.id, isCorrect, 'quiz');
@@ -4171,6 +4308,7 @@
         s.currentIndex++;
         s.completed = (s.completed || 0) + 1;
         this.saveLocal();
+        this.syncSessionSaveToCloud();
         this.loadQuizStep();
       }
 
@@ -4516,6 +4654,8 @@
             if (e.key === 'Escape') {
               this.closeKanjiModal();
               this.closeChapterModal();
+              this.closeQuizModeModal();
+              this.closeConfirmLogoutModal();
               this.closeAuthPromptModal();
               this.closeUserAccountModal();
               this.closeLoginModal();

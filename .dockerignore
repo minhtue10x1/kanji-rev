@@ -5,8 +5,16 @@ __pycache__
 .github
 .vscode
 .gemini
+.env
+.env.*
+.local_jwt_secret
 *.log
 *.pdf
+*.db
+*.sqlite
+*.sqlite3
+scripts/mazii_cache.json
+tests/
 make_data*.py
 gen_*.py
 test_*.js

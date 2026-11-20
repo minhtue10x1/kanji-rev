@@ -4,13 +4,14 @@ __pycache__/
 *$py.class
 *.log
 
-# Local Databases (Vercel uses Vercel Postgres / Neon via POSTGRES_URL)
+# Local Databases & Ephemeral Dev Secrets
 *.db
 *.sqlite
 *.sqlite3
 kanji_users.db
 kanji_users.db-shm
 kanji_users.db-wal
+.local_jwt_secret
 
 # Environment Variables
 .env
@@ -20,8 +21,9 @@ kanji_users.db-wal
 # Vercel deployment folder
 .vercel/
 
-# Heavy Raw Textbook Source PDFs (all extracted into kanji-data.js)
+# Heavy Raw Textbook Source PDFs & Scraper Cache (already compiled into data/ & kanji-data.js)
 *.pdf
+scripts/mazii_cache.json
 
 # Operating System & Editor artifacts
 .DS_Store
