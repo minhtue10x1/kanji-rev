@@ -1303,24 +1303,16 @@
       }
 
       .user-pill {
-        padding: 0.2rem 0.4rem !important;
+        padding: 0.2rem 0.55rem !important;
         height: 2.05rem !important;
-        font-size: 0.74rem !important;
-        max-width: 100px !important;
-        gap: 0.3rem !important;
+        font-size: 0.78rem !important;
+        max-width: 140px !important;
+        gap: 0.35rem !important;
       }
       .user-pill span:first-of-type {
-        max-width: 48px !important;
+        max-width: 90px !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
-        white-space: nowrap !important;
-      }
-
-      .btn-logout {
-        height: 2.05rem !important;
-        padding: 0.2rem 0.45rem !important;
-        font-size: 0.72rem !important;
-        gap: 0.2rem !important;
         white-space: nowrap !important;
       }
 
@@ -2015,32 +2007,19 @@
 
   <!-- User Account Modal -->
   <div class="modal-overlay" id="account-modal" onclick="if(event.target === this) app.closeUserAccountModal()">
-    <div class="modal-card" style="max-width: 440px;">
+    <div class="modal-card" style="max-width: 360px; text-align: center;">
       <button class="modal-close" onclick="app.closeUserAccountModal()">✕</button>
-      <div style="text-align:center; padding:0.5rem 0 1.25rem 0;">
-        <img id="acc-modal-avatar" src="" style="width:68px; height:68px; border-radius:50%; margin:0 auto 0.75rem auto; border:2px solid var(--accent); object-fit:cover; display:block;" onerror="this.src='https://www.gravatar.com/avatar/?d=mp'" />
-        <div id="acc-modal-name" style="font-size:1.25rem; font-weight:700; color:var(--text);"></div>
-        <div id="acc-modal-email" style="font-size:0.85rem; color:var(--text-muted); margin-top:0.2rem;"></div>
-        <div id="acc-modal-created" style="font-size:0.75rem; color:var(--text-subtle); margin-top:0.4rem;"></div>
+      <div style="padding: 0.75rem 0 1.25rem 0;">
+        <img id="acc-modal-avatar" src="" style="width:72px; height:72px; border-radius:50%; margin:0 auto 0.75rem auto; border:2px solid var(--accent); object-fit:cover; display:block;" onerror="this.src='https://www.gravatar.com/avatar/?d=mp'" />
+        <div id="acc-modal-name" style="font-size:1.2rem; font-weight:700; color:var(--text);"></div>
+        <div id="acc-modal-email" style="font-size:0.85rem; color:var(--text-muted); margin-top:0.25rem;"></div>
+        <div id="acc-modal-created" style="font-size:0.8rem; color:var(--text-subtle); margin-top:0.4rem;"></div>
       </div>
 
-      <div style="background:var(--surface-elevated); padding:0.85rem 1rem; border-radius:8px; border:1px solid var(--border); margin-bottom:1.25rem; font-size:0.85rem;">
-        <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;">
-          <span style="color:var(--text-muted);">Trạng thái:</span>
-          <strong style="color:var(--success);">☁️ Database Riêng Biệt</strong>
-        </div>
-        <div style="display:flex; justify-content:space-between;">
-          <span style="color:var(--text-muted);">Cơ chế lưu:</span>
-          <strong>Multi-User Isolation</strong>
-        </div>
-      </div>
-
-      <div style="display:flex; flex-direction:column; gap:0.6rem;">
-        <button class="btn btn-primary" onclick="app.closeUserAccountModal(); app.exportDatabase();">
-          💾 Xuất bản sao lưu dữ liệu cá nhân (db.json)
-        </button>
-        <button class="btn" onclick="app.closeUserAccountModal(); app.confirmLogout();" style="color:var(--danger); border-color:var(--danger);">
-          Đăng xuất khỏi tài khoản
+      <div style="margin-top: 0.25rem;">
+        <button class="btn" onclick="app.closeUserAccountModal(); app.confirmLogout();" style="color:var(--danger); border-color:var(--danger); width:100%; display:inline-flex; align-items:center; justify-content:center; gap:0.4rem; padding:0.6rem 1rem; font-weight:600; border-radius:8px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <span>Đăng xuất</span>
         </button>
       </div>
     </div>
@@ -2537,16 +2516,9 @@
           const avatar = this.currentUser.avatar_url || 'https://www.gravatar.com/avatar/?d=mp';
           const name = this.currentUser.name || this.currentUser.email.split('@')[0];
           container.innerHTML = `
-            <div style="display:inline-flex; align-items:center; gap:0.4rem;">
-              <div class="user-pill" onclick="app.showUserAccountModal()" style="display:inline-flex; align-items:center; gap:0.45rem; padding:0.25rem 0.65rem; background:var(--surface-elevated); border:1px solid var(--border); border-radius:999px; cursor:pointer; font-size:0.8rem;" title="Xem hồ sơ và dữ liệu đám mây">
-                <img src="${avatar}" style="width:20px; height:20px; border-radius:50%; object-fit:cover;" onerror="this.src='https://www.gravatar.com/avatar/?d=mp'" />
-                <span style="font-weight:600; max-width:90px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${name}</span>
-                <span style="font-size:0.7rem; color:var(--success);" title="Đồng bộ đám mây trực tiếp">☁️</span>
-              </div>
-              <button class="btn btn-sm btn-logout" onclick="app.confirmLogout()" style="display:inline-flex; align-items:center; gap:0.3rem; padding:0.25rem 0.55rem; font-size:0.75rem; color:var(--text-muted); border:1px solid var(--border); border-radius:999px; background:var(--surface);" title="Đăng xuất">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-                <span>Đăng xuất</span>
-              </button>
+            <div class="user-pill" onclick="app.showUserAccountModal()" style="display:inline-flex; align-items:center; gap:0.45rem; padding:0.25rem 0.65rem; background:var(--surface-elevated); border:1px solid var(--border); border-radius:999px; cursor:pointer; font-size:0.8rem;" title="Xem thông tin tài khoản">
+              <img src="${avatar}" style="width:22px; height:22px; border-radius:50%; object-fit:cover;" onerror="this.src='https://www.gravatar.com/avatar/?d=mp'" />
+              <span style="font-weight:600; max-width:110px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${name}</span>
             </div>
           `;
         } else {
