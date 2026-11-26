@@ -1,0 +1,626 @@
+/* ==========================================================================
+   Workspace Switcher & IT Nihongo Studio Component Styles
+   Standalone stylesheet for multi-workspace theming, popover switcher,
+   smooth workspace morph animations, and IT Japanese views.
+   ========================================================================== */
+
+/* --- 1. WORKSPACE THEME TOKENS (IT Nihongo Tech Indigo-Cyan Palette) --- */
+html[data-workspace="it"] {
+  --accent: #2563EB;
+  --accent-soft: #DBEAFE;
+  --accent-hover: #1D4ED8;
+}
+
+html[data-workspace="it"][data-theme="dark"] {
+  --accent: #38BDF8;
+  --accent-soft: #0C4A6E;
+  --accent-hover: #7DD3FC;
+}
+
+/* Smooth color morphing when switching workspaces */
+header, .btn-primary, .nav-btn, .mobile-nav-item, .brand-mark, .progress-fill {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+/* --- 2. WORKSPACE SWITCHER TRIGGER & POPOVER (Notion/Linear Style) --- */
+.ws-switcher {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.ws-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.32rem 0.6rem 0.32rem 0.38rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font-family: var(--font-ui);
+  transition: background-color 0.16s ease, border-color 0.16s ease, transform 0.12s ease;
+}
+
+.ws-trigger:hover {
+  background: var(--surface-elevated);
+  border-color: var(--border);
+}
+
+.ws-trigger:active {
+  transform: scale(0.98);
+}
+
+.ws-badge-icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease;
+}
+
+.ws-badge-icon.kanji {
+  font-family: var(--font-kanji);
+  font-size: 1.3rem;
+  background: var(--text);
+  color: var(--surface);
+}
+
+.ws-badge-icon.it {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #2563EB 0%, #0EA5E9 100%);
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.28);
+}
+
+.ws-trigger-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.15;
+}
+
+.ws-trigger-title {
+  font-family: var(--font-jp);
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.ws-trigger-sub {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.ws-chevron {
+  width: 14px;
+  height: 14px;
+  color: var(--text-muted);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.ws-switcher.open .ws-chevron {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Popover */
+.ws-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 292px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 14px 36px -6px rgba(0, 0, 0, 0.18), 0 4px 12px -2px rgba(0, 0, 0, 0.08);
+  padding: 0.45rem;
+  z-index: 120;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px) scale(0.96);
+  transform-origin: top left;
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s;
+}
+
+.ws-switcher.open .ws-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.ws-menu-header {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-subtle);
+  padding: 0.4rem 0.6rem 0.35rem;
+}
+
+.ws-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.65rem 0.65rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.12s ease;
+}
+
+.ws-option:hover {
+  background: var(--surface-elevated);
+}
+
+.ws-option.active {
+  background: var(--surface-elevated);
+  border-color: var(--border-strong);
+}
+
+.ws-option-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.ws-option-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.ws-option-desc {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  margin-top: 0.1rem;
+  line-height: 1.3;
+}
+
+.ws-option-check {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.ws-option.active .ws-option-check {
+  opacity: 1;
+  transform: scale(1);
+  background: var(--accent);
+  color: #FFFFFF;
+}
+
+/* --- 3. SILKY WORKSPACE SWITCH TRANSITION ANIMATION --- */
+.ws-transition-toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.88);
+  z-index: 250;
+  pointer-events: none;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.45rem;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: opacity 0.22s ease, transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ws-transition-toast.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+@keyframes wsViewEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+main.ws-animating {
+  animation: wsViewEnter 0.34s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hide JLPT-only controls cleanly when in IT workspace */
+html[data-workspace="it"] .kanji-only {
+  display: none !important;
+}
+
+html[data-workspace="kanji"] .it-only,
+html:not([data-workspace="it"]) .it-only {
+  display: none !important;
+}
+
+/* --- 4. IT NIHONGO STUDIO VIEWS --- */
+.it-hero {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem 1.4rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.it-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #2563EB, #0EA5E9, #6366F1);
+}
+
+.it-hero-title {
+  font-family: var(--font-jp);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.it-hero-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.it-progress-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  margin-top: 0.55rem;
+}
+
+.it-filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.it-pill-btn {
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.it-pill-btn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.it-pill-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #FFFFFF;
+}
+
+.it-units-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 0.9rem;
+}
+
+.it-unit-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.05rem 1.15rem;
+  cursor: pointer;
+  transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.42rem;
+}
+
+.it-unit-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+}
+
+.it-unit-card.done {
+  border-left: 3px solid var(--success);
+}
+
+.it-unit-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.it-unit-ja {
+  font-family: var(--font-jp);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.it-unit-vi {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.it-unit-summary {
+  font-size: 0.8rem;
+  color: var(--text-subtle);
+  line-height: 1.45;
+}
+
+.it-unit-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: auto;
+  padding-top: 0.45rem;
+}
+
+.it-badge {
+  font-size: 0.72rem;
+  padding: 0.18rem 0.55rem;
+  border-radius: 6px;
+  background: var(--surface-elevated);
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.it-badge.done {
+  background: var(--success-soft);
+  color: var(--success);
+  font-weight: 600;
+}
+
+.it-subtabs {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.1rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.it-subtab {
+  padding: 0.5rem 0.95rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.it-subtab.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.it-dialogue-row {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.65rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.it-speaker {
+  display: inline-block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 0.15rem 0.55rem;
+  border-radius: 6px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  margin-bottom: 0.3rem;
+}
+
+.it-ja-line {
+  font-family: var(--font-jp);
+  font-size: 1rem;
+  color: var(--text);
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.it-vi-line {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+  line-height: 1.45;
+}
+
+.it-vi-line.hidden-vi {
+  display: none;
+}
+
+.it-tip-card {
+  background: var(--surface-elevated);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.it-vocab-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.65rem;
+  margin-bottom: 1.25rem;
+}
+
+.it-vocab-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: border-color 0.15s ease;
+}
+
+.it-vocab-item.mastered {
+  border-color: var(--success);
+}
+
+.it-practice-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.it-practice-opt {
+  width: 100%;
+  text-align: left;
+  padding: 0.7rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface-elevated);
+  color: var(--text);
+  font-family: var(--font-jp);
+  font-size: 0.92rem;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  transition: all 0.15s ease;
+}
+
+.it-practice-opt:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.it-practice-opt.correct {
+  background: var(--success-soft);
+  border-color: var(--success);
+  color: var(--success);
+  font-weight: 600;
+}
+
+.it-practice-opt.incorrect {
+  background: var(--danger-soft);
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.it-flashcard {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 2.2rem 1.5rem;
+  text-align: center;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  margin: 1rem auto;
+  max-width: 560px;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+}
+
+.it-flashcard:hover {
+  border-color: var(--accent);
+}
+
+.it-practice-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.9rem;
+}
+
+.it-practice-mode-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.15rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.it-practice-mode-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 768px) {
+  .ws-trigger-text {
+    display: none;
+  }
+  .ws-menu {
+    width: 272px;
+  }
+  .it-units-grid, .it-vocab-list, .it-practice-hub-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

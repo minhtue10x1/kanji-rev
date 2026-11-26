@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/components/workspace-switcher.css">
   <style>
     :root {
       --bg: #FAFAF9;
@@ -1553,279 +1554,6 @@
       }
     }
 
-    /* --- IT JAPANESE LEARNING MODULE --- */
-    .it-hero {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.25rem 1.4rem;
-      margin-bottom: 1.25rem;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-    .it-hero-title {
-      font-family: var(--font-jp);
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 0.25rem;
-    }
-    .it-hero-sub {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-    .it-progress-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-      padding: 0.35rem 0.75rem;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      margin-top: 0.5rem;
-    }
-    .it-filter-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
-    .it-pill-btn {
-      padding: 0.45rem 0.9rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text-muted);
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-    .it-pill-btn:hover {
-      border-color: var(--accent);
-      color: var(--text);
-    }
-    .it-pill-btn.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
-    }
-    .it-units-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 0.9rem;
-    }
-    .it-unit-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.05rem 1.15rem;
-      cursor: pointer;
-      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-      display: flex;
-      flex-direction: column;
-      gap: 0.45rem;
-    }
-    .it-unit-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--accent);
-      box-shadow: var(--shadow-md);
-    }
-    .it-unit-card.done {
-      border-left: 3px solid var(--success);
-    }
-    .it-unit-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--accent);
-    }
-    .it-unit-ja {
-      font-family: var(--font-jp);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-    .it-unit-vi {
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--text-muted);
-    }
-    .it-unit-summary {
-      font-size: 0.8rem;
-      color: var(--text-subtle);
-      line-height: 1.45;
-    }
-    .it-unit-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: auto;
-      padding-top: 0.45rem;
-    }
-    .it-badge {
-      font-size: 0.72rem;
-      padding: 0.18rem 0.55rem;
-      border-radius: 6px;
-      background: var(--surface-elevated);
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-    .it-badge.done {
-      background: var(--success-soft);
-      color: var(--success);
-      font-weight: 600;
-    }
-    .it-subtabs {
-      display: flex;
-      gap: 0.5rem;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 1.1rem;
-      overflow-x: auto;
-      padding-bottom: 0.5rem;
-    }
-    .it-subtab {
-      padding: 0.5rem 0.95rem;
-      border-radius: 8px;
-      border: 1px solid transparent;
-      background: transparent;
-      color: var(--text-muted);
-      font-size: 0.86rem;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-    .it-subtab.active {
-      background: var(--accent-soft);
-      color: var(--accent);
-      border-color: var(--accent);
-    }
-    .it-dialogue-row {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 0.8rem 1rem;
-      margin-bottom: 0.65rem;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 0.75rem;
-    }
-    .it-speaker {
-      display: inline-block;
-      font-size: 0.74rem;
-      font-weight: 700;
-      padding: 0.15rem 0.55rem;
-      border-radius: 6px;
-      background: var(--surface-elevated);
-      color: var(--accent);
-      margin-bottom: 0.3rem;
-    }
-    .it-ja-line {
-      font-family: var(--font-jp);
-      font-size: 1rem;
-      color: var(--text);
-      line-height: 1.6;
-      font-weight: 500;
-    }
-    .it-vi-line {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-top: 0.25rem;
-      line-height: 1.45;
-    }
-    .it-vi-line.hidden-vi {
-      display: none;
-    }
-    .it-tip-card {
-      background: var(--surface-elevated);
-      border-left: 3px solid var(--accent);
-      border-radius: 8px;
-      padding: 0.75rem 1rem;
-      margin-bottom: 0.6rem;
-    }
-    .it-vocab-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 0.65rem;
-      margin-bottom: 1.25rem;
-    }
-    .it-vocab-item {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 0.75rem 0.9rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-    .it-vocab-item.mastered {
-      border-color: var(--success);
-    }
-    .it-practice-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.1rem;
-      margin-bottom: 1rem;
-    }
-    .it-practice-opt {
-      width: 100%;
-      text-align: left;
-      padding: 0.7rem 0.9rem;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: var(--surface-elevated);
-      color: var(--text);
-      font-family: var(--font-jp);
-      font-size: 0.92rem;
-      cursor: pointer;
-      margin-bottom: 0.5rem;
-      transition: all 0.15s ease;
-    }
-    .it-practice-opt:hover:not(:disabled) {
-      border-color: var(--accent);
-    }
-    .it-practice-opt.correct {
-      background: var(--success-soft);
-      border-color: var(--success);
-      color: var(--success);
-      font-weight: 600;
-    }
-    .it-practice-opt.incorrect {
-      background: var(--danger-soft);
-      border-color: var(--danger);
-      color: var(--danger);
-    }
-    .it-flashcard {
-      background: var(--surface);
-      border: 1.5px solid var(--border);
-      border-radius: 16px;
-      padding: 2.2rem 1.5rem;
-      text-align: center;
-      min-height: 260px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: var(--shadow-md);
-      margin: 1rem auto;
-      max-width: 560px;
-    }
-    @media (max-width: 768px) {
-      .it-units-grid, .it-vocab-list {
-        grid-template-columns: 1fr !important;
-      }
-    }
-
   </style>
   <!-- Google Identity Services (GIS) for Google OAuth2 -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -1836,13 +1564,40 @@
   <header>
     <div class="header-inner">
       <div class="header-left">
-        <div class="brand" onclick="app.navigate('home')">
-          <div class="brand-mark">漢</div>
-          <span class="brand-title">漢字マスター</span>
+        <!-- Notion/Linear-style Workspace Switcher -->
+        <div class="ws-switcher" id="workspace-switcher">
+          <button type="button" class="ws-trigger" onclick="app.workspace.toggleMenu(event)" title="Chuyển không gian học tập">
+            <span class="ws-badge-icon kanji" id="ws-trigger-icon">漢</span>
+            <span class="ws-trigger-text">
+              <span class="ws-trigger-title" id="ws-trigger-title">漢字マスター</span>
+              <span class="ws-trigger-sub" id="ws-trigger-sub">JLPT Kanji N5–N1</span>
+            </span>
+            <svg class="ws-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+
+          <div class="ws-menu" role="menu">
+            <div class="ws-menu-header">Chọn không gian học tập</div>
+            <button type="button" class="ws-option active" data-ws="kanji" onclick="app.workspace.switchTo('kanji')">
+              <span class="ws-badge-icon kanji">漢</span>
+              <span class="ws-option-body">
+                <span class="ws-option-title">Kanji Master</span>
+                <span class="ws-option-desc">Giáo trình JLPT N5 – N1 · Flashcard & Trắc nghiệm SRS</span>
+              </span>
+              <span class="ws-option-check">✓</span>
+            </button>
+            <button type="button" class="ws-option" data-ws="it" onclick="app.workspace.switchTo('it')">
+              <span class="ws-badge-icon it">IT</span>
+              <span class="ws-option-body">
+                <span class="ws-option-title">IT Nihongo Studio</span>
+                <span class="ws-option-desc">しごとの日本語 IT業務編 · 23 bài · 848 từ IT</span>
+              </span>
+              <span class="ws-option-check">✓</span>
+            </button>
+          </div>
         </div>
 
-        <!-- Level Selector ComboBox -->
-        <div class="level-select-wrapper">
+        <!-- Level Selector ComboBox (Visible ONLY in Kanji Workspace) -->
+        <div class="level-select-wrapper kanji-only">
           <select id="level-combo-select" class="level-combo-select" onchange="app.handleLevelSelectChange(this.value)" title="Chọn trình độ JLPT">
             <option value="N5">JLPT N5 (117 chữ)</option>
             <option value="N4">JLPT N4 (207 chữ)</option>
@@ -1853,11 +1608,18 @@
         </div>
       </div>
 
-      <nav>
+      <!-- Desktop Nav: Kanji Workspace -->
+      <nav class="kanji-only">
         <button class="nav-btn active" data-view="home" onclick="app.navigate('home')">Trang chủ</button>
         <button class="nav-btn" data-view="browse" onclick="app.navigate('browse')" id="nav-browse-btn">Danh sách chữ (376)</button>
         <button class="nav-btn" data-view="special" onclick="app.navigate('special')">Cách đọc đặc biệt</button>
-        <button class="nav-btn" data-view="it" onclick="app.navigate('it')">💻 IT Nhật</button>
+      </nav>
+
+      <!-- Desktop Nav: IT Nihongo Workspace -->
+      <nav class="it-only">
+        <button class="nav-btn it-nav-btn active" data-itsub="units" onclick="app.itWorkspace.navigateSubView('units')">📚 23 Bài học</button>
+        <button class="nav-btn it-nav-btn" data-itsub="dict" onclick="app.itWorkspace.navigateSubView('dict')">🔍 Từ điển IT (848)</button>
+        <button class="nav-btn it-nav-btn" data-itsub="practice" onclick="app.itWorkspace.navigateSubView('practice')">⚡ Luyện tập</button>
       </nav>
 
       <div class="header-actions">
@@ -2144,42 +1906,37 @@
       </div>
     </section>
 
-    <!-- 5. IT JAPANESE (しごとの日本語 IT業務編) VIEW -->
+    <!-- 5. IT JAPANESE (しごとの日本語 IT業務編) WORKSPACE VIEW -->
     <section id="view-it" class="view">
-      <!-- 5A. IT Overview & Unit Selector -->
+      <!-- 5A. IT Overview & 23 Units Selector -->
       <div id="it-home-panel">
         <div class="it-hero">
           <div>
-            <div class="it-hero-title">💻 しごとの日本語 IT業務編</div>
-            <div class="it-hero-sub">Tiếng Nhật chuyên ngành IT & giao tiếp thực chiến theo vòng đời dự án phần mềm (23 bài).</div>
+            <div class="it-hero-title">しごとの日本語 IT業務編</div>
+            <div class="it-hero-sub">Học tiếng Nhật chuyên ngành IT & giao tiếp thực chiến theo vòng đời dự án phần mềm.</div>
             <div class="it-progress-pill" id="it-progress-summary">Đang tải dữ liệu...</div>
           </div>
           <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-            <button class="btn btn-primary" onclick="app.startITStudy('flashcard', 'filtered')">🃏 Flashcard IT</button>
-            <button class="btn" onclick="app.startITStudy('quiz', 'filtered')" style="border-color:var(--accent); color:var(--accent); font-weight:600;">⚡ Trắc nghiệm IT</button>
+            <button class="btn btn-primary" onclick="app.itWorkspace.startStudy('flashcard', 'filtered')">🃏 Flashcard IT</button>
+            <button class="btn" onclick="app.itWorkspace.startStudy('quiz', 'filtered')" style="border-color:var(--accent); color:var(--accent); font-weight:600;">⚡ Trắc nghiệm IT</button>
           </div>
         </div>
 
         <div class="it-filter-pills" id="it-chapter-pills">
-          <button class="it-pill-btn active" data-ch="all" onclick="app.setITChapterFilter('all')">Tất cả (23 bài)</button>
-          <button class="it-pill-btn" data-ch="2" onclick="app.setITChapterFilter(2)">🔥 Ch.2: Thực chiến dự án (15)</button>
-          <button class="it-pill-btn" data-ch="3" onclick="app.setITChapterFilter(3)">📄 Ch.3: Đọc Spec (3)</button>
-          <button class="it-pill-btn" data-ch="1" onclick="app.setITChapterFilter(1)">💼 Ch.1: Tìm việc IT (5)</button>
+          <button class="it-pill-btn active" data-ch="all" onclick="app.itWorkspace.setChapterFilter('all')">Tất cả (23 bài)</button>
+          <button class="it-pill-btn" data-ch="2" onclick="app.itWorkspace.setChapterFilter(2)">🔥 Ch.2: Thực chiến dự án (15)</button>
+          <button class="it-pill-btn" data-ch="3" onclick="app.itWorkspace.setChapterFilter(3)">📄 Ch.3: Đọc Spec (3)</button>
+          <button class="it-pill-btn" data-ch="1" onclick="app.itWorkspace.setChapterFilter(1)">💼 Ch.1: Tìm việc IT (5)</button>
         </div>
 
-        <div style="margin-bottom:1rem;">
-          <input type="text" class="search-input" id="it-search-input" placeholder="Tìm thuật ngữ IT (VD: 要件定義書, バグ, deadline, spec, 結合テスト)..." oninput="app.renderITOverview()" style="width:100%;">
-        </div>
-
-        <div id="it-search-results" style="display:none; margin-bottom:1.25rem;"></div>
         <div class="it-units-grid" id="it-units-grid"></div>
       </div>
 
       <!-- 5B. IT Unit Detail Panel -->
       <div id="it-unit-panel" style="display:none; max-width:860px; margin:0 auto;">
         <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.6rem; margin-bottom:1rem;">
-          <button class="btn btn-sm" onclick="app.closeITUnit()">← Danh sách bài</button>
-          <button class="btn btn-sm" id="it-btn-toggle-done" onclick="app.toggleITUnitDone()">✓ Đánh dấu đã học</button>
+          <button class="btn btn-sm" onclick="app.itWorkspace.closeUnit()">← Danh sách bài</button>
+          <button class="btn btn-sm" id="it-btn-toggle-done" onclick="app.itWorkspace.toggleUnitDone()">✓ Đánh dấu đã học</button>
         </div>
 
         <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:1.1rem 1.25rem; margin-bottom:1rem;">
@@ -2190,9 +1947,9 @@
         </div>
 
         <div class="it-subtabs">
-          <button class="it-subtab active" data-tab="context" onclick="app.switchITUnitTab('context')">📖 Hội thoại & Ngữ cảnh</button>
-          <button class="it-subtab" data-tab="vocab" onclick="app.switchITUnitTab('vocab')" id="it-subtab-vocab-btn">🃏 Từ vựng IT</button>
-          <button class="it-subtab" data-tab="practice" onclick="app.switchITUnitTab('practice')" id="it-subtab-practice-btn">✏️ Luyện tập tình huống</button>
+          <button class="it-subtab active" data-tab="context" onclick="app.itWorkspace.switchUnitTab('context')">📖 Hội thoại & Ngữ cảnh</button>
+          <button class="it-subtab" data-tab="vocab" onclick="app.itWorkspace.switchUnitTab('vocab')" id="it-subtab-vocab-btn">🃏 Từ vựng IT</button>
+          <button class="it-subtab" data-tab="practice" onclick="app.itWorkspace.switchUnitTab('practice')" id="it-subtab-practice-btn">✏️ Luyện tập tình huống</button>
         </div>
 
         <div id="it-tab-context"></div>
@@ -2200,15 +1957,47 @@
         <div id="it-tab-practice" style="display:none;"></div>
 
         <div style="display:flex; justify-content:space-between; gap:0.75rem; margin-top:1.5rem; padding-top:1rem; border-top:1px solid var(--border);">
-          <button class="btn btn-sm" id="it-btn-prev-unit" onclick="app.navigateITUnit(-1)">← Bài trước</button>
-          <button class="btn btn-sm btn-primary" id="it-btn-next-unit" onclick="app.navigateITUnit(1)">Bài tiếp theo →</button>
+          <button class="btn btn-sm" id="it-btn-prev-unit" onclick="app.itWorkspace.navigateUnit(-1)">← Bài trước</button>
+          <button class="btn btn-sm btn-primary" id="it-btn-next-unit" onclick="app.itWorkspace.navigateUnit(1)">Bài tiếp theo →</button>
         </div>
       </div>
 
-      <!-- 5C. IT Vocab Flashcard / Quiz Study Panel -->
+      <!-- 5C. Dedicated IT Dictionary (848 Terms) -->
+      <div id="it-dict-panel" style="display:none;">
+        <div class="filter-bar">
+          <input type="text" class="search-input" id="it-dict-search" placeholder="Tìm thuật ngữ IT (Kanji, Hiragana, tiếng Việt, tiếng Anh)..." oninput="app.itWorkspace.renderDictionary()">
+          <div style="display:flex; gap:0.5rem;">
+            <select class="select-dropdown" id="it-dict-ch-filter" onchange="app.itWorkspace.renderDictionary()">
+              <option value="all">Tất cả 3 chương</option>
+              <option value="2">Ch.2: Dự án phần mềm</option>
+              <option value="3">Ch.3: Đọc Spec</option>
+              <option value="1">Ch.1: Tìm việc IT</option>
+            </select>
+            <select class="select-dropdown" id="it-dict-tier-filter" onchange="app.itWorkspace.renderDictionary()">
+              <option value="all">Mọi phân loại</option>
+              <option value="core">語彙 (Cốt lõi)</option>
+              <option value="advanced">発展語彙 (Chuyên sâu)</option>
+              <option value="unlearned">Chưa thuộc</option>
+              <option value="mastered">Đã thuộc ✓</option>
+            </select>
+          </div>
+        </div>
+        <div style="font-size:0.82rem; font-weight:600; color:var(--text-muted); margin-bottom:0.75rem;" id="it-dict-count"></div>
+        <div class="it-vocab-list" id="it-dict-list"></div>
+      </div>
+
+      <!-- 5D. Dedicated IT Practice Hub -->
+      <div id="it-practice-hub-panel" style="display:none;">
+        <div class="section-title" style="margin-bottom:1rem;">
+          <span>⚡ Trung tâm Luyện tập Tiếng Nhật IT</span>
+        </div>
+        <div class="it-practice-hub-grid" id="it-practice-hub-grid"></div>
+      </div>
+
+      <!-- 5E. IT Vocab Flashcard / Quiz Study Runner -->
       <div id="it-study-panel" style="display:none; max-width:640px; margin:0 auto;">
         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem;">
-          <button class="btn btn-sm" onclick="app.exitITStudy()">← Quay lại</button>
+          <button class="btn btn-sm" onclick="app.itWorkspace.exitStudy()">← Quay lại</button>
           <span style="font-size:0.85rem; font-weight:600; color:var(--text-muted);" id="it-study-progress-text">1 / 20</span>
         </div>
         <div class="progress-bar" style="margin-bottom:1.25rem;">
@@ -2220,8 +2009,17 @@
 
   </main>
 
-  <!-- Mobile Bottom Navigation Bar (Visible only on mobile devices) -->
-  <nav class="mobile-bottom-nav" id="mobile-nav">
+  <!-- Floating Workspace Switch Transition Badge -->
+  <div class="ws-transition-toast" id="ws-transition-toast" aria-hidden="true">
+    <span class="ws-badge-icon it">IT</span>
+    <div>
+      <div style="font-weight:700; font-size:0.95rem; color:var(--text);" id="ws-transition-label">IT Nihongo Studio</div>
+      <div style="font-size:0.76rem; color:var(--text-muted);" id="ws-transition-sub">23 bài · 848 thuật ngữ IT thực chiến</div>
+    </div>
+  </div>
+
+  <!-- Mobile Bottom Navigation Bar: Kanji Workspace -->
+  <nav class="mobile-bottom-nav kanji-only" id="mobile-nav">
     <button class="mobile-nav-item active" data-view="home" onclick="app.navigate('home')">
       <span class="mobile-nav-icon">🏠</span>
       <span class="mobile-nav-label">Trang chủ</span>
@@ -2234,9 +2032,21 @@
       <span class="mobile-nav-icon">⚡</span>
       <span class="mobile-nav-label">Đặc biệt</span>
     </button>
-    <button class="mobile-nav-item" data-view="it" onclick="app.navigate('it')">
-      <span class="mobile-nav-icon">💻</span>
-      <span class="mobile-nav-label">IT Nhật</span>
+  </nav>
+
+  <!-- Mobile Bottom Navigation Bar: IT Nihongo Workspace -->
+  <nav class="mobile-bottom-nav it-only" id="mobile-nav-it">
+    <button class="mobile-nav-item it-mobile-nav-item active" data-itsub="units" onclick="app.itWorkspace.navigateSubView('units')">
+      <span class="mobile-nav-icon">📚</span>
+      <span class="mobile-nav-label">Bài học</span>
+    </button>
+    <button class="mobile-nav-item it-mobile-nav-item" data-itsub="dict" onclick="app.itWorkspace.navigateSubView('dict')">
+      <span class="mobile-nav-icon">🔍</span>
+      <span class="mobile-nav-label">Từ điển IT</span>
+    </button>
+    <button class="mobile-nav-item it-mobile-nav-item" data-itsub="practice" onclick="app.itWorkspace.navigateSubView('practice')">
+      <span class="mobile-nav-icon">⚡</span>
+      <span class="mobile-nav-label">Luyện tập</span>
     </button>
   </nav>
 
@@ -2434,8 +2244,9 @@
     <span id="toast-message">Đã lưu tiến độ thành công</span>
   </div>
 
-  <!-- Load Static Kanji Dataset -->
+  <!-- Load Static Kanji Dataset & Standalone Workspace Components -->
   <script src="kanji-data.js"></script>
+  <script src="/components/it-workspace.js"></script>
 
   <!-- Main App Script -->
   <script>
@@ -2458,6 +2269,8 @@
         this.userSettings = null;
         this.levelSwitchRequestId = 0;
         this.levelAbortController = null;
+        this.workspace = new window.WorkspaceController(this);
+        this.itWorkspace = new window.ITWorkspace(this);
 
         this.init();
       }
@@ -2503,8 +2316,8 @@
           modalObserver.observe(el, { attributes: true, attributeFilter: ['class', 'style'] });
         });
 
-        // 7. Initial route
-        this.navigate('home');
+        // 7. Initial workspace & route from URL hash or saved workspace
+        this.workspace.initFromUrlOrStorage();
       }
 
       // --- GUEST FEATURE GATING MODAL ---
@@ -3730,7 +3543,7 @@
         } else if (viewName === 'browse') {
           this.renderBrowseGrid();
         } else if (viewName === 'it') {
-          this.loadITJapaneseView();
+          this.itWorkspace.ensureDataLoaded();
         }
       }
 
@@ -4967,619 +4780,6 @@
             </td>
           </tr>
         `).join('');
-      }
-
-      // --- IT JAPANESE (しごとの日本語 IT業務編) MODULE ---
-
-      getITProgress() {
-        try {
-          const raw = localStorage.getItem('kanji_it_japanese_progress_v1');
-          if (raw) {
-            const p = JSON.parse(raw);
-            return {
-              completedUnits: Array.isArray(p.completedUnits) ? p.completedUnits : [],
-              masteredVocab: Array.isArray(p.masteredVocab) ? p.masteredVocab : []
-            };
-          }
-        } catch (e) {}
-        return { completedUnits: [], masteredVocab: [] };
-      }
-
-      saveITProgress(prog) {
-        localStorage.setItem('kanji_it_japanese_progress_v1', JSON.stringify(prog));
-      }
-
-      escapeHtml(str) {
-        return String(str || '')
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#39;');
-      }
-
-      async loadITJapaneseView() {
-        if (!this.itChapterFilter) this.itChapterFilter = 'all';
-        if (this.itShowVi === undefined) this.itShowVi = true;
-        if (!this.itData) {
-          const grid = document.getElementById('it-units-grid');
-          if (grid) grid.innerHTML = '<div style="color:var(--text-muted); padding:2rem; text-align:center;">Đang tải 23 bài Tiếng Nhật IT...</div>';
-          try {
-            const res = await fetch('/data/it-japanese.json');
-            if (!res.ok) throw new Error('HTTP ' + res.status);
-            this.itData = await res.json();
-          } catch (e) {
-            if (grid) grid.innerHTML = '<div style="color:var(--danger); padding:2rem; text-align:center;">Không thể tải dữ liệu Tiếng Nhật IT. Vui lòng thử lại.</div>';
-            return;
-          }
-        }
-        this.renderITOverview();
-      }
-
-      setITChapterFilter(ch) {
-        this.itChapterFilter = ch;
-        document.querySelectorAll('#it-chapter-pills .it-pill-btn').forEach(btn => {
-          btn.classList.toggle('active', String(btn.dataset.ch) === String(ch));
-        });
-        this.renderITOverview();
-      }
-
-      getFilteredITUnits() {
-        if (!this.itData || !this.itData.units) return [];
-        if (this.itChapterFilter === 'all') return this.itData.units;
-        return this.itData.units.filter(u => String(u.chapter) === String(this.itChapterFilter));
-      }
-
-      renderITOverview() {
-        if (!this.itData || !this.itData.units) return;
-        const prog = this.getITProgress();
-        const totalUnits = this.itData.units.length;
-        const allVocabCount = this.itData.units.reduce((acc, u) => acc + (u.vocab ? u.vocab.length : 0), 0);
-        const summaryEl = document.getElementById('it-progress-summary');
-        if (summaryEl) {
-          summaryEl.textContent = `Đã học ${prog.completedUnits.length}/${totalUnits} bài · Thuộc ${prog.masteredVocab.length}/${allVocabCount} từ IT`;
-        }
-
-        const q = ((document.getElementById('it-search-input') || {}).value || '').trim().toLowerCase();
-        const searchBox = document.getElementById('it-search-results');
-        const grid = document.getElementById('it-units-grid');
-
-        if (q) {
-          const matches = [];
-          this.itData.units.forEach(u => {
-            (u.vocab || []).forEach(v => {
-              const hay = `${v.word} ${v.reading} ${v.vi} ${v.en}`.toLowerCase();
-              if (hay.includes(q)) {
-                matches.push({ unit: u, vocab: v });
-              }
-            });
-          });
-          if (searchBox) {
-            searchBox.style.display = 'block';
-            if (matches.length === 0) {
-              searchBox.innerHTML = '<div style="color:var(--text-muted); font-size:0.88rem; padding:0.75rem 0;">Không tìm thấy thuật ngữ IT nào khớp từ khóa.</div>';
-            } else {
-              searchBox.innerHTML = `
-                <div style="font-size:0.82rem; font-weight:700; color:var(--text-muted); margin-bottom:0.5rem;">Tìm thấy ${matches.length} thuật ngữ IT:</div>
-                <div class="it-vocab-list">
-                  ${matches.slice(0, 40).map(m => {
-                    const v = m.vocab;
-                    const u = m.unit;
-                    const wordEsc = this.escapeHtml(v.word).replace(/'/g, "\\'");
-                    return `
-                      <div class="it-vocab-item">
-                        <div style="display:flex; justify-content:space-between; align-items:center; gap:0.4rem;">
-                          <span style="font-family:var(--font-jp); font-size:1.05rem; font-weight:700; color:var(--text);">${this.escapeHtml(v.word)}</span>
-                          <button class="icon-btn" title="Phát âm" onclick="app.speakText('${wordEsc}')" style="width:1.7rem;height:1.7rem;font-size:0.75rem;">🔊</button>
-                        </div>
-                        <div style="font-family:var(--font-jp); font-size:0.82rem; color:var(--accent);">${this.escapeHtml(v.reading)}</div>
-                        <div style="font-size:0.86rem; color:var(--text); font-weight:500;">${this.escapeHtml(v.vi)}</div>
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.2rem;">
-                          <span style="font-size:0.75rem; color:var(--text-subtle);">${this.escapeHtml(v.en || '')}</span>
-                          <button class="btn btn-sm" style="padding:0.15rem 0.45rem; font-size:0.72rem;" onclick="app.openITUnit('${this.escapeHtml(u.id)}')">Ch.${u.chapter} U${u.unit} →</button>
-                        </div>
-                      </div>
-                    `;
-                  }).join('')}
-                </div>
-              `;
-            }
-          }
-        } else if (searchBox) {
-          searchBox.style.display = 'none';
-          searchBox.innerHTML = '';
-        }
-
-        const units = this.getFilteredITUnits();
-        if (!grid) return;
-        grid.innerHTML = units.map(u => {
-          const isDone = prog.completedUnits.includes(u.id);
-          const vCount = (u.vocab || []).length;
-          const pCount = (u.practice || []).length;
-          return `
-            <div class="it-unit-card ${isDone ? 'done' : ''}" onclick="app.openITUnit('${this.escapeHtml(u.id)}')">
-              <div class="it-unit-meta">
-                <span>Chương ${u.chapter} · Unit ${u.unit}</span>
-                ${isDone ? '<span class="it-badge done">✓ Đã học</span>' : ''}
-              </div>
-              <div class="it-unit-ja">${this.escapeHtml(u.titleJa)}</div>
-              <div class="it-unit-vi">${this.escapeHtml(u.titleVi)}</div>
-              <div class="it-unit-summary">${this.escapeHtml(u.summaryVi || '')}</div>
-              <div class="it-unit-badges">
-                <span class="it-badge">🃏 ${vCount} từ vựng IT</span>
-                ${pCount > 0 ? `<span class="it-badge">✏️ ${pCount} bài tình huống</span>` : ''}
-              </div>
-            </div>
-          `;
-        }).join('');
-      }
-
-      openITUnit(unitId) {
-        if (!this.itData || !this.itData.units) return;
-        const idx = this.itData.units.findIndex(u => u.id === unitId);
-        if (idx === -1) return;
-        this.currentITUnitIdx = idx;
-        this.currentITUnit = this.itData.units[idx];
-
-        document.getElementById('it-home-panel').style.display = 'none';
-        document.getElementById('it-study-panel').style.display = 'none';
-        document.getElementById('it-unit-panel').style.display = 'block';
-
-        const u = this.currentITUnit;
-        document.getElementById('it-unit-detail-meta').textContent = `Chương ${u.chapter} · Unit ${u.unit}${u.reading ? ' · ' + u.reading : ''}`;
-        document.getElementById('it-unit-detail-ja').textContent = u.titleJa;
-        document.getElementById('it-unit-detail-vi').textContent = u.titleVi;
-        document.getElementById('it-unit-detail-summary').textContent = u.summaryVi || '';
-
-        const vBtn = document.getElementById('it-subtab-vocab-btn');
-        if (vBtn) vBtn.textContent = `🃏 Từ vựng IT (${(u.vocab || []).length})`;
-        const pBtn = document.getElementById('it-subtab-practice-btn');
-        if (pBtn) pBtn.textContent = `✏️ Luyện tập (${(u.practice || []).length})`;
-
-        const prevBtn = document.getElementById('it-btn-prev-unit');
-        const nextBtn = document.getElementById('it-btn-next-unit');
-        if (prevBtn) prevBtn.disabled = idx <= 0;
-        if (nextBtn) nextBtn.disabled = idx >= this.itData.units.length - 1;
-
-        this.updateITUnitDoneButton();
-        this.renderITUnitContext();
-        this.renderITUnitVocab();
-        this.renderITUnitPractice();
-        this.switchITUnitTab('context');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-
-      closeITUnit() {
-        document.getElementById('it-unit-panel').style.display = 'none';
-        document.getElementById('it-study-panel').style.display = 'none';
-        document.getElementById('it-home-panel').style.display = 'block';
-        this.renderITOverview();
-      }
-
-      navigateITUnit(delta) {
-        if (!this.itData || !this.itData.units) return;
-        const nextIdx = (this.currentITUnitIdx || 0) + delta;
-        if (nextIdx >= 0 && nextIdx < this.itData.units.length) {
-          this.openITUnit(this.itData.units[nextIdx].id);
-        }
-      }
-
-      updateITUnitDoneButton() {
-        const btn = document.getElementById('it-btn-toggle-done');
-        if (!btn || !this.currentITUnit) return;
-        const prog = this.getITProgress();
-        const isDone = prog.completedUnits.includes(this.currentITUnit.id);
-        btn.textContent = isDone ? '✓ Đã hoàn thành bài này' : '○ Đánh dấu đã học';
-        btn.style.background = isDone ? 'var(--success-soft)' : '';
-        btn.style.borderColor = isDone ? 'var(--success)' : '';
-        btn.style.color = isDone ? 'var(--success)' : '';
-      }
-
-      toggleITUnitDone() {
-        if (!this.currentITUnit) return;
-        const prog = this.getITProgress();
-        const id = this.currentITUnit.id;
-        const i = prog.completedUnits.indexOf(id);
-        if (i === -1) {
-          prog.completedUnits.push(id);
-          this.showToast('Đã đánh dấu hoàn thành bài học IT!');
-        } else {
-          prog.completedUnits.splice(i, 1);
-        }
-        this.saveITProgress(prog);
-        this.updateITUnitDoneButton();
-      }
-
-      switchITUnitTab(tabName) {
-        ['context', 'vocab', 'practice'].forEach(t => {
-          const el = document.getElementById(`it-tab-${t}`);
-          if (el) el.style.display = (t === tabName) ? 'block' : 'none';
-        });
-        document.querySelectorAll('#it-unit-panel .it-subtab').forEach(btn => {
-          btn.classList.toggle('active', btn.dataset.tab === tabName);
-        });
-      }
-
-      toggleITTranslation() {
-        this.itShowVi = !this.itShowVi;
-        document.querySelectorAll('#it-tab-context .it-vi-line').forEach(el => {
-          el.classList.toggle('hidden-vi', !this.itShowVi);
-        });
-        const btn = document.getElementById('it-toggle-vi-btn');
-        if (btn) btn.textContent = this.itShowVi ? '👁️ Ẩn dịch Việt (Tự đọc hiểu)' : '👁️ Hiện dịch Việt';
-      }
-
-      renderITUnitContext() {
-        const u = this.currentITUnit;
-        const el = document.getElementById('it-tab-context');
-        if (!el || !u) return;
-
-        const dialogueHtml = (u.dialogue || []).map(line => {
-          const jaSafe = this.escapeHtml(line.ja).replace(/'/g, "\\'");
-          return `
-            <div class="it-dialogue-row">
-              <div style="flex:1;">
-                <span class="it-speaker">${this.escapeHtml(line.speaker || 'Nội dung')}</span>
-                <div class="it-ja-line">${this.escapeHtml(line.ja)}</div>
-                <div class="it-vi-line ${this.itShowVi ? '' : 'hidden-vi'}">${this.escapeHtml(line.vi || '')}</div>
-              </div>
-              <button class="icon-btn" title="Nghe câu này" onclick="app.speakText('${jaSafe}')" style="width:1.9rem;height:1.9rem;font-size:0.8rem;flex-shrink:0;">🔊</button>
-            </div>
-          `;
-        }).join('');
-
-        const pointsHtml = (u.points || []).length > 0 ? `
-          <div style="font-size:0.85rem; font-weight:700; color:var(--text); margin:1.25rem 0 0.6rem;">💡 Điểm lưu ý thực tế trong công ty Nhật (ポイント)</div>
-          ${(u.points || []).map(pt => `
-            <div class="it-tip-card">
-              <div style="font-weight:700; font-size:0.88rem; color:var(--text); margin-bottom:0.2rem;">${this.escapeHtml(pt.title)}</div>
-              <div style="font-size:0.84rem; color:var(--text-muted); line-height:1.5;">${this.escapeHtml(pt.detailVi)}</div>
-            </div>
-          `).join('')}
-        ` : '';
-
-        const exprHtml = (u.expressions || []).length > 0 ? `
-          <div style="font-size:0.85rem; font-weight:700; color:var(--text); margin:1.25rem 0 0.6rem;">🗣️ Mẫu câu & Cách diễn đạt cốt lõi (表現の理解)</div>
-          ${(u.expressions || []).map(ex => {
-            const jaSafe = this.escapeHtml(ex.ja).replace(/'/g, "\\'");
-            return `
-              <div class="it-dialogue-row">
-                <div style="flex:1;">
-                  <div class="it-ja-line">${this.escapeHtml(ex.ja)}</div>
-                  <div style="font-size:0.86rem; color:var(--accent); font-weight:600; margin-top:0.2rem;">${this.escapeHtml(ex.vi)}</div>
-                  ${ex.noteVi ? `<div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.2rem;">${this.escapeHtml(ex.noteVi)}</div>` : ''}
-                </div>
-                <button class="icon-btn" title="Nghe mẫu câu" onclick="app.speakText('${jaSafe}')" style="width:1.9rem;height:1.9rem;font-size:0.8rem;flex-shrink:0;">🔊</button>
-              </div>
-            `;
-          }).join('')}
-        ` : '';
-
-        el.innerHTML = `
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem;">
-            <span style="font-size:0.85rem; font-weight:700; color:var(--text);">${u.chapter === 3 ? '📄 Nội dung đặc tả / Flowchart (仕様書)' : '💬 Hội thoại ngữ cảnh thực tế (モデル会話)'}</span>
-            <button class="btn btn-sm" id="it-toggle-vi-btn" onclick="app.toggleITTranslation()">${this.itShowVi ? '👁️ Ẩn dịch Việt (Tự đọc hiểu)' : '👁️ Hiện dịch Việt'}</button>
-          </div>
-          ${dialogueHtml || '<div style="color:var(--text-muted);">Chưa có hội thoại cho bài này.</div>'}
-          ${pointsHtml}
-          ${exprHtml}
-        `;
-      }
-
-      toggleITVocabMastered(vocabKey) {
-        const prog = this.getITProgress();
-        const i = prog.masteredVocab.indexOf(vocabKey);
-        if (i === -1) prog.masteredVocab.push(vocabKey);
-        else prog.masteredVocab.splice(i, 1);
-        this.saveITProgress(prog);
-        this.renderITUnitVocab();
-      }
-
-      renderITUnitVocab() {
-        const u = this.currentITUnit;
-        const el = document.getElementById('it-tab-vocab');
-        if (!el || !u) return;
-        const prog = this.getITProgress();
-        const core = (u.vocab || []).filter(v => v.tier !== 'advanced');
-        const adv = (u.vocab || []).filter(v => v.tier === 'advanced');
-
-        const renderGroup = (items) => items.map(v => {
-          const vKey = `${u.id}::${v.word}`;
-          const isM = prog.masteredVocab.includes(vKey);
-          const wordSafe = this.escapeHtml(v.word).replace(/'/g, "\\'");
-          const keySafe = this.escapeHtml(vKey).replace(/'/g, "\\'");
-          return `
-            <div class="it-vocab-item ${isM ? 'mastered' : ''}">
-              <div style="display:flex; justify-content:space-between; align-items:center; gap:0.4rem;">
-                <span style="font-family:var(--font-jp); font-size:1.05rem; font-weight:700; color:var(--text);">${this.escapeHtml(v.word)}</span>
-                <div style="display:flex; gap:0.3rem;">
-                  <button class="icon-btn" title="Phát âm" onclick="app.speakText('${wordSafe}')" style="width:1.7rem;height:1.7rem;font-size:0.75rem;">🔊</button>
-                  <button class="icon-btn" title="${isM ? 'Đã thuộc' : 'Đánh dấu đã thuộc'}" onclick="app.toggleITVocabMastered('${keySafe}')" style="width:1.7rem;height:1.7rem;font-size:0.75rem; ${isM ? 'background:var(--success-soft);color:var(--success);border-color:var(--success);' : ''}">✓</button>
-                </div>
-              </div>
-              <div style="font-family:var(--font-jp); font-size:0.82rem; color:var(--accent);">${this.escapeHtml(v.reading || '')}</div>
-              <div style="font-size:0.87rem; color:var(--text); font-weight:500;">${this.escapeHtml(v.vi || '')}</div>
-              ${v.en ? `<div style="font-size:0.75rem; color:var(--text-subtle);">${this.escapeHtml(v.en)}</div>` : ''}
-            </div>
-          `;
-        }).join('');
-
-        el.innerHTML = `
-          <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:1rem;">
-            <button class="btn btn-sm btn-primary" onclick="app.startITStudy('flashcard', 'unit')">🃏 Học Flashcard bài này</button>
-            <button class="btn btn-sm" onclick="app.startITStudy('quiz', 'unit')" style="border-color:var(--accent); color:var(--accent); font-weight:600;">⚡ Trắc nghiệm bài này</button>
-          </div>
-          <div style="font-size:0.84rem; font-weight:700; color:var(--text); margin-bottom:0.55rem;">📌 Từ vựng cốt lõi trong bài — 語彙 (${core.length})</div>
-          <div class="it-vocab-list">${renderGroup(core)}</div>
-          ${adv.length > 0 ? `
-            <div style="font-size:0.84rem; font-weight:700; color:var(--text); margin:0.8rem 0 0.55rem;">🚀 Thuật ngữ IT mở rộng — 発展語彙 (${adv.length})</div>
-            <div class="it-vocab-list">${renderGroup(adv)}</div>
-          ` : ''}
-        `;
-      }
-
-      renderITUnitPractice() {
-        const u = this.currentITUnit;
-        const el = document.getElementById('it-tab-practice');
-        if (!el || !u) return;
-        const list = u.practice || [];
-        if (list.length === 0) {
-          el.innerHTML = '<div style="color:var(--text-muted); padding:1rem 0;">Bài này tập trung vào mẫu thực hành tự viết. Bạn có thể chuyển sang tab Từ vựng IT để luyện Flashcard/Trắc nghiệm!</div>';
-          return;
-        }
-        el.innerHTML = list.map((q, qIdx) => `
-          <div class="it-practice-card" id="it-prac-${qIdx}">
-            <div style="font-size:0.75rem; font-weight:700; color:var(--accent); margin-bottom:0.35rem;">TÌNH HUỐNG ${qIdx + 1} · やってみよう！</div>
-            <div class="it-ja-line" style="margin-bottom:0.35rem;">${this.escapeHtml(q.questionJa)}</div>
-            <div style="font-size:0.86rem; color:var(--text-muted); margin-bottom:0.85rem;">${this.escapeHtml(q.questionVi || '')}</div>
-            <div>
-              ${(q.options || []).map((opt, oIdx) => `
-                <button class="it-practice-opt" data-q="${qIdx}" data-o="${oIdx}" onclick="app.answerITPractice(${qIdx}, ${oIdx})">${this.escapeHtml(opt)}</button>
-              `).join('')}
-            </div>
-            <div id="it-prac-fb-${qIdx}" style="display:none; margin-top:0.75rem; padding:0.75rem; border-radius:8px; background:var(--surface-elevated); font-size:0.85rem; line-height:1.5;"></div>
-          </div>
-        `).join('');
-      }
-
-      answerITPractice(qIdx, oIdx) {
-        if (!this.currentITUnit || !this.currentITUnit.practice) return;
-        const q = this.currentITUnit.practice[qIdx];
-        if (!q) return;
-        const card = document.getElementById(`it-prac-${qIdx}`);
-        if (!card) return;
-        const buttons = card.querySelectorAll('.it-practice-opt');
-        const ans = q.answerIndex;
-        const isCorrect = Array.isArray(ans) ? ans.includes(oIdx) : (oIdx === ans);
-        buttons.forEach((b, idx) => {
-          const isRightOpt = Array.isArray(ans) ? ans.includes(idx) : (idx === ans);
-          if (isRightOpt) b.classList.add('correct');
-          else if (idx === oIdx && !isCorrect) b.classList.add('incorrect');
-          b.disabled = true;
-        });
-        const fb = document.getElementById(`it-prac-fb-${qIdx}`);
-        if (fb) {
-          fb.style.display = 'block';
-          fb.innerHTML = `
-            <div style="font-weight:700; color:${isCorrect ? 'var(--success)' : 'var(--danger)'}; margin-bottom:0.25rem;">
-              ${isCorrect ? '✓ Chính xác!' : '✗ Chưa chính xác'}
-            </div>
-            <div style="color:var(--text);">${this.escapeHtml(q.explanationVi || '')}</div>
-          `;
-        }
-      }
-
-      startITStudy(mode, scope) {
-        if (!this.itData || !this.itData.units) return;
-        let sourceUnits = [];
-        if (scope === 'unit' && this.currentITUnit) {
-          sourceUnits = [this.currentITUnit];
-        } else {
-          sourceUnits = this.getFilteredITUnits();
-        }
-        const pool = [];
-        sourceUnits.forEach(u => {
-          (u.vocab || []).forEach(v => {
-            pool.push({
-              ...v,
-              unitId: u.id,
-              unitLabel: `Ch.${u.chapter} U${u.unit} · ${u.titleJa}`,
-              vKey: `${u.id}::${v.word}`
-            });
-          });
-        });
-        if (pool.length === 0) {
-          this.showToast('Không có từ vựng IT nào trong phạm vi này.');
-          return;
-        }
-        pool.sort(() => Math.random() - 0.5);
-        const queue = (mode === 'quiz' && scope !== 'unit') ? pool.slice(0, 25) : pool;
-
-        this.itStudy = {
-          mode,
-          scope,
-          queue,
-          allPool: this.itData.units.flatMap(u => (u.vocab || []).map(v => ({ ...v, unitId: u.id }))),
-          index: 0,
-          flipped: false,
-          correct: 0,
-          answered: false
-        };
-
-        document.getElementById('it-home-panel').style.display = 'none';
-        document.getElementById('it-unit-panel').style.display = 'none';
-        document.getElementById('it-study-panel').style.display = 'block';
-        this.renderITStudyStep();
-      }
-
-      exitITStudy() {
-        const scope = this.itStudy ? this.itStudy.scope : 'filtered';
-        this.itStudy = null;
-        document.getElementById('it-study-panel').style.display = 'none';
-        if (scope === 'unit' && this.currentITUnit) {
-          document.getElementById('it-unit-panel').style.display = 'block';
-          this.renderITUnitVocab();
-        } else {
-          document.getElementById('it-home-panel').style.display = 'block';
-          this.renderITOverview();
-        }
-      }
-
-      renderITStudyStep() {
-        const st = this.itStudy;
-        if (!st) return;
-        const body = document.getElementById('it-study-body');
-        const progText = document.getElementById('it-study-progress-text');
-        const progFill = document.getElementById('it-study-progress-fill');
-
-        if (st.index >= st.queue.length) {
-          if (progFill) progFill.style.width = '100%';
-          if (progText) progText.textContent = `Hoàn thành ${st.queue.length}/${st.queue.length}`;
-          body.innerHTML = `
-            <div style="background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:2rem 1.5rem; text-align:center;">
-              <div style="font-size:2.5rem; margin-bottom:0.5rem;">🎉</div>
-              <div style="font-size:1.25rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;">Hoàn thành phiên luyện tập IT!</div>
-              <div style="font-size:0.95rem; color:var(--text-muted); margin-bottom:1.25rem;">
-                ${st.mode === 'quiz' ? `Bạn trả lời đúng <strong>${st.correct} / ${st.queue.length}</strong> câu.` : `Bạn đã ôn xong <strong>${st.queue.length}</strong> thuật ngữ IT.`}
-              </div>
-              <button class="btn btn-primary" onclick="app.exitITStudy()">Quay lại danh sách →</button>
-            </div>
-          `;
-          return;
-        }
-
-        const item = st.queue[st.index];
-        const pct = Math.round((st.index / st.queue.length) * 100);
-        if (progFill) progFill.style.width = `${pct}%`;
-        if (progText) progText.textContent = `${st.mode === 'quiz' ? 'Câu' : 'Thẻ'} ${st.index + 1} / ${st.queue.length}`;
-
-        if (st.mode === 'flashcard') {
-          const wordSafe = this.escapeHtml(item.word).replace(/'/g, "\\'");
-          body.innerHTML = `
-            <div class="it-flashcard" onclick="app.flipITFlashcard()">
-              <span class="it-badge" style="margin-bottom:0.85rem;">${this.escapeHtml(item.unitLabel)}</span>
-              <div style="font-family:var(--font-jp); font-size:2.1rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;">${this.escapeHtml(item.word)}</div>
-              <button class="icon-btn" onclick="event.stopPropagation(); app.speakText('${wordSafe}')" style="margin-bottom:0.8rem;">🔊</button>
-              ${st.flipped ? `
-                <div style="font-family:var(--font-jp); font-size:1.15rem; color:var(--accent); font-weight:600; margin-bottom:0.4rem;">${this.escapeHtml(item.reading || '')}</div>
-                <div style="font-size:1.15rem; font-weight:700; color:var(--text); margin-bottom:0.25rem;">${this.escapeHtml(item.vi || '')}</div>
-                ${item.en ? `<div style="font-size:0.88rem; color:var(--text-muted);">${this.escapeHtml(item.en)}</div>` : ''}
-              ` : '<div style="font-size:0.82rem; color:var(--text-subtle); margin-top:0.5rem;">Bấm vào thẻ để xem cách đọc & nghĩa IT</div>'}
-            </div>
-            <div style="display:flex; gap:0.75rem; justify-content:center; margin-top:1rem;">
-              <button class="btn" onclick="app.answerITFlashcard(false)" style="flex:1; max-width:220px; justify-content:center; border-color:var(--danger); color:var(--danger); font-weight:600;">Chưa nhớ (Lặp lại)</button>
-              <button class="btn btn-primary" onclick="app.answerITFlashcard(true)" style="flex:1; max-width:220px; justify-content:center; background:var(--success); border-color:var(--success); font-weight:600;">Đã thuộc ✓</button>
-            </div>
-          `;
-        } else {
-          // IT Vocab Quiz: alternate JP -> VI and VI -> JP
-          const qType = st.index % 2 === 0 ? 'jp_to_vi' : 'vi_to_jp';
-          const distractors = [];
-          const used = new Set([item.word]);
-          const shuffledPool = [...st.allPool].sort(() => Math.random() - 0.5);
-          for (const cand of shuffledPool) {
-            if (!used.has(cand.word) && cand.vi !== item.vi) {
-              used.add(cand.word);
-              distractors.push(cand);
-              if (distractors.length >= 3) break;
-            }
-          }
-          const options = [
-            { text: qType === 'jp_to_vi' ? item.vi : `${item.word}${item.reading && item.reading !== item.word ? ' (' + item.reading + ')' : ''}`, correct: true },
-            ...distractors.map(d => ({
-              text: qType === 'jp_to_vi' ? d.vi : `${d.word}${d.reading && d.reading !== d.word ? ' (' + d.reading + ')' : ''}`,
-              correct: false
-            }))
-          ].sort(() => Math.random() - 0.5);
-
-          st.currentOptions = options;
-          st.answered = false;
-          const wordSafe = this.escapeHtml(item.word).replace(/'/g, "\\'");
-
-          body.innerHTML = `
-            <div class="quiz-question-box">
-              <div class="quiz-type-badge">${this.escapeHtml(item.unitLabel)}</div>
-              <div style="font-family:var(--font-jp); font-size:${qType === 'jp_to_vi' ? '2rem' : '1.35rem'}; font-weight:700; color:${qType === 'jp_to_vi' ? 'var(--text)' : 'var(--accent)'}; margin:0.6rem 0;">
-                ${this.escapeHtml(qType === 'jp_to_vi' ? item.word : item.vi)}
-              </div>
-              <div style="font-size:0.85rem; color:var(--text-muted);">
-                ${qType === 'jp_to_vi' ? `Chọn nghĩa IT đúng${item.reading && item.reading !== item.word ? ' · ' + this.escapeHtml(item.reading) : ''}` : `Thuật ngữ tiếng Nhật tương ứng${item.en ? ' (' + this.escapeHtml(item.en) + ')' : ''} là gì?`}
-              </div>
-            </div>
-            <div style="display:flex; flex-direction:column; gap:0.55rem; margin-top:1rem;">
-              ${options.map((opt, idx) => `
-                <button class="it-practice-opt" id="it-qopt-${idx}" onclick="app.selectITQuizOption(${idx})">${idx + 1}. ${this.escapeHtml(opt.text)}</button>
-              `).join('')}
-            </div>
-            <div id="it-qfb" style="display:none; margin-top:0.85rem; padding:0.9rem; border-radius:10px; background:var(--surface); border:1px solid var(--border);">
-              <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem;">
-                <span id="it-qfb-title" style="font-weight:700;"></span>
-                <div style="display:flex; gap:0.4rem;">
-                  <button class="icon-btn" onclick="app.speakText('${wordSafe}')" style="width:1.9rem;height:1.9rem;">🔊</button>
-                  <button class="btn btn-sm btn-primary" onclick="app.nextITQuizStep()">Câu tiếp theo →</button>
-                </div>
-              </div>
-              <div style="font-size:0.85rem; color:var(--text-muted); margin-top:0.35rem;">
-                <strong style="color:var(--text);">${this.escapeHtml(item.word)}</strong> (${this.escapeHtml(item.reading || '')}) — ${this.escapeHtml(item.vi || '')}${item.en ? ' · ' + this.escapeHtml(item.en) : ''}
-              </div>
-            </div>
-          `;
-        }
-      }
-
-      flipITFlashcard() {
-        if (!this.itStudy) return;
-        this.itStudy.flipped = !this.itStudy.flipped;
-        this.renderITStudyStep();
-      }
-
-      answerITFlashcard(known) {
-        const st = this.itStudy;
-        if (!st) return;
-        const item = st.queue[st.index];
-        if (known) {
-          const prog = this.getITProgress();
-          if (!prog.masteredVocab.includes(item.vKey)) {
-            prog.masteredVocab.push(item.vKey);
-            this.saveITProgress(prog);
-          }
-        } else {
-          st.queue.push(item);
-        }
-        st.index++;
-        st.flipped = false;
-        this.renderITStudyStep();
-      }
-
-      selectITQuizOption(idx) {
-        const st = this.itStudy;
-        if (!st || st.answered) return;
-        st.answered = true;
-        const chosen = st.currentOptions[idx];
-        const isCorrect = !!(chosen && chosen.correct);
-        if (isCorrect) st.correct++;
-
-        st.currentOptions.forEach((opt, i) => {
-          const btn = document.getElementById(`it-qopt-${i}`);
-          if (!btn) return;
-          if (opt.correct) btn.classList.add('correct');
-          else if (i === idx) btn.classList.add('incorrect');
-          btn.disabled = true;
-        });
-
-        const fb = document.getElementById('it-qfb');
-        const title = document.getElementById('it-qfb-title');
-        if (title) {
-          title.textContent = isCorrect ? '✓ Chính xác!' : '✗ Chưa chính xác';
-          title.style.color = isCorrect ? 'var(--success)' : 'var(--danger)';
-        }
-        if (fb) fb.style.display = 'block';
-      }
-
-      nextITQuizStep() {
-        if (!this.itStudy) return;
-        this.itStudy.index++;
-        this.renderITStudyStep();
       }
 
       // --- SPEECH SYNTHESIS ---

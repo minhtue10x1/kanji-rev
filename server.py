@@ -942,6 +942,19 @@ def serve_data_json(filename: str):
     return FileResponse(str(target))
 
 
+@app.get("/components/{filename}")
+def serve_component_asset(filename: str):
+    if ".." in filename or not re.fullmatch(r"[a-zA-Z0-9._-]+\.(css|js)", filename):
+        raise HTTPException(status_code=400, detail="Tên file không hợp lệ")
+
+    comp_dir = (Path(WORKSPACE_DIR) / "components").resolve()
+    target = (comp_dir / filename).resolve()
+    if target.parent != comp_dir or not target.is_file():
+        raise HTTPException(status_code=404, detail="File không tồn tại")
+
+    return FileResponse(str(target))
+
+
 # Run using standard uvicorn entrypoint
 if __name__ == "__main__":
     import uvicorn
