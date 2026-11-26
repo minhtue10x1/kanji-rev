@@ -2071,6 +2071,13 @@
 
       <!-- 6C. BJT Reading CBT Panel -->
       <div id="bjt-dokkai-panel" style="display:none;">
+        <div class="it-filter-pills" id="bjt-dokkai-source-pills" style="margin-bottom:0.55rem;">
+          <button class="it-pill-btn active" data-dsrc="all" onclick="app.bjtWorkspace.setDokkaiSource('all')">Tất cả</button>
+          <button class="it-pill-btn" data-dsrc="mcbooks" onclick="app.bjtWorkspace.setDokkaiSource('mcbooks')">📘 Đề 1: MCBooks</button>
+          <button class="it-pill-btn" data-dsrc="jitsuryoku" onclick="app.bjtWorkspace.setDokkaiSource('jitsuryoku')">📗 実力養成</button>
+          <button class="it-pill-btn" data-dsrc="redbook" onclick="app.bjtWorkspace.setDokkaiSource('redbook')">📕 Quyển đỏ</button>
+        </div>
+
         <div class="it-filter-pills" id="bjt-dokkai-pills">
           <button class="it-pill-btn active" data-dsec="all" onclick="app.bjtWorkspace.setDokkaiSection('all')">Tất cả dạng đề</button>
           <button class="it-pill-btn" data-dsec="vocab" onclick="app.bjtWorkspace.setDokkaiSection('vocab')">🔤 語彙・表現</button>

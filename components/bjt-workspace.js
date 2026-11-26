@@ -28,6 +28,7 @@
       this.keigoMode = 'table'; // 'table' | 'situations' | 'flashcard'
       this.emailCategory = 'all';
       this.dokkaiSection = 'all';
+      this.dokkaiSource = 'all';
       this.dokkaiRun = null;
       this.keigoFlash = null;
       this._timerInterval = null;
@@ -412,12 +413,31 @@
 
     // ==================== TAB 3: BJT READING CBT (読解) ====================
 
+    setDokkaiSource(src) {
+      this.dokkaiSource = src;
+      document.querySelectorAll('#bjt-dokkai-source-pills .it-pill-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.dsrc === src);
+      });
+      this.renderDokkaiHome();
+    }
+
     setDokkaiSection(sec) {
       this.dokkaiSection = sec;
       document.querySelectorAll('#bjt-dokkai-pills .it-pill-btn').forEach(b => {
         b.classList.toggle('active', b.dataset.dsec === sec);
       });
       this.renderDokkaiHome();
+    }
+
+    getFilteredDokkai(sectionOverride) {
+      const allQ = (this.data && this.data.dokkai) || [];
+      const sec = sectionOverride !== undefined ? sectionOverride : this.dokkaiSection;
+      return allQ.filter(q => {
+        const qSrc = q.source || 'mcbooks';
+        if (this.dokkaiSource !== 'all' && qSrc !== this.dokkaiSource) return false;
+        if (sec !== 'all' && q.section !== sec) return false;
+        return true;
+      });
     }
 
     renderDokkaiHome() {
@@ -429,37 +449,57 @@
 
       const allQ = this.data.dokkai || [];
       const prog = this.getProgress();
-      const filtered = this.dokkaiSection === 'all' ? allQ : allQ.filter(q => q.section === this.dokkaiSection);
+      const sourcePool = this.getFilteredDokkai('all');
+      const filtered = this.getFilteredDokkai();
 
-      const cntVocab = allQ.filter(q => q.section === 'vocab').length;
-      const cntExpr = allQ.filter(q => q.section === 'expression').length;
-      const cntDoc = allQ.filter(q => q.section === 'document').length;
+      const cntVocab = sourcePool.filter(q => q.section === 'vocab').length;
+      const cntExpr = sourcePool.filter(q => q.section === 'expression').length;
+      const cntDoc = sourcePool.filter(q => q.section === 'document').length;
+
+      // Update source pill labels with live counts
+      const srcCounts = {
+        all: allQ.length,
+        mcbooks: allQ.filter(q => (q.source || 'mcbooks') === 'mcbooks').length,
+        jitsuryoku: allQ.filter(q => q.source === 'jitsuryoku').length,
+        redbook: allQ.filter(q => q.source === 'redbook').length
+      };
+      const labels = {
+        all: `Tất cả (${srcCounts.all})`,
+        mcbooks: `📘 Đề 1: MCBooks (${srcCounts.mcbooks})`,
+        jitsuryoku: `📗 実力養成 (${srcCounts.jitsuryoku})`,
+        redbook: `📕 Quyển đỏ (${srcCounts.redbook})`
+      };
+      document.querySelectorAll('#bjt-dokkai-source-pills .it-pill-btn').forEach(b => {
+        const key = b.dataset.dsrc;
+        if (labels[key]) b.textContent = labels[key];
+      });
 
       body.innerHTML = `
         <div class="it-hero" style="margin-bottom:1rem;">
           <div>
-            <div class="it-hero-title">📝 Luyện Đọc hiểu BJT (第3部 読解テスト)</div>
-            <div class="it-hero-sub">Bộ đề chuẩn CBT trích từ Đề thi thử chính thống BJT kèm giải thích chi tiết tiếng Việt.</div>
-            <div class="it-progress-pill">Đã làm đúng ${prog.solvedDokkai.length}/${allQ.length} câu · Bộ lọc hiện tại: ${filtered.length} câu</div>
+            <div class="it-hero-title">📝 Kho Đọc hiểu BJT (第3部 読解テスト)</div>
+            <div class="it-hero-sub">Tổng hợp từ 3 bộ sách chuẩn BJT (MCBooks · 実力養成問題集 · Quyển đỏ) kèm giải thích tiếng Việt.</div>
+            <div class="it-progress-pill">Đã làm đúng ${prog.solvedDokkai.length}/${allQ.length} câu · Đang lọc: ${filtered.length} câu</div>
           </div>
           <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-            <button class="btn btn-primary" onclick="app.bjtWorkspace.startDokkai(false)">📖 Luyện từng câu</button>
-            <button class="btn" onclick="app.bjtWorkspace.startDokkai(true)" style="border-color:var(--accent); color:var(--accent); font-weight:600;">⏱️ Thi thử CBT (Bấm giờ)</button>
+            <button class="btn btn-primary" onclick="app.bjtWorkspace.startDokkai(false, 20)">⚡ Luyện nhanh 20 câu</button>
+            <button class="btn" onclick="app.bjtWorkspace.startDokkai(false, null)">📖 Làm hết (${filtered.length} câu)</button>
+            <button class="btn" onclick="app.bjtWorkspace.startDokkai(true, 35)" style="border-color:var(--accent); color:var(--accent); font-weight:600;">⏱️ Thi thử CBT (35 câu)</button>
           </div>
         </div>
 
         <div class="it-practice-hub-grid">
-          <div class="it-practice-mode-card" onclick="app.bjtWorkspace.setDokkaiSection('vocab'); app.bjtWorkspace.startDokkai(false)">
+          <div class="it-practice-mode-card" onclick="app.bjtWorkspace.setDokkaiSection('vocab'); app.bjtWorkspace.startDokkai(false, null)">
             <div style="font-size:1.5rem;">🔤</div>
             <div style="font-weight:700; color:var(--text);">Dạng 1: 語彙・表現 (${cntVocab} câu)</div>
             <div style="font-size:0.82rem; color:var(--text-muted);">Chọn từ vựng thương mại và cụm từ diễn đạt chuẩn ngữ cảnh công ty Nhật.</div>
           </div>
-          <div class="it-practice-mode-card" onclick="app.bjtWorkspace.setDokkaiSection('expression'); app.bjtWorkspace.startDokkai(false)">
+          <div class="it-practice-mode-card" onclick="app.bjtWorkspace.setDokkaiSection('expression'); app.bjtWorkspace.startDokkai(false, null)">
             <div style="font-size:1.5rem;">🙇</div>
             <div style="font-weight:700; color:var(--text);">Dạng 2: 表現・敬語 (${cntExpr} câu)</div>
             <div style="font-size:0.82rem; color:var(--text-muted);">Diễn đạt lại câu & chọn kính ngữ đúng vai vế trong văn bản kinh doanh.</div>
           </div>
-          <div class="it-practice-mode-card" onclick="app.bjtWorkspace.setDokkaiSection('document'); app.bjtWorkspace.startDokkai(false)">
+          <div class="it-practice-mode-card" onclick="app.bjtWorkspace.setDokkaiSection('document'); app.bjtWorkspace.startDokkai(false, null)">
             <div style="font-size:1.5rem;">📄</div>
             <div style="font-weight:700; color:var(--text);">Dạng 3: 文書・メール読解 (${cntDoc} câu)</div>
             <div style="font-size:0.82rem; color:var(--text-muted);">Đọc Email, thông báo nội bộ, báo cáo doanh nghiệp và nắm ý chính nhanh.</div>
@@ -468,13 +508,19 @@
       `;
     }
 
-    startDokkai(timed) {
+    startDokkai(timed, limit = null) {
       if (!this.data || !this.data.dokkai) return;
-      const allQ = this.data.dokkai;
-      const pool = this.dokkaiSection === 'all' ? [...allQ] : allQ.filter(q => q.section === this.dokkaiSection);
+      let pool = this.getFilteredDokkai();
       if (pool.length === 0) {
-        this.app.showToast('Không có câu hỏi nào trong phần này.');
+        this.app.showToast('Không có câu hỏi nào trong bộ lọc này.');
         return;
+      }
+      if (limit && limit < pool.length) {
+        // Prioritize unsolved questions first when slicing a random batch
+        const prog = this.getProgress();
+        const unsolved = pool.filter(q => !prog.solvedDokkai.includes(q.id)).sort(() => Math.random() - 0.5);
+        const solved = pool.filter(q => prog.solvedDokkai.includes(q.id)).sort(() => Math.random() - 0.5);
+        pool = [...unsolved, ...solved].slice(0, limit);
       }
 
       this._stopTimer();
@@ -549,7 +595,7 @@
           </div>
 
           <div class="bjt-dokkai-card">
-            <div style="font-size:0.76rem; font-weight:700; color:var(--accent); margin-bottom:0.5rem;">${escapeHtml(q.sectionLabel || 'BJT 読解')} · Câu ${q.number || (st.index + 1)}</div>
+            <div style="font-size:0.76rem; font-weight:700; color:var(--accent); margin-bottom:0.5rem;">${escapeHtml(q.sourceLabel || 'Đề 1: MCBooks')} · ${escapeHtml(q.sectionLabel || 'BJT 読解')} · Câu ${q.number || (st.index + 1)}</div>
             ${q.passageJa ? `<pre class="bjt-passage-box">${escapeHtml(q.passageJa)}</pre>` : ''}
             <div class="it-ja-line" style="font-weight:700; margin-bottom:0.3rem;">${escapeHtml(q.questionJa)}</div>
             ${q.questionVi ? `<div style="font-size:0.84rem; color:var(--text-muted); margin-bottom:0.9rem;">${escapeHtml(q.questionVi)}</div>` : ''}
