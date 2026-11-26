@@ -1,0 +1,590 @@
+/* ==========================================================================
+   BJT Business Prep — Modern Manga Editorial UI/UX & Motion Polish
+   Scoped strictly to html[data-workspace="bjt"] so IT & Kanji remain untouched.
+   Features: Ink panels + hard shadows, Halftone screentone (網点),
+   Vertical Japanese ribbons (縦書き), Speech bubbles (吹き出し),
+   Red Hanko stamps (印鑑 済), Katakana SFX pop (擬音語), Speedlines (集中線).
+   ========================================================================== */
+
+/* --- 1. MANGA PRINT PALETTE (Warm Paper Light / Tokyo Night Ink Dark) --- */
+html[data-workspace="bjt"] {
+  --font-manga-jp: 'Shippori Mincho', 'Noto Serif JP', serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+  --bg: #FAF6EC;
+  --surface: #FFFFFF;
+  --surface-elevated: #F2ECE0;
+  --text: #16161A;
+  --text-muted: #52525B;
+  --text-subtle: #71717A;
+  --border: #16161A;
+  --border-strong: #16161A;
+  --accent: #0D9488;
+  --accent-soft: rgba(13, 148, 136, 0.12);
+  --accent-hover: #0F766E;
+  --success: #059669;
+  --success-soft: rgba(5, 150, 105, 0.12);
+  --danger: #DC2626;
+  --danger-soft: rgba(220, 38, 38, 0.10);
+
+  --manga-ink: #16161A;
+  --manga-shadow: #16161A;
+  --manga-stamp: #DC2626;
+  --manga-tone: rgba(22, 22, 26, 0.055);
+  --manga-speed: rgba(13, 148, 136, 0.18);
+}
+
+html[data-workspace="bjt"][data-theme="dark"] {
+  --bg: #0D0E13;
+  --surface: #15171F;
+  --surface-elevated: #1D202B;
+  --text: #F5F2EB;
+  --text-muted: #A1A1AA;
+  --text-subtle: #71717A;
+  --border: rgba(245, 242, 235, 0.24);
+  --border-strong: rgba(245, 242, 235, 0.42);
+  --accent: #2DD4BF;
+  --accent-soft: rgba(45, 212, 191, 0.14);
+  --accent-hover: #5EEAD4;
+  --success: #34D399;
+  --success-soft: rgba(52, 211, 153, 0.15);
+  --danger: #FB7185;
+  --danger-soft: rgba(251, 113, 133, 0.14);
+
+  --manga-ink: rgba(245, 242, 235, 0.34);
+  --manga-shadow: #040507;
+  --manga-stamp: #FB7185;
+  --manga-tone: rgba(245, 242, 235, 0.04);
+  --manga-speed: rgba(45, 212, 191, 0.22);
+}
+
+/* Subtle halftone paper background */
+html[data-workspace="bjt"] body {
+  background-color: var(--bg);
+  background-image: radial-gradient(var(--manga-tone) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+
+html[data-workspace="bjt"] header {
+  background: var(--surface);
+  border-bottom: 2px solid var(--manga-ink);
+  box-shadow: 0 3px 0 var(--manga-shadow);
+}
+
+/* --- 2. CRISP INK SVG ICONS --- */
+.bjt-svg {
+  width: 15px;
+  height: 15px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: -2px;
+}
+
+.bjt-svg-sm { width: 13px; height: 13px; }
+.bjt-svg-lg { width: 19px; height: 19px; }
+
+/* --- 3. MANGA NAV & PILLS (Sharp Ink Tabs) --- */
+html[data-workspace="bjt"] nav.bjt-only {
+  gap: 0.35rem;
+}
+
+html[data-workspace="bjt"] nav.bjt-only .nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  padding: 0.4rem 0.78rem;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: transform 0.14s ease, box-shadow 0.14s ease, border-color 0.16s ease, background-color 0.16s ease;
+}
+
+html[data-workspace="bjt"] nav.bjt-only .nav-btn:hover {
+  color: var(--text);
+  border-color: var(--manga-ink);
+  transform: translate(-1px, -1px);
+  box-shadow: 2px 2px 0 var(--manga-shadow);
+}
+
+html[data-workspace="bjt"] nav.bjt-only .nav-btn.active {
+  background: var(--accent);
+  color: #FFFFFF;
+  border-color: var(--manga-ink);
+  box-shadow: 3px 3px 0 var(--manga-shadow);
+  transform: translate(-1px, -1px);
+}
+
+html[data-workspace="bjt"][data-theme="dark"] nav.bjt-only .nav-btn.active {
+  color: #0D0E13;
+}
+
+html[data-workspace="bjt"] .it-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 6px;
+  border: 1.5px solid var(--manga-ink);
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.8rem;
+  padding: 0.38rem 0.78rem;
+  box-shadow: 2px 2px 0 var(--manga-shadow);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.15s ease;
+}
+
+html[data-workspace="bjt"] .it-pill-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--manga-shadow);
+}
+
+html[data-workspace="bjt"] .it-pill-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 var(--manga-shadow);
+}
+
+html[data-workspace="bjt"] .it-pill-btn.active {
+  background: var(--accent);
+  color: #FFFFFF;
+  border-color: var(--manga-ink);
+}
+
+html[data-workspace="bjt"][data-theme="dark"] .it-pill-btn.active {
+  color: #0D0E13;
+}
+
+/* Tactile Manga Ink Buttons */
+html[data-workspace="bjt"] .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 6px;
+  border: 2px solid var(--manga-ink);
+  box-shadow: 3px 3px 0 var(--manga-shadow);
+  font-weight: 700;
+  transition: transform 0.12s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.12s ease;
+}
+
+html[data-workspace="bjt"] .btn:hover {
+  transform: translate(-1.5px, -1.5px);
+  box-shadow: 4.5px 4.5px 0 var(--manga-shadow);
+}
+
+html[data-workspace="bjt"] .btn:active {
+  transform: translate(2.5px, 2.5px);
+  box-shadow: 0.5px 0.5px 0 var(--manga-shadow);
+}
+
+html[data-workspace="bjt"][data-theme="dark"] .btn-primary {
+  color: #0D0E13;
+}
+
+/* --- 4. MANGA EDITORIAL HERO + VERTICAL RIBBON (縦書き) + SCREENTONE --- */
+html[data-workspace="bjt"] .it-hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+  border: 2px solid var(--manga-ink);
+  border-radius: 8px;
+  box-shadow: 5px 5px 0 var(--manga-shadow);
+  padding: 1.45rem 3.2rem 1.45rem 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+/* Corner Screentone (網点) */
+html[data-workspace="bjt"] .it-hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 190px;
+  height: 100%;
+  pointer-events: none;
+  background-image: radial-gradient(var(--manga-ink) 1.1px, transparent 1.1px);
+  background-size: 6px 6px;
+  opacity: 0.08;
+  mask-image: linear-gradient(270deg, black 25%, transparent 100%);
+  -webkit-mask-image: linear-gradient(270deg, black 25%, transparent 100%);
+}
+
+html[data-workspace="bjt"] .it-hero::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  height: auto;
+  background: var(--accent);
+}
+
+.bjt-manga-ribbon {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.7rem;
+  writing-mode: vertical-rl;
+  font-family: var(--font-manga-jp);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+  border-left: 1.5px dashed var(--manga-ink);
+  padding-left: 0.35rem;
+  opacity: 0.75;
+  pointer-events: none;
+  user-select: none;
+}
+
+html[data-workspace="bjt"] .it-hero-title {
+  font-family: var(--font-manga-jp);
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+html[data-workspace="bjt"] .it-progress-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 600;
+  border: 1.5px solid var(--manga-ink);
+  border-radius: 4px;
+  background: var(--surface-elevated);
+  padding: 0.25rem 0.65rem;
+  margin-top: 0.55rem;
+}
+
+/* --- 5. MANGA PANEL CARDS + HANKO STAMP (印鑑 済) --- */
+@keyframes mangaPanelPop {
+  0% { opacity: 0; transform: translateY(10px) scale(0.985); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+html[data-workspace="bjt"] .bjt-keigo-card,
+html[data-workspace="bjt"] .bjt-situation-card,
+html[data-workspace="bjt"] .bjt-email-card,
+html[data-workspace="bjt"] .bjt-dokkai-card,
+html[data-workspace="bjt"] .it-vocab-item,
+html[data-workspace="bjt"] .it-practice-mode-card {
+  position: relative;
+  background: var(--surface);
+  border: 2px solid var(--manga-ink);
+  border-radius: 8px;
+  box-shadow: 4px 4px 0 var(--manga-shadow);
+  transition: transform 0.16s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.16s ease;
+}
+
+html[data-workspace="bjt"] .bjt-keigo-card:hover,
+html[data-workspace="bjt"] .it-vocab-item:hover,
+html[data-workspace="bjt"] .it-practice-mode-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--manga-shadow);
+}
+
+html[data-workspace="bjt"] .it-practice-mode-card:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--manga-shadow);
+}
+
+html[data-workspace="bjt"] .bjt-stagger {
+  animation: mangaPanelPop 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 22ms);
+}
+
+/* Red Hanko Stamp (印鑑 済) on Mastered Cards */
+.bjt-hanko-stamp {
+  position: absolute;
+  top: 0.55rem;
+  right: 4.7rem;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--manga-stamp);
+  color: var(--manga-stamp);
+  font-family: var(--font-manga-jp);
+  font-size: 0.92rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-12deg);
+  opacity: 0.88;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--manga-stamp) 35%, transparent);
+  animation: mangaStampSlam 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes mangaStampSlam {
+  0% { transform: scale(1.9) rotate(-26deg); opacity: 0; }
+  65% { transform: scale(0.92) rotate(-10deg); opacity: 1; }
+  100% { transform: scale(1) rotate(-12deg); opacity: 0.88; }
+}
+
+/* --- 6. SPEECH BUBBLES (吹き出し) FOR KEIGO SITUATIONS --- */
+html[data-workspace="bjt"] .bjt-compare-box {
+  position: relative;
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+}
+
+html[data-workspace="bjt"] .bjt-compare-box.bad {
+  border: 2px dashed var(--danger);
+  background: var(--danger-soft);
+}
+
+html[data-workspace="bjt"] .bjt-compare-box.good {
+  border: 2px solid var(--manga-ink);
+  background: var(--surface-elevated);
+  box-shadow: 3px 3px 0 var(--accent);
+}
+
+html[data-workspace="bjt"] .bjt-compare-box.good::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 22px;
+  width: 14px;
+  height: 14px;
+  background: var(--surface-elevated);
+  border-right: 2px solid var(--manga-ink);
+  border-bottom: 2px solid var(--manga-ink);
+  transform: rotate(45deg);
+}
+
+/* --- 7. MANGA 3D PAGE-FLIP FLASHCARD --- */
+.bjt-fc-scene {
+  perspective: 1200px;
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
+  min-height: 295px;
+}
+
+.bjt-fc-card {
+  position: relative;
+  width: 100%;
+  min-height: 295px;
+  transform-style: preserve-3d;
+  transition: transform 0.54s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.24s ease;
+  cursor: pointer;
+}
+
+.bjt-fc-card.is-flipped { transform: rotateY(180deg); }
+.bjt-fc-card.swipe-left { transform: translateX(-80px) rotate(-6deg); opacity: 0; }
+.bjt-fc-card.swipe-right { transform: translateX(80px) rotate(6deg); opacity: 0; }
+.bjt-fc-card.is-flipped.swipe-left { transform: rotateY(180deg) translateX(80px) rotate(6deg); opacity: 0; }
+.bjt-fc-card.is-flipped.swipe-right { transform: rotateY(180deg) translateX(-80px) rotate(-6deg); opacity: 0; }
+
+.bjt-fc-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: var(--surface);
+  border: 2.5px solid var(--manga-ink);
+  border-radius: 10px;
+  box-shadow: 6px 6px 0 var(--manga-shadow);
+  padding: 1.8rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.bjt-fc-face::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid color-mix(in srgb, var(--manga-ink) 22%, transparent);
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+.bjt-fc-back {
+  transform: rotateY(180deg);
+  border-color: var(--accent);
+}
+
+/* --- 8. QUIZ / DOKKAI OPTIONS + SFX POP (擬音語) + SPEEDLINES (集中線) --- */
+html[data-workspace="bjt"] .quiz-question-box {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+  border: 2px solid var(--manga-ink);
+  border-radius: 10px;
+  box-shadow: 5px 5px 0 var(--manga-shadow);
+  padding: 1.65rem 1.4rem;
+}
+
+html[data-workspace="bjt"] .it-practice-opt {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  width: 100%;
+  text-align: left;
+  padding: 0.8rem 0.95rem;
+  border-radius: 7px;
+  border: 2px solid var(--manga-ink);
+  background: var(--surface);
+  box-shadow: 3px 3px 0 var(--manga-shadow);
+  color: var(--text);
+  font-weight: 500;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.15s ease;
+}
+
+html[data-workspace="bjt"] .it-practice-opt:hover:not(:disabled) {
+  transform: translate(-1.5px, -1.5px);
+  box-shadow: 4.5px 4.5px 0 var(--manga-shadow);
+  background: var(--accent-soft);
+}
+
+html[data-workspace="bjt"] .it-practice-opt:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--manga-shadow);
+}
+
+html[data-workspace="bjt"] .it-practice-opt.correct {
+  background: var(--success-soft);
+  border-color: var(--success);
+  box-shadow: 3px 3px 0 var(--success);
+  animation: mangaCorrectPop 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html[data-workspace="bjt"] .it-practice-opt.incorrect {
+  background: var(--danger-soft);
+  border-color: var(--danger);
+  box-shadow: 3px 3px 0 var(--danger);
+  animation: mangaWrongShake 0.28s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+@keyframes mangaCorrectPop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.02) rotate(-0.5deg); }
+  100% { transform: scale(1); }
+}
+
+@keyframes mangaWrongShake {
+  0%, 100% { transform: translateX(0); }
+  22% { transform: translateX(-7px) rotate(-0.8deg); }
+  48% { transform: translateX(6px) rotate(0.8deg); }
+  74% { transform: translateX(-4px); }
+}
+
+/* Floating Katakana Manga SFX (擬音語) */
+.manga-sfx-pop {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  font-family: var(--font-manga-jp);
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  transform: translate(-50%, -50%) rotate(-8deg);
+  text-shadow: 2px 2px 0 var(--manga-shadow), -1px -1px 0 var(--surface), 1px -1px 0 var(--surface), -1px 1px 0 var(--surface);
+  animation: mangaSfxFly 0.68s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.manga-sfx-pop.good {
+  color: var(--accent);
+}
+
+.manga-sfx-pop.combo {
+  font-size: 1.7rem;
+  color: var(--manga-stamp);
+}
+
+.manga-sfx-pop.bad {
+  font-size: 1.25rem;
+  color: var(--danger);
+}
+
+@keyframes mangaSfxFly {
+  0% { opacity: 0; transform: translate(-50%, -15%) scale(0.55) rotate(-14deg); }
+  28% { opacity: 1; transform: translate(-50%, -85%) scale(1.14) rotate(-6deg); }
+  75% { opacity: 1; transform: translate(-50%, -115%) scale(1) rotate(-8deg); }
+  100% { opacity: 0; transform: translate(-50%, -145%) scale(0.95) rotate(-10deg); }
+}
+
+/* Speedlines Flash (集中線) on Combo / Correct */
+.manga-speedlines-ring {
+  position: absolute;
+  inset: -4px;
+  pointer-events: none;
+  z-index: 4;
+  border-radius: inherit;
+  background: repeating-conic-gradient(
+    from 0deg,
+    var(--manga-speed) 0deg 3deg,
+    transparent 3deg 12deg
+  );
+  mask-image: radial-gradient(circle, transparent 52%, black 92%);
+  -webkit-mask-image: radial-gradient(circle, transparent 52%, black 92%);
+  animation: mangaSpeedFlash 0.42s ease-out forwards;
+}
+
+@keyframes mangaSpeedFlash {
+  0% { opacity: 0; transform: scale(1.12); }
+  30% { opacity: 0.9; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.97); }
+}
+
+.bjt-combo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  border: 2px solid var(--manga-ink);
+  background: var(--manga-stamp);
+  color: #FFFFFF;
+  box-shadow: 2px 2px 0 var(--manga-shadow);
+  transform: rotate(-3deg);
+  animation: mangaCorrectPop 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bjt-keycap {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 5px;
+  border-radius: 4px;
+  border: 1.5px solid var(--manga-ink);
+  background: var(--surface-elevated);
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .bjt-manga-ribbon { display: none; }
+  html[data-workspace="bjt"] .it-hero { padding: 1.2rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-workspace="bjt"] *,
+  html[data-workspace="bjt"] *::before,
+  html[data-workspace="bjt"] *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

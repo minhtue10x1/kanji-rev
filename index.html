@@ -13,6 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/components/workspace-switcher.css?v=2">
   <link rel="stylesheet" href="/components/it-motion-polish.css?v=1">
+  <link rel="stylesheet" href="/components/bjt-manga-polish.css?v=1">
   <style>
     :root {
       --bg: #FAFAF9;
@@ -1633,10 +1634,10 @@
 
       <!-- Desktop Nav: BJT Prep Workspace -->
       <nav class="bjt-only">
-        <button class="nav-btn bjt-nav-btn active" data-bjtsub="keigo" onclick="app.bjtWorkspace.navigateSubView('keigo')">🙇 Kính ngữ</button>
-        <button class="nav-btn bjt-nav-btn" data-bjtsub="vocab" onclick="app.bjtWorkspace.navigateSubView('vocab')">💼 Từ vựng BJT</button>
-        <button class="nav-btn bjt-nav-btn" data-bjtsub="email" onclick="app.bjtWorkspace.navigateSubView('email')">✉️ Email thương mại</button>
-        <button class="nav-btn bjt-nav-btn" data-bjtsub="dokkai" onclick="app.bjtWorkspace.navigateSubView('dokkai')">📝 Đọc hiểu BJT</button>
+        <button class="nav-btn bjt-nav-btn active" data-bjtsub="keigo" onclick="app.bjtWorkspace.navigateSubView('keigo')"><svg class="bjt-svg" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg><span>Kính ngữ</span></button>
+        <button class="nav-btn bjt-nav-btn" data-bjtsub="vocab" onclick="app.bjtWorkspace.navigateSubView('vocab')"><svg class="bjt-svg" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg><span>Từ vựng BJT</span></button>
+        <button class="nav-btn bjt-nav-btn" data-bjtsub="email" onclick="app.bjtWorkspace.navigateSubView('email')"><svg class="bjt-svg" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><span>Email</span></button>
+        <button class="nav-btn bjt-nav-btn" data-bjtsub="dokkai" onclick="app.bjtWorkspace.navigateSubView('dokkai')"><svg class="bjt-svg" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg><span>Đọc hiểu BJT</span></button>
       </nav>
 
       <div class="header-actions">
@@ -2046,23 +2047,24 @@
       <!-- 6A. Keigo Panel -->
       <div id="bjt-keigo-panel">
         <div class="it-hero">
+          <span class="bjt-manga-ribbon" aria-hidden="true">敬語道場</span>
           <div>
-            <div class="it-hero-title">🙇 Kính ngữ Công sở Nhật (敬語マスター)</div>
+            <div class="it-hero-title">Kính ngữ Công sở Nhật — 敬語マスター</div>
             <div class="it-hero-sub">50 động từ 尊敬語 / 謙譲語 chuẩn Bộ Văn hóa Nhật & 24 tình huống giao tiếp thương mại thực tế (kèm Mini-Quiz).</div>
             <div class="it-progress-pill" id="bjt-keigo-stats">Đang tải dữ liệu...</div>
           </div>
           <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-            <button class="btn" id="bjt-keigo-mistake-btn" onclick="app.bjtWorkspace.startKeigoRoleplay(true)" style="display:none; border-color:var(--danger); color:var(--danger); font-weight:700;">🔴 Ôn câu hay sai</button>
-            <button class="btn btn-primary" onclick="app.bjtWorkspace.setKeigoMode('roleplay')">🎭 Phản xạ vai vế</button>
-            <button class="btn" onclick="app.bjtWorkspace.setKeigoMode('flashcard')">🃏 Flashcard</button>
+            <button class="btn" id="bjt-keigo-mistake-btn" onclick="app.bjtWorkspace.startKeigoRoleplay(true)" style="display:none; border-color:var(--danger); color:var(--danger);">Ôn câu hay sai</button>
+            <button class="btn btn-primary" onclick="app.bjtWorkspace.setKeigoMode('roleplay')"><svg class="bjt-svg" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Phản xạ vai vế</span></button>
+            <button class="btn" onclick="app.bjtWorkspace.setKeigoMode('flashcard')"><svg class="bjt-svg" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg><span>Flashcard 3D</span></button>
           </div>
         </div>
 
         <div class="it-filter-pills" id="bjt-keigo-pills">
-          <button class="it-pill-btn active" data-kmode="table" onclick="app.bjtWorkspace.setKeigoMode('table')">📋 Bảng chuyển đổi (50 động từ)</button>
-          <button class="it-pill-btn" data-kmode="situations" onclick="app.bjtWorkspace.setKeigoMode('situations')">💼 24 Tình huống công sở</button>
-          <button class="it-pill-btn" data-kmode="roleplay" onclick="app.bjtWorkspace.setKeigoMode('roleplay')">🎭 Phản xạ vai vế</button>
-          <button class="it-pill-btn" data-kmode="flashcard" onclick="app.bjtWorkspace.setKeigoMode('flashcard')">🃏 Flashcard</button>
+          <button class="it-pill-btn active" data-kmode="table" onclick="app.bjtWorkspace.setKeigoMode('table')">Bảng chuyển đổi (50)</button>
+          <button class="it-pill-btn" data-kmode="situations" onclick="app.bjtWorkspace.setKeigoMode('situations')">24 Tình huống</button>
+          <button class="it-pill-btn" data-kmode="roleplay" onclick="app.bjtWorkspace.setKeigoMode('roleplay')">Phản xạ vai vế</button>
+          <button class="it-pill-btn" data-kmode="flashcard" onclick="app.bjtWorkspace.setKeigoMode('flashcard')">Flashcard 3D</button>
         </div>
 
         <div id="bjt-keigo-body"></div>
@@ -2071,29 +2073,30 @@
       <!-- 6D. Business Vocab & Phrases Panel -->
       <div id="bjt-vocab-panel" style="display:none;">
         <div class="it-hero">
+          <span class="bjt-manga-ribbon" aria-hidden="true">商務語彙</span>
           <div>
-            <div class="it-hero-title">💼 Từ vựng & Cụm câu Thương mại (ビジネス語彙・表現)</div>
-            <div class="it-hero-sub">Tổng hợp từ Sổ tay tiếng Nhật thương mại, わかるビジネス日本語 & ビジネス日本語30時間.</div>
+            <div class="it-hero-title">Từ vựng & Cụm câu Thương mại — ビジネス語彙</div>
+            <div class="it-hero-sub">Tổng hợp 228 mục từ Sổ tay tiếng Nhật thương mại, わかるビジネス日本語 & ビジネス日本語30時間.</div>
             <div class="it-progress-pill" id="bjt-vocab-stats">Đang tải dữ liệu...</div>
           </div>
           <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-            <button class="btn" id="bjt-vocab-mistake-btn" onclick="app.bjtWorkspace.startVocabStudy('cloze', true)" style="display:none; border-color:var(--danger); color:var(--danger); font-weight:700;">🔴 Ôn từ hay sai</button>
-            <button class="btn btn-primary" onclick="app.bjtWorkspace.startVocabStudy('cloze')">🧩 Điền từ vào câu</button>
-            <button class="btn" onclick="app.bjtWorkspace.startVocabStudy('quiz')" style="border-color:var(--accent); color:var(--accent); font-weight:600;">⚡ Trắc nghiệm 25 câu</button>
-            <button class="btn" onclick="app.bjtWorkspace.startVocabStudy('flashcard')">🃏 Flashcard</button>
+            <button class="btn" id="bjt-vocab-mistake-btn" onclick="app.bjtWorkspace.startVocabStudy('cloze', true)" style="display:none; border-color:var(--danger); color:var(--danger);">Ôn từ hay sai</button>
+            <button class="btn btn-primary" onclick="app.bjtWorkspace.startVocabStudy('cloze')"><svg class="bjt-svg" viewBox="0 0 24 24"><path d="M19.439 7.85c-.049.322.059.648.289.878l1.568 1.568c.47.47.706 1.087.706 1.704s-.235 1.233-.706 1.704l-1.611 1.611a.98.98 0 0 1-.837.276c-.47-.07-.802-.48-.968-.925a2.501 2.501 0 1 0-3.214 3.214c.446.166.855.497.925.968a.979.979 0 0 1-.276.837l-1.61 1.61a2.404 2.404 0 0 1-1.705.707 2.402 2.402 0 0 1-1.704-.706l-1.568-1.568a1.026 1.026 0 0 0-.877-.29c-.493.074-.84.504-1.02.968a2.5 2.5 0 1 1-3.237-3.237c.464-.18.894-.527.967-1.02a1.026 1.026 0 0 0-.289-.877l-1.568-1.568A2.402 2.402 0 0 1 1.998 12c0-.617.236-1.234.706-1.704L4.23 8.77c.24-.24.581-.353.917-.303.515.077.877.528 1.073 1.01a2.5 2.5 0 1 0 3.259-3.259c-.482-.196-.933-.558-1.01-1.073-.05-.336.062-.676.303-.917l1.525-1.525A2.402 2.402 0 0 1 12 1.998c.617 0 1.234.236 1.704.706l1.568 1.568c.23.23.556.338.877.29.493-.074.84-.504 1.02-.968a2.5 2.5 0 1 1 3.237 3.237c-.464.18-.894.527-.967 1.02Z"/></svg><span>Điền từ Cloze</span></button>
+            <button class="btn" onclick="app.bjtWorkspace.startVocabStudy('quiz')"><svg class="bjt-svg" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span>Trắc nghiệm 25</span></button>
+            <button class="btn" onclick="app.bjtWorkspace.startVocabStudy('flashcard')"><svg class="bjt-svg" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg><span>Flashcard 3D</span></button>
           </div>
         </div>
 
         <div class="it-filter-pills" id="bjt-vocab-cat-pills">
           <button class="it-pill-btn active" data-vcat="all" onclick="app.bjtWorkspace.setVocabCategory('all')">Tất cả</button>
-          <button class="it-pill-btn" data-vcat="office" onclick="app.bjtWorkspace.setVocabCategory('office')">🏢 Công sở</button>
-          <button class="it-pill-btn" data-vcat="meeting" onclick="app.bjtWorkspace.setVocabCategory('meeting')">🗣️ Họp & Đàm phán</button>
-          <button class="it-pill-btn" data-vcat="sales" onclick="app.bjtWorkspace.setVocabCategory('sales')">🤝 Kinh doanh</button>
-          <button class="it-pill-btn" data-vcat="finance" onclick="app.bjtWorkspace.setVocabCategory('finance')">💰 Tài chính</button>
-          <button class="it-pill-btn" data-vcat="hr" onclick="app.bjtWorkspace.setVocabCategory('hr')">👥 Nhân sự</button>
-          <button class="it-pill-btn" data-vcat="phone" onclick="app.bjtWorkspace.setVocabCategory('phone')">📞 Điện thoại</button>
-          <button class="it-pill-btn" data-vcat="email_phrase" onclick="app.bjtWorkspace.setVocabCategory('email_phrase')">✉️ Cụm Email</button>
-          <button class="it-pill-btn" data-vcat="manner" onclick="app.bjtWorkspace.setVocabCategory('manner')">🙇 Tác phong</button>
+          <button class="it-pill-btn" data-vcat="office" onclick="app.bjtWorkspace.setVocabCategory('office')">Công sở</button>
+          <button class="it-pill-btn" data-vcat="meeting" onclick="app.bjtWorkspace.setVocabCategory('meeting')">Họp & Đàm phán</button>
+          <button class="it-pill-btn" data-vcat="sales" onclick="app.bjtWorkspace.setVocabCategory('sales')">Kinh doanh</button>
+          <button class="it-pill-btn" data-vcat="finance" onclick="app.bjtWorkspace.setVocabCategory('finance')">Tài chính</button>
+          <button class="it-pill-btn" data-vcat="hr" onclick="app.bjtWorkspace.setVocabCategory('hr')">Nhân sự</button>
+          <button class="it-pill-btn" data-vcat="phone" onclick="app.bjtWorkspace.setVocabCategory('phone')">Điện thoại</button>
+          <button class="it-pill-btn" data-vcat="email_phrase" onclick="app.bjtWorkspace.setVocabCategory('email_phrase')">Cụm Email</button>
+          <button class="it-pill-btn" data-vcat="manner" onclick="app.bjtWorkspace.setVocabCategory('manner')">Tác phong</button>
         </div>
 
         <div style="margin-bottom:1rem;" id="bjt-vocab-search-wrap">
@@ -2106,22 +2109,23 @@
       <!-- 6B. Business Email Panel -->
       <div id="bjt-email-panel" style="display:none;">
         <div class="it-hero">
+          <span class="bjt-manga-ribbon" aria-hidden="true">実務メール</span>
           <div>
-            <div class="it-hero-title">✉️ 40 Mẫu Email Thương mại (ビジネスメール)</div>
+            <div class="it-hero-title">40 Mẫu Email Thương mại — ビジネスメール</div>
             <div class="it-hero-sub">Thư viện Email chuẩn Nhật dùng cho cả bài Đọc hiểu BJT và công việc hàng ngày (có nút Copy & Nghe).</div>
           </div>
           <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-            <button class="btn btn-primary" onclick="app.bjtWorkspace.startEmailSkim()">⏱️ Đọc lướt 30s</button>
+            <button class="btn btn-primary" onclick="app.bjtWorkspace.startEmailSkim()"><svg class="bjt-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Đọc lướt 30s</span></button>
           </div>
         </div>
 
         <div class="it-filter-pills" id="bjt-email-pills">
           <button class="it-pill-btn active" data-ecat="all" onclick="app.bjtWorkspace.setEmailCategory('all')">Tất cả (40)</button>
-          <button class="it-pill-btn" data-ecat="internal" onclick="app.bjtWorkspace.setEmailCategory('internal')">🏢 Nội bộ (社内)</button>
-          <button class="it-pill-btn" data-ecat="external" onclick="app.bjtWorkspace.setEmailCategory('external')">🤝 Đối tác (社外)</button>
-          <button class="it-pill-btn" data-ecat="apology" onclick="app.bjtWorkspace.setEmailCategory('apology')">🙇 Xin lỗi / Từ chối</button>
-          <button class="it-pill-btn" data-ecat="greeting" onclick="app.bjtWorkspace.setEmailCategory('greeting')">🎉 Chào hỏi / Cảm ơn</button>
-          <button class="it-pill-btn" data-ecat="general" onclick="app.bjtWorkspace.setEmailCategory('general')">📌 Chung (一般)</button>
+          <button class="it-pill-btn" data-ecat="internal" onclick="app.bjtWorkspace.setEmailCategory('internal')">Nội bộ (社内)</button>
+          <button class="it-pill-btn" data-ecat="external" onclick="app.bjtWorkspace.setEmailCategory('external')">Đối tác (社外)</button>
+          <button class="it-pill-btn" data-ecat="apology" onclick="app.bjtWorkspace.setEmailCategory('apology')">Xin lỗi / Từ chối</button>
+          <button class="it-pill-btn" data-ecat="greeting" onclick="app.bjtWorkspace.setEmailCategory('greeting')">Chào hỏi / Cảm ơn</button>
+          <button class="it-pill-btn" data-ecat="general" onclick="app.bjtWorkspace.setEmailCategory('general')">Chung (一般)</button>
         </div>
 
         <div style="margin-bottom:1rem;">
@@ -2197,19 +2201,19 @@
   <!-- Mobile Bottom Navigation Bar: BJT Prep Workspace -->
   <nav class="mobile-bottom-nav bjt-only" id="mobile-nav-bjt">
     <button class="mobile-nav-item bjt-mobile-nav-item active" data-bjtsub="keigo" onclick="app.bjtWorkspace.navigateSubView('keigo')">
-      <span class="mobile-nav-icon">🙇</span>
+      <span class="mobile-nav-icon"><svg class="bjt-svg bjt-svg-lg" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></span>
       <span class="mobile-nav-label">Kính ngữ</span>
     </button>
     <button class="mobile-nav-item bjt-mobile-nav-item" data-bjtsub="vocab" onclick="app.bjtWorkspace.navigateSubView('vocab')">
-      <span class="mobile-nav-icon">💼</span>
+      <span class="mobile-nav-icon"><svg class="bjt-svg bjt-svg-lg" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
       <span class="mobile-nav-label">Từ vựng</span>
     </button>
     <button class="mobile-nav-item bjt-mobile-nav-item" data-bjtsub="email" onclick="app.bjtWorkspace.navigateSubView('email')">
-      <span class="mobile-nav-icon">✉️</span>
+      <span class="mobile-nav-icon"><svg class="bjt-svg bjt-svg-lg" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
       <span class="mobile-nav-label">Email</span>
     </button>
     <button class="mobile-nav-item bjt-mobile-nav-item" data-bjtsub="dokkai" onclick="app.bjtWorkspace.navigateSubView('dokkai')">
-      <span class="mobile-nav-icon">📝</span>
+      <span class="mobile-nav-icon"><svg class="bjt-svg bjt-svg-lg" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
       <span class="mobile-nav-label">Đọc hiểu</span>
     </button>
   </nav>
@@ -2412,7 +2416,8 @@
   <script src="kanji-data.js"></script>
   <script src="/components/it-motion-polish.js?v=1"></script>
   <script src="/components/it-workspace.js?v=5"></script>
-  <script src="/components/bjt-workspace.js?v=4"></script>
+  <script src="/components/bjt-manga-polish.js?v=1"></script>
+  <script src="/components/bjt-workspace.js?v=5"></script>
 
   <!-- Main App Script -->
   <script>

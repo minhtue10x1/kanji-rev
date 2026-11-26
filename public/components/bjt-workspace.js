@@ -20,6 +20,12 @@
       .replace(/'/g, '&#39;');
   }
 
+  function bjtIcon(name, cls = '') {
+    return (global.BJTManga && typeof global.BJTManga.icon === 'function')
+      ? global.BJTManga.icon(name, cls)
+      : '';
+  }
+
   class BJTWorkspace {
     constructor(app) {
       this.app = app;
@@ -144,6 +150,8 @@
         document.getElementById('bjt-dokkai-panel').style.display = 'block';
         this.renderDokkaiHome();
       }
+
+      if (global.BJTManga) global.BJTManga.initKeyboard();
     }
 
     // ==================== TAB 1: KEIGO ====================
@@ -200,20 +208,21 @@
             <input type="text" class="search-input" id="bjt-keigo-search" value="${escapeHtml(q)}" placeholder="Tìm động từ (VD: 行く, 見る, 確認, đi, xem)..." oninput="app.bjtWorkspace.renderKeigo()" style="width:100%;">
           </div>
           <div class="bjt-keigo-grid">
-            ${rows.map(k => {
+            ${rows.map((k, idx) => {
               const isM = prog.masteredKeigo.includes(k.id);
               const exSafe = escapeHtml(k.exampleJa || k.sonkeigo).replace(/'/g, "\\'");
               return `
-                <div class="bjt-keigo-card ${isM ? 'mastered' : ''}">
+                <div class="bjt-keigo-card bjt-stagger ${isM ? 'mastered' : ''}" style="--i:${Math.min(idx, 18)};">
+                  ${isM ? '<span class="bjt-hanko-stamp" aria-label="Đã thuộc">済</span>' : ''}
                   <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem;">
                     <div>
-                      <span style="font-family:var(--font-jp); font-size:1.15rem; font-weight:700; color:var(--text);">${escapeHtml(k.plain)}</span>
+                      <span style="font-family:var(--font-manga-jp, var(--font-jp)); font-size:1.15rem; font-weight:700; color:var(--text);">${escapeHtml(k.plain)}</span>
                       <span style="font-family:var(--font-jp); font-size:0.82rem; color:var(--text-muted); margin-left:0.35rem;">(${escapeHtml(k.reading || '')})</span>
                       <span style="font-size:0.86rem; font-weight:600; color:var(--accent); margin-left:0.4rem;">${escapeHtml(k.vi)}</span>
                     </div>
                     <div style="display:flex; gap:0.3rem;">
-                      <button class="icon-btn" title="Nghe ví dụ" onclick="app.speakText('${exSafe}')" style="width:1.75rem;height:1.75rem;font-size:0.75rem;">🔊</button>
-                      <button class="icon-btn" title="${isM ? 'Đã thuộc' : 'Đánh dấu đã thuộc'}" onclick="app.bjtWorkspace.toggleKeigoMastered('${escapeHtml(k.id)}')" style="width:1.75rem;height:1.75rem;font-size:0.75rem; ${isM ? 'background:var(--success-soft);color:var(--success);border-color:var(--success);' : ''}">✓</button>
+                      <button class="icon-btn" title="Nghe ví dụ" onclick="app.speakText('${exSafe}')" style="width:1.75rem;height:1.75rem;">${bjtIcon('volume', 'bjt-svg-sm')}</button>
+                      <button class="icon-btn" title="${isM ? 'Đã thuộc' : 'Đánh dấu đã thuộc'}" onclick="app.bjtWorkspace.toggleKeigoMastered('${escapeHtml(k.id)}')" style="width:1.75rem;height:1.75rem; ${isM ? 'background:var(--success-soft);color:var(--success);border-color:var(--success);' : ''}">${bjtIcon('check', 'bjt-svg-sm')}</button>
                     </div>
                   </div>
                   <div class="bjt-keigo-rows">
@@ -287,11 +296,16 @@
       const card = document.getElementById(`bjt-sit-${sIdx}`);
       if (!card) return;
       const isCorrect = oIdx === s.quiz.answerIndex;
-      card.querySelectorAll('.it-practice-opt').forEach((btn, idx) => {
+      const btns = card.querySelectorAll('.it-practice-opt');
+      btns.forEach((btn, idx) => {
         if (idx === s.quiz.answerIndex) btn.classList.add('correct');
         else if (idx === oIdx && !isCorrect) btn.classList.add('incorrect');
         btn.disabled = true;
       });
+      if (global.BJTManga) {
+        global.BJTManga.spawnSFX(btns[oIdx], isCorrect, 0);
+        if (isCorrect) global.BJTManga.flashSpeedlines(card);
+      }
       const fb = document.getElementById(`bjt-sit-fb-${sIdx}`);
       if (fb) {
         fb.style.display = 'block';
@@ -325,43 +339,52 @@
       const k = st.queue[st.index];
       const exSafe = escapeHtml(k.exampleJa || k.sonkeigo).replace(/'/g, "\\'");
       body.innerHTML = `
-        <div style="text-align:center; font-size:0.82rem; font-weight:600; color:var(--text-muted); margin-bottom:0.5rem;">Thẻ ${st.index + 1} / ${st.queue.length}</div>
-        <div class="it-flashcard" onclick="app.bjtWorkspace.flipKeigoFlash()">
-          <span class="it-badge" style="margin-bottom:0.75rem;">Đổi sang 尊敬語 & 謙譲語</span>
-          <div style="font-family:var(--font-jp); font-size:2.2rem; font-weight:700; color:var(--text);">${escapeHtml(k.plain)}</div>
-          <div style="font-size:0.95rem; color:var(--text-muted); margin-bottom:0.75rem;">(${escapeHtml(k.reading || '')}) — ${escapeHtml(k.vi)}</div>
-          ${st.flipped ? `
-            <div style="width:100%; max-width:420px; text-align:left; border-top:1px solid var(--border); padding-top:0.85rem; margin-top:0.4rem; display:flex; flex-direction:column; gap:0.45rem;">
-              <div class="bjt-keigo-row"><span class="bjt-tag sonkei">尊敬語</span> <strong style="font-family:var(--font-jp); font-size:1.05rem;">${escapeHtml(k.sonkeigo)}</strong></div>
-              <div class="bjt-keigo-row"><span class="bjt-tag kenjou">謙譲語</span> <strong style="font-family:var(--font-jp); font-size:1.05rem;">${escapeHtml(k.kenjougo)}</strong></div>
-              ${k.exampleJa ? `
-                <div style="font-size:0.84rem; color:var(--text-muted); margin-top:0.35rem;">
-                  <div style="display:flex; justify-content:space-between; align-items:center; gap:0.4rem;">
-                    <span style="font-family:var(--font-jp); color:var(--text);">${escapeHtml(k.exampleJa)}</span>
-                    <button class="icon-btn" onclick="event.stopPropagation(); app.speakText('${exSafe}')" style="width:1.7rem;height:1.7rem;font-size:0.75rem;">🔊</button>
-                  </div>
-                  <div>${escapeHtml(k.exampleVi || '')}</div>
-                </div>
-              ` : ''}
+        <div style="text-align:center; font-family:var(--font-mono); font-size:0.82rem; font-weight:700; color:var(--text-muted); margin-bottom:0.65rem;">Thẻ ${st.index + 1} / ${st.queue.length}</div>
+        <div class="bjt-fc-scene">
+          <div class="bjt-fc-card ${st.flipped ? 'is-flipped' : ''}" id="bjt-kfc-card" onclick="app.bjtWorkspace.flipKeigoFlash()">
+            <div class="bjt-fc-face">
+              <span class="it-badge" style="margin-bottom:0.85rem;">尊敬語・謙譲語</span>
+              <div style="font-family:var(--font-manga-jp, var(--font-jp)); font-size:2.35rem; font-weight:700; color:var(--text);">${escapeHtml(k.plain)}</div>
+              <div style="font-size:0.95rem; color:var(--text-muted); margin-top:0.35rem;">(${escapeHtml(k.reading || '')}) — ${escapeHtml(k.vi)}</div>
+              <div style="position:absolute; bottom:0.9rem; font-size:0.74rem; color:var(--text-subtle); display:inline-flex; align-items:center; gap:0.35rem;">${bjtIcon('rotateCw', 'bjt-svg-sm')} <span>Bấm thẻ hoặc Space để lật</span></div>
             </div>
-          ` : '<div style="font-size:0.82rem; color:var(--text-subtle); margin-top:0.5rem;">Bấm vào thẻ để xem Tôn kính ngữ & Khiêm nhường ngữ</div>'}
+            <div class="bjt-fc-face bjt-fc-back">
+              <div style="width:100%; max-width:440px; text-align:left; display:flex; flex-direction:column; gap:0.5rem;">
+                <div style="font-family:var(--font-manga-jp, var(--font-jp)); font-size:1.15rem; font-weight:700; color:var(--text); margin-bottom:0.15rem;">${escapeHtml(k.plain)} <span style="font-size:0.85rem; color:var(--text-muted); font-weight:500;">— ${escapeHtml(k.vi)}</span></div>
+                <div class="bjt-keigo-row"><span class="bjt-tag sonkei">尊敬語</span> <strong style="font-family:var(--font-jp); font-size:1.05rem;">${escapeHtml(k.sonkeigo)}</strong></div>
+                <div class="bjt-keigo-row"><span class="bjt-tag kenjou">謙譲語</span> <strong style="font-family:var(--font-jp); font-size:1.05rem;">${escapeHtml(k.kenjougo)}</strong></div>
+                ${k.exampleJa ? `
+                  <div style="font-size:0.84rem; color:var(--text-muted); margin-top:0.35rem; border-top:1.5px dashed var(--border); padding-top:0.45rem;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; gap:0.4rem;">
+                      <span style="font-family:var(--font-jp); color:var(--text);">${escapeHtml(k.exampleJa)}</span>
+                      <button class="icon-btn" onclick="event.stopPropagation(); app.speakText('${exSafe}')" style="width:1.75rem;height:1.75rem;">${bjtIcon('volume', 'bjt-svg-sm')}</button>
+                    </div>
+                    <div>${escapeHtml(k.exampleVi || '')}</div>
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+          </div>
         </div>
-        <div style="display:flex; gap:0.75rem; justify-content:center; margin-top:1rem;">
-          <button class="btn" onclick="app.bjtWorkspace.answerKeigoFlash(false)" style="flex:1; max-width:210px; justify-content:center; border-color:var(--danger); color:var(--danger); font-weight:600;">Chưa nhớ (Lặp lại)</button>
-          <button class="btn btn-primary" onclick="app.bjtWorkspace.answerKeigoFlash(true)" style="flex:1; max-width:210px; justify-content:center; background:var(--success); border-color:var(--success); font-weight:600;">Đã thuộc ✓</button>
+        <div style="display:flex; gap:0.75rem; justify-content:center; margin-top:1.15rem;">
+          <button class="btn" onclick="app.bjtWorkspace.answerKeigoFlash(false)" style="flex:1; max-width:210px; justify-content:center; border-color:var(--danger); color:var(--danger);">← Chưa nhớ</button>
+          <button class="btn btn-primary" onclick="app.bjtWorkspace.answerKeigoFlash(true)" style="flex:1; max-width:210px; justify-content:center; background:var(--success); border-color:var(--manga-ink);">Đã thuộc 済 →</button>
         </div>
       `;
     }
 
     flipKeigoFlash() {
-      if (!this.keigoFlash) return;
+      if (!this.keigoFlash || this.keigoFlash._swiping) return;
       this.keigoFlash.flipped = !this.keigoFlash.flipped;
-      this.renderKeigoFlashcardStep();
+      const card = document.getElementById('bjt-kfc-card');
+      if (card) card.classList.toggle('is-flipped', this.keigoFlash.flipped);
+      else this.renderKeigoFlashcardStep();
     }
 
     answerKeigoFlash(known) {
       const st = this.keigoFlash;
-      if (!st) return;
+      if (!st || st._swiping) return;
+      st._swiping = true;
       const item = st.queue[st.index];
       if (known) {
         const prog = this.getProgress();
@@ -372,9 +395,22 @@
       } else {
         st.queue.push(item);
       }
-      st.index++;
-      st.flipped = false;
-      this.renderKeigoFlashcardStep();
+      const card = document.getElementById('bjt-kfc-card');
+      if (card) {
+        card.classList.add(known ? 'swipe-right' : 'swipe-left');
+        setTimeout(() => {
+          if (!this.keigoFlash) return;
+          this.keigoFlash._swiping = false;
+          this.keigoFlash.index++;
+          this.keigoFlash.flipped = false;
+          this.renderKeigoFlashcardStep();
+        }, 220);
+      } else {
+        st._swiping = false;
+        st.index++;
+        st.flipped = false;
+        this.renderKeigoFlashcardStep();
+      }
     }
 
     startKeigoRoleplay(mistakesOnly = false) {
@@ -482,7 +518,7 @@
 
           <div style="display:flex; flex-direction:column; gap:0.55rem; margin-top:1rem;">
             ${options.map((opt, idx) => `
-              <button class="it-practice-opt" id="bjt-krp-${idx}" onclick="app.bjtWorkspace.selectKeigoRoleplayOption(${idx})">${idx + 1}. ${escapeHtml(opt.text)}</button>
+              <button class="it-practice-opt" id="bjt-krp-${idx}" onclick="app.bjtWorkspace.selectKeigoRoleplayOption(${idx})"><span class="bjt-keycap">${idx + 1}</span><span>${escapeHtml(opt.text)}</span></button>
             `).join('')}
           </div>
 
@@ -512,7 +548,12 @@
       const item = st.queue[st.index];
       const chosen = st.currentOptions[idx];
       const isCorrect = !!(chosen && chosen.correct);
-      if (isCorrect) st.correct++;
+      if (isCorrect) {
+        st.correct++;
+        st.combo = (st.combo || 0) + 1;
+      } else {
+        st.combo = 0;
+      }
       this._recordMistake('wrongKeigo', item.id, isCorrect);
 
       st.currentOptions.forEach((opt, i) => {
@@ -522,6 +563,13 @@
         else if (i === idx) btn.classList.add('incorrect');
         btn.disabled = true;
       });
+
+      if (global.BJTManga) {
+        global.BJTManga.spawnSFX(document.getElementById(`bjt-krp-${idx}`), isCorrect, st.combo);
+        if (isCorrect && st.combo >= 2) {
+          global.BJTManga.flashSpeedlines(document.querySelector('#bjt-keigo-body .quiz-question-box'));
+        }
+      }
 
       const fb = document.getElementById('bjt-krp-fb');
       const title = document.getElementById('bjt-krp-fb-title');
@@ -606,16 +654,17 @@
       body.innerHTML = `
         <div style="font-size:0.82rem; color:var(--text-muted); margin-bottom:0.65rem;">Hiển thị <strong>${list.length}</strong> / ${allV.length} mục</div>
         <div class="it-vocab-list">
-          ${list.map(v => {
+          ${list.map((v, idx) => {
             const isM = prog.masteredVocab.includes(v.id);
             const speakSafe = escapeHtml(v.word).replace(/'/g, "\\'");
             return `
-              <div class="it-vocab-item ${isM ? 'mastered' : ''}">
+              <div class="it-vocab-item bjt-stagger ${isM ? 'mastered' : ''}" style="--i:${Math.min(idx, 18)};">
+                ${isM ? '<span class="bjt-hanko-stamp" aria-label="Đã thuộc">済</span>' : ''}
                 <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:0.4rem;">
-                  <span style="font-family:var(--font-jp); font-size:1.05rem; font-weight:700; color:var(--text);">${escapeHtml(v.word)}</span>
+                  <span style="font-family:var(--font-manga-jp, var(--font-jp)); font-size:1.08rem; font-weight:700; color:var(--text);">${escapeHtml(v.word)}</span>
                   <div style="display:flex; gap:0.3rem; flex-shrink:0;">
-                    <button class="icon-btn" title="Phát âm" onclick="app.speakText('${speakSafe}')" style="width:1.7rem;height:1.7rem;font-size:0.75rem;">🔊</button>
-                    <button class="icon-btn" title="${isM ? 'Đã thuộc' : 'Đánh dấu đã thuộc'}" onclick="app.bjtWorkspace.toggleVocabMastered('${escapeHtml(v.id)}')" style="width:1.7rem;height:1.7rem;font-size:0.75rem; ${isM ? 'background:var(--success-soft);color:var(--success);border-color:var(--success);' : ''}">✓</button>
+                    <button class="icon-btn" title="Phát âm" onclick="app.speakText('${speakSafe}')" style="width:1.75rem;height:1.75rem;">${bjtIcon('volume', 'bjt-svg-sm')}</button>
+                    <button class="icon-btn" title="${isM ? 'Đã thuộc' : 'Đánh dấu đã thuộc'}" onclick="app.bjtWorkspace.toggleVocabMastered('${escapeHtml(v.id)}')" style="width:1.75rem;height:1.75rem; ${isM ? 'background:var(--success-soft);color:var(--success);border-color:var(--success);' : ''}">${bjtIcon('check', 'bjt-svg-sm')}</button>
                   </div>
                 </div>
                 ${v.reading ? `<div style="font-family:var(--font-jp); font-size:0.82rem; color:var(--accent);">${escapeHtml(v.reading)}</div>` : ''}
@@ -722,24 +771,31 @@
       if (st.mode === 'flashcard') {
         body.innerHTML = `
           ${headerBar}
-            <div class="it-flashcard" onclick="app.bjtWorkspace.flipVocabFlash()">
-              <span class="it-badge" style="margin-bottom:0.75rem;">${escapeHtml(item.categoryLabel || item.category)}</span>
-              <div style="font-family:var(--font-jp); font-size:2rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;">${escapeHtml(item.word)}</div>
-              <button class="icon-btn" onclick="event.stopPropagation(); app.speakText('${wordSafe}')" style="margin-bottom:0.75rem;">🔊</button>
-              ${st.flipped ? `
-                ${item.reading ? `<div style="font-family:var(--font-jp); font-size:1.1rem; color:var(--accent); font-weight:600; margin-bottom:0.35rem;">${escapeHtml(item.reading)}</div>` : ''}
-                <div style="font-size:1.1rem; font-weight:700; color:var(--text); margin-bottom:0.45rem;">${escapeHtml(item.vi || '')}</div>
-                ${item.exampleJa ? `
-                  <div style="font-size:0.84rem; color:var(--text-muted); max-width:460px; border-top:1px dashed var(--border); padding-top:0.5rem; margin-top:0.35rem;">
-                    <div style="font-family:var(--font-jp); color:var(--text);">${escapeHtml(item.exampleJa)}</div>
-                    <div>${escapeHtml(item.exampleVi || '')}</div>
-                  </div>
-                ` : ''}
-              ` : '<div style="font-size:0.82rem; color:var(--text-subtle); margin-top:0.4rem;">Bấm vào thẻ để xem cách đọc, nghĩa & ví dụ</div>'}
+            <div class="bjt-fc-scene">
+              <div class="bjt-fc-card ${st.flipped ? 'is-flipped' : ''}" id="bjt-vfc-card" onclick="app.bjtWorkspace.flipVocabFlash()">
+                <div class="bjt-fc-face">
+                  <span class="it-badge" style="margin-bottom:0.85rem;">${escapeHtml(item.categoryLabel || item.category)}</span>
+                  <div style="font-family:var(--font-manga-jp, var(--font-jp)); font-size:2.15rem; font-weight:700; color:var(--text); margin-bottom:0.45rem;">${escapeHtml(item.word)}</div>
+                  <button class="icon-btn" onclick="event.stopPropagation(); app.speakText('${wordSafe}')" style="margin-top:0.35rem;">${bjtIcon('volume')}</button>
+                  <div style="position:absolute; bottom:0.9rem; font-size:0.74rem; color:var(--text-subtle); display:inline-flex; align-items:center; gap:0.35rem;">${bjtIcon('rotateCw', 'bjt-svg-sm')} <span>Bấm thẻ hoặc Space để lật</span></div>
+                </div>
+                <div class="bjt-fc-face bjt-fc-back">
+                  <span class="it-badge" style="margin-bottom:0.55rem;">${escapeHtml(item.categoryLabel || item.category)}</span>
+                  <div style="font-family:var(--font-manga-jp, var(--font-jp)); font-size:1.5rem; font-weight:700; color:var(--text);">${escapeHtml(item.word)}</div>
+                  ${item.reading ? `<div style="font-family:var(--font-jp); font-size:1.05rem; color:var(--accent); font-weight:600; margin:0.25rem 0;">${escapeHtml(item.reading)}</div>` : ''}
+                  <div style="font-size:1.1rem; font-weight:700; color:var(--text); margin:0.25rem 0 0.45rem;">${escapeHtml(item.vi || '')}</div>
+                  ${item.exampleJa ? `
+                    <div style="font-size:0.82rem; color:var(--text-muted); max-width:460px; border-top:1.5px dashed var(--border); padding-top:0.45rem; margin-top:0.25rem;">
+                      <div style="font-family:var(--font-jp); color:var(--text);">${escapeHtml(item.exampleJa)}</div>
+                      <div>${escapeHtml(item.exampleVi || '')}</div>
+                    </div>
+                  ` : ''}
+                </div>
+              </div>
             </div>
-            <div style="display:flex; gap:0.75rem; justify-content:center; margin-top:1rem;">
-              <button class="btn" onclick="app.bjtWorkspace.answerVocabFlash(false)" style="flex:1; max-width:210px; justify-content:center; border-color:var(--danger); color:var(--danger); font-weight:600;">Chưa nhớ (Lặp lại)</button>
-              <button class="btn btn-primary" onclick="app.bjtWorkspace.answerVocabFlash(true)" style="flex:1; max-width:210px; justify-content:center; background:var(--success); border-color:var(--success); font-weight:600;">Đã thuộc ✓</button>
+            <div style="display:flex; gap:0.75rem; justify-content:center; margin-top:1.15rem;">
+              <button class="btn" onclick="app.bjtWorkspace.answerVocabFlash(false)" style="flex:1; max-width:210px; justify-content:center; border-color:var(--danger); color:var(--danger);">← Chưa nhớ</button>
+              <button class="btn btn-primary" onclick="app.bjtWorkspace.answerVocabFlash(true)" style="flex:1; max-width:210px; justify-content:center; background:var(--success); border-color:var(--manga-ink);">Đã thuộc 済 →</button>
             </div>
           </div>
         `;
@@ -850,14 +906,17 @@
     }
 
     flipVocabFlash() {
-      if (!this.vocabStudy) return;
+      if (!this.vocabStudy || this.vocabStudy._swiping) return;
       this.vocabStudy.flipped = !this.vocabStudy.flipped;
-      this.renderVocabStudyStep();
+      const card = document.getElementById('bjt-vfc-card');
+      if (card) card.classList.toggle('is-flipped', this.vocabStudy.flipped);
+      else this.renderVocabStudyStep();
     }
 
     answerVocabFlash(known) {
       const st = this.vocabStudy;
-      if (!st) return;
+      if (!st || st._swiping) return;
+      st._swiping = true;
       const item = st.queue[st.index];
       if (known) {
         const prog = this.getProgress();
@@ -868,9 +927,22 @@
       } else {
         st.queue.push(item);
       }
-      st.index++;
-      st.flipped = false;
-      this.renderVocabStudyStep();
+      const card = document.getElementById('bjt-vfc-card');
+      if (card) {
+        card.classList.add(known ? 'swipe-right' : 'swipe-left');
+        setTimeout(() => {
+          if (!this.vocabStudy) return;
+          this.vocabStudy._swiping = false;
+          this.vocabStudy.index++;
+          this.vocabStudy.flipped = false;
+          this.renderVocabStudyStep();
+        }, 220);
+      } else {
+        st._swiping = false;
+        st.index++;
+        st.flipped = false;
+        this.renderVocabStudyStep();
+      }
     }
 
     selectVocabQuizOption(idx) {
@@ -880,7 +952,12 @@
       const item = st.queue[st.index];
       const chosen = st.currentOptions[idx];
       const isCorrect = !!(chosen && chosen.correct);
-      if (isCorrect) st.correct++;
+      if (isCorrect) {
+        st.correct++;
+        st.combo = (st.combo || 0) + 1;
+      } else {
+        st.combo = 0;
+      }
       this._recordMistake('wrongVocab', item.id, isCorrect);
 
       st.currentOptions.forEach((opt, i) => {
@@ -890,6 +967,13 @@
         else if (i === idx) btn.classList.add('incorrect');
         btn.disabled = true;
       });
+
+      if (global.BJTManga) {
+        global.BJTManga.spawnSFX(document.getElementById(`bjt-vqopt-${idx}`), isCorrect, st.combo);
+        if (isCorrect && st.combo >= 2) {
+          global.BJTManga.flashSpeedlines(document.querySelector('#bjt-vocab-body .quiz-question-box'));
+        }
+      }
 
       const fb = document.getElementById('bjt-vqfb');
       const title = document.getElementById('bjt-vqfb-title');
@@ -1176,8 +1260,9 @@
 
       body.innerHTML = `
         <div class="it-hero" style="margin-bottom:1rem;">
+          <span class="bjt-manga-ribbon" aria-hidden="true">読解試験</span>
           <div>
-            <div class="it-hero-title">📝 Kho Đọc hiểu BJT (第3部 読解テスト)</div>
+            <div class="it-hero-title">Kho Đọc hiểu BJT — 第3部 読解テスト</div>
             <div class="it-hero-sub">Tổng hợp từ 3 bộ sách chuẩn BJT (MCBooks · 実力養成問題集 · Quyển đỏ) kèm giải thích tiếng Việt.</div>
             <div class="it-progress-pill">Đã làm đúng ${prog.solvedDokkai.length}/${allQ.length} câu · Đang lọc: ${filtered.length} câu${prog.wrongDokkai.length > 0 ? ` · 🔴 ${prog.wrongDokkai.length} câu hay sai` : ''}</div>
           </div>
@@ -1347,11 +1432,14 @@
       const isCorrect = oIdx === q.answerIndex;
       if (isCorrect) {
         st.correct++;
+        st.combo = (st.combo || 0) + 1;
         const prog = this.getProgress();
         if (!prog.solvedDokkai.includes(q.id)) {
           prog.solvedDokkai.push(q.id);
           this.saveProgress(prog);
         }
+      } else {
+        st.combo = 0;
       }
       this._recordMistake('wrongDokkai', q.id, isCorrect);
 
@@ -1362,6 +1450,13 @@
         else if (idx === oIdx && !isCorrect) btn.classList.add('incorrect');
         btn.disabled = true;
       });
+
+      if (global.BJTManga) {
+        global.BJTManga.spawnSFX(document.getElementById(`bjt-dopt-${oIdx}`), isCorrect, st.combo);
+        if (isCorrect && st.combo >= 2) {
+          global.BJTManga.flashSpeedlines(document.querySelector('#bjt-dokkai-body .bjt-dokkai-card'));
+        }
+      }
 
       const fb = document.getElementById('bjt-dfb');
       const title = document.getElementById('bjt-dfb-title');
