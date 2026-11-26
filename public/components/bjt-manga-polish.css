@@ -330,6 +330,16 @@ html[data-workspace="bjt"] .bjt-stagger {
   100% { transform: scale(1) rotate(-12deg); opacity: 0.88; }
 }
 
+@keyframes mangaCardBounce {
+  0% { transform: scale(1); }
+  38% { transform: scale(1.028) translate(-1px, -2px); }
+  100% { transform: scale(1); }
+}
+
+.manga-card-pop {
+  animation: mangaCardBounce 0.28s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
 /* --- 6. SPEECH BUBBLES (吹き出し) FOR KEIGO SITUATIONS --- */
 html[data-workspace="bjt"] .bjt-compare-box {
   position: relative;

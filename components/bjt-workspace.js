@@ -212,7 +212,7 @@
               const isM = prog.masteredKeigo.includes(k.id);
               const exSafe = escapeHtml(k.exampleJa || k.sonkeigo).replace(/'/g, "\\'");
               return `
-                <div class="bjt-keigo-card bjt-stagger ${isM ? 'mastered' : ''}" style="--i:${Math.min(idx, 18)};">
+                <div class="bjt-keigo-card bjt-stagger ${isM ? 'mastered' : ''}" data-keigo-id="${escapeHtml(k.id)}" style="--i:${Math.min(idx, 18)};">
                   ${isM ? '<span class="bjt-hanko-stamp" aria-label="Đã thuộc">済</span>' : ''}
                   <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem;">
                     <div>
@@ -222,7 +222,7 @@
                     </div>
                     <div style="display:flex; gap:0.3rem;">
                       <button class="icon-btn" title="Nghe ví dụ" onclick="app.speakText('${exSafe}')" style="width:1.75rem;height:1.75rem;">${bjtIcon('volume', 'bjt-svg-sm')}</button>
-                      <button class="icon-btn" title="${isM ? 'Đã thuộc' : 'Đánh dấu đã thuộc'}" onclick="app.bjtWorkspace.toggleKeigoMastered('${escapeHtml(k.id)}')" style="width:1.75rem;height:1.75rem; ${isM ? 'background:var(--success-soft);color:var(--success);border-color:var(--success);' : ''}">${bjtIcon('check', 'bjt-svg-sm')}</button>
+                      <button class="icon-btn bjt-check-btn" title="${isM ? 'Đã thuộc' : 'Đánh dấu đã thuộc'}" onclick="app.bjtWorkspace.toggleKeigoMastered('${escapeHtml(k.id)}')" style="width:1.75rem;height:1.75rem; ${isM ? 'background:var(--success-soft);color:var(--success);border-color:var(--success);' : ''}">${bjtIcon('check', 'bjt-svg-sm')}</button>
                     </div>
                   </div>
                   <div class="bjt-keigo-rows">
@@ -284,10 +284,42 @@
     toggleKeigoMastered(id) {
       const prog = this.getProgress();
       const i = prog.masteredKeigo.indexOf(id);
-      if (i === -1) prog.masteredKeigo.push(id);
+      const nowMastered = i === -1;
+      if (nowMastered) prog.masteredKeigo.push(id);
       else prog.masteredKeigo.splice(i, 1);
       this.saveProgress(prog);
-      this.renderKeigo();
+
+      const statsEl = document.getElementById('bjt-keigo-stats');
+      if (statsEl && this.data) {
+        const wrongNote = prog.wrongKeigo.length > 0 ? ` · 🔴 ${prog.wrongKeigo.length} câu hay sai` : '';
+        statsEl.textContent = `Thuộc ${prog.masteredKeigo.length}/${(this.data.keigoTable || []).length} động từ Kính ngữ · ${(this.data.keigoSituations || []).length} tình huống${wrongNote}`;
+      }
+
+      const card = document.querySelector(`.bjt-keigo-card[data-keigo-id="${CSS.escape(id)}"]`);
+      if (!card) return;
+      card.classList.toggle('mastered', nowMastered);
+      card.classList.remove('bjt-stagger', 'manga-card-pop');
+      void card.offsetWidth;
+      card.classList.add('manga-card-pop');
+
+      const oldStamp = card.querySelector('.bjt-hanko-stamp');
+      if (nowMastered && !oldStamp) {
+        const stamp = document.createElement('span');
+        stamp.className = 'bjt-hanko-stamp';
+        stamp.setAttribute('aria-label', 'Đã thuộc');
+        stamp.textContent = '済';
+        card.prepend(stamp);
+      } else if (!nowMastered && oldStamp) {
+        oldStamp.remove();
+      }
+
+      const btn = card.querySelector('.bjt-check-btn');
+      if (btn) {
+        btn.title = nowMastered ? 'Đã thuộc' : 'Đánh dấu đã thuộc';
+        btn.style.background = nowMastered ? 'var(--success-soft)' : '';
+        btn.style.color = nowMastered ? 'var(--success)' : '';
+        btn.style.borderColor = nowMastered ? 'var(--success)' : '';
+      }
     }
 
     answerSituationQuiz(sIdx, oIdx) {
@@ -612,10 +644,42 @@
     toggleVocabMastered(id) {
       const prog = this.getProgress();
       const i = prog.masteredVocab.indexOf(id);
-      if (i === -1) prog.masteredVocab.push(id);
+      const nowMastered = i === -1;
+      if (nowMastered) prog.masteredVocab.push(id);
       else prog.masteredVocab.splice(i, 1);
       this.saveProgress(prog);
-      this.renderVocab();
+
+      const statsEl = document.getElementById('bjt-vocab-stats');
+      if (statsEl && this.data) {
+        const wrongNote = prog.wrongVocab.length > 0 ? ` · 🔴 ${prog.wrongVocab.length} từ hay sai` : '';
+        statsEl.textContent = `Đã thuộc ${prog.masteredVocab.length}/${(this.data.businessVocab || []).length} từ vựng & cụm câu thương mại${wrongNote}`;
+      }
+
+      const card = document.querySelector(`.it-vocab-item[data-bvocab-id="${CSS.escape(id)}"]`);
+      if (!card) return;
+      card.classList.toggle('mastered', nowMastered);
+      card.classList.remove('bjt-stagger', 'manga-card-pop');
+      void card.offsetWidth;
+      card.classList.add('manga-card-pop');
+
+      const oldStamp = card.querySelector('.bjt-hanko-stamp');
+      if (nowMastered && !oldStamp) {
+        const stamp = document.createElement('span');
+        stamp.className = 'bjt-hanko-stamp';
+        stamp.setAttribute('aria-label', 'Đã thuộc');
+        stamp.textContent = '済';
+        card.prepend(stamp);
+      } else if (!nowMastered && oldStamp) {
+        oldStamp.remove();
+      }
+
+      const btn = card.querySelector('.bjt-check-btn');
+      if (btn) {
+        btn.title = nowMastered ? 'Đã thuộc' : 'Đánh dấu đã thuộc';
+        btn.style.background = nowMastered ? 'var(--success-soft)' : '';
+        btn.style.color = nowMastered ? 'var(--success)' : '';
+        btn.style.borderColor = nowMastered ? 'var(--success)' : '';
+      }
     }
 
     renderVocab() {
@@ -658,13 +722,13 @@
             const isM = prog.masteredVocab.includes(v.id);
             const speakSafe = escapeHtml(v.word).replace(/'/g, "\\'");
             return `
-              <div class="it-vocab-item bjt-stagger ${isM ? 'mastered' : ''}" style="--i:${Math.min(idx, 18)};">
+              <div class="it-vocab-item bjt-stagger ${isM ? 'mastered' : ''}" data-bvocab-id="${escapeHtml(v.id)}" style="--i:${Math.min(idx, 18)};">
                 ${isM ? '<span class="bjt-hanko-stamp" aria-label="Đã thuộc">済</span>' : ''}
                 <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:0.4rem;">
                   <span style="font-family:var(--font-manga-jp, var(--font-jp)); font-size:1.08rem; font-weight:700; color:var(--text);">${escapeHtml(v.word)}</span>
                   <div style="display:flex; gap:0.3rem; flex-shrink:0;">
                     <button class="icon-btn" title="Phát âm" onclick="app.speakText('${speakSafe}')" style="width:1.75rem;height:1.75rem;">${bjtIcon('volume', 'bjt-svg-sm')}</button>
-                    <button class="icon-btn" title="${isM ? 'Đã thuộc' : 'Đánh dấu đã thuộc'}" onclick="app.bjtWorkspace.toggleVocabMastered('${escapeHtml(v.id)}')" style="width:1.75rem;height:1.75rem; ${isM ? 'background:var(--success-soft);color:var(--success);border-color:var(--success);' : ''}">${bjtIcon('check', 'bjt-svg-sm')}</button>
+                    <button class="icon-btn bjt-check-btn" title="${isM ? 'Đã thuộc' : 'Đánh dấu đã thuộc'}" onclick="app.bjtWorkspace.toggleVocabMastered('${escapeHtml(v.id)}')" style="width:1.75rem;height:1.75rem; ${isM ? 'background:var(--success-soft);color:var(--success);border-color:var(--success);' : ''}">${bjtIcon('check', 'bjt-svg-sm')}</button>
                   </div>
                 </div>
                 ${v.reading ? `<div style="font-family:var(--font-jp); font-size:0.82rem; color:var(--accent);">${escapeHtml(v.reading)}</div>` : ''}
