@@ -621,8 +621,7 @@
       el.innerHTML = list.map((q, qIdx) => `
         <div class="it-practice-card" id="it-prac-${qIdx}">
           <div style="font-size:0.75rem; font-weight:700; color:var(--accent); margin-bottom:0.35rem;">TÌNH HUỐNG ${qIdx + 1} · やってみよう！</div>
-          <div class="it-ja-line" style="margin-bottom:0.35rem;">${escapeHtml(q.questionJa)}</div>
-          <div style="font-size:0.86rem; color:var(--text-muted); margin-bottom:0.85rem;">${escapeHtml(q.questionVi || '')}</div>
+          <div class="it-ja-line" style="margin-bottom:0.85rem;">${escapeHtml(q.questionJa)}</div>
           <div>
             ${(q.options || []).map((opt, oIdx) => `
               <button class="it-practice-opt" data-q="${qIdx}" data-o="${oIdx}" onclick="app.itWorkspace.answerPractice(${qIdx}, ${oIdx})">${escapeHtml(opt)}</button>
@@ -655,6 +654,7 @@
           <div style="font-weight:700; color:${isCorrect ? 'var(--success)' : 'var(--danger)'}; margin-bottom:0.25rem;">
             ${isCorrect ? '✓ Chính xác!' : '✗ Chưa chính xác'}
           </div>
+          ${q.questionVi ? `<div style="font-size:0.82rem; color:var(--text-muted); margin-bottom:0.3rem; font-style:italic;">Dịch câu hỏi: ${escapeHtml(q.questionVi)}</div>` : ''}
           <div style="color:var(--text);">${escapeHtml(q.explanationVi || '')}</div>
         `;
       }
@@ -790,9 +790,9 @@
           }
         }
         const options = [
-          { text: qType === 'jp_to_vi' ? item.vi : `${item.word}${item.reading && item.reading !== item.word ? ' (' + item.reading + ')' : ''}`, correct: true },
+          { text: qType === 'jp_to_vi' ? item.vi : item.word, correct: true },
           ...distractors.map(d => ({
-            text: qType === 'jp_to_vi' ? d.vi : `${d.word}${d.reading && d.reading !== d.word ? ' (' + d.reading + ')' : ''}`,
+            text: qType === 'jp_to_vi' ? d.vi : d.word,
             correct: false
           }))
         ].sort(() => Math.random() - 0.5);
@@ -808,7 +808,7 @@
               ${escapeHtml(qType === 'jp_to_vi' ? item.word : item.vi)}
             </div>
             <div style="font-size:0.85rem; color:var(--text-muted);">
-              ${qType === 'jp_to_vi' ? `Chọn nghĩa IT đúng${item.reading && item.reading !== item.word ? ' · ' + escapeHtml(item.reading) : ''}` : `Thuật ngữ tiếng Nhật tương ứng${item.en ? ' (' + escapeHtml(item.en) + ')' : ''} là gì?`}
+              ${qType === 'jp_to_vi' ? 'Chọn nghĩa IT tương ứng:' : 'Chọn thuật ngữ tiếng Nhật tương ứng:'}
             </div>
           </div>
           <div style="display:flex; flex-direction:column; gap:0.55rem; margin-top:1rem;">

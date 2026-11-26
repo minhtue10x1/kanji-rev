@@ -597,8 +597,7 @@
           <div class="bjt-dokkai-card">
             <div style="font-size:0.76rem; font-weight:700; color:var(--accent); margin-bottom:0.5rem;">${escapeHtml(q.sourceLabel || 'Đề 1: MCBooks')} · ${escapeHtml(q.sectionLabel || 'BJT 読解')} · Câu ${q.number || (st.index + 1)}</div>
             ${q.passageJa ? `<pre class="bjt-passage-box">${escapeHtml(q.passageJa)}</pre>` : ''}
-            <div class="it-ja-line" style="font-weight:700; margin-bottom:0.3rem;">${escapeHtml(q.questionJa)}</div>
-            ${q.questionVi ? `<div style="font-size:0.84rem; color:var(--text-muted); margin-bottom:0.9rem;">${escapeHtml(q.questionVi)}</div>` : ''}
+            <div class="it-ja-line" style="font-weight:700; margin-bottom:0.85rem;">${escapeHtml(q.questionJa)}</div>
 
             <div>
               ${(q.options || []).map((opt, oIdx) => `
@@ -611,6 +610,7 @@
                 <span id="bjt-dfb-title" style="font-weight:700;"></span>
                 <button class="btn btn-sm btn-primary" onclick="app.bjtWorkspace.nextDokkaiStep()">Câu tiếp theo →</button>
               </div>
+              ${q.questionVi ? `<div style="font-size:0.82rem; color:var(--text-muted); margin-bottom:0.35rem; font-style:italic;">Dịch câu hỏi: ${escapeHtml(q.questionVi)}</div>` : ''}
               <div style="font-size:0.86rem; color:var(--text); line-height:1.6;">${escapeHtml(q.explanationVi || '')}</div>
             </div>
           </div>
