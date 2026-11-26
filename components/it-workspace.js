@@ -45,7 +45,8 @@
         else if (hash === '#it/practice') this.app.itWorkspace.navigateSubView('practice');
         else this.app.itWorkspace.navigateSubView('units');
       } else if (initial === 'bjt') {
-        if (hash === '#bjt/email') this.app.bjtWorkspace.navigateSubView('email');
+        if (hash === '#bjt/vocab') this.app.bjtWorkspace.navigateSubView('vocab');
+        else if (hash === '#bjt/email') this.app.bjtWorkspace.navigateSubView('email');
         else if (hash === '#bjt/dokkai') this.app.bjtWorkspace.navigateSubView('dokkai');
         else this.app.bjtWorkspace.navigateSubView('keigo');
       }
@@ -101,10 +102,10 @@
         bjt: {
           icon: 'BJT',
           title: 'BJT Prep',
-          sub: 'Kính ngữ · Email · Đọc hiểu',
+          sub: 'Kính ngữ · Từ vựng · Email · Đọc hiểu',
           docTitle: 'BJT Prep — ビジネス日本語能力テスト',
           toastTitle: 'BJT Business Prep',
-          toastSub: 'Kính ngữ · Email thương mại · Đọc hiểu CBT'
+          toastSub: '50 Kính ngữ · 228 Từ vựng · 40 Email · 160 Đọc hiểu'
         }
       }[workspace];
 
