@@ -10,8 +10,9 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/components/workspace-switcher.css?v=2">
+  <link rel="stylesheet" href="/components/it-motion-polish.css?v=1">
   <style>
     :root {
       --bg: #FAFAF9;
@@ -1625,9 +1626,9 @@
 
       <!-- Desktop Nav: IT Nihongo Workspace -->
       <nav class="it-only">
-        <button class="nav-btn it-nav-btn active" data-itsub="units" onclick="app.itWorkspace.navigateSubView('units')">📚 23 Bài học</button>
-        <button class="nav-btn it-nav-btn" data-itsub="dict" onclick="app.itWorkspace.navigateSubView('dict')">🔍 Từ điển IT (848)</button>
-        <button class="nav-btn it-nav-btn" data-itsub="practice" onclick="app.itWorkspace.navigateSubView('practice')">⚡ Luyện tập</button>
+        <button class="nav-btn it-nav-btn active" data-itsub="units" onclick="app.itWorkspace.navigateSubView('units')"><svg class="it-svg" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg><span>23 Bài học</span></button>
+        <button class="nav-btn it-nav-btn" data-itsub="dict" onclick="app.itWorkspace.navigateSubView('dict')"><svg class="it-svg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><span>Từ điển IT (848)</span></button>
+        <button class="nav-btn it-nav-btn" data-itsub="practice" onclick="app.itWorkspace.navigateSubView('practice')"><svg class="it-svg" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span>Luyện tập</span></button>
       </nav>
 
       <!-- Desktop Nav: BJT Prep Workspace -->
@@ -1928,21 +1929,34 @@
       <div id="it-home-panel">
         <div class="it-hero">
           <div>
+            <div class="it-hero-eyebrow">SHIGOTO NO NIHONGO · IT 業務編</div>
             <div class="it-hero-title">しごとの日本語 IT業務編</div>
-            <div class="it-hero-sub">Học tiếng Nhật chuyên ngành IT & giao tiếp thực chiến theo vòng đời dự án phần mềm.</div>
-            <div class="it-progress-pill" id="it-progress-summary">Đang tải dữ liệu...</div>
+            <div class="it-hero-sub">Tiếng Nhật chuyên ngành IT & giao tiếp thực chiến xuyên suốt vòng đời dự án phần mềm.</div>
           </div>
-          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-            <button class="btn btn-primary" onclick="app.itWorkspace.startStudy('flashcard', 'filtered')">🃏 Flashcard IT</button>
-            <button class="btn" onclick="app.itWorkspace.startStudy('quiz', 'filtered')" style="border-color:var(--accent); color:var(--accent); font-weight:600;">⚡ Trắc nghiệm IT</button>
+          <div class="it-hero-right">
+            <div class="it-ring-card" id="it-progress-summary">
+              <svg class="it-ring-svg" viewBox="0 0 44 44">
+                <circle class="it-ring-track" cx="22" cy="22" r="18"></circle>
+                <circle class="it-ring-fill" id="it-ring-fill" cx="22" cy="22" r="18" stroke-dasharray="113.1" stroke-dashoffset="113.1"></circle>
+              </svg>
+              <div class="it-ring-meta">
+                <span class="it-ring-num" id="it-ring-pct">0%</span>
+                <span class="it-ring-label" id="it-ring-detail">0/23 bài · 0/848 từ</span>
+              </div>
+            </div>
+            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+              <button class="btn btn-primary" onclick="app.itWorkspace.startStudy('cloze', 'filtered', 20)"><svg class="it-svg" viewBox="0 0 24 24"><path d="M19.439 7.85c-.049.322.059.648.289.878l1.568 1.568c.47.47.706 1.087.706 1.704s-.235 1.233-.706 1.704l-1.611 1.611a.98.98 0 0 1-.837.276c-.47-.07-.802-.48-.968-.925a2.501 2.501 0 1 0-3.214 3.214c.446.166.855.497.925.968a.979.979 0 0 1-.276.837l-1.61 1.61a2.404 2.404 0 0 1-1.705.707 2.402 2.402 0 0 1-1.704-.706l-1.568-1.568a1.026 1.026 0 0 0-.877-.29c-.493.074-.84.504-1.02.968a2.5 2.5 0 1 1-3.237-3.237c.464-.18.894-.527.967-1.02a1.026 1.026 0 0 0-.289-.877l-1.568-1.568A2.402 2.402 0 0 1 1.998 12c0-.617.236-1.234.706-1.704L4.23 8.77c.24-.24.581-.353.917-.303.515.077.877.528 1.073 1.01a2.5 2.5 0 1 0 3.259-3.259c-.482-.196-.933-.558-1.01-1.073-.05-.336.062-.676.303-.917l1.525-1.525A2.402 2.402 0 0 1 12 1.998c.617 0 1.234.236 1.704.706l1.568 1.568c.23.23.556.338.877.29.493-.074.84-.504 1.02-.968a2.5 2.5 0 1 1 3.237 3.237c-.464.18-.894.527-.967 1.02Z"/></svg><span>Điền từ Cloze</span></button>
+              <button class="btn" onclick="app.itWorkspace.startStudy('flashcard', 'filtered')"><svg class="it-svg" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg><span>Flashcard 3D</span></button>
+              <button class="btn" onclick="app.itWorkspace.startStudy('quiz', 'filtered')" style="border-color:var(--accent); color:var(--accent);"><svg class="it-svg" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span>Trắc nghiệm</span></button>
+            </div>
           </div>
         </div>
 
         <div class="it-filter-pills" id="it-chapter-pills">
-          <button class="it-pill-btn active" data-ch="all" onclick="app.itWorkspace.setChapterFilter('all')">Tất cả (23 bài)</button>
-          <button class="it-pill-btn" data-ch="1" onclick="app.itWorkspace.setChapterFilter(1)">💼 Ch.1: Tìm việc IT (5)</button>
-          <button class="it-pill-btn" data-ch="2" onclick="app.itWorkspace.setChapterFilter(2)">🔥 Ch.2: Thực chiến dự án (15)</button>
-          <button class="it-pill-btn" data-ch="3" onclick="app.itWorkspace.setChapterFilter(3)">📄 Ch.3: Đọc Spec (3)</button>
+          <button class="it-pill-btn active" data-ch="all" onclick="app.itWorkspace.setChapterFilter('all')"><span>Tất cả (23)</span></button>
+          <button class="it-pill-btn" data-ch="1" onclick="app.itWorkspace.setChapterFilter(1)"><svg class="it-svg it-svg-sm" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg><span>Ch.1 · Tìm việc IT (5)</span></button>
+          <button class="it-pill-btn" data-ch="2" onclick="app.itWorkspace.setChapterFilter(2)"><svg class="it-svg it-svg-sm" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg><span>Ch.2 · Dự án phần mềm (15)</span></button>
+          <button class="it-pill-btn" data-ch="3" onclick="app.itWorkspace.setChapterFilter(3)"><svg class="it-svg it-svg-sm" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg><span>Ch.3 · Đọc Spec (3)</span></button>
         </div>
 
         <div class="it-units-grid" id="it-units-grid"></div>
@@ -1955,17 +1969,17 @@
           <button class="btn btn-sm" id="it-btn-toggle-done" onclick="app.itWorkspace.toggleUnitDone()">✓ Đánh dấu đã học</button>
         </div>
 
-        <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:1.1rem 1.25rem; margin-bottom:1rem;">
-          <div style="font-size:0.78rem; font-weight:700; color:var(--accent);" id="it-unit-detail-meta"></div>
-          <div style="font-family:var(--font-jp); font-size:1.45rem; font-weight:700; color:var(--text); margin-top:0.15rem;" id="it-unit-detail-ja"></div>
-          <div style="font-size:0.95rem; font-weight:600; color:var(--text-muted);" id="it-unit-detail-vi"></div>
-          <div style="font-size:0.84rem; color:var(--text-subtle); margin-top:0.35rem; line-height:1.5;" id="it-unit-detail-summary"></div>
+        <div style="background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:1.25rem 1.4rem; margin-bottom:1rem; box-shadow:var(--it-card-shadow);">
+          <div style="font-family:var(--font-mono); font-size:0.74rem; font-weight:600; letter-spacing:0.06em; color:var(--accent);" id="it-unit-detail-meta"></div>
+          <div style="font-family:var(--font-display-jp); font-size:1.55rem; font-weight:700; color:var(--text); margin-top:0.2rem;" id="it-unit-detail-ja"></div>
+          <div style="font-size:0.96rem; font-weight:600; color:var(--text-muted);" id="it-unit-detail-vi"></div>
+          <div style="font-size:0.84rem; color:var(--text-subtle); margin-top:0.4rem; line-height:1.55;" id="it-unit-detail-summary"></div>
         </div>
 
         <div class="it-subtabs">
-          <button class="it-subtab active" data-tab="context" onclick="app.itWorkspace.switchUnitTab('context')">📖 Hội thoại & Ngữ cảnh</button>
-          <button class="it-subtab" data-tab="vocab" onclick="app.itWorkspace.switchUnitTab('vocab')" id="it-subtab-vocab-btn">🃏 Từ vựng IT</button>
-          <button class="it-subtab" data-tab="practice" onclick="app.itWorkspace.switchUnitTab('practice')" id="it-subtab-practice-btn">✏️ Luyện tập tình huống</button>
+          <button class="it-subtab active" data-tab="context" onclick="app.itWorkspace.switchUnitTab('context')"><svg class="it-svg it-svg-sm" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Hội thoại & Ngữ cảnh</span></button>
+          <button class="it-subtab" data-tab="vocab" onclick="app.itWorkspace.switchUnitTab('vocab')" id="it-subtab-vocab-btn"><svg class="it-svg it-svg-sm" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg><span>Từ vựng IT</span></button>
+          <button class="it-subtab" data-tab="practice" onclick="app.itWorkspace.switchUnitTab('practice')" id="it-subtab-practice-btn"><svg class="it-svg it-svg-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><span>Tình huống</span></button>
         </div>
 
         <div id="it-tab-context"></div>
@@ -2004,17 +2018,21 @@
 
       <!-- 5D. Dedicated IT Practice Hub -->
       <div id="it-practice-hub-panel" style="display:none;">
-        <div class="section-title" style="margin-bottom:1rem;">
-          <span>⚡ Trung tâm Luyện tập Tiếng Nhật IT</span>
+        <div class="section-title" style="margin-bottom:1.1rem; display:flex; align-items:center; gap:0.5rem;">
+          <svg class="it-svg it-svg-lg" style="color:var(--accent);" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <span style="font-family:var(--font-display-jp); font-size:1.3rem;">Trung tâm Luyện tập IT</span>
         </div>
         <div class="it-practice-hub-grid" id="it-practice-hub-grid"></div>
       </div>
 
       <!-- 5E. IT Vocab Flashcard / Quiz Study Runner -->
-      <div id="it-study-panel" style="display:none; max-width:640px; margin:0 auto;">
-        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem;">
+      <div id="it-study-panel" style="display:none; max-width:660px; margin:0 auto;">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:0.5rem; margin-bottom:0.85rem;">
           <button class="btn btn-sm" onclick="app.itWorkspace.exitStudy()">← Quay lại</button>
-          <span style="font-size:0.85rem; font-weight:600; color:var(--text-muted);" id="it-study-progress-text">1 / 20</span>
+          <div style="display:flex; align-items:center; gap:0.65rem;">
+            <span id="it-study-combo"></span>
+            <span style="font-family:var(--font-mono); font-size:0.82rem; font-weight:600; color:var(--text-muted);" id="it-study-progress-text">1 / 20</span>
+          </div>
         </div>
         <div class="progress-bar" style="margin-bottom:1.25rem;">
           <div class="progress-fill" id="it-study-progress-fill" style="width:0%;"></div>
@@ -2163,15 +2181,15 @@
   <!-- Mobile Bottom Navigation Bar: IT Nihongo Workspace -->
   <nav class="mobile-bottom-nav it-only" id="mobile-nav-it">
     <button class="mobile-nav-item it-mobile-nav-item active" data-itsub="units" onclick="app.itWorkspace.navigateSubView('units')">
-      <span class="mobile-nav-icon">📚</span>
+      <span class="mobile-nav-icon"><svg class="it-svg it-svg-lg" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></span>
       <span class="mobile-nav-label">Bài học</span>
     </button>
     <button class="mobile-nav-item it-mobile-nav-item" data-itsub="dict" onclick="app.itWorkspace.navigateSubView('dict')">
-      <span class="mobile-nav-icon">🔍</span>
+      <span class="mobile-nav-icon"><svg class="it-svg it-svg-lg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
       <span class="mobile-nav-label">Từ điển IT</span>
     </button>
     <button class="mobile-nav-item it-mobile-nav-item" data-itsub="practice" onclick="app.itWorkspace.navigateSubView('practice')">
-      <span class="mobile-nav-icon">⚡</span>
+      <span class="mobile-nav-icon"><svg class="it-svg it-svg-lg" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
       <span class="mobile-nav-label">Luyện tập</span>
     </button>
   </nav>
@@ -2392,7 +2410,8 @@
 
   <!-- Load Static Kanji Dataset & Standalone Workspace Components -->
   <script src="kanji-data.js"></script>
-  <script src="/components/it-workspace.js?v=4"></script>
+  <script src="/components/it-motion-polish.js?v=1"></script>
+  <script src="/components/it-workspace.js?v=5"></script>
   <script src="/components/bjt-workspace.js?v=4"></script>
 
   <!-- Main App Script -->

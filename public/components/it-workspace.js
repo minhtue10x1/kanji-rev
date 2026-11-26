@@ -18,6 +18,12 @@
       .replace(/'/g, '&#39;');
   }
 
+  function svgIcon(name, cls = '') {
+    return (global.ITMotion && typeof global.ITMotion.icon === 'function')
+      ? global.ITMotion.icon(name, cls)
+      : '';
+  }
+
   class WorkspaceController {
     constructor(app) {
       this.app = app;
@@ -285,6 +291,12 @@
         document.getElementById('it-practice-hub-panel').style.display = 'block';
         this.renderPracticeHub();
       }
+
+      if (global.ITMotion) {
+        global.ITMotion.initSpotlight();
+        global.ITMotion.initKeyboard();
+        global.ITMotion.syncAllSliders();
+      }
     }
 
     setChapterFilter(ch) {
@@ -293,6 +305,7 @@
         btn.classList.toggle('active', String(btn.dataset.ch) === String(ch));
       });
       this.renderOverview();
+      if (global.ITMotion) global.ITMotion.syncAllSliders();
     }
 
     getFilteredUnits(chapterOverride) {
@@ -307,32 +320,44 @@
       const prog = this.getProgress();
       const totalUnits = this.data.units.length;
       const allVocabCount = this.data.units.reduce((acc, u) => acc + (u.vocab ? u.vocab.length : 0), 0);
-      const summaryEl = document.getElementById('it-progress-summary');
-      if (summaryEl) {
-        summaryEl.textContent = `Đã học ${prog.completedUnits.length}/${totalUnits} bài · Thuộc ${prog.masteredVocab.length}/${allVocabCount} từ IT`;
+      const pct = allVocabCount > 0 ? Math.round((prog.masteredVocab.length / allVocabCount) * 100) : 0;
+
+      const ringFill = document.getElementById('it-ring-fill');
+      const ringPct = document.getElementById('it-ring-pct');
+      const ringDetail = document.getElementById('it-ring-detail');
+      if (ringFill) {
+        const circumference = 2 * Math.PI * 18;
+        ringFill.style.strokeDashoffset = (circumference * (1 - pct / 100)).toFixed(2);
       }
+      if (ringPct) ringPct.textContent = `${pct}%`;
+      if (ringDetail) ringDetail.textContent = `${prog.completedUnits.length}/${totalUnits} bài · ${prog.masteredVocab.length}/${allVocabCount} từ`;
 
       const units = this.getFilteredUnits();
       const grid = document.getElementById('it-units-grid');
       if (!grid) return;
 
-      grid.innerHTML = units.map(u => {
+      grid.innerHTML = units.map((u, idx) => {
         const isDone = prog.completedUnits.includes(u.id);
-        const vCount = (u.vocab || []).length;
+        const vList = u.vocab || [];
+        const vCount = vList.length;
+        const vMastered = vList.filter(v => prog.masteredVocab.includes(`${u.id}::${v.word}`)).length;
+        const unitPct = vCount > 0 ? Math.round((vMastered / vCount) * 100) : (isDone ? 100 : 0);
         const pCount = (u.practice || []).length;
+        const code = `CH.${String(u.chapter).padStart(2, '0')} · U${String(u.unit).padStart(2, '0')}`;
         return `
-          <div class="it-unit-card ${isDone ? 'done' : ''}" onclick="app.itWorkspace.openUnit('${escapeHtml(u.id)}')">
+          <div class="it-unit-card it-stagger ${isDone ? 'done' : ''}" style="--i:${idx};" onclick="app.itWorkspace.openUnit('${escapeHtml(u.id)}')">
             <div class="it-unit-meta">
-              <span>Chương ${u.chapter} · Unit ${u.unit}</span>
-              ${isDone ? '<span class="it-badge done">✓ Đã học</span>' : ''}
+              <span class="it-unit-code">${code}</span>
+              ${isDone ? `<span class="it-badge done" style="display:inline-flex;align-items:center;gap:0.25rem;">${svgIcon('check', 'it-svg-sm')} Đã học</span>` : `<span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-subtle);">${vMastered}/${vCount}</span>`}
             </div>
-            <div class="it-unit-ja">${escapeHtml(u.titleJa)}</div>
+            <div class="it-unit-ja it-unit-ja-title">${escapeHtml(u.titleJa)}</div>
             <div class="it-unit-vi">${escapeHtml(u.titleVi)}</div>
             <div class="it-unit-summary">${escapeHtml(u.summaryVi || '')}</div>
             <div class="it-unit-badges">
-              <span class="it-badge">🃏 ${vCount} từ IT</span>
-              ${pCount > 0 ? `<span class="it-badge">✏️ ${pCount} tình huống</span>` : ''}
+              <span class="it-badge" style="display:inline-flex;align-items:center;gap:0.3rem;">${svgIcon('layers', 'it-svg-sm')} ${vCount} từ IT</span>
+              ${pCount > 0 ? `<span class="it-badge" style="display:inline-flex;align-items:center;gap:0.3rem;">${svgIcon('target', 'it-svg-sm')} ${pCount} tình huống</span>` : ''}
             </div>
+            <div class="it-unit-mini-bar"><div class="it-unit-mini-fill" style="width:${unitPct}%;"></div></div>
           </div>
         `;
       }).join('');
@@ -384,8 +409,8 @@
             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.4rem;">
               <span style="font-family:var(--font-jp); font-size:1.05rem; font-weight:700; color:var(--text);">${escapeHtml(v.word)}</span>
               <div style="display:flex; gap:0.3rem;">
-                <button class="icon-btn" title="Phát âm" onclick="app.speakText('${wordSafe}')" style="width:1.7rem;height:1.7rem;font-size:0.75rem;">🔊</button>
-                <button class="icon-btn" title="${m.isMastered ? 'Đã thuộc' : 'Đánh dấu đã thuộc'}" onclick="app.itWorkspace.toggleVocabMastered('${keySafe}', true)" style="width:1.7rem;height:1.7rem;font-size:0.75rem; ${m.isMastered ? 'background:var(--success-soft);color:var(--success);border-color:var(--success);' : ''}">✓</button>
+                <button class="icon-btn" title="Phát âm" onclick="app.speakText('${wordSafe}')" style="width:1.75rem;height:1.75rem;">${svgIcon('volume', 'it-svg-sm')}</button>
+                <button class="icon-btn" title="${m.isMastered ? 'Đã thuộc' : 'Đánh dấu đã thuộc'}" onclick="app.itWorkspace.toggleVocabMastered('${keySafe}', true)" style="width:1.75rem;height:1.75rem; ${m.isMastered ? 'background:var(--success-soft);color:var(--success);border-color:var(--success);' : ''}">${svgIcon('check', 'it-svg-sm')}</button>
               </div>
             </div>
             <div style="font-family:var(--font-jp); font-size:0.82rem; color:var(--accent);">${escapeHtml(v.reading || '')}</div>
@@ -407,38 +432,39 @@
 
       const hub = document.getElementById('it-practice-hub-grid');
       if (!hub) return;
+      let idx = 0;
       hub.innerHTML = `
         ${prog.wrongVocab.length > 0 ? `
-          <div class="it-practice-mode-card" style="border-color:var(--danger);" onclick="app.itWorkspace.startStudy('quiz', 'mistakes')">
-            <div style="font-size:1.6rem;">🔴</div>
+          <div class="it-practice-mode-card it-stagger" style="--i:${idx++}; border-color:var(--danger);" onclick="app.itWorkspace.startStudy('quiz', 'mistakes')">
+            <div class="it-mode-icon danger">${svgIcon('alertCircle', 'it-svg-lg')}</div>
             <div style="font-weight:700; font-size:1rem; color:var(--danger);">Ôn lại ${prog.wrongVocab.length} từ hay sai</div>
-            <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.45;">Tự động gom các thuật ngữ bạn từng chọn nhầm. Trả lời đúng sẽ tự gỡ khỏi danh sách.</div>
+            <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">Tự động gom các thuật ngữ bạn từng chọn nhầm. Trả lời đúng sẽ tự gỡ khỏi danh sách.</div>
           </div>
         ` : ''}
-        <div class="it-practice-mode-card" style="border-color:var(--accent);" onclick="app.itWorkspace.startStudy('cloze', 'all', 20)">
-          <div style="font-size:1.6rem;">🧩</div>
-          <div style="font-weight:700; font-size:1rem; color:var(--text);">Điền từ vào hội thoại IT (Cloze 20 câu)</div>
-          <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.45;">Đục lỗ trực tiếp trên câu hội thoại & mẫu câu thực tế trong sách — học theo ngữ cảnh thay vì học từ rời.</div>
+        <div class="it-practice-mode-card it-stagger" style="--i:${idx++}; border-color:var(--accent);" onclick="app.itWorkspace.startStudy('cloze', 'all', 20)">
+          <div class="it-mode-icon">${svgIcon('puzzle', 'it-svg-lg')}</div>
+          <div style="font-weight:700; font-size:1rem; color:var(--text);">Điền từ vào hội thoại IT (Cloze)</div>
+          <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">Đục lỗ trực tiếp trên 248 câu hội thoại & mẫu câu thực tế — học theo ngữ cảnh thay vì từ rời.</div>
         </div>
-        <div class="it-practice-mode-card" onclick="app.itWorkspace.startStudy('quiz', 'ch2', 20)">
-          <div style="font-size:1.6rem;">🔥</div>
-          <div style="font-weight:700; font-size:1rem; color:var(--text);">Trắc nghiệm nhanh Dự án (Ch.2)</div>
-          <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.45;">20 câu ngẫu nhiên từ 15 bài thực chiến dự án (SRS, thiết kế, delay, test, demo).</div>
+        <div class="it-practice-mode-card it-stagger" style="--i:${idx++};" onclick="app.itWorkspace.startStudy('quiz', 'ch2', 20)">
+          <div class="it-mode-icon">${svgIcon('terminal', 'it-svg-lg')}</div>
+          <div style="font-weight:700; font-size:1rem; color:var(--text);">Trắc nghiệm Dự án (Ch.2)</div>
+          <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">20 câu ngẫu nhiên từ 15 bài thực chiến dự án (SRS, thiết kế, delay, test, demo).</div>
         </div>
-        <div class="it-practice-mode-card" onclick="app.itWorkspace.startStudy('flashcard', 'unlearned')">
-          <div style="font-size:1.6rem;">🃏</div>
-          <div style="font-weight:700; font-size:1rem; color:var(--text);">Flashcard từ chưa thuộc (${unlearnedCount})</div>
-          <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.45;">Tập trung ôn các thuật ngữ IT bạn chưa đánh dấu thuộc, có lặp lại từ quên.</div>
+        <div class="it-practice-mode-card it-stagger" style="--i:${idx++};" onclick="app.itWorkspace.startStudy('flashcard', 'unlearned')">
+          <div class="it-mode-icon">${svgIcon('layers', 'it-svg-lg')}</div>
+          <div style="font-weight:700; font-size:1rem; color:var(--text);">Flashcard 3D từ chưa thuộc (${unlearnedCount})</div>
+          <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">Lật 3D mượt & điều khiển nhanh bằng bàn phím (Space / ← / →), tự lặp lại từ quên.</div>
         </div>
-        <div class="it-practice-mode-card" onclick="app.itWorkspace.startStudy('quiz', 'all', 40)">
-          <div style="font-size:1.6rem;">🎯</div>
+        <div class="it-practice-mode-card it-stagger" style="--i:${idx++};" onclick="app.itWorkspace.startStudy('quiz', 'all', 40)">
+          <div class="it-mode-icon">${svgIcon('target', 'it-svg-lg')}</div>
           <div style="font-weight:700; font-size:1rem; color:var(--text);">Tổng ôn 40 câu Toàn sách</div>
-          <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.45;">Kiểm tra toàn diện cả 3 chương (Tìm việc · Dự án · Đọc Spec), xen kẽ Nhật→Việt & Việt→Nhật.</div>
+          <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">Kiểm tra toàn diện cả 3 chương (Tìm việc · Dự án · Đọc Spec), xen kẽ Nhật→Việt & Việt→Nhật.</div>
         </div>
-        <div class="it-practice-mode-card" onclick="app.itWorkspace.startStudy('flashcard', 'ch3')">
-          <div style="font-size:1.6rem;">📄</div>
+        <div class="it-practice-mode-card it-stagger" style="--i:${idx++};" onclick="app.itWorkspace.startStudy('flashcard', 'ch3')">
+          <div class="it-mode-icon">${svgIcon('fileText', 'it-svg-lg')}</div>
           <div style="font-weight:700; font-size:1rem; color:var(--text);">Flashcard Đọc Spec (Ch.3)</div>
-          <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.45;">Thuật ngữ bảng dữ liệu, tồn kho, đơn hàng, điều kiện lọc thường gặp trong Spec Nhật.</div>
+          <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">Thuật ngữ bảng dữ liệu, tồn kho, đơn hàng, điều kiện lọc thường gặp trong Spec Nhật.</div>
         </div>
       `;
     }
@@ -551,13 +577,13 @@
               <div class="it-ja-line">${escapeHtml(line.ja)}</div>
               <div class="it-vi-line ${this.showVi ? '' : 'hidden-vi'}">${escapeHtml(line.vi || '')}</div>
             </div>
-            <button class="icon-btn" title="Nghe câu này" onclick="app.speakText('${jaSafe}')" style="width:1.9rem;height:1.9rem;font-size:0.8rem;flex-shrink:0;">🔊</button>
+            <button class="icon-btn" title="Nghe câu này" onclick="app.speakText('${jaSafe}')" style="width:1.95rem;height:1.95rem;flex-shrink:0;">${svgIcon('volume', 'it-svg-sm')}</button>
           </div>
         `;
       }).join('');
 
       const pointsHtml = (u.points || []).length > 0 ? `
-        <div style="font-size:0.85rem; font-weight:700; color:var(--text); margin:1.25rem 0 0.6rem;">💡 Điểm lưu ý thực tế trong công ty Nhật (ポイント)</div>
+        <div style="font-size:0.85rem; font-weight:700; color:var(--text); margin:1.25rem 0 0.6rem; display:flex; align-items:center; gap:0.4rem;">${svgIcon('lightbulb', 'it-svg')} <span>Điểm lưu ý thực tế trong công ty Nhật (ポイント)</span></div>
         ${(u.points || []).map(pt => `
           <div class="it-tip-card">
             <div style="font-weight:700; font-size:0.88rem; color:var(--text); margin-bottom:0.2rem;">${escapeHtml(pt.title)}</div>
@@ -567,7 +593,7 @@
       ` : '';
 
       const exprHtml = (u.expressions || []).length > 0 ? `
-        <div style="font-size:0.85rem; font-weight:700; color:var(--text); margin:1.25rem 0 0.6rem;">🗣️ Mẫu câu & Cách diễn đạt cốt lõi (表現の理解)</div>
+        <div style="font-size:0.85rem; font-weight:700; color:var(--text); margin:1.25rem 0 0.6rem; display:flex; align-items:center; gap:0.4rem;">${svgIcon('messageSquare', 'it-svg')} <span>Mẫu câu & Cách diễn đạt cốt lõi (表現の理解)</span></div>
         ${(u.expressions || []).map(ex => {
           const jaSafe = escapeHtml(ex.ja).replace(/'/g, "\\'");
           return `
@@ -577,7 +603,7 @@
                 <div style="font-size:0.86rem; color:var(--accent); font-weight:600; margin-top:0.2rem;">${escapeHtml(ex.vi)}</div>
                 ${ex.noteVi ? `<div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.2rem;">${escapeHtml(ex.noteVi)}</div>` : ''}
               </div>
-              <button class="icon-btn" title="Nghe mẫu câu" onclick="app.speakText('${jaSafe}')" style="width:1.9rem;height:1.9rem;font-size:0.8rem;flex-shrink:0;">🔊</button>
+              <button class="icon-btn" title="Nghe mẫu câu" onclick="app.speakText('${jaSafe}')" style="width:1.95rem;height:1.95rem;flex-shrink:0;">${svgIcon('volume', 'it-svg-sm')}</button>
             </div>
           `;
         }).join('')}
@@ -585,10 +611,10 @@
 
       el.innerHTML = `
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem;">
-          <span style="font-size:0.85rem; font-weight:700; color:var(--text);">${u.chapter === 3 ? '📄 Nội dung đặc tả / Flowchart (仕様書)' : '💬 Hội thoại ngữ cảnh thực tế (モデル会話)'}</span>
+          <span style="font-size:0.85rem; font-weight:700; color:var(--text); display:inline-flex; align-items:center; gap:0.4rem;">${svgIcon(u.chapter === 3 ? 'fileText' : 'messageSquare', 'it-svg')} <span>${u.chapter === 3 ? 'Nội dung đặc tả / Flowchart (仕様書)' : 'Hội thoại ngữ cảnh thực tế (モデル会話)'}</span></span>
           <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
-            <button class="btn btn-sm" id="it-skim-btn" onclick="app.itWorkspace.startUnitSkim()" style="border-color:var(--accent); color:var(--accent);">⏱️ Đọc nhanh 30s</button>
-            <button class="btn btn-sm" id="it-toggle-vi-btn" onclick="app.itWorkspace.toggleTranslation()">${this.showVi ? '👁️ Ẩn dịch Việt (Tự đọc hiểu)' : '👁️ Hiện dịch Việt'}</button>
+            <button class="btn btn-sm" id="it-skim-btn" onclick="app.itWorkspace.startUnitSkim()" style="border-color:var(--accent); color:var(--accent);">${svgIcon('clock', 'it-svg-sm')} <span>Đọc nhanh 30s</span></button>
+            <button class="btn btn-sm" id="it-toggle-vi-btn" onclick="app.itWorkspace.toggleTranslation()">${svgIcon(this.showVi ? 'eyeOff' : 'eye', 'it-svg-sm')} <span>${this.showVi ? 'Ẩn dịch Việt' : 'Hiện dịch Việt'}</span></button>
           </div>
         </div>
         ${dialogueHtml || '<div style="color:var(--text-muted);">Bài này trong bản scan không có trang hội thoại — bạn chuyển sang tab Từ vựng IT để luyện tập nhé.</div>'}
@@ -602,11 +628,11 @@
       this.showVi = false;
       document.querySelectorAll('#it-tab-context .it-vi-line').forEach(el => el.classList.add('hidden-vi'));
       const toggleBtn = document.getElementById('it-toggle-vi-btn');
-      if (toggleBtn) toggleBtn.textContent = '👁️ Hiện dịch Việt';
+      if (toggleBtn) toggleBtn.innerHTML = `${svgIcon('eye', 'it-svg-sm')} <span>Hiện dịch Việt</span>`;
 
       let sec = 30;
       const btn = document.getElementById('it-skim-btn');
-      if (btn) btn.textContent = `⏱️ Đang đọc... ${sec}s`;
+      if (btn) btn.innerHTML = `${svgIcon('clock', 'it-svg-sm')} <span>Đang đọc... ${sec}s</span>`;
       this._skimTimer = setInterval(() => {
         sec--;
         const b = document.getElementById('it-skim-btn');
@@ -615,11 +641,11 @@
           this.showVi = true;
           document.querySelectorAll('#it-tab-context .it-vi-line').forEach(el => el.classList.remove('hidden-vi'));
           const tb = document.getElementById('it-toggle-vi-btn');
-          if (tb) tb.textContent = '👁️ Ẩn dịch Việt (Tự đọc hiểu)';
-          if (b) b.textContent = '⏱️ Đọc nhanh 30s';
+          if (tb) tb.innerHTML = `${svgIcon('eyeOff', 'it-svg-sm')} <span>Ẩn dịch Việt</span>`;
+          if (b) b.innerHTML = `${svgIcon('clock', 'it-svg-sm')} <span>Đọc nhanh 30s</span>`;
           this.app.showToast('Hết 30s — Đã mở bản dịch để bạn đối chiếu!');
         } else if (b) {
-          b.textContent = `⏱️ Đang đọc... ${sec}s`;
+          b.innerHTML = `${svgIcon('clock', 'it-svg-sm')} <span>Đang đọc... ${sec}s</span>`;
         }
       }, 1000);
     }
@@ -652,11 +678,11 @@
             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.4rem;">
               <span style="font-family:var(--font-jp); font-size:1.05rem; font-weight:700; color:var(--text);">${escapeHtml(v.word)}</span>
               <div style="display:flex; gap:0.3rem;">
-                <button class="icon-btn" title="Phát âm" onclick="app.speakText('${wordSafe}')" style="width:1.7rem;height:1.7rem;font-size:0.75rem;">🔊</button>
-                <button class="icon-btn" title="${isM ? 'Đã thuộc' : 'Đánh dấu đã thuộc'}" onclick="app.itWorkspace.toggleVocabMastered('${keySafe}')" style="width:1.7rem;height:1.7rem;font-size:0.75rem; ${isM ? 'background:var(--success-soft);color:var(--success);border-color:var(--success);' : ''}">✓</button>
+                <button class="icon-btn" title="Phát âm" onclick="app.speakText('${wordSafe}')" style="width:1.75rem;height:1.75rem;">${svgIcon('volume', 'it-svg-sm')}</button>
+                <button class="icon-btn" title="${isM ? 'Đã thuộc' : 'Đánh dấu đã thuộc'}" onclick="app.itWorkspace.toggleVocabMastered('${keySafe}')" style="width:1.75rem;height:1.75rem; ${isM ? 'background:var(--success-soft);color:var(--success);border-color:var(--success);' : ''}">${svgIcon('check', 'it-svg-sm')}</button>
               </div>
             </div>
-            <div style="font-family:var(--font-jp); font-size:0.82rem; color:var(--accent);">${escapeHtml(v.reading || '')}</div>
+            ${v.reading ? `<div style="font-family:var(--font-jp); font-size:0.82rem; color:var(--accent);">${escapeHtml(v.reading)}</div>` : ''}
             <div style="font-size:0.87rem; color:var(--text); font-weight:500;">${escapeHtml(v.vi || '')}</div>
             ${v.en ? `<div style="font-size:0.75rem; color:var(--text-subtle);">${escapeHtml(v.en)}</div>` : ''}
           </div>
@@ -665,13 +691,13 @@
 
       el.innerHTML = `
         <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:1rem;">
-          <button class="btn btn-sm btn-primary" onclick="app.itWorkspace.startStudy('flashcard', 'unit')">🃏 Học Flashcard bài này</button>
-          <button class="btn btn-sm" onclick="app.itWorkspace.startStudy('quiz', 'unit')" style="border-color:var(--accent); color:var(--accent); font-weight:600;">⚡ Trắc nghiệm bài này</button>
+          <button class="btn btn-sm btn-primary" onclick="app.itWorkspace.startStudy('flashcard', 'unit')">${svgIcon('layers', 'it-svg-sm')} <span>Flashcard 3D bài này</span></button>
+          <button class="btn btn-sm" onclick="app.itWorkspace.startStudy('quiz', 'unit')" style="border-color:var(--accent); color:var(--accent);">${svgIcon('zap', 'it-svg-sm')} <span>Trắc nghiệm bài này</span></button>
         </div>
-        <div style="font-size:0.84rem; font-weight:700; color:var(--text); margin-bottom:0.55rem;">📌 Từ vựng cốt lõi trong bài — 語彙 (${core.length})</div>
+        <div style="font-size:0.84rem; font-weight:700; color:var(--text); margin-bottom:0.55rem;">Từ vựng cốt lõi trong bài — 語彙 (${core.length})</div>
         <div class="it-vocab-list">${renderGroup(core)}</div>
         ${adv.length > 0 ? `
-          <div style="font-size:0.84rem; font-weight:700; color:var(--text); margin:0.8rem 0 0.55rem;">🚀 Thuật ngữ IT mở rộng — 発展語彙 (${adv.length})</div>
+          <div style="font-size:0.84rem; font-weight:700; color:var(--text); margin:0.8rem 0 0.55rem;">Thuật ngữ IT mở rộng — 発展語彙 (${adv.length})</div>
           <div class="it-vocab-list">${renderGroup(adv)}</div>
         ` : ''}
       `;
@@ -789,7 +815,9 @@
         index: 0,
         flipped: false,
         correct: 0,
-        answered: false
+        combo: 0,
+        answered: false,
+        _swiping: false
       };
 
       ['it-home-panel', 'it-unit-panel', 'it-dict-panel', 'it-practice-hub-panel'].forEach(id => {
@@ -819,14 +847,21 @@
       const progText = document.getElementById('it-study-progress-text');
       const progFill = document.getElementById('it-study-progress-fill');
 
+      const comboEl = document.getElementById('it-study-combo');
+      if (comboEl) {
+        comboEl.innerHTML = (st.combo >= 2)
+          ? `<span class="it-combo-pill">${svgIcon('flame', 'it-svg-sm')} ${st.combo}x</span>`
+          : '';
+      }
+
       if (st.index >= st.queue.length) {
         if (progFill) progFill.style.width = '100%';
         if (progText) progText.textContent = `Hoàn thành ${st.queue.length}/${st.queue.length}`;
         body.innerHTML = `
-          <div style="background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:2rem 1.5rem; text-align:center;">
-            <div style="font-size:2.5rem; margin-bottom:0.5rem;">🎉</div>
-            <div style="font-size:1.25rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;">Hoàn thành phiên luyện tập IT!</div>
-            <div style="font-size:0.95rem; color:var(--text-muted); margin-bottom:1.25rem;">
+          <div style="background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:2.2rem 1.5rem; text-align:center; box-shadow:var(--it-card-shadow);">
+            <div class="it-mode-icon" style="width:52px;height:52px;margin:0 auto 0.85rem;border-radius:14px;">${svgIcon('award', 'it-svg-lg')}</div>
+            <div style="font-family:var(--font-display-jp); font-size:1.35rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;">Hoàn thành phiên luyện tập IT</div>
+            <div style="font-size:0.95rem; color:var(--text-muted); margin-bottom:1.35rem;">
               ${st.mode === 'flashcard' ? `Bạn đã ôn xong <strong>${st.queue.length}</strong> thuật ngữ IT.` : `Bạn trả lời đúng <strong>${st.correct} / ${st.queue.length}</strong> câu.`}
             </div>
             <button class="btn btn-primary" onclick="app.itWorkspace.exitStudy()">Quay lại →</button>
@@ -843,19 +878,33 @@
       if (st.mode === 'flashcard') {
         const wordSafe = escapeHtml(item.word).replace(/'/g, "\\'");
         body.innerHTML = `
-          <div class="it-flashcard" onclick="app.itWorkspace.flipFlashcard()">
-            <span class="it-badge" style="margin-bottom:0.85rem;">${escapeHtml(item.unitLabel)}</span>
-            <div style="font-family:var(--font-jp); font-size:2.1rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;">${escapeHtml(item.word)}</div>
-            <button class="icon-btn" onclick="event.stopPropagation(); app.speakText('${wordSafe}')" style="margin-bottom:0.8rem;">🔊</button>
-            ${st.flipped ? `
-              <div style="font-family:var(--font-jp); font-size:1.15rem; color:var(--accent); font-weight:600; margin-bottom:0.4rem;">${escapeHtml(item.reading || '')}</div>
-              <div style="font-size:1.15rem; font-weight:700; color:var(--text); margin-bottom:0.25rem;">${escapeHtml(item.vi || '')}</div>
-              ${item.en ? `<div style="font-size:0.88rem; color:var(--text-muted);">${escapeHtml(item.en)}</div>` : ''}
-            ` : '<div style="font-size:0.82rem; color:var(--text-subtle); margin-top:0.5rem;">Bấm vào thẻ để xem cách đọc & nghĩa IT</div>'}
+          <div class="it-fc-scene">
+            <div class="it-fc-card ${st.flipped ? 'is-flipped' : ''}" id="it-fc-card" onclick="app.itWorkspace.flipFlashcard()">
+              <div class="it-fc-face it-fc-front">
+                <span class="it-unit-code" style="margin-bottom:1rem;">${escapeHtml(item.unitLabel)}</span>
+                <div class="it-fc-word">${escapeHtml(item.word)}</div>
+                <button class="icon-btn" title="Nghe phát âm (S)" onclick="event.stopPropagation(); app.speakText('${wordSafe}')" style="margin-top:0.9rem;">${svgIcon('volume')}</button>
+                <div class="it-fc-hint">${svgIcon('rotateCw', 'it-svg-sm')} <span>Bấm vào thẻ hoặc Space để lật</span></div>
+              </div>
+              <div class="it-fc-face it-fc-back">
+                <span class="it-unit-code" style="margin-bottom:0.65rem;">${escapeHtml(item.unitLabel)}</span>
+                <div style="font-family:var(--font-display-jp); font-size:1.5rem; font-weight:700; color:var(--text); margin-bottom:0.25rem;">${escapeHtml(item.word)}</div>
+                ${item.reading ? `<div style="font-family:var(--font-jp); font-size:1.05rem; color:var(--accent); font-weight:600; margin-bottom:0.55rem;">${escapeHtml(item.reading)}</div>` : ''}
+                <div style="font-size:1.15rem; font-weight:700; color:var(--text); margin-bottom:0.25rem;">${escapeHtml(item.vi || '')}</div>
+                ${item.en ? `<div style="font-size:0.86rem; color:var(--text-muted); font-family:var(--font-mono);">${escapeHtml(item.en)}</div>` : ''}
+                <button class="icon-btn" title="Nghe phát âm (S)" onclick="event.stopPropagation(); app.speakText('${wordSafe}')" style="margin-top:0.85rem;">${svgIcon('volume')}</button>
+              </div>
+            </div>
           </div>
-          <div style="display:flex; gap:0.75rem; justify-content:center; margin-top:1rem;">
-            <button class="btn" onclick="app.itWorkspace.answerFlashcard(false)" style="flex:1; max-width:220px; justify-content:center; border-color:var(--danger); color:var(--danger); font-weight:600;">Chưa nhớ (Lặp lại)</button>
-            <button class="btn btn-primary" onclick="app.itWorkspace.answerFlashcard(true)" style="flex:1; max-width:220px; justify-content:center; background:var(--success); border-color:var(--success); font-weight:600;">Đã thuộc ✓</button>
+          <div style="display:flex; gap:0.75rem; justify-content:center; margin-top:1.15rem;">
+            <button class="btn" onclick="app.itWorkspace.answerFlashcard(false)" style="flex:1; max-width:220px; justify-content:center; border-color:var(--danger); color:var(--danger);">${svgIcon('arrowLeft', 'it-svg-sm')} <span>Chưa nhớ</span></button>
+            <button class="btn btn-primary" onclick="app.itWorkspace.answerFlashcard(true)" style="flex:1; max-width:220px; justify-content:center; background:var(--success); border-color:var(--success);"><span>Đã thuộc</span> ${svgIcon('check', 'it-svg-sm')}</button>
+          </div>
+          <div class="it-kbd-bar">
+            <span class="it-kbd-item"><kbd>Space</kbd> Lật thẻ</span>
+            <span class="it-kbd-item"><kbd>←</kbd> Chưa nhớ</span>
+            <span class="it-kbd-item"><kbd>→</kbd> Đã thuộc</span>
+            <span class="it-kbd-item"><kbd>S</kbd> Nghe</span>
           </div>
         `;
       } else if (st.mode === 'cloze') {
@@ -886,30 +935,35 @@
 
         body.innerHTML = `
           <div class="quiz-question-box">
-            <div class="quiz-type-badge">🧩 ĐIỀN TỪ VÀO HỘI THOẠI IT · ${escapeHtml(item.unitLabel)}</div>
-            <div style="font-family:var(--font-jp); font-size:1.28rem; font-weight:600; color:var(--text); line-height:1.75; margin:0.75rem 0;">
+            <div class="it-unit-code" style="display:inline-block;">CLOZE · ${escapeHtml(item.unitLabel)}</div>
+            <div style="font-family:var(--font-jp); font-size:1.25rem; font-weight:600; color:var(--text); line-height:1.8; margin:0.85rem 0 0.45rem;">
               ${clozeHtml}
             </div>
-            <div style="font-size:0.84rem; color:var(--text-muted);">Chọn thuật ngữ IT phù hợp điền vào chỗ trống:</div>
+            <div style="font-size:0.82rem; color:var(--text-muted);">Chọn thuật ngữ IT điền vào chỗ trống:</div>
           </div>
-          <div style="display:flex; flex-direction:column; gap:0.55rem; margin-top:1rem;">
+          <div style="display:flex; flex-direction:column; gap:0.6rem; margin-top:1rem;">
             ${options.map((opt, idx) => `
-              <button class="it-practice-opt" id="it-qopt-${idx}" onclick="app.itWorkspace.selectQuizOption(${idx})">${idx + 1}. ${escapeHtml(opt.text)}</button>
+              <button class="it-practice-opt" id="it-qopt-${idx}" onclick="app.itWorkspace.selectQuizOption(${idx})"><span class="it-keycap">${idx + 1}</span><span>${escapeHtml(opt.text)}</span></button>
             `).join('')}
           </div>
-          <div id="it-qfb" style="display:none; margin-top:0.85rem; padding:0.9rem; border-radius:10px; background:var(--surface); border:1px solid var(--border);">
+          <div id="it-qfb" style="display:none; margin-top:0.9rem; padding:1rem; border-radius:14px; background:var(--surface); border:1px solid var(--border-strong); box-shadow:var(--it-card-shadow);">
             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem;">
               <span id="it-qfb-title" style="font-weight:700;"></span>
               <div style="display:flex; gap:0.4rem;">
-                <button class="icon-btn" onclick="app.speakText('${sentSafe}')" style="width:1.9rem;height:1.9rem;">🔊</button>
+                <button class="icon-btn" onclick="app.speakText('${sentSafe}')" style="width:2rem;height:2rem;">${svgIcon('volume', 'it-svg-sm')}</button>
                 <button class="btn btn-sm btn-primary" onclick="app.itWorkspace.nextQuizStep()">Câu tiếp theo →</button>
               </div>
             </div>
-            <div style="font-size:0.86rem; color:var(--text-muted); margin-top:0.35rem;">
+            <div style="font-size:0.86rem; color:var(--text-muted); margin-top:0.4rem;">
               <strong style="color:var(--text);">${escapeHtml(item.word)}</strong>${item.reading ? ` (${escapeHtml(item.reading)})` : ''} — ${escapeHtml(item.vi || '')}${item.en ? ' · ' + escapeHtml(item.en) : ''}
             </div>
-            <div style="font-size:0.83rem; color:var(--text); margin-top:0.3rem; font-family:var(--font-jp);">${escapeHtml(sent.ja)}</div>
+            <div style="font-size:0.84rem; color:var(--text); margin-top:0.35rem; font-family:var(--font-jp);">${escapeHtml(sent.ja)}</div>
             ${sent.vi ? `<div style="font-size:0.81rem; color:var(--text-muted); margin-top:0.15rem;">${escapeHtml(sent.vi)}</div>` : ''}
+          </div>
+          <div class="it-kbd-bar">
+            <span class="it-kbd-item"><kbd>1</kbd>–<kbd>4</kbd> Chọn đáp án</span>
+            <span class="it-kbd-item"><kbd>Enter</kbd> Câu tiếp</span>
+            <span class="it-kbd-item"><kbd>S</kbd> Nghe câu</span>
           </div>
         `;
       } else {
@@ -938,44 +992,55 @@
 
         body.innerHTML = `
           <div class="quiz-question-box">
-            <div class="quiz-type-badge">${escapeHtml(item.unitLabel)}</div>
-            <div style="font-family:var(--font-jp); font-size:${qType === 'jp_to_vi' ? '2rem' : '1.35rem'}; font-weight:700; color:${qType === 'jp_to_vi' ? 'var(--text)' : 'var(--accent)'}; margin:0.6rem 0;">
+            <div class="it-unit-code" style="display:inline-block;">${escapeHtml(item.unitLabel)}</div>
+            <div style="font-family:${qType === 'jp_to_vi' ? 'var(--font-display-jp)' : 'var(--font-ui)'}; font-size:${qType === 'jp_to_vi' ? '2.15rem' : '1.35rem'}; font-weight:700; color:${qType === 'jp_to_vi' ? 'var(--text)' : 'var(--accent)'}; margin:0.75rem 0 0.45rem;">
               ${escapeHtml(qType === 'jp_to_vi' ? item.word : item.vi)}
             </div>
-            <div style="font-size:0.85rem; color:var(--text-muted);">
+            <div style="font-size:0.84rem; color:var(--text-muted);">
               ${qType === 'jp_to_vi' ? 'Chọn nghĩa IT tương ứng:' : 'Chọn thuật ngữ tiếng Nhật tương ứng:'}
             </div>
           </div>
-          <div style="display:flex; flex-direction:column; gap:0.55rem; margin-top:1rem;">
+          <div style="display:flex; flex-direction:column; gap:0.6rem; margin-top:1rem;">
             ${options.map((opt, idx) => `
-              <button class="it-practice-opt" id="it-qopt-${idx}" onclick="app.itWorkspace.selectQuizOption(${idx})">${idx + 1}. ${escapeHtml(opt.text)}</button>
+              <button class="it-practice-opt" id="it-qopt-${idx}" onclick="app.itWorkspace.selectQuizOption(${idx})"><span class="it-keycap">${idx + 1}</span><span>${escapeHtml(opt.text)}</span></button>
             `).join('')}
           </div>
-          <div id="it-qfb" style="display:none; margin-top:0.85rem; padding:0.9rem; border-radius:10px; background:var(--surface); border:1px solid var(--border);">
+          <div id="it-qfb" style="display:none; margin-top:0.9rem; padding:1rem; border-radius:14px; background:var(--surface); border:1px solid var(--border-strong); box-shadow:var(--it-card-shadow);">
             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem;">
               <span id="it-qfb-title" style="font-weight:700;"></span>
               <div style="display:flex; gap:0.4rem;">
-                <button class="icon-btn" onclick="app.speakText('${wordSafe}')" style="width:1.9rem;height:1.9rem;">🔊</button>
+                <button class="icon-btn" onclick="app.speakText('${wordSafe}')" style="width:2rem;height:2rem;">${svgIcon('volume', 'it-svg-sm')}</button>
                 <button class="btn btn-sm btn-primary" onclick="app.itWorkspace.nextQuizStep()">Câu tiếp theo →</button>
               </div>
             </div>
-            <div style="font-size:0.85rem; color:var(--text-muted); margin-top:0.35rem;">
+            <div style="font-size:0.86rem; color:var(--text-muted); margin-top:0.4rem;">
               <strong style="color:var(--text);">${escapeHtml(item.word)}</strong>${item.reading ? ` (${escapeHtml(item.reading)})` : ''} — ${escapeHtml(item.vi || '')}${item.en ? ' · ' + escapeHtml(item.en) : ''}
             </div>
+          </div>
+          <div class="it-kbd-bar">
+            <span class="it-kbd-item"><kbd>1</kbd>–<kbd>4</kbd> Chọn đáp án</span>
+            <span class="it-kbd-item"><kbd>Enter</kbd> Câu tiếp</span>
+            <span class="it-kbd-item"><kbd>S</kbd> Nghe phát âm</span>
           </div>
         `;
       }
     }
 
     flipFlashcard() {
-      if (!this.study) return;
+      if (!this.study || this.study._swiping) return;
       this.study.flipped = !this.study.flipped;
-      this.renderStudyStep();
+      const card = document.getElementById('it-fc-card');
+      if (card) {
+        card.classList.toggle('is-flipped', this.study.flipped);
+      } else {
+        this.renderStudyStep();
+      }
     }
 
     answerFlashcard(known) {
       const st = this.study;
-      if (!st) return;
+      if (!st || st._swiping) return;
+      st._swiping = true;
       const item = st.queue[st.index];
       if (known) {
         const prog = this.getProgress();
@@ -986,9 +1051,23 @@
       } else {
         st.queue.push(item);
       }
-      st.index++;
-      st.flipped = false;
-      this.renderStudyStep();
+
+      const card = document.getElementById('it-fc-card');
+      if (card) {
+        card.classList.add(known ? 'swipe-right' : 'swipe-left');
+        setTimeout(() => {
+          if (!this.study) return;
+          this.study._swiping = false;
+          this.study.index++;
+          this.study.flipped = false;
+          this.renderStudyStep();
+        }, 230);
+      } else {
+        st._swiping = false;
+        st.index++;
+        st.flipped = false;
+        this.renderStudyStep();
+      }
     }
 
     selectQuizOption(idx) {
@@ -998,8 +1077,20 @@
       const item = st.queue[st.index];
       const chosen = st.currentOptions[idx];
       const isCorrect = !!(chosen && chosen.correct);
-      if (isCorrect) st.correct++;
+      if (isCorrect) {
+        st.correct++;
+        st.combo = (st.combo || 0) + 1;
+      } else {
+        st.combo = 0;
+      }
       if (item && item.vKey) this._recordMistake(item.vKey, isCorrect);
+
+      const comboEl = document.getElementById('it-study-combo');
+      if (comboEl) {
+        comboEl.innerHTML = (st.combo >= 2)
+          ? `<span class="it-combo-pill">${svgIcon('flame', 'it-svg-sm')} ${st.combo}x</span>`
+          : '';
+      }
 
       st.currentOptions.forEach((opt, i) => {
         const btn = document.getElementById(`it-qopt-${i}`);
@@ -1008,6 +1099,10 @@
         else if (i === idx) btn.classList.add('incorrect');
         btn.disabled = true;
       });
+
+      if (isCorrect && global.ITMotion) {
+        global.ITMotion.burstConfetti(document.getElementById(`it-qopt-${idx}`));
+      }
 
       const fb = document.getElementById('it-qfb');
       const title = document.getElementById('it-qfb-title');
