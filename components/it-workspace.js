@@ -212,7 +212,7 @@
         grid.innerHTML = '<div style="color:var(--text-muted); padding:2rem; text-align:center;">Đang tải 23 bài Tiếng Nhật IT...</div>';
       }
       try {
-        const res = await fetch('/data/it-japanese.json');
+        const res = await fetch('/data/it-japanese.json?v=2');
         if (!res.ok) throw new Error('HTTP ' + res.status);
         this.data = await res.json();
         return true;
@@ -825,7 +825,7 @@
               </div>
             </div>
             <div style="font-size:0.85rem; color:var(--text-muted); margin-top:0.35rem;">
-              <strong style="color:var(--text);">${escapeHtml(item.word)}</strong> (${escapeHtml(item.reading || '')}) — ${escapeHtml(item.vi || '')}${item.en ? ' · ' + escapeHtml(item.en) : ''}
+              <strong style="color:var(--text);">${escapeHtml(item.word)}</strong>${item.reading ? ` (${escapeHtml(item.reading)})` : ''} — ${escapeHtml(item.vi || '')}${item.en ? ' · ' + escapeHtml(item.en) : ''}
             </div>
           </div>
         `;
