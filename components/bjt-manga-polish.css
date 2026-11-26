@@ -8,7 +8,7 @@
 
 /* --- 1. MANGA PRINT PALETTE (Warm Paper Light / Tokyo Night Ink Dark) --- */
 html[data-workspace="bjt"] {
-  --font-manga-jp: 'Shippori Mincho', 'Noto Serif JP', serif;
+  --font-manga-jp: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 
   --bg: #FAF6EC;

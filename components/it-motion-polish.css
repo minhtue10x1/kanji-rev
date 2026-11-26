@@ -5,7 +5,7 @@
 
 /* --- 1. REFINED EDITORIAL & PRECISION TOKENS --- */
 html[data-workspace="it"] {
-  --font-display-jp: 'Shippori Mincho', 'Noto Serif JP', serif;
+  --font-display-jp: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --bg: #F6F4EF;
