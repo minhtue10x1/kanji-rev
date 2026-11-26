@@ -161,22 +161,40 @@
       }
 
       const toast = document.getElementById('ws-transition-toast');
+      const backdrop = document.getElementById('ws-transition-backdrop');
       if (!toast) return;
       const icon = toast.querySelector('.ws-badge-icon');
       const label = toast.querySelector('#ws-transition-label');
       const sub = toast.querySelector('#ws-transition-sub');
+      const jpTag = toast.querySelector('#ws-transition-jp-tag');
+      const barFill = toast.querySelector('.ws-transition-bar-fill');
+      const jpMap = { kanji: '漢字道場', it: 'IT現場編', bjt: '商務検定' };
+
       if (icon) {
         icon.className = `ws-badge-icon ${workspace}`;
         icon.textContent = meta.icon;
       }
       if (label) label.textContent = meta.toastTitle;
       if (sub) sub.textContent = meta.toastSub;
+      if (jpTag) jpTag.textContent = jpMap[workspace] || '学習編';
+
+      // Reset progress sweep animation cleanly on rapid switches
+      toast.classList.remove('show');
+      if (backdrop) backdrop.classList.remove('show');
+      if (barFill) {
+        barFill.style.animation = 'none';
+        void barFill.offsetWidth;
+        barFill.style.animation = '';
+      }
+      void toast.offsetWidth;
 
       toast.classList.add('show');
+      if (backdrop) backdrop.classList.add('show');
       clearTimeout(this._toastTimer);
       this._toastTimer = setTimeout(() => {
         toast.classList.remove('show');
-      }, 650);
+        if (backdrop) backdrop.classList.remove('show');
+      }, 950);
     }
   }
 

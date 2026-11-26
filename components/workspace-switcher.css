@@ -235,37 +235,140 @@ header, .btn-primary, .nav-btn, .mobile-nav-item, .brand-mark, .progress-fill {
   color: #FFFFFF;
 }
 
-/* --- 3. SILKY WORKSPACE SWITCH TRANSITION ANIMATION --- */
+/* --- 3. CINEMATIC MANGA EYECATCH WORKSPACE SWITCH TRANSITION (~0.95s) --- */
+.ws-transition-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 240;
+  pointer-events: none;
+  opacity: 0;
+  background: rgba(250, 246, 236, 0.72);
+  backdrop-filter: blur(10px) saturate(1.1);
+  -webkit-backdrop-filter: blur(10px) saturate(1.1);
+  transition: opacity 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
+}
+
+[data-theme="dark"] .ws-transition-backdrop {
+  background: rgba(9, 10, 14, 0.68);
+}
+
+.ws-transition-backdrop::before {
+  content: "";
+  position: absolute;
+  inset: -12%;
+  opacity: 0.45;
+  background: repeating-conic-gradient(
+    from 0deg,
+    color-mix(in srgb, var(--accent) 18%, transparent) 0deg 2.2deg,
+    transparent 2.2deg 11deg
+  );
+  mask-image: radial-gradient(circle, transparent 34%, black 88%);
+  -webkit-mask-image: radial-gradient(circle, transparent 34%, black 88%);
+  transform: scale(1.08);
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ws-transition-backdrop.show {
+  opacity: 1;
+}
+
+.ws-transition-backdrop.show::before {
+  transform: scale(1);
+}
+
 .ws-transition-toast {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0.88);
+  transform: translate(-50%, -50%) scale(0.84) rotate(-2deg);
   z-index: 250;
   pointer-events: none;
   opacity: 0;
+  min-width: 300px;
+  max-width: min(420px, 90vw);
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.9rem 1.45rem;
-  border-radius: 16px;
+  gap: 0.95rem;
+  padding: 1.15rem 2.6rem 1.35rem 1.35rem;
+  border-radius: 10px;
   background: var(--surface);
-  border: 1px solid var(--border);
-  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: opacity 0.22s ease, transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 2.5px solid var(--manga-ink, var(--border-strong));
+  box-shadow: 7px 7px 0 var(--manga-shadow, rgba(0, 0, 0, 0.28));
+  overflow: hidden;
+  transition: opacity 0.22s ease, transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ws-transition-toast::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: var(--accent);
 }
 
 .ws-transition-toast.show {
   opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%) scale(1) rotate(0deg);
+}
+
+.ws-transition-toast .ws-badge-icon {
+  width: 2.85rem;
+  height: 2.85rem;
+  font-size: 1.05rem;
+  border: 2px solid var(--manga-ink, var(--border-strong));
+  box-shadow: 3px 3px 0 var(--manga-shadow, rgba(0, 0, 0, 0.2));
+}
+
+.ws-transition-toast .ws-badge-icon.kanji {
+  font-size: 1.5rem;
+}
+
+.ws-transition-jp-tag {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.65rem;
+  writing-mode: vertical-rl;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+  opacity: 0.85;
+  border-left: 1.5px dashed var(--manga-ink, var(--border-strong));
+  padding-left: 0.28rem;
+}
+
+.ws-transition-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  background: var(--surface-elevated);
+}
+
+.ws-transition-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+}
+
+.ws-transition-toast.show .ws-transition-bar-fill {
+  animation: wsBarSweep 0.92s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes wsBarSweep {
+  0% { width: 0%; }
+  100% { width: 100%; }
 }
 
 @keyframes wsViewEnter {
   0% {
     opacity: 0;
-    transform: translateY(10px) scale(0.99);
+    transform: translateY(12px) scale(0.99);
   }
   100% {
     opacity: 1;
@@ -274,7 +377,7 @@ header, .btn-primary, .nav-btn, .mobile-nav-item, .brand-mark, .progress-fill {
 }
 
 main.ws-animating {
-  animation: wsViewEnter 0.34s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: wsViewEnter 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Workspace visibility guards */
