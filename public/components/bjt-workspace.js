@@ -1267,10 +1267,10 @@
             <div class="it-progress-pill">Đã làm đúng ${prog.solvedDokkai.length}/${allQ.length} câu · Đang lọc: ${filtered.length} câu${prog.wrongDokkai.length > 0 ? ` · 🔴 ${prog.wrongDokkai.length} câu hay sai` : ''}</div>
           </div>
           <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-            ${prog.wrongDokkai.length > 0 ? `<button class="btn" onclick="app.bjtWorkspace.startDokkaiMistakes()" style="border-color:var(--danger); color:var(--danger); font-weight:700;">🔴 Ôn ${prog.wrongDokkai.length} câu hay sai</button>` : ''}
-            <button class="btn btn-primary" onclick="app.bjtWorkspace.startDokkai(false, 20)">⚡ Luyện nhanh 20 câu</button>
-            <button class="btn" onclick="app.bjtWorkspace.startDokkai(false, null)">📖 Làm hết (${filtered.length} câu)</button>
-            <button class="btn" onclick="app.bjtWorkspace.startDokkai(true, 35)" style="border-color:var(--accent); color:var(--accent); font-weight:600;">⏱️ Thi thử CBT (35 câu)</button>
+            <button class="btn btn-primary" onclick="app.bjtWorkspace.startDokkai(false, 20)">Luyện nhanh 20 câu</button>
+            <button class="btn" onclick="app.bjtWorkspace.startDokkai(false, null)">Làm hết (${filtered.length} câu)</button>
+            <button class="btn" onclick="app.bjtWorkspace.startDokkai(true, 35)" style="border-color:var(--accent); color:var(--accent);">Thi thử CBT (35 câu)</button>
+            ${prog.wrongDokkai.length > 0 ? `<button class="btn" onclick="app.bjtWorkspace.startDokkaiMistakes()" style="border-color:var(--danger); color:var(--danger);">Ôn ${prog.wrongDokkai.length} câu hay sai</button>` : ''}
           </div>
         </div>
 

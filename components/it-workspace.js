@@ -434,6 +434,31 @@
       if (!hub) return;
       let idx = 0;
       hub.innerHTML = `
+        <div class="it-practice-mode-card it-stagger" style="--i:${idx++}; border-color:var(--accent);" onclick="app.itWorkspace.startStudy('flashcard', 'unlearned')">
+          <div class="it-mode-icon">${svgIcon('layers', 'it-svg-lg')}</div>
+          <div style="font-weight:700; font-size:1rem; color:var(--text);">Flashcard 3D từ chưa thuộc (${unlearnedCount})</div>
+          <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">Học và ghi nhớ các thuật ngữ IT chưa thuộc với thẻ lật 3D & phím tắt (Space / ← / →).</div>
+        </div>
+        <div class="it-practice-mode-card it-stagger" style="--i:${idx++};" onclick="app.itWorkspace.startStudy('flashcard', 'ch3')">
+          <div class="it-mode-icon">${svgIcon('fileText', 'it-svg-lg')}</div>
+          <div style="font-weight:700; font-size:1rem; color:var(--text);">Flashcard Đọc Spec (Ch.3)</div>
+          <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">Thuật ngữ bảng dữ liệu, tồn kho, đơn hàng, điều kiện lọc thường gặp trong Spec Nhật.</div>
+        </div>
+        <div class="it-practice-mode-card it-stagger" style="--i:${idx++};" onclick="app.itWorkspace.startStudy('cloze', 'all', 20)">
+          <div class="it-mode-icon">${svgIcon('puzzle', 'it-svg-lg')}</div>
+          <div style="font-weight:700; font-size:1rem; color:var(--text);">Điền từ vào hội thoại IT (Cloze)</div>
+          <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">Đục lỗ trực tiếp trên 248 câu hội thoại & mẫu câu thực tế — luyện dùng từ trong ngữ cảnh.</div>
+        </div>
+        <div class="it-practice-mode-card it-stagger" style="--i:${idx++};" onclick="app.itWorkspace.startStudy('quiz', 'ch2', 20)">
+          <div class="it-mode-icon">${svgIcon('terminal', 'it-svg-lg')}</div>
+          <div style="font-weight:700; font-size:1rem; color:var(--text);">Trắc nghiệm Dự án (Ch.2)</div>
+          <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">20 câu ngẫu nhiên từ 15 bài thực chiến dự án (SRS, thiết kế, delay, test, demo).</div>
+        </div>
+        <div class="it-practice-mode-card it-stagger" style="--i:${idx++};" onclick="app.itWorkspace.startStudy('quiz', 'all', 40)">
+          <div class="it-mode-icon">${svgIcon('target', 'it-svg-lg')}</div>
+          <div style="font-weight:700; font-size:1rem; color:var(--text);">Tổng ôn 40 câu Toàn sách</div>
+          <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">Kiểm tra toàn diện cả 3 chương (Tìm việc · Dự án · Đọc Spec), xen kẽ Nhật→Việt & Việt→Nhật.</div>
+        </div>
         ${prog.wrongVocab.length > 0 ? `
           <div class="it-practice-mode-card it-stagger" style="--i:${idx++}; border-color:var(--danger);" onclick="app.itWorkspace.startStudy('quiz', 'mistakes')">
             <div class="it-mode-icon danger">${svgIcon('alertCircle', 'it-svg-lg')}</div>
@@ -441,31 +466,6 @@
             <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">Tự động gom các thuật ngữ bạn từng chọn nhầm. Trả lời đúng sẽ tự gỡ khỏi danh sách.</div>
           </div>
         ` : ''}
-        <div class="it-practice-mode-card it-stagger" style="--i:${idx++}; border-color:var(--accent);" onclick="app.itWorkspace.startStudy('cloze', 'all', 20)">
-          <div class="it-mode-icon">${svgIcon('puzzle', 'it-svg-lg')}</div>
-          <div style="font-weight:700; font-size:1rem; color:var(--text);">Điền từ vào hội thoại IT (Cloze)</div>
-          <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">Đục lỗ trực tiếp trên 248 câu hội thoại & mẫu câu thực tế — học theo ngữ cảnh thay vì từ rời.</div>
-        </div>
-        <div class="it-practice-mode-card it-stagger" style="--i:${idx++};" onclick="app.itWorkspace.startStudy('quiz', 'ch2', 20)">
-          <div class="it-mode-icon">${svgIcon('terminal', 'it-svg-lg')}</div>
-          <div style="font-weight:700; font-size:1rem; color:var(--text);">Trắc nghiệm Dự án (Ch.2)</div>
-          <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">20 câu ngẫu nhiên từ 15 bài thực chiến dự án (SRS, thiết kế, delay, test, demo).</div>
-        </div>
-        <div class="it-practice-mode-card it-stagger" style="--i:${idx++};" onclick="app.itWorkspace.startStudy('flashcard', 'unlearned')">
-          <div class="it-mode-icon">${svgIcon('layers', 'it-svg-lg')}</div>
-          <div style="font-weight:700; font-size:1rem; color:var(--text);">Flashcard 3D từ chưa thuộc (${unlearnedCount})</div>
-          <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">Lật 3D mượt & điều khiển nhanh bằng bàn phím (Space / ← / →), tự lặp lại từ quên.</div>
-        </div>
-        <div class="it-practice-mode-card it-stagger" style="--i:${idx++};" onclick="app.itWorkspace.startStudy('quiz', 'all', 40)">
-          <div class="it-mode-icon">${svgIcon('target', 'it-svg-lg')}</div>
-          <div style="font-weight:700; font-size:1rem; color:var(--text);">Tổng ôn 40 câu Toàn sách</div>
-          <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">Kiểm tra toàn diện cả 3 chương (Tìm việc · Dự án · Đọc Spec), xen kẽ Nhật→Việt & Việt→Nhật.</div>
-        </div>
-        <div class="it-practice-mode-card it-stagger" style="--i:${idx++};" onclick="app.itWorkspace.startStudy('flashcard', 'ch3')">
-          <div class="it-mode-icon">${svgIcon('fileText', 'it-svg-lg')}</div>
-          <div style="font-weight:700; font-size:1rem; color:var(--text);">Flashcard Đọc Spec (Ch.3)</div>
-          <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">Thuật ngữ bảng dữ liệu, tồn kho, đơn hàng, điều kiện lọc thường gặp trong Spec Nhật.</div>
-        </div>
       `;
     }
 

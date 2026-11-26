@@ -245,13 +245,37 @@ html[data-workspace="kanji"] .kanji-card.mastered::after {
   pointer-events: none;
 }
 
-/* Flashcard Panel in Kanji Study View */
+/* Flashcard Panel in Kanji Study View + Directional Swipe Animation */
 html[data-workspace="kanji"] .flashcard,
-html[data-workspace="kanji"] .flashcard-face,
-html:not([data-workspace]) .flashcard-face {
+html:not([data-workspace]) .flashcard {
+  transition: transform 0.52s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.22s ease;
+}
+
+html[data-workspace="kanji"] .card-face,
+html:not([data-workspace]) .card-face {
   border: 2.5px solid var(--manga-ink);
   border-radius: 10px;
   box-shadow: 6px 6px 0 var(--manga-shadow);
+}
+
+.flashcard.swipe-left {
+  transform: translateX(-95px) rotate(-6deg) !important;
+  opacity: 0;
+}
+
+.flashcard.swipe-right {
+  transform: translateX(95px) rotate(6deg) !important;
+  opacity: 0;
+}
+
+.flashcard.flipped.swipe-left {
+  transform: rotateY(180deg) translateX(95px) rotate(6deg) !important;
+  opacity: 0;
+}
+
+.flashcard.flipped.swipe-right {
+  transform: rotateY(180deg) translateX(-95px) rotate(-6deg) !important;
+  opacity: 0;
 }
 
 /* Quiz Question Box & Options */
