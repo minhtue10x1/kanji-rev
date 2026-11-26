@@ -186,6 +186,7 @@
       this.currentUnitIdx = 0;
       this.currentUnit = null;
       this.study = null;
+      this._skimTimer = null;
     }
 
     getProgress() {
@@ -195,15 +196,39 @@
           const p = JSON.parse(raw);
           return {
             completedUnits: Array.isArray(p.completedUnits) ? p.completedUnits : [],
-            masteredVocab: Array.isArray(p.masteredVocab) ? p.masteredVocab : []
+            masteredVocab: Array.isArray(p.masteredVocab) ? p.masteredVocab : [],
+            wrongVocab: Array.isArray(p.wrongVocab) ? p.wrongVocab : []
           };
         }
       } catch (e) {}
-      return { completedUnits: [], masteredVocab: [] };
+      return { completedUnits: [], masteredVocab: [], wrongVocab: [] };
     }
 
     saveProgress(prog) {
       localStorage.setItem('kanji_it_japanese_progress_v1', JSON.stringify(prog));
+    }
+
+    _recordMistake(vKey, isCorrect) {
+      if (!vKey) return;
+      const prog = this.getProgress();
+      const idx = prog.wrongVocab.indexOf(vKey);
+      if (!isCorrect) {
+        if (idx === -1) {
+          prog.wrongVocab.push(vKey);
+          this.saveProgress(prog);
+        }
+      } else if (idx !== -1) {
+        prog.wrongVocab.splice(idx, 1);
+        this.saveProgress(prog);
+        this.app.showToast('✓ Đã gỡ khỏi sổ từ hay sai!');
+      }
+    }
+
+    _stopSkimTimer() {
+      if (this._skimTimer) {
+        clearInterval(this._skimTimer);
+        this._skimTimer = null;
+      }
     }
 
     async ensureDataLoaded() {
@@ -383,6 +408,18 @@
       const hub = document.getElementById('it-practice-hub-grid');
       if (!hub) return;
       hub.innerHTML = `
+        ${prog.wrongVocab.length > 0 ? `
+          <div class="it-practice-mode-card" style="border-color:var(--danger);" onclick="app.itWorkspace.startStudy('quiz', 'mistakes')">
+            <div style="font-size:1.6rem;">🔴</div>
+            <div style="font-weight:700; font-size:1rem; color:var(--danger);">Ôn lại ${prog.wrongVocab.length} từ hay sai</div>
+            <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.45;">Tự động gom các thuật ngữ bạn từng chọn nhầm. Trả lời đúng sẽ tự gỡ khỏi danh sách.</div>
+          </div>
+        ` : ''}
+        <div class="it-practice-mode-card" style="border-color:var(--accent);" onclick="app.itWorkspace.startStudy('cloze', 'all', 20)">
+          <div style="font-size:1.6rem;">🧩</div>
+          <div style="font-weight:700; font-size:1rem; color:var(--text);">Điền từ vào hội thoại IT (Cloze 20 câu)</div>
+          <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.45;">Đục lỗ trực tiếp trên câu hội thoại & mẫu câu thực tế trong sách — học theo ngữ cảnh thay vì học từ rời.</div>
+        </div>
         <div class="it-practice-mode-card" onclick="app.itWorkspace.startStudy('quiz', 'ch2', 20)">
           <div style="font-size:1.6rem;">🔥</div>
           <div style="font-weight:700; font-size:1rem; color:var(--text);">Trắc nghiệm nhanh Dự án (Ch.2)</div>
@@ -549,12 +586,42 @@
       el.innerHTML = `
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem;">
           <span style="font-size:0.85rem; font-weight:700; color:var(--text);">${u.chapter === 3 ? '📄 Nội dung đặc tả / Flowchart (仕様書)' : '💬 Hội thoại ngữ cảnh thực tế (モデル会話)'}</span>
-          <button class="btn btn-sm" id="it-toggle-vi-btn" onclick="app.itWorkspace.toggleTranslation()">${this.showVi ? '👁️ Ẩn dịch Việt (Tự đọc hiểu)' : '👁️ Hiện dịch Việt'}</button>
+          <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+            <button class="btn btn-sm" id="it-skim-btn" onclick="app.itWorkspace.startUnitSkim()" style="border-color:var(--accent); color:var(--accent);">⏱️ Đọc nhanh 30s</button>
+            <button class="btn btn-sm" id="it-toggle-vi-btn" onclick="app.itWorkspace.toggleTranslation()">${this.showVi ? '👁️ Ẩn dịch Việt (Tự đọc hiểu)' : '👁️ Hiện dịch Việt'}</button>
+          </div>
         </div>
-        ${dialogueHtml || '<div style="color:var(--text-muted);">Bài này trong bản scan không có trang hội thoại — bạn chuyển sang tab Từ vựng IT & Luyện tập nhé.</div>'}
+        ${dialogueHtml || '<div style="color:var(--text-muted);">Bài này trong bản scan không có trang hội thoại — bạn chuyển sang tab Từ vựng IT để luyện tập nhé.</div>'}
         ${pointsHtml}
         ${exprHtml}
       `;
+    }
+
+    startUnitSkim() {
+      this._stopSkimTimer();
+      this.showVi = false;
+      document.querySelectorAll('#it-tab-context .it-vi-line').forEach(el => el.classList.add('hidden-vi'));
+      const toggleBtn = document.getElementById('it-toggle-vi-btn');
+      if (toggleBtn) toggleBtn.textContent = '👁️ Hiện dịch Việt';
+
+      let sec = 30;
+      const btn = document.getElementById('it-skim-btn');
+      if (btn) btn.textContent = `⏱️ Đang đọc... ${sec}s`;
+      this._skimTimer = setInterval(() => {
+        sec--;
+        const b = document.getElementById('it-skim-btn');
+        if (sec <= 0) {
+          this._stopSkimTimer();
+          this.showVi = true;
+          document.querySelectorAll('#it-tab-context .it-vi-line').forEach(el => el.classList.remove('hidden-vi'));
+          const tb = document.getElementById('it-toggle-vi-btn');
+          if (tb) tb.textContent = '👁️ Ẩn dịch Việt (Tự đọc hiểu)';
+          if (b) b.textContent = '⏱️ Đọc nhanh 30s';
+          this.app.showToast('Hết 30s — Đã mở bản dịch để bạn đối chiếu!');
+        } else if (b) {
+          b.textContent = `⏱️ Đang đọc... ${sec}s`;
+        }
+      }, 1000);
     }
 
     toggleVocabMastered(vocabKey, fromDict = false) {
@@ -671,7 +738,7 @@
         sourceUnits = this.getFilteredUnits(2);
       } else if (scope === 'ch3') {
         sourceUnits = this.getFilteredUnits(3);
-      } else if (scope === 'all' || scope === 'unlearned') {
+      } else if (scope === 'all' || scope === 'unlearned' || scope === 'mistakes') {
         sourceUnits = this.data.units;
       } else {
         sourceUnits = this.getFilteredUnits();
@@ -679,25 +746,38 @@
 
       const pool = [];
       sourceUnits.forEach(u => {
+        const unitSentences = [
+          ...(u.dialogue || []).map(d => ({ ja: d.ja, vi: d.vi || '' })),
+          ...(u.expressions || []).map(e => ({ ja: e.ja, vi: e.vi || '' }))
+        ];
         (u.vocab || []).forEach(v => {
           const vKey = `${u.id}::${v.word}`;
           if (scope === 'unlearned' && prog.masteredVocab.includes(vKey)) return;
+          if (scope === 'mistakes' && !prog.wrongVocab.includes(vKey)) return;
+          let clozeSentence = null;
+          if (mode === 'cloze') {
+            if (!v.word || v.word.length < 2) return;
+            const match = unitSentences.find(s => s.ja && s.ja.includes(v.word));
+            if (!match) return;
+            clozeSentence = match;
+          }
           pool.push({
             ...v,
             unitId: u.id,
             unitLabel: `Ch.${u.chapter} U${u.unit} · ${u.titleJa}`,
-            vKey
+            vKey,
+            clozeSentence
           });
         });
       });
 
       if (pool.length === 0) {
-        this.app.showToast('Tuyệt vời! Không còn từ chưa thuộc trong phạm vi này.');
+        this.app.showToast(scope === 'mistakes' ? 'Tuyệt vời! Không còn từ hay sai nào.' : 'Tuyệt vời! Không còn từ chưa thuộc trong phạm vi này.');
         return;
       }
 
       pool.sort(() => Math.random() - 0.5);
-      const maxCount = limit || ((mode === 'quiz' && scope !== 'unit') ? 25 : (scope === 'unlearned' ? 30 : pool.length));
+      const maxCount = limit || (((mode === 'quiz' || mode === 'cloze') && scope !== 'unit' && scope !== 'mistakes') ? 25 : (scope === 'unlearned' ? 30 : pool.length));
       const queue = pool.slice(0, maxCount);
 
       this.study = {
@@ -747,7 +827,7 @@
             <div style="font-size:2.5rem; margin-bottom:0.5rem;">🎉</div>
             <div style="font-size:1.25rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;">Hoàn thành phiên luyện tập IT!</div>
             <div style="font-size:0.95rem; color:var(--text-muted); margin-bottom:1.25rem;">
-              ${st.mode === 'quiz' ? `Bạn trả lời đúng <strong>${st.correct} / ${st.queue.length}</strong> câu.` : `Bạn đã ôn xong <strong>${st.queue.length}</strong> thuật ngữ IT.`}
+              ${st.mode === 'flashcard' ? `Bạn đã ôn xong <strong>${st.queue.length}</strong> thuật ngữ IT.` : `Bạn trả lời đúng <strong>${st.correct} / ${st.queue.length}</strong> câu.`}
             </div>
             <button class="btn btn-primary" onclick="app.itWorkspace.exitStudy()">Quay lại →</button>
           </div>
@@ -758,7 +838,7 @@
       const item = st.queue[st.index];
       const pct = Math.round((st.index / st.queue.length) * 100);
       if (progFill) progFill.style.width = `${pct}%`;
-      if (progText) progText.textContent = `${st.mode === 'quiz' ? 'Câu' : 'Thẻ'} ${st.index + 1} / ${st.queue.length}`;
+      if (progText) progText.textContent = `${st.mode === 'flashcard' ? 'Thẻ' : 'Câu'} ${st.index + 1} / ${st.queue.length}`;
 
       if (st.mode === 'flashcard') {
         const wordSafe = escapeHtml(item.word).replace(/'/g, "\\'");
@@ -776,6 +856,60 @@
           <div style="display:flex; gap:0.75rem; justify-content:center; margin-top:1rem;">
             <button class="btn" onclick="app.itWorkspace.answerFlashcard(false)" style="flex:1; max-width:220px; justify-content:center; border-color:var(--danger); color:var(--danger); font-weight:600;">Chưa nhớ (Lặp lại)</button>
             <button class="btn btn-primary" onclick="app.itWorkspace.answerFlashcard(true)" style="flex:1; max-width:220px; justify-content:center; background:var(--success); border-color:var(--success); font-weight:600;">Đã thuộc ✓</button>
+          </div>
+        `;
+      } else if (st.mode === 'cloze') {
+        const sent = item.clozeSentence || { ja: item.word, vi: item.vi };
+        const pos = sent.ja.indexOf(item.word);
+        const clozeHtml = pos !== -1
+          ? escapeHtml(sent.ja.slice(0, pos)) + '<span style="display:inline-block;padding:0.05rem 0.55rem;margin:0 0.15rem;border-radius:6px;background:var(--accent-soft);color:var(--accent);font-weight:700;border:1px dashed var(--accent);">＿＿＿</span>' + escapeHtml(sent.ja.slice(pos + item.word.length))
+          : escapeHtml(sent.ja);
+
+        const distractors = [];
+        const used = new Set([item.word]);
+        const shuffledPool = [...st.allPool].sort(() => Math.random() - 0.5);
+        for (const cand of shuffledPool) {
+          if (!used.has(cand.word)) {
+            used.add(cand.word);
+            distractors.push(cand);
+            if (distractors.length >= 3) break;
+          }
+        }
+        const options = [
+          { text: item.word, correct: true },
+          ...distractors.map(d => ({ text: d.word, correct: false }))
+        ].sort(() => Math.random() - 0.5);
+
+        st.currentOptions = options;
+        st.answered = false;
+        const sentSafe = escapeHtml(sent.ja).replace(/'/g, "\\'");
+
+        body.innerHTML = `
+          <div class="quiz-question-box">
+            <div class="quiz-type-badge">🧩 ĐIỀN TỪ VÀO HỘI THOẠI IT · ${escapeHtml(item.unitLabel)}</div>
+            <div style="font-family:var(--font-jp); font-size:1.28rem; font-weight:600; color:var(--text); line-height:1.75; margin:0.75rem 0;">
+              ${clozeHtml}
+            </div>
+            <div style="font-size:0.84rem; color:var(--text-muted);">Chọn thuật ngữ IT phù hợp điền vào chỗ trống:</div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:0.55rem; margin-top:1rem;">
+            ${options.map((opt, idx) => `
+              <button class="it-practice-opt" id="it-qopt-${idx}" onclick="app.itWorkspace.selectQuizOption(${idx})">${idx + 1}. ${escapeHtml(opt.text)}</button>
+            `).join('')}
+          </div>
+          <div id="it-qfb" style="display:none; margin-top:0.85rem; padding:0.9rem; border-radius:10px; background:var(--surface); border:1px solid var(--border);">
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem;">
+              <span id="it-qfb-title" style="font-weight:700;"></span>
+              <div style="display:flex; gap:0.4rem;">
+                <button class="icon-btn" onclick="app.speakText('${sentSafe}')" style="width:1.9rem;height:1.9rem;">🔊</button>
+                <button class="btn btn-sm btn-primary" onclick="app.itWorkspace.nextQuizStep()">Câu tiếp theo →</button>
+              </div>
+            </div>
+            <div style="font-size:0.86rem; color:var(--text-muted); margin-top:0.35rem;">
+              <strong style="color:var(--text);">${escapeHtml(item.word)}</strong>${item.reading ? ` (${escapeHtml(item.reading)})` : ''} — ${escapeHtml(item.vi || '')}${item.en ? ' · ' + escapeHtml(item.en) : ''}
+            </div>
+            <div style="font-size:0.83rem; color:var(--text); margin-top:0.3rem; font-family:var(--font-jp);">${escapeHtml(sent.ja)}</div>
+            ${sent.vi ? `<div style="font-size:0.81rem; color:var(--text-muted); margin-top:0.15rem;">${escapeHtml(sent.vi)}</div>` : ''}
           </div>
         `;
       } else {
@@ -861,9 +995,11 @@
       const st = this.study;
       if (!st || st.answered) return;
       st.answered = true;
+      const item = st.queue[st.index];
       const chosen = st.currentOptions[idx];
       const isCorrect = !!(chosen && chosen.correct);
       if (isCorrect) st.correct++;
+      if (item && item.vKey) this._recordMistake(item.vKey, isCorrect);
 
       st.currentOptions.forEach((opt, i) => {
         const btn = document.getElementById(`it-qopt-${i}`);

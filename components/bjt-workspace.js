@@ -25,10 +25,12 @@
       this.app = app;
       this.data = null;
       this.subView = 'keigo'; // 'keigo' | 'vocab' | 'email' | 'dokkai'
-      this.keigoMode = 'table'; // 'table' | 'situations' | 'flashcard'
+      this.keigoMode = 'table'; // 'table' | 'situations' | 'flashcard' | 'roleplay'
+      this.keigoRoleplay = null;
       this.vocabCategory = 'all';
       this.vocabStudy = null;
       this.emailCategory = 'all';
+      this.emailSkim = null;
       this.dokkaiSection = 'all';
       this.dokkaiSource = 'all';
       this.dokkaiRun = null;
@@ -44,15 +46,37 @@
           return {
             solvedDokkai: Array.isArray(p.solvedDokkai) ? p.solvedDokkai : [],
             masteredKeigo: Array.isArray(p.masteredKeigo) ? p.masteredKeigo : [],
-            masteredVocab: Array.isArray(p.masteredVocab) ? p.masteredVocab : []
+            masteredVocab: Array.isArray(p.masteredVocab) ? p.masteredVocab : [],
+            wrongDokkai: Array.isArray(p.wrongDokkai) ? p.wrongDokkai : [],
+            wrongVocab: Array.isArray(p.wrongVocab) ? p.wrongVocab : [],
+            wrongKeigo: Array.isArray(p.wrongKeigo) ? p.wrongKeigo : []
           };
         }
       } catch (e) {}
-      return { solvedDokkai: [], masteredKeigo: [], masteredVocab: [] };
+      return { solvedDokkai: [], masteredKeigo: [], masteredVocab: [], wrongDokkai: [], wrongVocab: [], wrongKeigo: [] };
     }
 
     saveProgress(prog) {
       localStorage.setItem('kanji_bjt_progress_v1', JSON.stringify(prog));
+    }
+
+    _recordMistake(bucket, id, isCorrect) {
+      if (!id) return;
+      const prog = this.getProgress();
+      const list = prog[bucket] || [];
+      const idx = list.indexOf(id);
+      if (!isCorrect) {
+        if (idx === -1) {
+          list.push(id);
+          prog[bucket] = list;
+          this.saveProgress(prog);
+        }
+      } else if (idx !== -1) {
+        list.splice(idx, 1);
+        prog[bucket] = list;
+        this.saveProgress(prog);
+        this.app.showToast('✓ Đã gỡ khỏi sổ câu hay sai!');
+      }
     }
 
     async ensureDataLoaded() {
@@ -85,6 +109,7 @@
       this.subView = subView;
       this._stopTimer();
       this.vocabStudy = null;
+      this.emailSkim = null;
       if (this.app.currentView !== 'bjt') {
         this.app.navigate('bjt');
       }
@@ -130,6 +155,8 @@
       });
       if (mode === 'flashcard') {
         this.startKeigoFlashcards();
+      } else if (mode === 'roleplay') {
+        this.startKeigoRoleplay(false);
       } else {
         this.renderKeigo();
       }
@@ -143,11 +170,21 @@
 
       const statsEl = document.getElementById('bjt-keigo-stats');
       if (statsEl) {
-        statsEl.textContent = `Thuộc ${prog.masteredKeigo.length}/${(this.data.keigoTable || []).length} động từ Kính ngữ · ${(this.data.keigoSituations || []).length} tình huống công sở`;
+        const wrongNote = prog.wrongKeigo.length > 0 ? ` · 🔴 ${prog.wrongKeigo.length} câu hay sai` : '';
+        statsEl.textContent = `Thuộc ${prog.masteredKeigo.length}/${(this.data.keigoTable || []).length} động từ Kính ngữ · ${(this.data.keigoSituations || []).length} tình huống${wrongNote}`;
+      }
+      const mistakeBtn = document.getElementById('bjt-keigo-mistake-btn');
+      if (mistakeBtn) {
+        mistakeBtn.style.display = prog.wrongKeigo.length > 0 ? 'inline-flex' : 'none';
+        mistakeBtn.textContent = `🔴 Ôn ${prog.wrongKeigo.length} câu hay sai`;
       }
 
       if (this.keigoMode === 'flashcard') {
         this.renderKeigoFlashcardStep();
+        return;
+      }
+      if (this.keigoMode === 'roleplay') {
+        this.renderKeigoRoleplayStep();
         return;
       }
 
@@ -340,6 +377,167 @@
       this.renderKeigoFlashcardStep();
     }
 
+    startKeigoRoleplay(mistakesOnly = false) {
+      if (!this.data || !this.data.keigoTable) return;
+      this.keigoMode = 'roleplay';
+      document.querySelectorAll('#bjt-keigo-pills .it-pill-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.kmode === 'roleplay');
+      });
+      const prog = this.getProgress();
+      let pool = [...this.data.keigoTable];
+      if (mistakesOnly) {
+        pool = pool.filter(k => prog.wrongKeigo.includes(k.id));
+        if (pool.length === 0) {
+          this.app.showToast('Không còn câu Kính ngữ sai nào!');
+          return;
+        }
+      }
+      pool.sort(() => Math.random() - 0.5);
+      const queue = mistakesOnly ? pool : pool.slice(0, Math.min(20, pool.length));
+      this.keigoRoleplay = {
+        queue,
+        index: 0,
+        correct: 0,
+        answered: false,
+        currentOptions: [],
+        targetType: 'sonkeigo'
+      };
+      this.renderKeigoRoleplayStep();
+    }
+
+    renderKeigoRoleplayStep() {
+      const body = document.getElementById('bjt-keigo-body');
+      const st = this.keigoRoleplay;
+      if (!body || !st) return;
+
+      if (st.index >= st.queue.length) {
+        const pct = Math.round((st.correct / st.queue.length) * 100);
+        body.innerHTML = `
+          <div style="background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:2rem 1.5rem; text-align:center; max-width:520px; margin:0 auto;">
+            <div style="font-size:2.4rem; margin-bottom:0.5rem;">🎭</div>
+            <div style="font-size:1.25rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;">Hoàn thành Phản xạ Vai vế Kính ngữ!</div>
+            <div style="font-size:0.95rem; color:var(--text-muted); margin-bottom:1.25rem;">
+              Đúng <strong>${st.correct} / ${st.queue.length}</strong> câu (<strong>${pct}%</strong>)
+            </div>
+            <button class="btn btn-primary" onclick="app.bjtWorkspace.startKeigoRoleplay(false)">Luyện lượt mới →</button>
+          </div>
+        `;
+        return;
+      }
+
+      const item = st.queue[st.index];
+      const hasValidKenjou = item.kenjougo && !item.kenjougo.startsWith('—');
+      const targetType = hasValidKenjou ? (Math.random() < 0.5 ? 'sonkeigo' : 'kenjougo') : 'sonkeigo';
+      const oppositeType = targetType === 'sonkeigo' ? 'kenjougo' : 'sonkeigo';
+      st.targetType = targetType;
+      st.answered = false;
+
+      const correctText = item[targetType];
+      const distractors = [];
+      const used = new Set([correctText]);
+      // Trap #1: Always include the opposite form of the SAME verb when valid!
+      if (item[oppositeType] && !item[oppositeType].startsWith('—') && !used.has(item[oppositeType])) {
+        used.add(item[oppositeType]);
+        distractors.push(item[oppositeType]);
+      }
+      const others = [...(this.data.keigoTable || [])].sort(() => Math.random() - 0.5);
+      for (const cand of others) {
+        if (distractors.length >= 3) break;
+        const pick = Math.random() < 0.5 ? cand.sonkeigo : cand.kenjougo;
+        if (pick && !pick.startsWith('—') && !used.has(pick)) {
+          used.add(pick);
+          distractors.push(pick);
+        }
+      }
+
+      const options = [
+        { text: correctText, correct: true },
+        ...distractors.map(t => ({ text: t, correct: false }))
+      ].sort(() => Math.random() - 0.5);
+      st.currentOptions = options;
+
+      const pct = Math.round((st.index / st.queue.length) * 100);
+      const isSonkei = targetType === 'sonkeigo';
+      const exSafe = escapeHtml(item.exampleJa || correctText).replace(/'/g, "\\'");
+
+      body.innerHTML = `
+        <div style="max-width:680px; margin:0 auto;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.55rem;">
+            <span style="font-size:0.82rem; font-weight:700; color:var(--accent);">🎭 Phản xạ vai vế (Tránh bẫy 尊敬語 / 謙譲語)</span>
+            <span style="font-size:0.84rem; font-weight:600; color:var(--text-muted);">Câu ${st.index + 1} / ${st.queue.length}</span>
+          </div>
+          <div class="progress-bar" style="margin-bottom:1rem;"><div class="progress-fill" style="width:${pct}%;"></div></div>
+
+          <div class="quiz-question-box">
+            <div class="quiz-type-badge" style="${isSonkei ? 'background:rgba(59,130,246,0.14);color:#60a5fa;' : 'background:rgba(16,185,129,0.14);color:#34d399;'}">
+              ${isSonkei ? '👔 HÀNH ĐỘNG CỦA KHÁCH HÀNG / CẤP TRÊN' : '🙋 HÀNH ĐỘNG CỦA BẢN THÂN / CÔNG TY MÌNH'}
+            </div>
+            <div style="font-family:var(--font-jp); font-size:2.1rem; font-weight:700; color:var(--text); margin:0.65rem 0 0.35rem;">
+              ${escapeHtml(item.plain)}
+            </div>
+            <div style="font-size:0.86rem; color:var(--text-muted);">
+              ${isSonkei ? 'Chọn 尊敬語 (Tôn kính ngữ) phù hợp:' : 'Chọn 謙譲語 (Khiêm nhường ngữ) phù hợp:'}
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:0.55rem; margin-top:1rem;">
+            ${options.map((opt, idx) => `
+              <button class="it-practice-opt" id="bjt-krp-${idx}" onclick="app.bjtWorkspace.selectKeigoRoleplayOption(${idx})">${idx + 1}. ${escapeHtml(opt.text)}</button>
+            `).join('')}
+          </div>
+
+          <div id="bjt-krp-fb" style="display:none; margin-top:0.85rem; padding:0.9rem; border-radius:10px; background:var(--surface); border:1px solid var(--border);">
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem; margin-bottom:0.45rem;">
+              <span id="bjt-krp-fb-title" style="font-weight:700;"></span>
+              <div style="display:flex; gap:0.4rem;">
+                <button class="icon-btn" onclick="app.speakText('${exSafe}')" style="width:1.9rem;height:1.9rem;">🔊</button>
+                <button class="btn btn-sm btn-primary" onclick="app.bjtWorkspace.nextKeigoRoleplayStep()">Câu tiếp theo →</button>
+              </div>
+            </div>
+            <div style="font-size:0.84rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.25rem;">
+              <div><strong style="color:var(--text);">${escapeHtml(item.plain)}</strong> (${escapeHtml(item.reading || '')}) — ${escapeHtml(item.vi)}</div>
+              <div><span class="bjt-tag sonkei">尊敬語</span> <strong style="font-family:var(--font-jp); color:var(--text);">${escapeHtml(item.sonkeigo)}</strong></div>
+              <div><span class="bjt-tag kenjou">謙譲語</span> <strong style="font-family:var(--font-jp); color:var(--text);">${escapeHtml(item.kenjougo)}</strong></div>
+              ${item.exampleJa ? `<div style="margin-top:0.25rem; font-family:var(--font-jp); color:var(--text);">${escapeHtml(item.exampleJa)}</div><div>${escapeHtml(item.exampleVi || '')}</div>` : ''}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    selectKeigoRoleplayOption(idx) {
+      const st = this.keigoRoleplay;
+      if (!st || st.answered) return;
+      st.answered = true;
+      const item = st.queue[st.index];
+      const chosen = st.currentOptions[idx];
+      const isCorrect = !!(chosen && chosen.correct);
+      if (isCorrect) st.correct++;
+      this._recordMistake('wrongKeigo', item.id, isCorrect);
+
+      st.currentOptions.forEach((opt, i) => {
+        const btn = document.getElementById(`bjt-krp-${i}`);
+        if (!btn) return;
+        if (opt.correct) btn.classList.add('correct');
+        else if (i === idx) btn.classList.add('incorrect');
+        btn.disabled = true;
+      });
+
+      const fb = document.getElementById('bjt-krp-fb');
+      const title = document.getElementById('bjt-krp-fb-title');
+      if (title) {
+        title.textContent = isCorrect ? '✓ Chính xác!' : '✗ Chưa đúng vai vế';
+        title.style.color = isCorrect ? 'var(--success)' : 'var(--danger)';
+      }
+      if (fb) fb.style.display = 'block';
+    }
+
+    nextKeigoRoleplayStep() {
+      if (!this.keigoRoleplay) return;
+      this.keigoRoleplay.index++;
+      this.renderKeigoRoleplayStep();
+    }
+
     // ==================== TAB 4: BUSINESS VOCAB & PHRASES ====================
 
     setVocabCategory(cat) {
@@ -382,7 +580,13 @@
       const prog = this.getProgress();
       const statsEl = document.getElementById('bjt-vocab-stats');
       if (statsEl) {
-        statsEl.textContent = `Đã thuộc ${prog.masteredVocab.length}/${allV.length} từ vựng & cụm câu thương mại`;
+        const wrongNote = prog.wrongVocab.length > 0 ? ` · 🔴 ${prog.wrongVocab.length} từ hay sai` : '';
+        statsEl.textContent = `Đã thuộc ${prog.masteredVocab.length}/${allV.length} từ vựng & cụm câu thương mại${wrongNote}`;
+      }
+      const vMistakeBtn = document.getElementById('bjt-vocab-mistake-btn');
+      if (vMistakeBtn) {
+        vMistakeBtn.style.display = prog.wrongVocab.length > 0 ? 'inline-flex' : 'none';
+        vMistakeBtn.textContent = `🔴 Ôn ${prog.wrongVocab.length} từ hay sai`;
       }
 
       if (this.vocabStudy) {
@@ -433,15 +637,38 @@
       `;
     }
 
-    startVocabStudy(mode) {
+    _makeClozeSentence(item) {
+      const ex = item.exampleJa || '';
+      const w = item.word || '';
+      if (!ex || !w) return null;
+      let target = null;
+      if (ex.includes(w)) target = w;
+      else if (w.length >= 3 && ex.includes(w.slice(0, -1))) target = w.slice(0, -1);
+      else if (w.length >= 4 && ex.includes(w.slice(0, -2))) target = w.slice(0, -2);
+      if (!target) return null;
+      const idx = ex.indexOf(target);
+      return escapeHtml(ex.slice(0, idx)) + '<span style="display:inline-block;padding:0.05rem 0.55rem;margin:0 0.15rem;border-radius:6px;background:var(--accent-soft);color:var(--accent);font-weight:700;border:1px dashed var(--accent);">＿＿＿</span>' + escapeHtml(ex.slice(idx + target.length));
+    }
+
+    startVocabStudy(mode, mistakesOnly = false) {
       if (!this.data || !this.data.businessVocab) return;
-      const pool = this.getFilteredVocab();
-      if (pool.length < 4) {
-        this.app.showToast('Cần ít nhất 4 từ trong bộ lọc để bắt đầu luyện tập.');
+      const prog = this.getProgress();
+      let pool = mistakesOnly
+        ? this.data.businessVocab.filter(v => prog.wrongVocab.includes(v.id))
+        : this.getFilteredVocab();
+
+      if (mode === 'cloze') {
+        pool = pool.filter(v => this._makeClozeSentence(v) !== null);
+      }
+
+      if (pool.length === 0 || (!mistakesOnly && pool.length < 4)) {
+        this.app.showToast(mistakesOnly ? 'Không còn từ hay sai nào!' : 'Cần ít nhất 4 từ trong bộ lọc để bắt đầu luyện tập.');
         return;
       }
       const shuffled = [...pool].sort(() => Math.random() - 0.5);
-      const queue = mode === 'quiz' ? shuffled.slice(0, Math.min(25, shuffled.length)) : shuffled;
+      const queue = (mode === 'quiz' || mode === 'cloze') && !mistakesOnly
+        ? shuffled.slice(0, Math.min(25, shuffled.length))
+        : shuffled;
       this.vocabStudy = {
         mode,
         queue,
@@ -471,7 +698,7 @@
             <div style="font-size:2.5rem; margin-bottom:0.5rem;">🎉</div>
             <div style="font-size:1.25rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;">Hoàn thành phiên ôn Từ vựng BJT!</div>
             <div style="font-size:0.95rem; color:var(--text-muted); margin-bottom:1.25rem;">
-              ${st.mode === 'quiz' ? `Bạn trả lời đúng <strong>${st.correct} / ${st.queue.length}</strong> câu.` : `Bạn đã ôn xong <strong>${st.queue.length}</strong> từ vựng thương mại.`}
+              ${st.mode === 'flashcard' ? `Bạn đã ôn xong <strong>${st.queue.length}</strong> từ vựng thương mại.` : `Bạn trả lời đúng <strong>${st.correct} / ${st.queue.length}</strong> câu.`}
             </div>
             <button class="btn btn-primary" onclick="app.bjtWorkspace.exitVocabStudy()">Quay lại danh sách →</button>
           </div>
@@ -487,7 +714,7 @@
         <div style="max-width:680px; margin:0 auto;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
             <button class="btn btn-sm" onclick="app.bjtWorkspace.exitVocabStudy()">← Quay lại</button>
-            <span style="font-size:0.85rem; font-weight:600; color:var(--text-muted);">${st.mode === 'quiz' ? 'Câu' : 'Thẻ'} ${st.index + 1} / ${st.queue.length}</span>
+            <span style="font-size:0.85rem; font-weight:600; color:var(--text-muted);">${st.mode === 'flashcard' ? 'Thẻ' : 'Câu'} ${st.index + 1} / ${st.queue.length}</span>
           </div>
           <div class="progress-bar" style="margin-bottom:1rem;"><div class="progress-fill" style="width:${pct}%;"></div></div>
       `;
@@ -513,6 +740,58 @@
             <div style="display:flex; gap:0.75rem; justify-content:center; margin-top:1rem;">
               <button class="btn" onclick="app.bjtWorkspace.answerVocabFlash(false)" style="flex:1; max-width:210px; justify-content:center; border-color:var(--danger); color:var(--danger); font-weight:600;">Chưa nhớ (Lặp lại)</button>
               <button class="btn btn-primary" onclick="app.bjtWorkspace.answerVocabFlash(true)" style="flex:1; max-width:210px; justify-content:center; background:var(--success); border-color:var(--success); font-weight:600;">Đã thuộc ✓</button>
+            </div>
+          </div>
+        `;
+      } else if (st.mode === 'cloze') {
+        const clozeHtml = this._makeClozeSentence(item) || escapeHtml(item.exampleJa || item.word);
+        const distractors = [];
+        const used = new Set([item.word]);
+        const sameCat = st.allPool.filter(c => c.category === item.category).sort(() => Math.random() - 0.5);
+        const otherCat = st.allPool.filter(c => c.category !== item.category).sort(() => Math.random() - 0.5);
+        for (const cand of [...sameCat, ...otherCat]) {
+          if (!used.has(cand.word)) {
+            used.add(cand.word);
+            distractors.push(cand);
+            if (distractors.length >= 3) break;
+          }
+        }
+        const options = [
+          { text: item.word, correct: true },
+          ...distractors.map(d => ({ text: d.word, correct: false }))
+        ].sort(() => Math.random() - 0.5);
+
+        st.currentOptions = options;
+        st.answered = false;
+        const exSafe = escapeHtml(item.exampleJa || item.word).replace(/'/g, "\\'");
+
+        body.innerHTML = `
+          ${headerBar}
+            <div class="quiz-question-box">
+              <div class="quiz-type-badge">🧩 ĐIỀN TỪ VÀO NGỮ CẢNH · ${escapeHtml(item.categoryLabel || item.category)}</div>
+              <div style="font-family:var(--font-jp); font-size:1.3rem; font-weight:600; color:var(--text); line-height:1.75; margin:0.75rem 0;">
+                ${clozeHtml}
+              </div>
+              <div style="font-size:0.84rem; color:var(--text-muted);">Chọn từ / cụm từ điền vào chỗ trống:</div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:0.55rem; margin-top:1rem;">
+              ${options.map((opt, idx) => `
+                <button class="it-practice-opt" id="bjt-vqopt-${idx}" onclick="app.bjtWorkspace.selectVocabQuizOption(${idx})">${idx + 1}. ${escapeHtml(opt.text)}</button>
+              `).join('')}
+            </div>
+            <div id="bjt-vqfb" style="display:none; margin-top:0.85rem; padding:0.9rem; border-radius:10px; background:var(--surface); border:1px solid var(--border);">
+              <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem;">
+                <span id="bjt-vqfb-title" style="font-weight:700;"></span>
+                <div style="display:flex; gap:0.4rem;">
+                  <button class="icon-btn" onclick="app.speakText('${exSafe}')" style="width:1.9rem;height:1.9rem;">🔊</button>
+                  <button class="btn btn-sm btn-primary" onclick="app.bjtWorkspace.nextVocabQuizStep()">Câu tiếp theo →</button>
+                </div>
+              </div>
+              <div style="font-size:0.86rem; color:var(--text-muted); margin-top:0.35rem;">
+                <strong style="color:var(--text);">${escapeHtml(item.word)}</strong>${item.reading ? ` (${escapeHtml(item.reading)})` : ''} — ${escapeHtml(item.vi || '')}
+              </div>
+              <div style="font-size:0.84rem; color:var(--text); margin-top:0.3rem; font-family:var(--font-jp);">${escapeHtml(item.exampleJa || '')}</div>
+              ${item.exampleVi ? `<div style="font-size:0.82rem; color:var(--text-muted); margin-top:0.15rem;">${escapeHtml(item.exampleVi)}</div>` : ''}
             </div>
           </div>
         `;
@@ -598,9 +877,11 @@
       const st = this.vocabStudy;
       if (!st || st.answered) return;
       st.answered = true;
+      const item = st.queue[st.index];
       const chosen = st.currentOptions[idx];
       const isCorrect = !!(chosen && chosen.correct);
       if (isCorrect) st.correct++;
+      this._recordMistake('wrongVocab', item.id, isCorrect);
 
       st.currentOptions.forEach((opt, i) => {
         const btn = document.getElementById(`bjt-vqopt-${i}`);
@@ -629,10 +910,137 @@
 
     setEmailCategory(cat) {
       this.emailCategory = cat;
+      this.exitEmailSkim(false);
       document.querySelectorAll('#bjt-email-pills .it-pill-btn').forEach(b => {
         b.classList.toggle('active', b.dataset.ecat === cat);
       });
       this.renderEmails();
+    }
+
+    startEmailSkim() {
+      if (!this.data || !this.data.emails) return;
+      const pool = (this.data.emails || []).filter(em => this.emailCategory === 'all' || em.category === this.emailCategory);
+      if (pool.length === 0) {
+        this.app.showToast('Không có mẫu Email nào trong nhóm này.');
+        return;
+      }
+      this._stopTimer();
+      this.emailSkim = {
+        queue: [...pool].sort(() => Math.random() - 0.5),
+        index: 0,
+        secondsLeft: 30,
+        revealed: false
+      };
+      this.renderEmailSkimStep();
+    }
+
+    exitEmailSkim(shouldRender = true) {
+      this._stopTimer();
+      this.emailSkim = null;
+      if (shouldRender) this.renderEmails();
+    }
+
+    renderEmailSkimStep() {
+      const st = this.emailSkim;
+      const body = document.getElementById('bjt-email-body');
+      if (!st || !body) return;
+      this._stopTimer();
+
+      if (st.index >= st.queue.length) {
+        this.emailSkim = null;
+        body.innerHTML = `
+          <div style="background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:2rem; text-align:center; max-width:520px; margin:0 auto;">
+            <div style="font-size:2.4rem; margin-bottom:0.5rem;">⚡</div>
+            <div style="font-size:1.2rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;">Hoàn thành luyện đọc lướt Email!</div>
+            <button class="btn btn-primary" onclick="app.bjtWorkspace.renderEmails()">Quay lại thư viện Email →</button>
+          </div>
+        `;
+        return;
+      }
+
+      const em = st.queue[st.index];
+      const speakSafe = escapeHtml(em.bodyJa.replace(/\n+/g, ' ')).replace(/'/g, "\\'");
+
+      if (!st.revealed) {
+        st.secondsLeft = 30;
+        this._timerInterval = setInterval(() => {
+          if (!this.emailSkim || this.emailSkim.revealed) return this._stopTimer();
+          this.emailSkim.secondsLeft = Math.max(0, this.emailSkim.secondsLeft - 1);
+          const badge = document.getElementById('bjt-skim-timer');
+          if (badge) {
+            badge.textContent = `⏱️ ${this._fmtTime(this.emailSkim.secondsLeft)}`;
+            if (this.emailSkim.secondsLeft <= 5) badge.style.color = 'var(--danger)';
+          }
+          if (this.emailSkim.secondsLeft === 0) {
+            this.revealEmailSkim();
+          }
+        }, 1000);
+      }
+
+      body.innerHTML = `
+        <div class="bjt-email-card" style="max-width:820px; margin:0 auto;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem;">
+            <button class="btn btn-sm" onclick="app.bjtWorkspace.exitEmailSkim(true)">← Thoát đọc lướt</button>
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <span class="it-badge" id="bjt-skim-timer" style="background:var(--accent-soft); color:var(--accent); font-weight:700;">⏱️ ${this._fmtTime(st.secondsLeft)}</span>
+              <span style="font-size:0.84rem; color:var(--text-muted); font-weight:600;">Email ${st.index + 1} / ${st.queue.length}</span>
+            </div>
+          </div>
+
+          <div class="it-tip-card" style="margin-bottom:0.85rem;">
+            <div style="font-size:0.8rem; font-weight:700; color:var(--accent); margin-bottom:0.2rem;">🎯 Mục tiêu đọc lướt 30 giây (tự nhẩm nhanh 3 ý):</div>
+            <div style="font-size:0.82rem; color:var(--text-muted);">1) Ai gửi & mục đích chính? · 2) Yêu cầu hành động / thời hạn? · 3) Cụm kính ngữ quan trọng?</div>
+          </div>
+
+          <div class="bjt-email-subject">
+            <strong>件名:</strong> <span style="font-family:var(--font-jp);">${escapeHtml(em.subjectJa)}</span>
+            ${st.revealed ? `<span style="color:var(--text-muted); font-size:0.82rem; margin-left:0.4rem;">— ${escapeHtml(em.subjectVi || '')}</span>` : ''}
+          </div>
+
+          <div class="${st.revealed ? 'bjt-email-columns' : ''}">
+            <pre class="bjt-email-pre jp">${escapeHtml(em.bodyJa)}</pre>
+            ${st.revealed ? `<pre class="bjt-email-pre vi">${escapeHtml(em.bodyVi || '')}</pre>` : ''}
+          </div>
+
+          ${st.revealed ? `
+            ${(em.keigoNotes || []).length > 0 ? `
+              <div class="it-tip-card" style="margin-top:0.75rem;">
+                <div style="font-size:0.76rem; font-weight:700; color:var(--accent); margin-bottom:0.25rem;">💡 Phân tích kính ngữ & cấu trúc (${escapeHtml(em.titleVi)})</div>
+                <ul style="margin:0; padding-left:1.1rem; font-size:0.82rem; color:var(--text-muted); line-height:1.5;">
+                  ${em.keigoNotes.map(n => `<li>${escapeHtml(n)}</li>`).join('')}
+                </ul>
+              </div>
+            ` : ''}
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-top:0.9rem;">
+              <div style="display:flex; gap:0.4rem;">
+                <button class="btn btn-sm" onclick="app.speakText('${speakSafe}')">🔊 Nghe Shadowing</button>
+                <button class="btn btn-sm" onclick="app.bjtWorkspace.copyEmailText('${escapeHtml(em.id)}')">📋 Copy JP</button>
+              </div>
+              <button class="btn btn-primary" onclick="app.bjtWorkspace.nextEmailSkim()">Email tiếp theo →</button>
+            </div>
+          ` : `
+            <div style="display:flex; justify-content:center; gap:0.6rem; margin-top:1rem;">
+              <button class="btn btn-primary" onclick="app.bjtWorkspace.revealEmailSkim()">👁️ Hiện bản dịch & Phân tích</button>
+              <button class="btn" onclick="app.speakText('${speakSafe}')">🔊 Nghe đọc</button>
+            </div>
+          `}
+        </div>
+      `;
+    }
+
+    revealEmailSkim() {
+      if (!this.emailSkim) return;
+      this._stopTimer();
+      this.emailSkim.revealed = true;
+      this.renderEmailSkimStep();
+    }
+
+    nextEmailSkim() {
+      if (!this.emailSkim) return;
+      this.emailSkim.index++;
+      this.emailSkim.revealed = false;
+      this.emailSkim.secondsLeft = 30;
+      this.renderEmailSkimStep();
     }
 
     copyEmailText(emailId) {
@@ -771,9 +1179,10 @@
           <div>
             <div class="it-hero-title">📝 Kho Đọc hiểu BJT (第3部 読解テスト)</div>
             <div class="it-hero-sub">Tổng hợp từ 3 bộ sách chuẩn BJT (MCBooks · 実力養成問題集 · Quyển đỏ) kèm giải thích tiếng Việt.</div>
-            <div class="it-progress-pill">Đã làm đúng ${prog.solvedDokkai.length}/${allQ.length} câu · Đang lọc: ${filtered.length} câu</div>
+            <div class="it-progress-pill">Đã làm đúng ${prog.solvedDokkai.length}/${allQ.length} câu · Đang lọc: ${filtered.length} câu${prog.wrongDokkai.length > 0 ? ` · 🔴 ${prog.wrongDokkai.length} câu hay sai` : ''}</div>
           </div>
           <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+            ${prog.wrongDokkai.length > 0 ? `<button class="btn" onclick="app.bjtWorkspace.startDokkaiMistakes()" style="border-color:var(--danger); color:var(--danger); font-weight:700;">🔴 Ôn ${prog.wrongDokkai.length} câu hay sai</button>` : ''}
             <button class="btn btn-primary" onclick="app.bjtWorkspace.startDokkai(false, 20)">⚡ Luyện nhanh 20 câu</button>
             <button class="btn" onclick="app.bjtWorkspace.startDokkai(false, null)">📖 Làm hết (${filtered.length} câu)</button>
             <button class="btn" onclick="app.bjtWorkspace.startDokkai(true, 35)" style="border-color:var(--accent); color:var(--accent); font-weight:600;">⏱️ Thi thử CBT (35 câu)</button>
@@ -798,6 +1207,26 @@
           </div>
         </div>
       `;
+    }
+
+    startDokkaiMistakes() {
+      if (!this.data || !this.data.dokkai) return;
+      const prog = this.getProgress();
+      const pool = this.data.dokkai.filter(q => prog.wrongDokkai.includes(q.id));
+      if (pool.length === 0) {
+        this.app.showToast('Tuyệt vời! Không còn câu Đọc hiểu sai nào.');
+        return;
+      }
+      this._stopTimer();
+      this.dokkaiRun = {
+        queue: pool.sort(() => Math.random() - 0.5),
+        index: 0,
+        correct: 0,
+        answered: false,
+        timed: false,
+        secondsLeft: pool.length * 60
+      };
+      this.renderDokkaiStep();
     }
 
     startDokkai(timed, limit = null) {
@@ -924,6 +1353,7 @@
           this.saveProgress(prog);
         }
       }
+      this._recordMistake('wrongDokkai', q.id, isCorrect);
 
       (q.options || []).forEach((_, idx) => {
         const btn = document.getElementById(`bjt-dopt-${idx}`);
