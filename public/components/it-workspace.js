@@ -346,9 +346,10 @@
         const code = `CH.${String(u.chapter).padStart(2, '0')} · U${String(u.unit).padStart(2, '0')}`;
         return `
           <div class="it-unit-card it-stagger ${isDone ? 'done' : ''}" style="--i:${idx};" onclick="app.itWorkspace.openUnit('${escapeHtml(u.id)}')">
+            ${isDone ? '<span class="it-hanko-stamp" aria-label="Đã học">済</span>' : ''}
             <div class="it-unit-meta">
               <span class="it-unit-code">${code}</span>
-              ${isDone ? `<span class="it-badge done" style="display:inline-flex;align-items:center;gap:0.25rem;">${svgIcon('check', 'it-svg-sm')} Đã học</span>` : `<span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-subtle);">${vMastered}/${vCount}</span>`}
+              ${!isDone ? `<span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-subtle);">${vMastered}/${vCount}</span>` : ''}
             </div>
             <div class="it-unit-ja it-unit-ja-title">${escapeHtml(u.titleJa)}</div>
             <div class="it-unit-vi">${escapeHtml(u.titleVi)}</div>
@@ -406,6 +407,7 @@
         const keySafe = escapeHtml(m.vKey).replace(/'/g, "\\'");
         return `
           <div class="it-vocab-item ${m.isMastered ? 'mastered' : ''}">
+            ${m.isMastered ? '<span class="it-hanko-stamp" aria-label="Đã thuộc">済</span>' : ''}
             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.4rem;">
               <span style="font-family:var(--font-jp); font-size:1.05rem; font-weight:700; color:var(--text);">${escapeHtml(v.word)}</span>
               <div style="display:flex; gap:0.3rem;">
@@ -675,6 +677,7 @@
         const keySafe = escapeHtml(vKey).replace(/'/g, "\\'");
         return `
           <div class="it-vocab-item ${isM ? 'mastered' : ''}">
+            ${isM ? '<span class="it-hanko-stamp" aria-label="Đã thuộc">済</span>' : ''}
             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.4rem;">
               <span style="font-family:var(--font-jp); font-size:1.05rem; font-weight:700; color:var(--text);">${escapeHtml(v.word)}</span>
               <div style="display:flex; gap:0.3rem;">
@@ -741,6 +744,10 @@
         else if (idx === oIdx && !isCorrect) b.classList.add('incorrect');
         b.disabled = true;
       });
+      if (global.BJTManga) {
+        global.BJTManga.spawnSFX(buttons[oIdx], isCorrect, 0);
+        if (isCorrect) global.BJTManga.flashSpeedlines(card);
+      }
       const fb = document.getElementById(`it-prac-fb-${qIdx}`);
       if (fb) {
         fb.style.display = 'block';
@@ -1100,8 +1107,11 @@
         btn.disabled = true;
       });
 
-      if (isCorrect && global.ITMotion) {
-        global.ITMotion.burstConfetti(document.getElementById(`it-qopt-${idx}`));
+      if (global.BJTManga) {
+        global.BJTManga.spawnSFX(document.getElementById(`it-qopt-${idx}`), isCorrect, st.combo);
+        if (isCorrect && st.combo >= 2) {
+          global.BJTManga.flashSpeedlines(document.querySelector('#it-study-body .quiz-question-box'));
+        }
       }
 
       const fb = document.getElementById('it-qfb');
