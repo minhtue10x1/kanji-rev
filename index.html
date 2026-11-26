@@ -1593,6 +1593,14 @@
               </span>
               <span class="ws-option-check">✓</span>
             </button>
+            <button type="button" class="ws-option" data-ws="bjt" onclick="app.workspace.switchTo('bjt')">
+              <span class="ws-badge-icon bjt">BJT</span>
+              <span class="ws-option-body">
+                <span class="ws-option-title">BJT Business Prep</span>
+                <span class="ws-option-desc">Kính ngữ · Email thương mại · Đọc hiểu CBT</span>
+              </span>
+              <span class="ws-option-check">✓</span>
+            </button>
           </div>
         </div>
 
@@ -1620,6 +1628,13 @@
         <button class="nav-btn it-nav-btn active" data-itsub="units" onclick="app.itWorkspace.navigateSubView('units')">📚 23 Bài học</button>
         <button class="nav-btn it-nav-btn" data-itsub="dict" onclick="app.itWorkspace.navigateSubView('dict')">🔍 Từ điển IT (848)</button>
         <button class="nav-btn it-nav-btn" data-itsub="practice" onclick="app.itWorkspace.navigateSubView('practice')">⚡ Luyện tập</button>
+      </nav>
+
+      <!-- Desktop Nav: BJT Prep Workspace -->
+      <nav class="bjt-only">
+        <button class="nav-btn bjt-nav-btn active" data-bjtsub="keigo" onclick="app.bjtWorkspace.navigateSubView('keigo')">🙇 Kính ngữ</button>
+        <button class="nav-btn bjt-nav-btn" data-bjtsub="email" onclick="app.bjtWorkspace.navigateSubView('email')">✉️ Email thương mại</button>
+        <button class="nav-btn bjt-nav-btn" data-bjtsub="dokkai" onclick="app.bjtWorkspace.navigateSubView('dokkai')">📝 Đọc hiểu BJT</button>
       </nav>
 
       <div class="header-actions">
@@ -2007,6 +2022,66 @@
       </div>
     </section>
 
+    <!-- 6. BJT BUSINESS PREP WORKSPACE VIEW -->
+    <section id="view-bjt" class="view">
+      <!-- 6A. Keigo Panel -->
+      <div id="bjt-keigo-panel">
+        <div class="it-hero">
+          <div>
+            <div class="it-hero-title">🙇 Kính ngữ Công sở Nhật (敬語マスター)</div>
+            <div class="it-hero-sub">Bảng chuyển đổi 尊敬語 / 謙譲語 chuẩn Bộ Văn hóa Nhật & 9 tình huống giao tiếp thương mại thực tế.</div>
+            <div class="it-progress-pill" id="bjt-keigo-stats">Đang tải dữ liệu...</div>
+          </div>
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <button class="btn btn-primary" onclick="app.bjtWorkspace.setKeigoMode('flashcard')">🃏 Flashcard Kính ngữ</button>
+          </div>
+        </div>
+
+        <div class="it-filter-pills" id="bjt-keigo-pills">
+          <button class="it-pill-btn active" data-kmode="table" onclick="app.bjtWorkspace.setKeigoMode('table')">📋 Bảng chuyển đổi (30 động từ)</button>
+          <button class="it-pill-btn" data-kmode="situations" onclick="app.bjtWorkspace.setKeigoMode('situations')">💼 9 Tình huống công sở</button>
+          <button class="it-pill-btn" data-kmode="flashcard" onclick="app.bjtWorkspace.setKeigoMode('flashcard')">🃏 Flashcard phản xạ</button>
+        </div>
+
+        <div id="bjt-keigo-body"></div>
+      </div>
+
+      <!-- 6B. Business Email Panel -->
+      <div id="bjt-email-panel" style="display:none;">
+        <div class="it-hero">
+          <div>
+            <div class="it-hero-title">✉️ Mẫu Email Thương mại (ビジネスメール)</div>
+            <div class="it-hero-sub">Thư viện Email chuẩn Nhật dùng cho cả bài Đọc hiểu BJT và công việc hàng ngày (có nút Copy & Nghe).</div>
+          </div>
+        </div>
+
+        <div class="it-filter-pills" id="bjt-email-pills">
+          <button class="it-pill-btn active" data-ecat="all" onclick="app.bjtWorkspace.setEmailCategory('all')">Tất cả</button>
+          <button class="it-pill-btn" data-ecat="internal" onclick="app.bjtWorkspace.setEmailCategory('internal')">🏢 Nội bộ (社内)</button>
+          <button class="it-pill-btn" data-ecat="external" onclick="app.bjtWorkspace.setEmailCategory('external')">🤝 Đối tác (社外)</button>
+          <button class="it-pill-btn" data-ecat="general" onclick="app.bjtWorkspace.setEmailCategory('general')">📌 Tình huống chung (一般)</button>
+        </div>
+
+        <div style="margin-bottom:1rem;">
+          <input type="text" class="search-input" id="bjt-email-search" placeholder="Tìm mẫu Email (VD: 報告, 謝罪, hẹn họp, gửi tài liệu, xin lỗi)..." oninput="app.bjtWorkspace.renderEmails()" style="width:100%;">
+        </div>
+
+        <div id="bjt-email-body"></div>
+      </div>
+
+      <!-- 6C. BJT Reading CBT Panel -->
+      <div id="bjt-dokkai-panel" style="display:none;">
+        <div class="it-filter-pills" id="bjt-dokkai-pills">
+          <button class="it-pill-btn active" data-dsec="all" onclick="app.bjtWorkspace.setDokkaiSection('all')">Tất cả dạng đề</button>
+          <button class="it-pill-btn" data-dsec="vocab" onclick="app.bjtWorkspace.setDokkaiSection('vocab')">🔤 語彙・表現</button>
+          <button class="it-pill-btn" data-dsec="expression" onclick="app.bjtWorkspace.setDokkaiSection('expression')">🙇 表現・敬語</button>
+          <button class="it-pill-btn" data-dsec="document" onclick="app.bjtWorkspace.setDokkaiSection('document')">📄 文書・メール</button>
+        </div>
+
+        <div id="bjt-dokkai-body"></div>
+      </div>
+    </section>
+
   </main>
 
   <!-- Floating Workspace Switch Transition Badge -->
@@ -2047,6 +2122,22 @@
     <button class="mobile-nav-item it-mobile-nav-item" data-itsub="practice" onclick="app.itWorkspace.navigateSubView('practice')">
       <span class="mobile-nav-icon">⚡</span>
       <span class="mobile-nav-label">Luyện tập</span>
+    </button>
+  </nav>
+
+  <!-- Mobile Bottom Navigation Bar: BJT Prep Workspace -->
+  <nav class="mobile-bottom-nav bjt-only" id="mobile-nav-bjt">
+    <button class="mobile-nav-item bjt-mobile-nav-item active" data-bjtsub="keigo" onclick="app.bjtWorkspace.navigateSubView('keigo')">
+      <span class="mobile-nav-icon">🙇</span>
+      <span class="mobile-nav-label">Kính ngữ</span>
+    </button>
+    <button class="mobile-nav-item bjt-mobile-nav-item" data-bjtsub="email" onclick="app.bjtWorkspace.navigateSubView('email')">
+      <span class="mobile-nav-icon">✉️</span>
+      <span class="mobile-nav-label">Email</span>
+    </button>
+    <button class="mobile-nav-item bjt-mobile-nav-item" data-bjtsub="dokkai" onclick="app.bjtWorkspace.navigateSubView('dokkai')">
+      <span class="mobile-nav-icon">📝</span>
+      <span class="mobile-nav-label">Đọc hiểu</span>
     </button>
   </nav>
 
@@ -2247,6 +2338,7 @@
   <!-- Load Static Kanji Dataset & Standalone Workspace Components -->
   <script src="kanji-data.js"></script>
   <script src="/components/it-workspace.js"></script>
+  <script src="/components/bjt-workspace.js"></script>
 
   <!-- Main App Script -->
   <script>
@@ -2271,6 +2363,7 @@
         this.levelAbortController = null;
         this.workspace = new window.WorkspaceController(this);
         this.itWorkspace = new window.ITWorkspace(this);
+        this.bjtWorkspace = new window.BJTWorkspace(this);
 
         this.init();
       }
@@ -3544,6 +3637,8 @@
           this.renderBrowseGrid();
         } else if (viewName === 'it') {
           this.itWorkspace.ensureDataLoaded();
+        } else if (viewName === 'bjt') {
+          this.bjtWorkspace.ensureDataLoaded();
         }
       }
 

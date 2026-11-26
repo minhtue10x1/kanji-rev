@@ -21,8 +21,11 @@ kanji_users.db-wal
 # Vercel deployment folder
 .vercel/
 
-# Heavy Raw Textbook Source PDFs & Scraper Cache (already compiled into data/ & kanji-data.js)
+# Heavy Raw Textbook Source PDFs, Audio & Scraper Cache
 *.pdf
+*.mp3
+*.zip
+BJT/
 scripts/mazii_cache.json
 
 # Operating System & Editor artifacts

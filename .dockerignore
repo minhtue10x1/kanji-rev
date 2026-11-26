@@ -10,6 +10,9 @@ __pycache__
 .local_jwt_secret
 *.log
 *.pdf
+*.mp3
+*.zip
+BJT/
 *.db
 *.sqlite
 *.sqlite3

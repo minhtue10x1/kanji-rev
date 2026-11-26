@@ -31,17 +31,23 @@
       let initial = 'kanji';
       if (hash.startsWith('#it')) {
         initial = 'it';
+      } else if (hash.startsWith('#bjt')) {
+        initial = 'bjt';
       } else if (hash.startsWith('#kanji')) {
         initial = 'kanji';
       } else {
         const saved = localStorage.getItem('kanji_active_workspace');
-        if (saved === 'it' || saved === 'kanji') initial = saved;
+        if (saved === 'it' || saved === 'kanji' || saved === 'bjt') initial = saved;
       }
       this.switchTo(initial, { animate: false, updateHash: false });
       if (initial === 'it') {
         if (hash === '#it/dict') this.app.itWorkspace.navigateSubView('dict');
         else if (hash === '#it/practice') this.app.itWorkspace.navigateSubView('practice');
         else this.app.itWorkspace.navigateSubView('units');
+      } else if (initial === 'bjt') {
+        if (hash === '#bjt/email') this.app.bjtWorkspace.navigateSubView('email');
+        else if (hash === '#bjt/dokkai') this.app.bjtWorkspace.navigateSubView('dokkai');
+        else this.app.bjtWorkspace.navigateSubView('keigo');
       }
     }
 
@@ -67,7 +73,7 @@
 
     switchTo(workspace, opts = {}) {
       const { animate = true, updateHash = true } = opts;
-      if (workspace !== 'kanji' && workspace !== 'it') return;
+      if (workspace !== 'kanji' && workspace !== 'it' && workspace !== 'bjt') return;
       const changed = this.current !== workspace;
       this.current = workspace;
       this.closeMenu();
@@ -75,52 +81,71 @@
       document.documentElement.setAttribute('data-workspace', workspace);
       localStorage.setItem('kanji_active_workspace', workspace);
 
-      // Update trigger badge & title
+      const meta = {
+        kanji: {
+          icon: '漢',
+          title: '漢字マスター',
+          sub: 'JLPT Kanji N5–N1',
+          docTitle: '漢字マスター (N5 - N1) — Kanji Study App',
+          toastTitle: 'Kanji Master JLPT',
+          toastSub: 'Luyện thi Kanji N5 – N1'
+        },
+        it: {
+          icon: 'IT',
+          title: 'IT Nihongo',
+          sub: 'しごとの日本語 · 23 bài',
+          docTitle: 'IT Nihongo — しごとの日本語 IT業務編',
+          toastTitle: 'IT Nihongo Studio',
+          toastSub: '23 bài · 848 thuật ngữ IT thực chiến'
+        },
+        bjt: {
+          icon: 'BJT',
+          title: 'BJT Prep',
+          sub: 'Kính ngữ · Email · Đọc hiểu',
+          docTitle: 'BJT Prep — ビジネス日本語能力テスト',
+          toastTitle: 'BJT Business Prep',
+          toastSub: 'Kính ngữ · Email thương mại · Đọc hiểu CBT'
+        }
+      }[workspace];
+
       const iconEl = document.getElementById('ws-trigger-icon');
       const titleEl = document.getElementById('ws-trigger-title');
       const subEl = document.getElementById('ws-trigger-sub');
       if (iconEl) {
         iconEl.className = `ws-badge-icon ${workspace}`;
-        iconEl.textContent = workspace === 'it' ? 'IT' : '漢';
+        iconEl.textContent = meta.icon;
       }
-      if (titleEl) {
-        titleEl.textContent = workspace === 'it' ? 'IT Nihongo' : '漢字マスター';
-      }
-      if (subEl) {
-        subEl.textContent = workspace === 'it' ? 'しごとの日本語 · 23 bài' : 'JLPT Kanji N5–N1';
-      }
+      if (titleEl) titleEl.textContent = meta.title;
+      if (subEl) subEl.textContent = meta.sub;
+      document.title = meta.docTitle;
 
-      document.title = workspace === 'it'
-        ? 'IT Nihongo — しごとの日本語 IT業務編'
-        : '漢字マスター (N5 - N1) — Kanji Study App';
-
-      // Highlight active option inside popover
       document.querySelectorAll('.ws-option').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.ws === workspace);
       });
 
       if (updateHash) {
-        const targetHash = workspace === 'it' ? '#it' : '#kanji';
+        const targetHash = `#${workspace}`;
         if (window.location.hash !== targetHash) {
           history.replaceState(null, '', targetHash);
         }
       }
 
-      // Trigger smooth enter animation & floating workspace toast when switching interactively
       if (animate && changed) {
-        this._playSwitchAnimation(workspace);
+        this._playSwitchAnimation(workspace, meta);
       }
 
-      // Route to workspace home
       if (workspace === 'it') {
         this.app.navigate('it');
         this.app.itWorkspace.navigateSubView('units');
+      } else if (workspace === 'bjt') {
+        this.app.navigate('bjt');
+        this.app.bjtWorkspace.navigateSubView('keigo');
       } else {
         this.app.navigate('home');
       }
     }
 
-    _playSwitchAnimation(workspace) {
+    _playSwitchAnimation(workspace, meta) {
       const mainEl = document.querySelector('main');
       if (mainEl) {
         mainEl.classList.remove('ws-animating');
@@ -135,10 +160,10 @@
       const sub = toast.querySelector('#ws-transition-sub');
       if (icon) {
         icon.className = `ws-badge-icon ${workspace}`;
-        icon.textContent = workspace === 'it' ? 'IT' : '漢';
+        icon.textContent = meta.icon;
       }
-      if (label) label.textContent = workspace === 'it' ? 'IT Nihongo Studio' : 'Kanji Master JLPT';
-      if (sub) sub.textContent = workspace === 'it' ? '23 bài · 848 thuật ngữ IT thực chiến' : 'Luyện thi Kanji N5 – N1';
+      if (label) label.textContent = meta.toastTitle;
+      if (sub) sub.textContent = meta.toastSub;
 
       toast.classList.add('show');
       clearTimeout(this._toastTimer);
