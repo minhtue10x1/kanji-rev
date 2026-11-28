@@ -235,45 +235,44 @@ header, .btn-primary, .nav-btn, .mobile-nav-item, .brand-mark, .progress-fill {
   color: #FFFFFF;
 }
 
-/* --- 3. CINEMATIC MANGA EYECATCH WORKSPACE SWITCH TRANSITION (~0.95s) --- */
+/* --- 3. GPU-COMPOSITED MANGA EYECATCH WORKSPACE SWITCH (~0.92s) --- */
 .ws-transition-backdrop {
   position: fixed;
   inset: 0;
   z-index: 240;
   pointer-events: none;
   opacity: 0;
-  background: rgba(250, 246, 236, 0.72);
-  backdrop-filter: blur(10px) saturate(1.1);
-  -webkit-backdrop-filter: blur(10px) saturate(1.1);
-  transition: opacity 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+  background-color: rgba(250, 246, 236, 0.94);
+  background-image: radial-gradient(rgba(22, 22, 26, 0.08) 1px, transparent 1px);
+  background-size: 10px 10px;
   overflow: hidden;
+  will-change: opacity;
+  transition: opacity 0.22s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 [data-theme="dark"] .ws-transition-backdrop {
-  background: rgba(9, 10, 14, 0.68);
-}
-
-.ws-transition-backdrop::before {
-  content: "";
-  position: absolute;
-  inset: -12%;
-  opacity: 0.45;
-  background: repeating-conic-gradient(
-    from 0deg,
-    color-mix(in srgb, var(--accent) 18%, transparent) 0deg 2.2deg,
-    transparent 2.2deg 11deg
-  );
-  mask-image: radial-gradient(circle, transparent 34%, black 88%);
-  -webkit-mask-image: radial-gradient(circle, transparent 34%, black 88%);
-  transform: scale(1.08);
-  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  background-color: rgba(13, 14, 19, 0.94);
+  background-image: radial-gradient(rgba(245, 242, 235, 0.07) 1px, transparent 1px);
 }
 
 .ws-transition-backdrop.show {
   opacity: 1;
 }
 
-.ws-transition-backdrop.show::before {
+.ws-eyecatch-rays {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--manga-ink, var(--text));
+  opacity: 0;
+  transform: scale(1.05);
+  will-change: transform, opacity;
+  transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ws-transition-backdrop.show .ws-eyecatch-rays {
+  opacity: 1;
   transform: scale(1);
 }
 
@@ -281,7 +280,7 @@ header, .btn-primary, .nav-btn, .mobile-nav-item, .brand-mark, .progress-fill {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0.84) rotate(-2deg);
+  transform: translate3d(-50%, -50%, 0) translate3d(-28px, 0, 0) scale(0.86);
   z-index: 250;
   pointer-events: none;
   opacity: 0;
@@ -296,7 +295,8 @@ header, .btn-primary, .nav-btn, .mobile-nav-item, .brand-mark, .progress-fill {
   border: 2.5px solid var(--manga-ink, var(--border-strong));
   box-shadow: 7px 7px 0 var(--manga-shadow, rgba(0, 0, 0, 0.28));
   overflow: hidden;
-  transition: opacity 0.22s ease, transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
+  transition: opacity 0.24s cubic-bezier(0.22, 1, 0.36, 1), transform 0.24s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .ws-transition-toast::before {
@@ -311,7 +311,13 @@ header, .btn-primary, .nav-btn, .mobile-nav-item, .brand-mark, .progress-fill {
 
 .ws-transition-toast.show {
   opacity: 1;
-  transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  transform: translate3d(-50%, -50%, 0) translate3d(0, 0, 0) scale(1);
+}
+
+.ws-transition-toast.leaving {
+  opacity: 0;
+  transform: translate3d(-50%, -50%, 0) translate3d(24px, 0, 0) scale(1.03);
+  transition: opacity 0.2s cubic-bezier(0.22, 1, 0.36, 1), transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .ws-transition-toast .ws-badge-icon {
@@ -352,17 +358,32 @@ header, .btn-primary, .nav-btn, .mobile-nav-item, .brand-mark, .progress-fill {
 
 .ws-transition-bar-fill {
   height: 100%;
-  width: 0%;
+  width: 100%;
   background: var(--accent);
+  transform-origin: left center;
+  transform: scaleX(0);
+  will-change: transform;
 }
 
 .ws-transition-toast.show .ws-transition-bar-fill {
-  animation: wsBarSweep 0.92s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: wsBarSweep 0.72s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes wsBarSweep {
-  0% { width: 0%; }
-  100% { width: 100%; }
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ws-eyecatch-rays {
+    transform: none !important;
+  }
+  .ws-transition-toast {
+    transform: translate3d(-50%, -50%, 0) !important;
+  }
+  .ws-transition-toast.leaving {
+    transform: translate3d(-50%, -50%, 0) !important;
+  }
 }
 
 @keyframes wsViewEnter {

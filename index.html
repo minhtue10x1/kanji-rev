@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/components/workspace-switcher.css?v=3">
+  <link rel="stylesheet" href="/components/workspace-switcher.css?v=4">
   <link rel="stylesheet" href="/components/it-motion-polish.css?v=3">
   <link rel="stylesheet" href="/components/bjt-manga-polish.css?v=3">
   <link rel="stylesheet" href="/components/kanji-manga-polish.css?v=2">
@@ -2160,7 +2160,9 @@
   </main>
 
   <!-- Cinematic Manga Eyecatch Workspace Switch Overlay -->
-  <div class="ws-transition-backdrop" id="ws-transition-backdrop" aria-hidden="true"></div>
+  <div class="ws-transition-backdrop" id="ws-transition-backdrop" aria-hidden="true">
+    <svg class="ws-eyecatch-rays" id="ws-eyecatch-rays" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice"></svg>
+  </div>
   <div class="ws-transition-toast" id="ws-transition-toast" aria-hidden="true">
     <span class="ws-badge-icon it">IT</span>
     <div>
@@ -2420,7 +2422,7 @@
   <!-- Load Static Kanji Dataset & Standalone Workspace Components -->
   <script src="kanji-data.js"></script>
   <script src="/components/it-motion-polish.js?v=1"></script>
-  <script src="/components/it-workspace.js?v=8"></script>
+  <script src="/components/it-workspace.js?v=9"></script>
   <script src="/components/bjt-manga-polish.js?v=1"></script>
   <script src="/components/bjt-workspace.js?v=7"></script>
 

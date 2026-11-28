@@ -152,13 +152,30 @@
       }
     }
 
-    _playSwitchAnimation(workspace, meta) {
-      const mainEl = document.querySelector('main');
-      if (mainEl) {
-        mainEl.classList.remove('ws-animating');
-        void mainEl.offsetWidth;
-        mainEl.classList.add('ws-animating');
+    _ensureEyecatchRays() {
+      const svg = document.getElementById('ws-eyecatch-rays');
+      if (!svg || svg.childElementCount > 0) return;
+      const ns = 'http://www.w3.org/2000/svg';
+      const frag = document.createDocumentFragment();
+      for (let i = 0; i < 36; i++) {
+        const a = (i / 36) * Math.PI * 2;
+        const tipX = (600 + Math.cos(a) * 240).toFixed(1);
+        const tipY = (350 + Math.sin(a) * 155).toFixed(1);
+        const lx = (600 + Math.cos(a - 0.012) * 860).toFixed(1);
+        const ly = (350 + Math.sin(a - 0.012) * 860).toFixed(1);
+        const rx = (600 + Math.cos(a + 0.012) * 860).toFixed(1);
+        const ry = (350 + Math.sin(a + 0.012) * 860).toFixed(1);
+        const poly = document.createElementNS(ns, 'polygon');
+        poly.setAttribute('points', `${tipX},${tipY} ${lx},${ly} ${rx},${ry}`);
+        poly.setAttribute('fill', 'currentColor');
+        poly.setAttribute('opacity', i % 4 === 0 ? '0.28' : '0.14');
+        frag.appendChild(poly);
       }
+      svg.appendChild(frag);
+    }
+
+    _playSwitchAnimation(workspace, meta) {
+      this._ensureEyecatchRays();
 
       const toast = document.getElementById('ws-transition-toast');
       const backdrop = document.getElementById('ws-transition-backdrop');
@@ -178,8 +195,7 @@
       if (sub) sub.textContent = meta.toastSub;
       if (jpTag) jpTag.textContent = jpMap[workspace] || '学習編';
 
-      // Reset progress sweep animation cleanly on rapid switches
-      toast.classList.remove('show');
+      toast.classList.remove('show', 'leaving');
       if (backdrop) backdrop.classList.remove('show');
       if (barFill) {
         barFill.style.animation = 'none';
@@ -190,11 +206,17 @@
 
       toast.classList.add('show');
       if (backdrop) backdrop.classList.add('show');
+
       clearTimeout(this._toastTimer);
+      clearTimeout(this._toastCleanupTimer);
       this._toastTimer = setTimeout(() => {
         toast.classList.remove('show');
+        toast.classList.add('leaving');
         if (backdrop) backdrop.classList.remove('show');
-      }, 950);
+        this._toastCleanupTimer = setTimeout(() => {
+          toast.classList.remove('leaving');
+        }, 220);
+      }, 720);
     }
   }
 
